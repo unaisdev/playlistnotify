@@ -3,7 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/home';
 import LoginScreen from '../screens/login';
-import {AnimatedTabBarNavigator} from 'react-native-animated-nav-tab-bar';
+// import SearchPlaylistScreen from '../screens/searchPlaylist';
+import {Text, View} from 'react-native';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -13,22 +14,10 @@ export type RootStackParamList = {
 export type RootTabsParamList = {
   Home: undefined;
   Login: undefined;
+  SearchPlaylist: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
-const Tab = AnimatedTabBarNavigator<RootTabsParamList>();
-
-const Tabs = () => (
-  <Tab.Navigator
-    appearance={{}}
-    tabBarOptions={{
-      activeTintColor: '#2F7C6E',
-      inactiveTintColor: '#222222',
-    }}>
-    <Tab.Screen name="Home" component={HomeScreen} />
-  </Tab.Navigator>
-);
 
 const MyStack = () => {
   return (
