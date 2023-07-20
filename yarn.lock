@@ -5614,6 +5614,11 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-animated-nav-tab-bar@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.npmjs.org/react-native-animated-nav-tab-bar/-/react-native-animated-nav-tab-bar-3.1.8.tgz"
+  integrity sha512-7JtXipq1HPZqFGtjrUkez206XzJy1J1vWDm2aWfii8sDv3egA/zWC6jaKjNLbvtjNh2qJ56h2VDODL8HMbJkjA==
+
 react-native-safe-area-context@^4.7.1:
   version "4.7.1"
   resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.7.1.tgz"

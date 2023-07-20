@@ -1,10 +1,17 @@
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {RootStackParamList} from '../../navigation';
 
-const LoginScreen = ({navigation}) => {
+type Props = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+const LoginScreen = ({navigation}: Props) => {
   const handleLogin = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Tabs');
   };
 
   return (
