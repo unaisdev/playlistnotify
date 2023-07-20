@@ -10,7 +10,7 @@ type Props = {
 
 const LoginScreen = ({navigation}: Props) => {
   const handleLogin = () => {
-    navigation.navigate('Tabs');
+    navigation.replace('Tabs');
   };
 
   return (
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   spotify_logo: {
     width: 100,
