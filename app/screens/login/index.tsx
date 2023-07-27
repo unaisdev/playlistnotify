@@ -2,6 +2,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import useLogin from './hooks/useLogin';
 import {RootStackParamList} from '../../navigation';
 
 type Props = {
@@ -9,8 +10,10 @@ type Props = {
 };
 
 const LoginScreen = ({navigation}: Props) => {
+  const {handleStartSession} = useLogin({navigation});
+
   const handleLogin = () => {
-    navigation.replace('Tabs');
+    handleStartSession();
   };
 
   return (
@@ -21,6 +24,11 @@ const LoginScreen = ({navigation}: Props) => {
           source={require('../../../assets/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png')}
           style={styles.spotify_logo}
         />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Tabs')}
+        style={styles.button_pass}>
+        <Text style={{color: 'white'}}>Pasar a los tabs</Text>
       </TouchableOpacity>
     </View>
   );
@@ -43,10 +51,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000',
     borderRadius: 12,
-
+    color: 'white',
     width: 160,
     height: 60,
     objectFit: 'contain',
+  },
+  button_pass: {
+    backgroundColor: 'black',
+    marginTop: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
   },
 });
 
