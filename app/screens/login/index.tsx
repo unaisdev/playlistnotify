@@ -18,7 +18,7 @@ const LoginScreen = ({navigation}: Props) => {
       <Text>Conéctate con</Text>
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Image
-          source={require('../../assets/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png')}
+          source={require('../../../assets/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png')}
           style={styles.spotify_logo}
         />
       </TouchableOpacity>
