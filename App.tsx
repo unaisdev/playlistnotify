@@ -1,8 +1,8 @@
 import React from 'react';
 import MyStack from './navigation';
 
-const _App = () => {
+const App = () => {
   return <MyStack />;
 };
 
-export default _App;
+export default App;
