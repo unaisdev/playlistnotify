@@ -50,6 +50,17 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleURLName</key>
+		<string>com.unaicanales.playlistnotify</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<string>com.unaicanales.playlistnotify</string>
+		</array>
+	</dict>
+	</array>
 	<false/>
 </dict>
 </plist>

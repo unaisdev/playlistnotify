@@ -27,7 +27,7 @@ const useLoging = ({navigation}: Props) => {
           'playlist-read-private',
           'playlist-read-collaborative',
         ],
-        redirectUrl: 'com.playlistnotify://', // Replace with your app's redirect URL
+        redirectUrl: 'com.unaicanales.playlistnotify:/oauth',
         serviceConfiguration: discovery,
       };
 
