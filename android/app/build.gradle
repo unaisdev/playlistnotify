@@ -76,6 +76,9 @@ android {
     namespace "com.playlistnotify"
     defaultConfig {
         applicationId "com.playlistnotify"
+        manifestPlaceholders = [
+            appAuthRedirectScheme: 'com.playlistnotify'
+        ]
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
