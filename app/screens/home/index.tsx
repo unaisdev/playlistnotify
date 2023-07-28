@@ -1,8 +1,20 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
+import { getUserPlaylists, getUserProfile } from '../../services/user';
 
 const HomeScreen = () => {
+
+  const init = async () => {
+    const user = await getUserProfile()
+    const playlists = await getUserPlaylists()
+    playlists.map((item) => console.log(item.name))
+  } 
+
+  useEffect(() => {
+    init()
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Hola Home</Text>
