@@ -7,8 +7,6 @@ const HomeScreen = () => {
 
   const init = async () => {
     const user = await getUserProfile()
-    const playlists = await getUserPlaylists()
-    playlists.map((item) => console.log(item.name))
   } 
 
   useEffect(() => {

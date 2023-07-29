@@ -16,6 +16,11 @@ import Animated, {
   FadeOutDown,
   Layout,
 } from 'react-native-reanimated';
+import ProfileScreen from '../screens/profile';
+import {Text} from 'react-native';
+import ProfileImageButton from '../components/header/ProfileImageButton';
+import GoBackButton from '../components/header/GoBackButton';
+import Header from '../components/header';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -25,6 +30,7 @@ export type RootStackParamList = {
 export type RootTabsParamList = {
   Home: undefined;
   Login: undefined;
+  Profile: undefined;
   SearchPlaylist: undefined;
 };
 
@@ -58,16 +64,41 @@ const Tabs = () => {
         headerRightContainerStyle: {
           paddingRight: 16,
         },
+        header: (props) => <Header />,
       })}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{headerShown: false}}
+        options={{
+          headerLeft: () => {
+            return (
+              <Text>
+                ¡Bienvenido, <Text>nombre de usuario</Text>!
+              </Text>
+            );
+          },
+          headerRight: () => <ProfileImageButton />,
+          headerTitle: () => <></>,
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerRight: () => <></>,
+          headerLeft: () => <GoBackButton />,
+          headerTitle: () => <Text>Tu perfil</Text>,
+          tabBarButton: () => null,
+        }}
       />
       <Tab.Screen
         name="SearchPlaylist"
         component={SearchPlaylistScreen}
-        options={() => ({headerShown: false, animation: FadeIn})}
+        options={{
+          headerRight: () => <></>,
+          headerLeft: () => <></>,
+          headerTitle: () => <></>,
+        }}
       />
     </Tab.Navigator>
   );
@@ -76,7 +107,9 @@ const Tabs = () => {
 const MyStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{
+        header: (props) => <Header />,
+      }}>
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -85,7 +118,7 @@ const MyStack = () => {
         <Stack.Screen
           name="Tabs"
           component={Tabs}
-          options={{title: 'Welcome'}}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
