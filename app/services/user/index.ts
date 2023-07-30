@@ -23,7 +23,6 @@ export const getUserPlaylists = async (
   next?: string,
   accumulatedPlaylists: PlaylistModel[] = [],
 ): Promise<PlaylistModel[]> => {
-  console.log('## Getting user all playlists data ##');
 
   try {
     const { data } = await HttpClient({
@@ -39,6 +38,7 @@ export const getUserPlaylists = async (
     if (data.next) {
       return await getUserPlaylists(data.next, allPlaylists);
     }
+    console.log('## Getting user all playlists data ##');
 
     return allPlaylists;
   } catch (error) {
@@ -46,3 +46,28 @@ export const getUserPlaylists = async (
     return accumulatedPlaylists; // Devolver la lista acumulada en caso de error
   }
 };
+
+export const getUserFeaturedPlaylists = async (
+  next?: string,
+  accumulatedPlaylists: PlaylistModel[] = [],
+): Promise<PlaylistModel[]> => {
+
+  try {
+    const { data } = await HttpClient({
+      baseURL: BASE_URL,
+      url: next || '/browse/featured-playlists', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+      method: 'get',
+    });
+
+    const { message, playlists } = data
+
+    if (!data) return accumulatedPlaylists;
+
+
+    return playlists.items;
+  } catch (error) {
+    console.log('getUserFeaturedPlaylists', error);
+    return accumulatedPlaylists; // Devolver la lista acumulada en caso de error
+  }
+};
+

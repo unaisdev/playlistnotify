@@ -1,5 +1,5 @@
 import HttpClient from '../httpClient';
-import {User} from '../types';
+import {PlaylistModel, User} from '../types';
 
 const BASE_URL = 'https://api.spotify.com/v1';
 
@@ -13,7 +13,7 @@ export const getPlaylist = async (playlistId: string) => {
       method: 'get',
     });
 
-    return data as User;
+    return data as PlaylistModel;
   } catch (error) {
     console.log('getPlaylist', error);
   }
@@ -21,17 +21,6 @@ export const getPlaylist = async (playlistId: string) => {
 
 
 export const getPlaylistTracks = async () => {
-    console.log('## Getting user playlists data ##');
+    console.log('## Getting playlists tracks ##');
 
-    try {
-      const {data} = await HttpClient({
-        baseURL: BASE_URL,
-        url: '/me/playlists',
-        method: 'get',
-      });
-  
-      return data as User;
-    } catch (error) {
-      console.log('getPlaylistTracks', error);
-    }
 }

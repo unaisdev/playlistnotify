@@ -20,8 +20,8 @@ const GoBackButton = ({}: Props) => {
   if (!navigation.canGoBack()) return;
 
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <MaterialCommunityIcons name="arrow-left" size={17} />
+    <TouchableOpacity style={{height: 28}} onPress={handlePress}>
+      <MaterialCommunityIcons name="arrow-left" size={22} />
     </TouchableOpacity>
   );
 };

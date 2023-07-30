@@ -21,10 +21,12 @@ import {Text} from 'react-native';
 import ProfileImageButton from '../components/header/ProfileImageButton';
 import GoBackButton from '../components/header/GoBackButton';
 import Header from '../components/header';
+import PlaylistScreen from '../screens/playlist';
 
 export type RootStackParamList = {
   Tabs: undefined;
   Login: undefined;
+  Playlist: { id: string }
 };
 
 export type RootTabsParamList = {
@@ -104,7 +106,7 @@ const Tabs = () => {
   );
 };
 
-const MyStack = () => {
+const StackNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
@@ -120,9 +122,14 @@ const MyStack = () => {
           component={Tabs}
           options={{headerShown: false}}
         />
+         <Stack.Screen
+          name="Playlist"
+          component={PlaylistScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default MyStack;
+export default StackNavigation;
