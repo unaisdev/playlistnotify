@@ -34,7 +34,7 @@ type Props = {
 
 const SavedSpotifyLists = ({userOwnedPlaylists, text}: Props) => {
   const navigation =
-    useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const scale = useSharedValue(1);
   const containerRef = useRef(null);

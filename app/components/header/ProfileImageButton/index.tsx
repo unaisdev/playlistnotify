@@ -24,7 +24,7 @@ const ProfileImageButton = ({}: Props) => {
       style={{
 
       }}>
-      <Image source={{uri: user?.images[0].url}} style={{ width: 34, height: 34, borderRadius: 1000}}/>
+      <Image source={{uri: user?.images[0].url}} style={{ width: 30, height: 30, borderRadius: 1000}}/>
     </TouchableOpacity>
   );
 };

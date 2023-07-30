@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface Props {
-  image_url?: string;
+
 }
 
 const GoBackButton = ({}: Props) => {
@@ -14,6 +14,8 @@ const GoBackButton = ({}: Props) => {
     useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
 
   const handlePress = () => {
+    console.log(navigation.getState());
+    
     navigation.goBack();
   };
 

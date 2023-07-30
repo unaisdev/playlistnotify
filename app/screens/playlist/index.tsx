@@ -10,9 +10,10 @@ import {getPlaylist} from '../../services/playlist';
 import Feather from 'react-native-vector-icons/Feather';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useQuery} from '@tanstack/react-query';
+import { PlaylistHeader } from '../../components/header';
 
 interface Props {
-  route: RouteProp<RootTabsParamList, 'Playlist'>;
+  route: RouteProp<RootStackParamList, 'Playlist'>;
 }
 
 const PlaylistScreen = ({route}: Props) => {
@@ -71,13 +72,8 @@ const PlaylistScreen = ({route}: Props) => {
   }
 
   return (
-    <SafeAreaView
-      style={{
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-        
-      }}>
+    <SafeAreaView>
+      <PlaylistHeader id={id} />
       <LinearGradient
         start={{x: 1, y: 0}}
         end={{x: 1, y: 1}}

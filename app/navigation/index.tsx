@@ -26,14 +26,13 @@ import PlaylistScreen from '../screens/playlist';
 export type RootStackParamList = {
   Tabs: undefined;
   Login: undefined;
+  Playlist: {id: string};
 };
 
 export type RootTabsParamList = {
   Home: undefined;
-  Login: undefined;
   Profile: undefined;
   SearchPlaylist: undefined;
-  Playlist: {id: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -102,11 +101,7 @@ const Tabs = () => {
           headerTitle: () => <></>,
         }}
       />
-      <Tab.Screen
-        name="Playlist"
-        component={PlaylistScreen}
-        options={{header: () => <PlaylistHeader />, tabBarButton: () => null}}
-      />
+      
     </Tab.Navigator>
   );
 };
@@ -125,6 +120,11 @@ const StackNavigation = () => {
           component={Tabs}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+        name="Playlist"
+        component={PlaylistScreen}
+        options={{headerShown: false}}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );

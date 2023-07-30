@@ -9,15 +9,16 @@ import {useUserContext} from '../../context/userContext';
 const ProfileScreen = () => {
   const {user} = useUserContext();
 
-  const [userPlaylists, setUserPlaylists] = useState<PlaylistModel[]>([]);
-  const [userFeaturedPlaylists, setUserFeaturedPlaylists] = useState<PlaylistModel[]>([]);
+  const [userPlaylists, setUserPlaylists] = useState<PlaylistModel[]>();
+  const [userFeaturedPlaylists, setUserFeaturedPlaylists] = useState<
+    PlaylistModel[]
+  >([]);
 
   const init = async () => {
     const userPlaylists = await getUserPlaylists();
-    const userFeaturedPlaylists = await getUserFeaturedPlaylists();
+    // const userFeaturedPlaylists = await getUserFeaturedPlaylists();
     setUserPlaylists(userPlaylists);
-    console.log(userFeaturedPlaylists)
-    setUserFeaturedPlaylists(userFeaturedPlaylists);
+    // setUserFeaturedPlaylists(userFeaturedPlaylists);
   };
 
   useEffect(() => {
@@ -25,9 +26,18 @@ const ProfileScreen = () => {
   }, []);
 
   if (!user) return;
+  if (!userPlaylists) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
-    <ScrollView contentContainerStyle={{paddingVertical: 12}} style={styles.container}>
+    <ScrollView
+      contentContainerStyle={{paddingVertical: 12}}
+      style={styles.container}>
       <View style={{padding: 8}}>
         <Text>Este es tu perfil,</Text>
         <Text>
@@ -45,8 +55,8 @@ const ProfileScreen = () => {
       <View>
         <SavedSpotifyLists
           text={'Tus listas'}
-          userOwnedPlaylists={userPlaylists.filter((item) =>
-            item.owner.display_name.includes(user.display_name)
+          userOwnedPlaylists={userPlaylists.filter(item =>
+            item.owner.display_name.includes(user.display_name),
           )}
         />
       </View>

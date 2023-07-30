@@ -28,9 +28,13 @@ export const TabHeader = () => {
   );
 };
 
-export const PlaylistHeader = () => {
+interface PlaylistHeaderProps {
+  id: string;
+}
+
+export const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View
         style={{
           height: 28,
@@ -44,9 +48,9 @@ export const PlaylistHeader = () => {
         alignItems: 'center',
         gap: 20,
       }}>
-        <NotifyMeButton id={''} />
+        <NotifyMeButton id={id} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
