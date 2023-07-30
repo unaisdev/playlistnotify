@@ -20,13 +20,12 @@ import ProfileScreen from '../screens/profile';
 import {Text} from 'react-native';
 import ProfileImageButton from '../components/header/ProfileImageButton';
 import GoBackButton from '../components/header/GoBackButton';
-import Header from '../components/header';
+import {PlaylistHeader, TabHeader} from '../components/header';
 import PlaylistScreen from '../screens/playlist';
 
 export type RootStackParamList = {
   Tabs: undefined;
   Login: undefined;
-  Playlist: { id: string }
 };
 
 export type RootTabsParamList = {
@@ -34,6 +33,7 @@ export type RootTabsParamList = {
   Login: undefined;
   Profile: undefined;
   SearchPlaylist: undefined;
+  Playlist: {id: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -66,7 +66,7 @@ const Tabs = () => {
         headerRightContainerStyle: {
           paddingRight: 16,
         },
-        header: (props) => <Header />,
+        header: props => <TabHeader />,
       })}>
       <Tab.Screen
         name="Home"
@@ -102,6 +102,11 @@ const Tabs = () => {
           headerTitle: () => <></>,
         }}
       />
+      <Tab.Screen
+        name="Playlist"
+        component={PlaylistScreen}
+        options={{header: () => <PlaylistHeader />, tabBarButton: () => null}}
+      />
     </Tab.Navigator>
   );
 };
@@ -109,9 +114,7 @@ const Tabs = () => {
 const StackNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        header: (props) => <Header />,
-      }}>
+      <Stack.Navigator screenOptions={{}}>
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -120,11 +123,6 @@ const StackNavigation = () => {
         <Stack.Screen
           name="Tabs"
           component={Tabs}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
-          name="Playlist"
-          component={PlaylistScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

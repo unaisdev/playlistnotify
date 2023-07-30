@@ -35,12 +35,12 @@ const ProfileScreen = () => {
         </Text>
       </View>
 
-      <View>
+      {/* <View>
         <SavedSpotifyLists
           text={'Últimas listas vistas'}
           userOwnedPlaylists={userFeaturedPlaylists}
         />
-      </View>
+      </View> */}
 
       <View>
         <SavedSpotifyLists
