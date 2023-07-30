@@ -25,11 +25,6 @@ const LoginScreen = ({navigation}: Props) => {
           style={styles.spotify_logo}
         />
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Tabs')}
-        style={styles.button_pass}>
-        <Text style={{color: 'white'}}>Pasar a los tabs</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -39,6 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 8,
   },
   spotify_logo: {
     width: 100,

@@ -1,24 +1,20 @@
 import React, {useCallback, useEffect} from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
-import { getUserPlaylists, getUserProfile } from '../../services/user';
-import { useUserContext } from '../../context/userContext';
+import {getUserPlaylists, getUserProfile} from '../../services/user';
+import {useUserContext} from '../../context/userContext';
+import {useQuery} from '@tanstack/react-query';
 
 const HomeScreen = () => {
-
-  const { setUser } = useUserContext();
-
-  const init = async () => {
-    const user = await getUserProfile()
-    
-    if(!user) return 
-
-    setUser(user)
-  } 
+  const {setUser} = useUserContext();
+  const {data, isLoading, error} = useQuery({
+    queryKey: ['user'],
+    queryFn: getUserProfile,
+  });
 
   useEffect(() => {
-    init()
-  }, []);
+    if (data) setUser(data);
+  }, [data]);
 
   return (
     <View style={styles.container}>

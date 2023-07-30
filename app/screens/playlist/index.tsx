@@ -1,35 +1,46 @@
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {View, Text, Pressable, Image} from 'react-native';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Linking} from 'react-native';
-import {RootStackParamList} from '../../navigation';
+import {RootStackParamList, RootTabsParamList} from '../../navigation';
 import {PlaylistModel} from '../../services/types';
 import LinearGradient from 'react-native-linear-gradient';
 import {getPlaylist} from '../../services/playlist';
 import Feather from 'react-native-vector-icons/Feather';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useQuery} from '@tanstack/react-query';
 
 interface Props {
-  route: RouteProp<RootStackParamList, 'Playlist'>;
+  route: RouteProp<RootTabsParamList, 'Playlist'>;
 }
 
 const PlaylistScreen = ({route}: Props) => {
   const {id} = route.params;
 
-  const [playlistData, setPlaylistData] = useState<PlaylistModel | undefined>();
+  const [playlistData, setPlaylistData] = useState<PlaylistModel>();
+  const [isLoadingData, setIsLoadingData] = useState(true);
 
-  const init = async () => {
-    const playlist = await getPlaylist(id);
-    if (!playlist) return;
-    setPlaylistData(playlist);
-  };
+  const {data, isLoading, error, refetch} = useQuery({
+    queryKey: ['playlist'],
+    queryFn: () => getPlaylist(id),
+    
+  });
+
+  const reload = useCallback(async () => {
+    setIsLoadingData(true);
+    const { data } = await refetch();
+    setPlaylistData(data);
+    setIsLoadingData(false);
+  }, [id]);
 
   useEffect(() => {
-    init();
-  }, []);
+    reload();
+  }, [id]);
 
-  if (!playlistData) {
+  if(!playlistData) return
+
+  if (isLoadingData || isLoading) {
     return (
       <View
         style={{
@@ -44,7 +55,20 @@ const PlaylistScreen = ({route}: Props) => {
     );
   }
 
-  
+  if (error) {
+    return (
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text>Error occurred while fetching data.</Text>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView
@@ -52,6 +76,7 @@ const PlaylistScreen = ({route}: Props) => {
         display: 'flex',
         width: '100%',
         height: '100%',
+        
       }}>
       <LinearGradient
         start={{x: 1, y: 0}}
@@ -65,6 +90,9 @@ const PlaylistScreen = ({route}: Props) => {
         ]}
         style={{
           paddingHorizontal: 12,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
         }}>
         {playlistData.images[0]?.url ? (
           <Pressable
@@ -82,8 +110,8 @@ const PlaylistScreen = ({route}: Props) => {
             <Image
               source={{uri: playlistData.images[0]?.url}}
               style={{
-                width: 120,
-                height: 120,
+                width: 88,
+                height: 88,
               }}
             />
           </Pressable>
@@ -92,8 +120,8 @@ const PlaylistScreen = ({route}: Props) => {
         )}
         <View
           style={{
-            width: '75%',
             display: 'flex',
+            flexGrow: 1,
             justifyContent: 'space-evenly',
           }}>
           <View
