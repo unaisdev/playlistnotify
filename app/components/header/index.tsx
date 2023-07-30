@@ -3,8 +3,9 @@ import GoBackButton from './GoBackButton';
 import ProfileImageButton from './ProfileImageButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
+import NotifyMeButton from './NotifyMeButton';
 
-const Header = () => {
+export const TabHeader = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -27,6 +28,28 @@ const Header = () => {
   );
 };
 
+export const PlaylistHeader = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          height: 28,
+        }}>
+        <GoBackButton />
+      </View>
+
+      <View style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 20,
+      }}>
+        <NotifyMeButton id={''} />
+      </View>
+    </SafeAreaView>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -39,4 +62,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
