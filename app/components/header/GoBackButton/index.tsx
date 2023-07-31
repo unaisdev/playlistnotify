@@ -13,9 +13,7 @@ const GoBackButton = ({}: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
 
-  const handlePress = () => {
-    console.log(navigation.getState());
-    
+  const handlePress = () => {  
     navigation.goBack();
   };
 

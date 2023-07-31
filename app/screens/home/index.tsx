@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
 import {getUserPlaylists, getUserProfile} from '../../services/user';
-import {useUserContext} from '../../context/userContext';
+import {useUserContext} from '../../containers/userContext';
 import {useQuery} from '@tanstack/react-query';
 
 const HomeScreen = () => {

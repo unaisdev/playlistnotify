@@ -10,10 +10,6 @@ const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const REVOKE_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const REDIRECT_URL = 'com.unaicanales.playlistnotify:/oauth';
 
-type Props = {
-  navigation: NativeStackNavigationProp<RootStackParamList>;
-};
-
 // Endpoint
 const discovery = {
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
@@ -32,10 +28,10 @@ const config = {
   serviceConfiguration: discovery,
 };
 
-const useLogin = ({navigation}: Props) => {
+const useLogin = () => {
   const isTokenValid = async () => {
     try {
-      const tokenExp = await AsyncStorage.getItem('AuthTokenExpiration');
+      const tokenExp = await AsyncStorage.getItem('AccessTokenExpiration');
       if (tokenExp) {
         console.log(tokenExp);
         let expiration;
@@ -70,20 +66,23 @@ const useLogin = ({navigation}: Props) => {
         console.log('token expires in: ' + result.accessTokenExpirationDate);
 
         // Store the access token, expiration date and refresh token as strings
-        await AsyncStorage.setItem('AuthToken', result.accessToken);
-        await AsyncStorage.setItem('AuthTokenExpiration', expiration.toString());
+        await AsyncStorage.setItem('AccessToken', result.accessToken);
+        await AsyncStorage.setItem('AccessTokenExpiration', expiration.toString());
         await AsyncStorage.setItem('AuthRefreshToken', result.refreshToken);
 
-        navigation.replace('Tabs');
+        return true
       }
+
+      return false
     } catch (error) {
       console.log('useLoging', error);
+      return false
     }
-  }, [navigation]);
+  }, []);
 
   const refreshToken = async () => {
     // Check if the access token is expired
-    const tokenExp = await AsyncStorage.getItem('AuthTokenExpiration');
+    const tokenExp = await AsyncStorage.getItem('AccessTokenExpiration');
     if (tokenExp) {
       let expiration;
 
@@ -103,9 +102,9 @@ const useLogin = ({navigation}: Props) => {
             const data = await refresh(config, {refreshToken});
             if (data && data.accessToken && data.refreshToken) {
               // Store the new access token and its expiration date
-              await AsyncStorage.setItem('AuthToken', data.accessToken);
+              await AsyncStorage.setItem('AccessToken', data.accessToken);
               await AsyncStorage.setItem(
-                'AuthTokenExpiration',
+                'AccessTokenExpiration',
                 data.accessTokenExpirationDate,
               );
               await AsyncStorage.setItem('AuthRefreshToken', data.refreshToken);

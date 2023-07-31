@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { User } from '../services/types';
+import { User } from '../../services/types';
 
 interface UserContextType {
     user: User | undefined;

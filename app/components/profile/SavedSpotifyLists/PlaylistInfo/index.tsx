@@ -17,7 +17,7 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        backgroundColor: '#C7C9C7',
+        backgroundColor: '#D9D9D6',
         padding: 10,
         borderRadius: 10,
         width: 140,

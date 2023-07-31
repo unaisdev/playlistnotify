@@ -4,7 +4,7 @@ import {getUserFeaturedPlaylists, getUserPlaylists} from '../../services/user';
 import {useEffect, useState} from 'react';
 import {PlaylistModel} from '../../services/types';
 import SavedSpotifyLists from '../../components/profile/SavedSpotifyLists';
-import {useUserContext} from '../../context/userContext';
+import {useUserContext} from '../../containers/userContext';
 
 const ProfileScreen = () => {
   const {user} = useUserContext();
