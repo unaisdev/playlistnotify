@@ -10,25 +10,22 @@ interface Props {
 const PlaylistInfo = ({id, image_url, name}: Props) => {
   return (
     <Animated.View
-      
       style={{
         display: 'flex',
-        height: 180,
+        width: 96, 
+        gap: 6,
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        // backgroundColor: '#D9D9D6',
-        padding: 10,
         borderRadius: 10,
-        width: 140,
         marginHorizontal: 10,
       }}>
       {image_url ? (
         <Image
           source={{uri: image_url}}
           style={{
-            width: 120,
-            height: 120,
+            width: 96,
+            height: 96,
             aspectRatio: 1 / 1,
           }}
         />
@@ -36,14 +33,14 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
         <Image
           source={{uri: ''}}
           style={{
-            width: 120,
-            height: 120,
+            width: 96,
+            height: 96,
             aspectRatio: 1 / 1,
           }}
         />
       )}
 
-      <Text style={{color: 'white'}} numberOfLines={2}>{name}</Text>
+      <Text style={{color: 'white', fontSize: 10}} numberOfLines={2}>{name}</Text>
     </Animated.View>
   );
 };

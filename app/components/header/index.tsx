@@ -36,15 +36,18 @@ export const TabHeader = ({props}: TabHeaderProps) => {
 
   const {user} = useUserContext();
 
+  // Define the TAB_NAMES object
   const TAB_NAMES: TabNames = {
-    Home: `¡Bienvenido, ${user?.display_name}!`,
+    Home: `¡Bienvenido, ${user?.display_name || 'Invitado'}!`,
     Profile: 'Tu perfil',
     SearchPlaylist: '¿Buscas alguna lista?',
   };
-  console.log('currentTabName is', route.name || TAB_NAME_DEFAULT);
 
-  const TabHeaderText = useCallback(() => {
+  const TabHeaderText = () => {
     const currentTabName = route.name || TAB_NAME_DEFAULT;
+
+    if(!user) return 
+    
     return (
       <Animated.Text
         entering={FadeInLeft.duration(600).delay(200)}
@@ -52,12 +55,11 @@ export const TabHeader = ({props}: TabHeaderProps) => {
         style={{
           color: 'white',
           flexGrow: 1,
-          backgroundColor: 'red',
         }}>
         {TAB_NAMES[currentTabName]}
       </Animated.Text>
     );
-  }, [route.name]);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,34 +77,6 @@ export const TabHeader = ({props}: TabHeaderProps) => {
         </View>
       </View>
     </SafeAreaView>
-  );
-};
-
-interface PlaylistHeaderProps {
-  id: string;
-}
-
-export const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
-  return (
-    <View
-      style={[styles.container, {paddingHorizontal: 12, paddingVertical: 12}]}>
-      <View
-        style={{
-          height: 28,
-        }}>
-        <GoBackButton />
-      </View>
-
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: 20,
-        }}>
-        <NotifyMeButton id={id} />
-      </View>
-    </View>
   );
 };
 

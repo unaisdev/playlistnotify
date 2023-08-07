@@ -39,22 +39,6 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
   const scale = useSharedValue(1);
   const containerRef = useRef(null);
 
-  // Función para actualizar la escala y animar el retorno a 1 al soltar el botón
-  const handlePress = () => {
-    scale.value = withSpring(0.4);
-  };
-
-  // Función para restablecer la escala a 1 al soltar el botón
-  const handleRelease = () => {
-    scale.value = withSpring(1);
-  };
-
-  // Define el gestor de eventos animados para el botón
-  const gestureHandler = useAnimatedGestureHandler({
-    onStart: handlePress,
-    onEnd: handleRelease,
-  });
-
   // Define los estilos animados para el contenedor
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -68,7 +52,7 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
   };
 
   return (
-    <GestureHandlerRootView >
+    <GestureHandlerRootView>
       <Text style={{padding: 12, color: 'white'}}>{text}</Text>
       <FlatList
         horizontal
@@ -76,16 +60,16 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
           paddingHorizontal: 6,
         }}
         showsHorizontalScrollIndicator={false}
+        initialNumToRender={10}
         data={playlists}
         keyExtractor={(item) => item.id} // Utiliza una propiedad única como clave
         renderItem={({item, index}) => {
           return (
             <Animated.View
               key={item.id}
-              entering={FadeInDown.duration(800).delay(index * 300)}
+              entering={FadeInDown.duration(800).delay(index * 100)}
               exiting={FadeOutRight.duration(800)}
               layout={Layout.springify().delay(850)}>
-              <TapGestureHandler onGestureEvent={gestureHandler}>
                 <TouchableOpacity
                   key={`${item.id}_${index}`}
                   ref={containerRef}
@@ -98,7 +82,6 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
                     />
                   </Animated.View>
                 </TouchableOpacity>
-              </TapGestureHandler>
             </Animated.View>
           );
         }}

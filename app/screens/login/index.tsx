@@ -1,5 +1,5 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import useLogin from './hooks/useLogin';
@@ -12,29 +12,30 @@ type Props = {
 const LoginScreen = ({navigation}: Props) => {
   const {handleStartSession, isTokenValid, refreshToken} = useLogin();
 
-  const handleLogin = () => {
-    handleStartSession();
+  const handleLogin = async () => {
+    const isValid = await isTokenValid();
+
+    if(!isValid){
+      await refreshToken();
+      
+    }
+
+    navigation.replace("Tabs")
+    
   };
 
   const init = async () => {
     // Verificar si el token de acceso es válido al cargar la pantalla
     // Si el token es válido, navegar a la pantalla principal automáticamente
-    const isValid = await isTokenValid()
-    console.log("isValid");
-    console.log(isValid);
-    
-    if (!isValid) {
-      return
-    }
+    const isValid = await isTokenValid();
 
-    await refreshToken()
+    if (!isValid) await refreshToken();
 
-    navigation.replace("Tabs")
-  }
-  
+    // navigation.replace('Tabs');
+  };
+
   useEffect(() => {
-   
-    init()
+    init();
   }, [isTokenValid]);
 
   return (

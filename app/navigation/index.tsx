@@ -11,7 +11,7 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import SearchPlaylistScreen from '../screens/searchPlaylist';
+import SearchPlaylistScreen from '../screens/search';
 import Animated, {
   FadeIn,
   FadeInUp,

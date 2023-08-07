@@ -1,11 +1,12 @@
 import React from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
+import Search from '../../components/search';
 
 const SearchPlaylistScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>SEARCH</Text>
+      <Search />
     </View>
   );
 };
@@ -13,7 +14,7 @@ const SearchPlaylistScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: 'white',
   },

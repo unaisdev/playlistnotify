@@ -7,13 +7,16 @@ import {useQuery} from '@tanstack/react-query';
 
 const HomeScreen = () => {
   const {setUser} = useUserContext();
-  const {data, isLoading, error} = useQuery({
+  const {data, isLoading, error, failureReason} = useQuery({
     queryKey: ['user'],
     queryFn: getUserProfile,
     
   });
 
-  if(error) console.log(error)
+  if(data) {
+    console.log("!!!!!!!!!!!!!!!!!!!!!")
+    console.log(data)
+  }
 
   useEffect(() => {
     if (data) setUser(data);

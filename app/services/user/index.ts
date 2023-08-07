@@ -1,14 +1,13 @@
+import { SPOTIFY_API_URL } from '../../constants';
 import HttpClient from '../httpClient';
 import {Playlist, PlaylistModel, User} from '../types';
-
-const BASE_URL = 'https://api.spotify.com/v1';
 
 export const getUserProfile = async () => {
   console.log('## Getting user profile data ##');
 
   try {
     const {data} = await HttpClient({
-      baseURL: BASE_URL,
+      baseURL: SPOTIFY_API_URL,
       url: '/me',
       method: 'get',
     });
@@ -16,6 +15,8 @@ export const getUserProfile = async () => {
     return data as User;
   } catch (error) {
     console.log('getUserProfile', error);
+
+    throw new Error('Error fetching user profile'); // Lanzar un nuevo error con un mensaje descriptivo
   }
 };
 
@@ -26,7 +27,7 @@ export const getUserPlaylists = async (
 
   try {
     const { data } = await HttpClient({
-      baseURL: BASE_URL,
+      baseURL: SPOTIFY_API_URL,
       url: next || '/me/playlists', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
       method: 'get',
     });
@@ -54,7 +55,7 @@ export const getUserFeaturedPlaylists = async (
 
   try {
     const { data } = await HttpClient({
-      baseURL: BASE_URL,
+      baseURL: SPOTIFY_API_URL,
       url: next || '/browse/featured-playlists', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
       method: 'get',
     });

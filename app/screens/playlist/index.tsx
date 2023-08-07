@@ -1,5 +1,5 @@
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {View, Text, Pressable, Image} from 'react-native';
+import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
 import {useCallback, useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Linking} from 'react-native';
@@ -10,11 +10,40 @@ import {getPlaylist} from '../../services/playlist';
 import Feather from 'react-native-vector-icons/Feather';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useQuery} from '@tanstack/react-query';
-import { PlaylistHeader } from '../../components/header';
+import GoBackButton from '../../components/header/GoBackButton';
+import NotifyMeButton from '../../components/header/NotifyMeButton';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
 }
+
+interface PlaylistHeaderProps {
+  id: string;
+}
+
+const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
+  return (
+    <View
+      style={[styles.container, {paddingHorizontal: 12, paddingVertical: 12}]}>
+      <View
+        style={{
+          height: 28,
+        }}>
+        <GoBackButton />
+      </View>
+
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 20,
+        }}>
+        <NotifyMeButton id={id} />
+      </View>
+    </View>
+  );
+};
 
 const PlaylistScreen = ({route}: Props) => {
   const {id} = route.params;
@@ -203,5 +232,28 @@ const PlaylistScreen = ({route}: Props) => {
     </SafeAreaView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'black',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+});
+
 
 export default PlaylistScreen;
