@@ -10,7 +10,10 @@ const HomeScreen = () => {
   const {data, isLoading, error} = useQuery({
     queryKey: ['user'],
     queryFn: getUserProfile,
+    
   });
+
+  if(error) console.log(error)
 
   useEffect(() => {
     if (data) setUser(data);
