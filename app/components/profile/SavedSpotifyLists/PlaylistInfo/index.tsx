@@ -17,7 +17,7 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        backgroundColor: '#D9D9D6',
+        // backgroundColor: '#D9D9D6',
         padding: 10,
         borderRadius: 10,
         width: 140,
@@ -43,7 +43,7 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
         />
       )}
 
-      <Text numberOfLines={2}>{name}</Text>
+      <Text style={{color: 'white'}} numberOfLines={2}>{name}</Text>
     </Animated.View>
   );
 };

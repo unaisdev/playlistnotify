@@ -29,10 +29,10 @@ import {
 
 type Props = {
   text: string;
-  userOwnedPlaylists: PlaylistModel[];
+  playlists: PlaylistModel[];
 };
 
-const SavedSpotifyLists = ({userOwnedPlaylists, text}: Props) => {
+const SavedSpotifyLists = ({playlists, text}: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -68,15 +68,16 @@ const SavedSpotifyLists = ({userOwnedPlaylists, text}: Props) => {
   };
 
   return (
-    <GestureHandlerRootView>
-      <Text style={{padding: 8}}>{text}</Text>
+    <GestureHandlerRootView >
+      <Text style={{padding: 12, color: 'white'}}>{text}</Text>
       <FlatList
         horizontal
         contentContainerStyle={{
           paddingHorizontal: 6,
         }}
         showsHorizontalScrollIndicator={false}
-        data={userOwnedPlaylists}
+        data={playlists}
+        keyExtractor={(item) => item.id} // Utiliza una propiedad única como clave
         renderItem={({item, index}) => {
           return (
             <Animated.View

@@ -11,7 +11,7 @@ HttpClient.defaults.headers.common = {
 
 HttpClient.interceptors.request.use(async (config) => {
   if (!config.headers?.Authorization) {
-    const auth = await AsyncStorage.getItem("AuthToken");
+    const auth = await AsyncStorage.getItem("AccessToken");
 
     config.headers.Authorization = `Bearer ${auth}`;
   }

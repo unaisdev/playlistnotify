@@ -21,6 +21,7 @@ const ProfileScreen = () => {
     // setUserFeaturedPlaylists(userFeaturedPlaylists);
   };
 
+
   useEffect(() => {
     init();
   }, []);
@@ -36,12 +37,20 @@ const ProfileScreen = () => {
 
   return (
     <ScrollView
-      contentContainerStyle={{paddingVertical: 12}}
+      contentContainerStyle={{
+        paddingVertical: 12,
+        backgroundColor: 'black',
+        height: '100%',
+      }}
       style={styles.container}>
-      <View style={{padding: 8}}>
-        <Text>Este es tu perfil,</Text>
-        <Text>
-          ¡Aquí podrás seleccionar las listas que tienes guardadas en Spotify!
+      <View style={{padding: 12}}>
+        <Text
+          style={{
+            fontSize: 12,
+            color: 'white'
+          }}>
+          Tanto aquí, como en el buscador, podrás elegir las listas de las que
+          quieres recibir notificaciones en Spotify.
         </Text>
       </View>
 
@@ -55,7 +64,7 @@ const ProfileScreen = () => {
       <View>
         <SavedSpotifyLists
           text={'Tus listas'}
-          userOwnedPlaylists={userPlaylists.filter(item =>
+          playlists={userPlaylists.filter(item =>
             item.owner.display_name.includes(user.display_name),
           )}
         />
@@ -64,7 +73,7 @@ const ProfileScreen = () => {
       <View>
         <SavedSpotifyLists
           text={'Tus listas guardadas'}
-          userOwnedPlaylists={userPlaylists.filter(
+          playlists={userPlaylists.filter(
             item => !item.owner.display_name.includes(user.display_name),
           )}
         />

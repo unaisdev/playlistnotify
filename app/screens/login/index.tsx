@@ -10,10 +10,15 @@ type Props = {
 };
 
 const LoginScreen = ({navigation}: Props) => {
-  const {handleStartSession, isTokenValid, refreshToken} = useLogin({navigation});
+  const {handleStartSession, isTokenValid, refreshToken} = useLogin();
 
-  const handleLogin = () => {
-    handleStartSession();
+  const handleLogin = async () => {
+    const logged = await handleStartSession();
+
+    if(!logged) return
+    
+    navigation.replace("Tabs")
+    
   };
 
   const init = async () => {
@@ -22,7 +27,10 @@ const LoginScreen = ({navigation}: Props) => {
     const isValid = await isTokenValid()
     console.log(isValid);
     
-    if (!isValid) await refreshToken()
+    if (!isValid) {
+      await refreshToken()
+      return
+    }
 
     navigation.replace("Tabs")
   }

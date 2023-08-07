@@ -1,6 +1,8 @@
-import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {
+  NativeStackNavigationProp,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/home';
 import LoginScreen from '../screens/login';
 // import SearchPlaylistScreen from '../screens/searchPlaylist';
@@ -20,8 +22,11 @@ import ProfileScreen from '../screens/profile';
 import {Text} from 'react-native';
 import ProfileImageButton from '../components/header/ProfileImageButton';
 import GoBackButton from '../components/header/GoBackButton';
-import {PlaylistHeader, TabHeader} from '../components/header';
 import PlaylistScreen from '../screens/playlist';
+import useLogin from '../screens/login/hooks/useLogin';
+import {useEffect} from 'react';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { TabHeader } from '../components/header';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -65,30 +70,32 @@ const Tabs = () => {
         headerRightContainerStyle: {
           paddingRight: 16,
         },
-        header: props => <TabHeader />,
+        header: props => <TabHeader props={props}/>,
       })}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          headerLeft: () => {
-            return (
-              <Text>
-                ¡Bienvenido, <Text>nombre de usuario</Text>!
-              </Text>
-            );
-          },
-          headerRight: () => <ProfileImageButton />,
+          headerLeft: () => <></>,
+          headerRight: () => <></>,
           headerTitle: () => <></>,
+          tabBarIcon: ({color, size}) => (
+            <MaterialIcons
+              name="home"
+              size={size}
+              color={color  }
+            />
+          ),
+          tabBarLabel: () => <></>,
         }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
+          headerLeft: () => <></>,
           headerRight: () => <></>,
-          headerLeft: () => <GoBackButton />,
-          headerTitle: () => <Text>Tu perfil</Text>,
+          headerTitle: () => <></>,
           tabBarButton: () => null,
         }}
       />
@@ -96,17 +103,24 @@ const Tabs = () => {
         name="SearchPlaylist"
         component={SearchPlaylistScreen}
         options={{
-          headerRight: () => <></>,
           headerLeft: () => <></>,
+          headerRight: () => <></>,
           headerTitle: () => <></>,
+          tabBarIcon: ({color, size}) => (
+            <MaterialIcons
+              name="search"
+              size={size}
+              color={color}
+            />
+          ),
+          tabBarLabel: () => <></>,
         }}
       />
-      
     </Tab.Navigator>
   );
 };
 
-const StackNavigation = () => {
+const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{}}>
@@ -121,13 +135,13 @@ const StackNavigation = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-        name="Playlist"
-        component={PlaylistScreen}
-        options={{headerShown: false}}
-      />
+          name="Playlist"
+          component={PlaylistScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default StackNavigation;
+export default AppNavigator;
