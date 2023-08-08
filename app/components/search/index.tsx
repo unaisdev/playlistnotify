@@ -1,90 +1,36 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   TextInput,
   View,
   TouchableOpacity,
-  Text,
-  Pressable,
-  Image,
   ActivityIndicator,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../navigation';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Linking} from 'react-native';
-import {PlaylistModel} from '../../services/types';
-import {fetchSearchPlaylists} from '../../services/search';
+import { useNavigation } from '@react-navigation/native';
+import { PlaylistModel } from '../../services/types';
 import SearchList from './searchList';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { fetchSearchPlaylists } from '../../services/search'; // Import your fetch function
+import { useQuery } from '@tanstack/react-query';
+import { useSearch } from './hooks/useSearch';
 
 const Search = () => {
-  const [searchPhrase, setSearchPhrase] = useState('');
-  const [clicked, setClicked] = useState(false);
-  const [loadingList, setLoadingList] = useState(false);
-  const [searchResults, setSearchResults] = useState<PlaylistModel[]>([]);
-  const fetchTimer = useRef<NodeJS.Timeout | null>(null);
-
+  const navigation = useNavigation();
   const inputRef = useRef<TextInput>(null);
 
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-  useEffect(() => {
-    // Cancelar el temporizador anterior si aún está activo
-    if (fetchTimer.current) {
-      clearTimeout(fetchTimer.current);
-    }
-
-    // Verificar si hay texto en el input
-    if (searchPhrase.length === 0) {
-      setSearchResults([]);
-      setLoadingList(false);
-      return;
-    }
-    if (searchPhrase.length === 0) setSearchResults([]);
-
-    // Crear un temporizador para retrasar la ejecución de la búsqueda
-    fetchTimer.current = setTimeout(async () => {
-      setLoadingList(true);
-      const searchedPlaylists = await fetchSearchPlaylists(searchPhrase);
-      setSearchResults(searchedPlaylists);
-      setLoadingList(false);
-    }, 650);
-
-    // Limpiar el temporizador cuando el componente se desmonte
-    return () => {
-      if (fetchTimer.current) {
-        clearTimeout(fetchTimer.current);
-      }
-    };
-  }, [searchPhrase]);
-
-  const handleTextChange = (text: string) => {
-    setSearchPhrase(text);
-  };
+  const { searchPhrase, handleSearchTextChange, data, isLoading, isFetching} = useSearch()
 
   const handlePress = () => {
-    setClicked(true);
-    inputRef.current?.focus();
+    // Handle press logic
   };
 
   const handleBlur = () => {
-    setClicked(false);
+    // Handle blur logic
   };
 
   const handleClear = () => {
     inputRef.current?.blur();
-
-    setSearchPhrase('');
-    setClicked(false);
-    setSearchResults([]);
-
-    if (fetchTimer.current) {
-      clearTimeout(fetchTimer.current);
-      fetchTimer.current = null;
-    }
+    // setSearchPhrase('');
   };
 
   return (
@@ -95,8 +41,7 @@ const Search = () => {
         activeOpacity={1}>
         <View style={styles.searchBar}>
           <View>
-            {/* className="flex items-center justify-center" */}
-            {loadingList ? (
+            {isFetching ? (
               <ActivityIndicator size={'small'} color={'gray'} />
             ) : (
               <MaterialIcons name="search" size={20} color="white" />
@@ -108,21 +53,21 @@ const Search = () => {
             style={styles.input}
             placeholder="¿En qué lista quieres activar las notificaciones?"
             value={searchPhrase}
-            onChangeText={handleTextChange}
+            onChangeText={handleSearchTextChange}
             onBlur={handleBlur}
-            onFocus={() => setClicked(true)}
+            onFocus={() => {}}
             placeholderTextColor="#d3d3d3"
           />
           <View>
-            {searchPhrase.length > 0 && (
+            {data?.length === 0 && (
               <TouchableOpacity onPress={handleClear}>
-                {/* <Entypo name="cross" size={20} color="white" /> */}
+                {/* Renderizar tu icono de limpiar aquí */}
               </TouchableOpacity>
             )}
           </View>
         </View>
       </TouchableOpacity>
-      <SearchList searchResults={searchResults} />
+      <SearchList searchResults={data || []} />
     </View>
   );
 };
@@ -130,9 +75,7 @@ const Search = () => {
 export default Search;
 
 const styles = StyleSheet.create({
-  container: {
-
-},
+  container: {},
   searchBarContainer: {
     alignItems: 'center',
     flexDirection: 'column',
