@@ -10,7 +10,6 @@ import {
   BottomTabHeaderProps,
 } from '@react-navigation/bottom-tabs';
 import {useRoute} from '@react-navigation/native';
-import {useUserContext} from '../../containers/userContext';
 import {useCallback, useEffect} from 'react';
 import Animated, {
   FadeInLeft,
@@ -19,6 +18,7 @@ import Animated, {
   Layout,
 } from 'react-native-reanimated';
 import React from 'react';
+import {useUserContext} from '../../../containers/userContext';
 
 interface TabHeaderProps {
   props: BottomTabHeaderProps;
@@ -46,8 +46,8 @@ export const TabHeader = ({props}: TabHeaderProps) => {
   const TabHeaderText = () => {
     const currentTabName = route.name || TAB_NAME_DEFAULT;
 
-    if(!user) return 
-    
+    if (!user) return;
+
     return (
       <Animated.Text
         entering={FadeInLeft.duration(600).delay(200)}

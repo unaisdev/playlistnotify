@@ -1,19 +1,17 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {RootStackParamList, RootTabsParamList} from '../../../navigation';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {RootStackParamList} from '../../../../navigation';
 
-interface Props {
-
-}
+interface Props {}
 
 const GoBackButton = ({}: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const handlePress = () => {  
+  const handlePress = () => {
     navigation.goBack();
   };
 

@@ -17,7 +17,7 @@ export interface User {
   uri: string;
 }
 
-export interface Playlist {
+export interface UserPlaylistsResponse {
   href: string;
   limit: number;
   next: string | null;
@@ -25,6 +25,35 @@ export interface Playlist {
   previous: string | null;
   total: number;
   items: PlaylistModel[];
+}
+
+export interface PlaylistResponse {
+  href: string;
+  limit: number;
+  next: string | null;
+  offset: number;
+  previous: string | null;
+  total: number;
+  items: PlaylistItem[];
+}
+
+export interface PlaylistItem {
+  added_at: string;
+  added_by: {
+    external_urls: {
+      spotify: string;
+    };
+    followers: {
+      href: string;
+      total: number;
+    };
+    href: string;
+    id: string;
+    type: string;
+    uri: string;
+  };
+  is_local: boolean;
+  track: Track;
 }
 
 export interface PlaylistModel {
@@ -46,7 +75,7 @@ export interface PlaylistModel {
     offset: number;
     previous: string;
     total: number;
-    items: Track[];
+    items: PlaylistItem[];
   };
   type: string;
   uri: string;
@@ -150,18 +179,18 @@ export interface Track {
 
 type ExternalUrls = {
   spotify: string;
-}
+};
 
 type Followers = {
   href: string;
   total: number;
-}
+};
 
 type Image = {
   url: string;
   height: number;
   width: number;
-}
+};
 
 type Owner = {
   external_urls: ExternalUrls;
@@ -171,4 +200,4 @@ type Owner = {
   type: string;
   uri: string;
   display_name: string;
-}
+};

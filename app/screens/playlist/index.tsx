@@ -1,17 +1,18 @@
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Linking} from 'react-native';
 import {RootStackParamList, RootTabsParamList} from '../../navigation';
 import {PlaylistModel} from '../../services/types';
 import LinearGradient from 'react-native-linear-gradient';
-import {getPlaylist} from '../../services/playlist';
+import {getPlaylist, getPlaylistTracks} from '../../services/playlist';
 import Feather from 'react-native-vector-icons/Feather';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useQuery} from '@tanstack/react-query';
-import GoBackButton from '../../components/header/GoBackButton';
-import NotifyMeButton from '../../components/header/NotifyMeButton';
+import GoBackButton from '../../features/commons/header/GoBackButton';
+import NotifyMeButton from '../../features/commons/header/NotifyMeButton';
+import TrackList from './components/TrackList';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -23,8 +24,7 @@ interface PlaylistHeaderProps {
 
 const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
   return (
-    <View
-      style={[styles.container, {paddingHorizontal: 12, paddingVertical: 12}]}>
+    <View style={styles.container}>
       <View
         style={{
           height: 28,
@@ -48,61 +48,22 @@ const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
 const PlaylistScreen = ({route}: Props) => {
   const {id} = route.params;
 
-  const [playlistData, setPlaylistData] = useState<PlaylistModel>();
-  const [isLoadingData, setIsLoadingData] = useState(true);
-
-  const {data, isLoading, error, refetch} = useQuery({
+  const playlistReq = useQuery({
     queryKey: ['playlist'],
     queryFn: () => getPlaylist(id),
-    
   });
 
-  const reload = useCallback(async () => {
-    setIsLoadingData(true);
-    const { data } = await refetch();
-    setPlaylistData(data);
-    setIsLoadingData(false);
-  }, [id]);
+  const playlistData = useMemo(() => {
+    return playlistReq.data;
+  }, [playlistReq]);
 
-  useEffect(() => {
-    reload();
-  }, [id]);
-
-  if(!playlistData) return
-
-  if (isLoadingData || isLoading) {
-    return (
-      <View
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text>Error occurred while fetching data.</Text>
-      </View>
-    );
-  }
+  if (!playlistData) return;
 
   return (
-    <SafeAreaView>
-      <PlaylistHeader id={id} />
+    <SafeAreaView style={{height: '100%'}}>
+      <View>
+        <PlaylistHeader id={id} />
+      </View>
       <LinearGradient
         start={{x: 1, y: 0}}
         end={{x: 1, y: 1}}
@@ -113,110 +74,46 @@ const PlaylistScreen = ({route}: Props) => {
           'rgba(245, 211, 215, 0.5)',
           'rgba(255, 255, 255, 0)',
         ]}
-        style={{
-          paddingHorizontal: 12,
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-        {playlistData.images[0]?.url ? (
-          <Pressable
-            onPress={() => {
-              Linking.openURL(playlistData.uri);
-            }}
-            style={{
-              width: 96,
-              height: 96,
-              shadowColor: '#000',
-              shadowOffset: {width: 1, height: 3},
-              shadowOpacity: 0.5,
-              shadowRadius: 4,
-            }}>
-            <Image
-              source={{uri: playlistData.images[0]?.url}}
-              style={{
-                width: 88,
-                height: 88,
-              }}
-            />
-          </Pressable>
-        ) : (
-          <></>
-        )}
+        style={styles.linearGradient}>
+        <Pressable
+          onPress={() => Linking.openURL(playlistData?.uri)}
+          style={styles.imageShadow}>
+          <Image
+            source={{uri: playlistData.images[0]?.url}}
+            style={styles.image}
+          />
+        </Pressable>
         <View
           style={{
             display: 'flex',
             flexGrow: 1,
             justifyContent: 'space-evenly',
           }}>
-          <View
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              paddingVertical: 8,
-              paddingRight: 16,
-            }}>
+          <View style={styles.topContent}>
             <Pressable
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                maxWidth: 250,
-              }}
+              style={styles.inline}
               onPress={() => {
                 Linking.openURL(playlistData.owner.uri);
               }}>
               <Feather name="user" size={8} />
-              <Text style={{paddingLeft: 4, fontSize: 10}} numberOfLines={1}>
+              <Text style={{fontSize: 10}} numberOfLines={1}>
                 {playlistData.owner.display_name}
               </Text>
             </Pressable>
           </View>
-          <View
-            style={{
-              paddingLeft: 12,
-              flexGrow: 1,
-              paddingVertical: 6,
-              display: 'flex',
-              justifyContent: 'flex-end',
-            }}>
+          <View style={styles.bottomContent}>
             <Pressable
               onPress={() => {
                 Linking.openURL(playlistData.uri);
               }}>
-              <Text
-                style={{
-                  fontWeight: '700',
-                  fontSize: 16,
-                  marginBottom: 4,
-                  maxWidth: 180,
-                  overflow: 'hidden',
-                }}
-                numberOfLines={3}>
+              <Text style={styles.playlistName} numberOfLines={3}>
                 {playlistData.name}
               </Text>
             </Pressable>
 
-            {/* <Text className="text-[10px] whitespace-nowrap">
-              {playlistData.description}
-            </Text> */}
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}>
-              <Text style={{fontSize: 10, marginBottom: 4}}>
-                canciones en esta lista
-              </Text>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: 4,
-                  alignItems: 'center',
-                }}>
+            <View style={styles.columnBetween}>
+              <Text style={{fontSize: 10}}>canciones en esta lista</Text>
+              <View style={styles.inline}>
                 <Text
                   style={{
                     fontSize: 10,
@@ -229,10 +126,10 @@ const PlaylistScreen = ({route}: Props) => {
           </View>
         </View>
       </LinearGradient>
+      <TrackList playlist={playlistData} />
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -240,6 +137,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  linearGradient: {
+    paddingHorizontal: 12,
+    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
   },
   contentContainer: {
@@ -253,7 +163,51 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 12,
   },
+  imageShadow: {
+    width: 96,
+    height: 96,
+    shadowColor: '#000',
+    shadowOffset: {width: 1, height: 3},
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+  },
+  image: {
+    width: 88,
+    height: 88,
+  },
+  topContent: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingVertical: 8,
+    paddingRight: 16,
+  },
+  inline: {
+    display: 'flex',
+    gap: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bottomContent: {
+    paddingLeft: 12,
+    flexGrow: 1,
+    paddingVertical: 6,
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  playlistName: {
+    fontWeight: '700',
+    fontSize: 16,
+    marginBottom: 4,
+    maxWidth: 180,
+    overflow: 'hidden',
+  },
+  columnBetween: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    gap: 8,
+  },
 });
-
 
 export default PlaylistScreen;

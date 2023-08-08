@@ -5,7 +5,10 @@ import {PlaylistModel} from '../../../services/types';
 
 export const useSearch = () => {
   const [searchPhrase, setSearchPhrase] = useState<string | undefined>();
-  const debouncedSearchTerm = useDebounce<string | undefined>(searchPhrase, 500);
+  const debouncedSearchTerm = useDebounce<string | undefined>(
+    searchPhrase,
+    500,
+  );
   const queryClient = useQueryClient();
 
   //isLoading only return true if it is hard "first" loading
@@ -14,9 +17,10 @@ export const useSearch = () => {
     queryKey: ['search', debouncedSearchTerm],
     queryFn: () => {
       if (debouncedSearchTerm) return fetchSearchPlaylists(debouncedSearchTerm);
-      return []
+      return [];
     },
     keepPreviousData: true,
+    staleTime: 2000,
   });
 
   const mutation = useMutation(

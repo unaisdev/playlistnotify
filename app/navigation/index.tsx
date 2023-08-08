@@ -20,13 +20,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import ProfileScreen from '../screens/profile';
 import {Text} from 'react-native';
-import ProfileImageButton from '../components/header/ProfileImageButton';
-import GoBackButton from '../components/header/GoBackButton';
 import PlaylistScreen from '../screens/playlist';
 import useLogin from '../screens/login/hooks/useLogin';
 import {useEffect} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { TabHeader } from '../components/header';
+import {TabHeader} from '../features/commons/header';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -70,7 +68,7 @@ const Tabs = () => {
         headerRightContainerStyle: {
           paddingRight: 16,
         },
-        header: props => <TabHeader props={props}/>,
+        header: props => <TabHeader props={props} />,
       })}>
       <Tab.Screen
         name="Home"
@@ -80,11 +78,7 @@ const Tabs = () => {
           headerRight: () => <></>,
           headerTitle: () => <></>,
           tabBarIcon: ({color, size}) => (
-            <MaterialIcons
-              name="home"
-              size={size}
-              color={color  }
-            />
+            <MaterialIcons name="home" size={size} color={color} />
           ),
           tabBarLabel: () => <></>,
         }}
@@ -107,11 +101,7 @@ const Tabs = () => {
           headerRight: () => <></>,
           headerTitle: () => <></>,
           tabBarIcon: ({color, size}) => (
-            <MaterialIcons
-              name="search"
-              size={size}
-              color={color}
-            />
+            <MaterialIcons name="search" size={size} color={color} />
           ),
           tabBarLabel: () => <></>,
         }}

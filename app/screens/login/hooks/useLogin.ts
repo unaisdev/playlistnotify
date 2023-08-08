@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import {useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { authorize, refresh } from 'react-native-app-auth';
-import { ASYNC_STORAGE } from '../../../constants';
+import {authorize, refresh} from 'react-native-app-auth';
+import {ASYNC_STORAGE} from '../../../services/constants';
 
 const CLIENT_ID = 'df7cd23d00fe4f989f0eaeaa638f03cf';
 const REDIRECT_URL = 'com.unaicanales.playlistnotify:/oauth';
@@ -27,24 +27,23 @@ const useLogin = () => {
   const isTokenValid = async () => {
     try {
       const tokenExp = await AsyncStorage.getItem(
-        ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION
+        ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
       );
       if (!tokenExp) {
         console.log('No expiration token!');
         return false;
       }
 
-      const expiration =
-        containsNonNumeric(tokenExp)
-          ? Date.parse(tokenExp) / 1000
-          : parseFloat(tokenExp);
+      const expiration = containsNonNumeric(tokenExp)
+        ? Date.parse(tokenExp) / 1000
+        : parseFloat(tokenExp);
       const nowSeconds = Date.now() / 1000;
 
       console.log('expiration:', expiration);
       console.log('nowSeconds:', nowSeconds);
       console.log('isTokenValid:', expiration >= nowSeconds + 4000);
 
-      return (expiration >= nowSeconds + 4000) 
+      return expiration >= nowSeconds + 4000;
     } catch (error) {
       console.log('Error checking token validity:', error);
       return false;
@@ -64,14 +63,17 @@ const useLogin = () => {
         console.log('token expires at:', expiration);
         console.log('refresh token:', result.refreshToken);
 
-        await AsyncStorage.setItem(ASYNC_STORAGE.AUTH_TOKEN, result.accessToken);
+        await AsyncStorage.setItem(
+          ASYNC_STORAGE.AUTH_TOKEN,
+          result.accessToken,
+        );
         await AsyncStorage.setItem(
           ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
-          expiration.toString()
+          expiration.toString(),
         );
         await AsyncStorage.setItem(
           ASYNC_STORAGE.REFRESH_TOKEN,
-          result.refreshToken
+          result.refreshToken,
         );
 
         return true;
@@ -86,19 +88,18 @@ const useLogin = () => {
 
   const refreshToken = async () => {
     const tokenExp = await AsyncStorage.getItem(
-      ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION
+      ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
     );
     if (!tokenExp) return;
 
-    const expiration =
-      containsNonNumeric(tokenExp)
-        ? Date.parse(tokenExp) / 1000
-        : parseFloat(tokenExp);
+    const expiration = containsNonNumeric(tokenExp)
+      ? Date.parse(tokenExp) / 1000
+      : parseFloat(tokenExp);
     const nowSeconds = Date.now() / 1000;
 
     if (expiration && expiration <= nowSeconds + 4000) {
       const refreshToken = await AsyncStorage.getItem(
-        ASYNC_STORAGE.REFRESH_TOKEN
+        ASYNC_STORAGE.REFRESH_TOKEN,
       );
       if (!refreshToken) {
         console.log('No refresh token found.');
@@ -106,19 +107,19 @@ const useLogin = () => {
       }
 
       try {
-        const data = await refresh(config, { refreshToken });
+        const data = await refresh(config, {refreshToken});
         if (data && data.accessToken && data.refreshToken) {
           await AsyncStorage.setItem(
             ASYNC_STORAGE.AUTH_TOKEN,
-            data.accessToken
+            data.accessToken,
           );
           await AsyncStorage.setItem(
             ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
-            data.accessTokenExpirationDate
+            data.accessTokenExpirationDate,
           );
           await AsyncStorage.setItem(
             ASYNC_STORAGE.REFRESH_TOKEN,
-            data.refreshToken
+            data.refreshToken,
           );
 
           console.log('Access token refreshed successfully.');

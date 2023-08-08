@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 import PlaylistInfo from './PlaylistInfo';
-import {RootStackParamList, RootTabsParamList} from '../../../navigation';
+import {RootStackParamList, RootTabsParamList} from '../../../../navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 import Animated, {
@@ -21,7 +21,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import React from 'react';
-import {PlaylistModel} from '../../../services/types';
+import {PlaylistModel} from '../../../../services/types';
 import {
   GestureHandlerRootView,
   TapGestureHandler,
@@ -62,7 +62,7 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
         showsHorizontalScrollIndicator={false}
         initialNumToRender={10}
         data={playlists}
-        keyExtractor={(item) => item.id} // Utiliza una propiedad única como clave
+        keyExtractor={item => item.id} // Utiliza una propiedad única como clave
         renderItem={({item, index}) => {
           return (
             <Animated.View
@@ -70,18 +70,18 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
               entering={FadeInDown.duration(800).delay(index * 100)}
               exiting={FadeOutRight.duration(800)}
               layout={Layout.springify().delay(850)}>
-                <TouchableOpacity
-                  key={`${item.id}_${index}`}
-                  ref={containerRef}
-                  onPress={() => handleOpenPlaylist(item.id)}>
-                  <Animated.View style={[animatedStyle]}>
-                    <PlaylistInfo
-                      id={item.id}
-                      image_url={item.images[0]?.url}
-                      name={item.name}
-                    />
-                  </Animated.View>
-                </TouchableOpacity>
+              <TouchableOpacity
+                key={`${item.id}_${index}`}
+                ref={containerRef}
+                onPress={() => handleOpenPlaylist(item.id)}>
+                <Animated.View style={[animatedStyle]}>
+                  <PlaylistInfo
+                    id={item.id}
+                    image_url={item.images[0]?.url}
+                    name={item.name}
+                  />
+                </Animated.View>
+              </TouchableOpacity>
             </Animated.View>
           );
         }}

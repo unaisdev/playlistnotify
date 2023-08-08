@@ -1,9 +1,9 @@
-import { SPOTIFY_API_URL } from '../../constants';
+import {SPOTIFY_API_URL} from '../constants';
 import HttpClient from '../httpClient';
-import {Playlist, PlaylistModel, User} from '../types';
+import {PlaylistModel, User} from '../types';
 
 export const getUserProfile = async () => {
-  console.log('## Getting user profile data ##');
+  console.log('## Getting user profile data ##00');
 
   try {
     const {data} = await HttpClient({
@@ -24,9 +24,8 @@ export const getUserPlaylists = async (
   next?: string,
   accumulatedPlaylists: PlaylistModel[] = [],
 ): Promise<PlaylistModel[]> => {
-
   try {
-    const { data } = await HttpClient({
+    const {data} = await HttpClient({
       baseURL: SPOTIFY_API_URL,
       url: next || '/me/playlists', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
       method: 'get',
@@ -52,18 +51,16 @@ export const getUserFeaturedPlaylists = async (
   next?: string,
   accumulatedPlaylists: PlaylistModel[] = [],
 ): Promise<PlaylistModel[]> => {
-
   try {
-    const { data } = await HttpClient({
+    const {data} = await HttpClient({
       baseURL: SPOTIFY_API_URL,
       url: next || '/browse/featured-playlists', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
       method: 'get',
     });
 
-    const { message, playlists } = data
+    const {message, playlists} = data;
 
     if (!data) return accumulatedPlaylists;
-
 
     return playlists.items;
   } catch (error) {
@@ -71,4 +68,3 @@ export const getUserFeaturedPlaylists = async (
     return accumulatedPlaylists; // Devolver la lista acumulada en caso de error
   }
 };
-

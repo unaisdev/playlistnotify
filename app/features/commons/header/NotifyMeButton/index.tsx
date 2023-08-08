@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
 
@@ -42,6 +42,18 @@ const NotifyMeButton = ({id}: Props) => {
     setLoading(true);
   };
 
+  const color = useMemo(() => {
+    if (notifyMeButtonSelected) return 'black';
+
+    return 'gray';
+  }, [notifyMeButtonSelected]);
+
+  const iconName = useMemo(() => {
+    if (notifyMeButtonSelected) return 'notifications-active';
+
+    return 'notifications-off';
+  }, []);
+
   useEffect(() => {
     const isSaved = async () => {
       // const bool = await isPlaylistSaved(id, user.id);
@@ -61,15 +73,9 @@ const NotifyMeButton = ({id}: Props) => {
         gap: 8,
       }}>
       {loading && <ActivityIndicator size="small" color="gray" />}
-      {notifyMeButtonSelected ? (
-        <TouchableOpacity onPress={handleNotifyMeButtonPress}>
-          <MaterialIcons name="notifications-active" size={26} color="black" />
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity onPress={handleNotifyMeButtonPress}>
-          <MaterialIcons name="notifications-off" size={26} color="gray" />
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity onPress={handleNotifyMeButtonPress}>
+        <MaterialIcons name={iconName} size={26} color={color} />
+      </TouchableOpacity>
     </View>
   );
 };
