@@ -5,10 +5,7 @@ import {PlaylistModel} from '../../../services/types';
 
 export const useSearch = () => {
   const [searchPhrase, setSearchPhrase] = useState<string | undefined>();
-  const debouncedSearchTerm = useDebounce<string | undefined>(
-    searchPhrase,
-    500,
-  );
+  const debouncedSearchTerm = useDebounce(searchPhrase, 500);
   const queryClient = useQueryClient();
 
   //isLoading only return true if it is hard "first" loading
@@ -72,24 +69,16 @@ export const useSearch = () => {
 //Dynamic State debounced value
 const useDebounce = <T>(value: T, delay: number): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Reset the timer on every value change
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
-
     // Set a new timer with the updated value
-    debounceTimerRef.current = setTimeout(() => {
+    const timer = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
 
     // Clean up the timer on component unmount
     return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
+      clearTimeout(timer);
     };
   }, [value, delay]);
 
