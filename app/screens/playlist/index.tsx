@@ -1,5 +1,12 @@
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Linking} from 'react-native';
@@ -60,9 +67,7 @@ const PlaylistScreen = ({route}: Props) => {
     isFetching,
     error,
     refetch,
-  } = useTrackList({
-    playlistId: id,
-  });
+  } = useTrackList(id);
 
   const playlistData = useMemo(() => {
     return playlistReq.data;
@@ -146,6 +151,13 @@ const PlaylistScreen = ({route}: Props) => {
         isLoading={isLoading}
         error={error}
       />
+      {isFetching && (
+        <ActivityIndicator
+          style={{margin: 12}}
+          size={'small'}
+          color={'black'}
+        />
+      )}
     </SafeAreaView>
   );
 };

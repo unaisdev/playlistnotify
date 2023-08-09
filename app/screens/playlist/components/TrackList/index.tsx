@@ -22,7 +22,6 @@ const TrackList = ({
   isLoading,
   error,
 }: Props) => {
-
   const handleEndReached = async () => {
     if (hasNextPage) {
       await fetchNextPage();

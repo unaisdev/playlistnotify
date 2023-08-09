@@ -6,7 +6,7 @@ interface Props {
 }
 
 //handle infinite scroll on tracklist
-export const useTrackList = ({playlistId}: Props) => {
+export const useTrackList = (playlistId: string) => {
   //receiving pageParam through the getgetNextPageParam property
   const fetchPlaylists = async ({pageParam = ''}) => {
     const res = await getPlaylistTracks(playlistId, pageParam);
@@ -15,22 +15,21 @@ export const useTrackList = ({playlistId}: Props) => {
 
   const allTracks = () => {
     const {
-        data,
-        fetchNextPage,
-        hasNextPage,
-        isLoading,
-        isFetching,
-        error,
-        refetch,
-      } = useInfiniteQuery({
-        queryKey: ['playlistTracks', playlistId],
-        queryFn: fetchPlaylists,
-        getNextPageParam: (lastPage, allPages) => {
-          return lastPage?.next;
-        },
-        keepPreviousData: true,
-        
-      });
+      data,
+      fetchNextPage,
+      hasNextPage,
+      isLoading,
+      isFetching,
+      error,
+      refetch,
+    } = useInfiniteQuery({
+      queryKey: ['playlistTracks', playlistId],
+      queryFn: fetchPlaylists,
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage?.next;
+      },
+      keepPreviousData: true,
+    });
   };
 
   const {
