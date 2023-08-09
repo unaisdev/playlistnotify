@@ -9,7 +9,10 @@ interface Props {
 const TrackItem = ({item}: Props) => {
   return (
     <View style={styles.item}>
-      <Image source={{uri: item.track.album.images[0].url}} />
+      <Image
+        source={{uri: item.track.album.images[0].url}}
+        style={styles.image}
+      />
       <Text>{item.track.name}</Text>
     </View>
   );
@@ -22,8 +25,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginVertical: 4,
+    paddingHorizontal: 6,
   },
   inline: {},
+  image: {
+    width: 46,
+    height: 46,
+    objectFit: 'contain',
+  },
 });
 
 export default React.memo(TrackItem);

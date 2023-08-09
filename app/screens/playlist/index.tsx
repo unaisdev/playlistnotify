@@ -13,6 +13,8 @@ import {useQuery} from '@tanstack/react-query';
 import GoBackButton from '../../features/commons/header/GoBackButton';
 import NotifyMeButton from '../../features/commons/header/NotifyMeButton';
 import TrackList from './components/TrackList';
+import {useTrackList} from './components/TrackList/hooks/useTrackList';
+import {usePlaylist} from './components/TrackList/hooks/usePlaylist';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -48,9 +50,18 @@ const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
 const PlaylistScreen = ({route}: Props) => {
   const {id} = route.params;
 
-  const playlistReq = useQuery({
-    queryKey: ['playlist'],
-    queryFn: () => getPlaylist(id),
+  const playlistReq = usePlaylist({playlistId: id});
+
+  const {
+    tracks,
+    fetchNextPage,
+    hasNextPage,
+    isLoading,
+    isFetching,
+    error,
+    refetch,
+  } = useTrackList({
+    playlistId: id,
   });
 
   const playlistData = useMemo(() => {
@@ -112,7 +123,9 @@ const PlaylistScreen = ({route}: Props) => {
             </Pressable>
 
             <View style={styles.columnBetween}>
-              <Text style={{fontSize: 10}}>canciones en esta lista</Text>
+              <Text style={{fontSize: 10}}>
+                {playlistData.tracks.total} canciones en esta lista
+              </Text>
               <View style={styles.inline}>
                 <Text
                   style={{
@@ -126,7 +139,13 @@ const PlaylistScreen = ({route}: Props) => {
           </View>
         </View>
       </LinearGradient>
-      <TrackList playlist={playlistData} />
+      <TrackList
+        tracks={tracks}
+        fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage ?? false}
+        isLoading={isLoading}
+        error={error}
+      />
     </SafeAreaView>
   );
 };
