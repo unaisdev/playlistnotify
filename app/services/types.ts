@@ -17,6 +17,14 @@ export interface User {
   uri: string;
 }
 
+export interface UserAddedPlaylistsResponse {
+  id: string;
+  playlistId: string;
+  userId: string;
+  trackIds: string[];
+  last_update: Date;
+}
+
 export interface UserPlaylistsResponse {
   href: string;
   limit: number;
