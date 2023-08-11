@@ -60,7 +60,6 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
           paddingHorizontal: 6,
         }}
         showsHorizontalScrollIndicator={false}
-        initialNumToRender={10}
         data={playlists}
         keyExtractor={item => item.id} // Utiliza una propiedad única como clave
         renderItem={({item, index}) => {
@@ -68,8 +67,7 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
             <Animated.View
               key={item.id}
               entering={FadeInDown.duration(800).delay(index * 100)}
-              exiting={FadeOutRight.duration(800)}
-              layout={Layout.springify().delay(850)}>
+              exiting={FadeOutRight.duration(800)}>
               <TouchableOpacity
                 key={`${item.id}_${index}`}
                 ref={containerRef}

@@ -10,7 +10,7 @@ const TrackItem = ({item}: Props) => {
   return (
     <View style={styles.item}>
       <Image
-        source={{uri: item.track.album.images[0].url}}
+        source={{uri: item.track.album.images[0]?.url ?? ''}}
         style={styles.image}
       />
       <Text>{item.track.name}</Text>

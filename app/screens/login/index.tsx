@@ -15,13 +15,12 @@ const LoginScreen = ({navigation}: Props) => {
   const handleLogin = async () => {
     const isValid = await isTokenValid();
 
-    if(!isValid){
+    if (!isValid) {
+      // await handleStartSession();
       await refreshToken();
-      
     }
 
-    navigation.replace("Tabs")
-    
+    navigation.replace('Tabs');
   };
 
   const init = async () => {

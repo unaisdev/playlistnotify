@@ -1,6 +1,6 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {getUserFeaturedPlaylists, getUserPlaylists} from '../../services/user';
+import {getUserPlaylists} from '../../services/user';
 import {useEffect, useState} from 'react';
 import {PlaylistModel} from '../../services/types';
 import SavedSpotifyLists from './components/SavedSpotifyLists';

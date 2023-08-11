@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, Text, Linking, Pressable, ScrollView, Image} from 'react-native';
+import {
+  View,
+  Text,
+  Linking,
+  Pressable,
+  ScrollView,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import Animated, {
   FadeInDown,
   FadeOutRight,
