@@ -1,34 +1,67 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
-import {StyleSheet, Text, View} from 'react-native';
-import {getUserPlaylists, getUserProfile} from '../../services/user';
+import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  getUserNotifiedPlaylists,
+  getUserPlaylists,
+  getUserProfile,
+  registerUser,
+} from '../../services/user';
 import {useUserContext} from '../../containers/userContext';
-import {useQuery} from '@tanstack/react-query';
+import {UseQueryOptions, useQuery} from '@tanstack/react-query';
+import {
+  PlaylistResponse,
+  UserAddedPlaylistsResponse,
+} from '../../services/types';
+import {usePlaylist} from '../playlist/components/TrackList/hooks/usePlaylist';
+import PlaylistList from './components/PlaylistList';
 
 const HomeScreen = () => {
   const {setUser} = useUserContext();
-  const {data, isLoading, error, failureReason} = useQuery({
+
+  //TODO: hook 
+  const {
+    data: user,
+    isLoading,
+    error,
+    failureReason,
+  } = useQuery({
     queryKey: ['user'],
     queryFn: getUserProfile,
   });
 
+  const getPlaylists = useCallback(async () => {
+    if (user) {
+      const fetchedPlaylists = await getUserNotifiedPlaylists(user.id);
+
+      if (fetchedPlaylists) return fetchedPlaylists;
+      return [];
+    }
+  }, [user]);
+
+  const CONFIG = {
+    queryKey: ['userPlaylists'],
+    queryFn: getPlaylists,
+    enabled: !!user, // Start the query only when user is available
+  };
+
+  const userPlaylistsQuery = useQuery({
+    queryKey: ['userPlaylists'],
+    queryFn: getPlaylists,
+    enabled: !!user,
+    refetchInterval: 1000, // Start the query only when user is available
+  });
+
   useEffect(() => {
-    if (data) setUser(data);
-  }, [data]);
+    if (user) {
+      registerUser(user);
+      setUser(user);
+    }
+  }, [user]);
 
-  return (
-    <View style={styles.container}>
-      <Text>Hola Home</Text>
-    </View>
-  );
+  if (!userPlaylistsQuery.data) return;
+
+  return <PlaylistList savedPlaylistsInfo={userPlaylistsQuery.data} />;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default HomeScreen;

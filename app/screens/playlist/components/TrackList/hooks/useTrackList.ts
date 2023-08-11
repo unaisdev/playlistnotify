@@ -13,25 +13,6 @@ export const useTrackList = (playlistId: string) => {
     return res;
   };
 
-  const allTracks = () => {
-    const {
-      data,
-      fetchNextPage,
-      hasNextPage,
-      isLoading,
-      isFetching,
-      error,
-      refetch,
-    } = useInfiniteQuery({
-      queryKey: ['playlistTracks', playlistId],
-      queryFn: fetchPlaylists,
-      getNextPageParam: (lastPage, allPages) => {
-        return lastPage?.next;
-      },
-      keepPreviousData: true,
-    });
-  };
-
   const {
     data,
     fetchNextPage,
@@ -54,7 +35,6 @@ export const useTrackList = (playlistId: string) => {
   return {
     //flatMapping data for getting only tracks items
     tracks,
-    allTracks,
     fetchNextPage,
     isLoading,
     isFetching,

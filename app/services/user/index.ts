@@ -1,6 +1,7 @@
-import {SPOTIFY_API_URL} from '../constants';
+import {API_URL, SPOTIFY_API_URL} from '../constants';
 import HttpClient from '../httpClient';
-import {PlaylistModel, User} from '../types';
+import {PlaylistModel, User, UserAddedPlaylistsResponse} from '../types';
+import {AxiosError} from 'axios';
 
 export const getUserProfile = async () => {
   console.log('## Getting user profile data ##00');
@@ -47,24 +48,33 @@ export const getUserPlaylists = async (
   }
 };
 
-export const getUserFeaturedPlaylists = async (
-  next?: string,
-  accumulatedPlaylists: PlaylistModel[] = [],
-): Promise<PlaylistModel[]> => {
-  try {
-    const {data} = await HttpClient({
-      baseURL: SPOTIFY_API_URL,
-      url: next || '/browse/featured-playlists', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
-      method: 'get',
-    });
+export const getUserNotifiedPlaylists = async (userId: string) => {
+  const {data} = await HttpClient<UserAddedPlaylistsResponse[]>({
+    baseURL: API_URL,
+    url: '/getUserPlaylistsForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    method: 'post',
+    data: {
+      userId: userId,
+    },
+  });
 
-    const {message, playlists} = data;
+  return data as UserAddedPlaylistsResponse[];
+};
 
-    if (!data) return accumulatedPlaylists;
+export const registerUser = async (user: User) => {
+  console.log('REGISTERING USER: ' + user.followers.total);
 
-    return playlists.items;
-  } catch (error) {
-    console.log('getUserFeaturedPlaylists', error);
-    return accumulatedPlaylists; // Devolver la lista acumulada en caso de error
-  }
+  const data = await HttpClient<User>({
+    baseURL: API_URL,
+    url: '/register', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    method: 'post',
+    data: {
+      user: user,
+    },
+  })
+    .then(({data}) => {
+      console.log(data);
+      return data;
+    })
+    .catch((error: AxiosError) => console.log(error.response?.data));
 };
