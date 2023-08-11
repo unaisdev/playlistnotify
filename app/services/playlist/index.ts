@@ -1,4 +1,4 @@
-import {SPOTIFY_API_URL} from '../constants';
+import {API_URL, SPOTIFY_API_URL} from '../constants';
 import HttpClient from '../httpClient';
 import {
   PlaylistItem,
@@ -7,6 +7,7 @@ import {
   Track,
   User,
 } from '../types';
+import {AxiosError} from 'axios';
 
 export const getPlaylist = async (playlistId: string) => {
   console.log(`## Getting playlist data: ${playlistId} ##`);
@@ -45,32 +46,68 @@ export const getPlaylistTracks = async (
     return data;
   } catch (error) {
     console.log('getPlaylistTracks', error);
-    throw new Error(error);
+    throw new Error('error');
   }
 };
 
-export const recursiveGetPlaylistTracks = async (
-  id: string,
-  next?: string,
-  accumulatedTracks: PlaylistItem[] = [],
-): Promise<PlaylistItem[]> => {
-  try {
-    const {data} = await HttpClient<PlaylistResponse>({
-      baseURL: SPOTIFY_API_URL,
-      url: `/playlists/${id}/tracks`, // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
-      method: 'get',
-    });
+export const savePlaylistForNotify = async (
+  playlistId: string,
+  tracks: PlaylistItem[],
+  userId: string,
+) => {
+  const data = await HttpClient<boolean>({
+    baseURL: API_URL,
+    url: '/addPlaylistForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    method: 'post',
+    data: {
+      playlistId: playlistId,
+      tracks: tracks,
+      userId: userId,
+    },
+  })
+    .then(({data}) => {
+      console.log(data);
+      return data;
+    })
+    .catch((error: AxiosError) => console.log(error.response?.data));
+};
 
-    const allTracks = accumulatedTracks.concat(data.items || []);
+export const removePlaylistForNotify = async (
+  playlistId: string,
+  userId: string,
+) => {
+  const data = await HttpClient<boolean>({
+    baseURL: API_URL,
+    url: '/deleteUserPlaylistsForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    method: 'post',
+    data: {
+      playlistId: playlistId,
+      userId: userId,
+    },
+  })
+    .then(({data}) => {
+      console.log(data);
+      return data;
+    })
+    .catch((error: AxiosError) => console.log(error.response?.data));
+};
 
-    if (data.next) {
-      return await recursiveGetPlaylistTracks(id, data.next, allTracks);
-    }
-    console.log('## Getting user all TRACKS data ##');
-
-    return allTracks;
-  } catch (error) {
-    console.log('getPlaylistTracks', error);
-    throw new Error(error);
-  }
+export const isSavedPlaylistForNotify = async (
+  playlistId: string,
+  userId: string,
+) => {
+  return await HttpClient<boolean>({
+    baseURL: API_URL,
+    url: '/isSavedPlaylistsForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    method: 'post',
+    data: {
+      playlistId: playlistId,
+      userId: userId,
+    },
+  })
+    .then(({data}) => {
+      console.log(data);
+      return data;
+    })
+    .catch((error: AxiosError) => console.log(error.response?.data));
 };

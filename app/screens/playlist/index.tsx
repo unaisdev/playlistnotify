@@ -22,37 +22,11 @@ import NotifyMeButton from '../../features/commons/header/NotifyMeButton';
 import TrackList from './components/TrackList';
 import {useTrackList} from './components/TrackList/hooks/useTrackList';
 import {usePlaylist} from './components/TrackList/hooks/usePlaylist';
+import PlaylistHeader from '../../features/commons/header/PlaylistHeader';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
 }
-
-interface PlaylistHeaderProps {
-  id: string;
-}
-
-const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
-  return (
-    <View style={styles.container}>
-      <View
-        style={{
-          height: 28,
-        }}>
-        <GoBackButton />
-      </View>
-
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: 20,
-        }}>
-        <NotifyMeButton id={id} />
-      </View>
-    </View>
-  );
-};
 
 const PlaylistScreen = ({route}: Props) => {
   const {id} = route.params;
