@@ -15,53 +15,14 @@ import {
 } from '../../services/types';
 import {usePlaylist} from '../playlist/components/TrackList/hooks/usePlaylist';
 import PlaylistList from './components/PlaylistList';
+import {useUserNotifiedPlaylists} from './hooks/useUserNotifiedPlaylists';
 
 const HomeScreen = () => {
-  const {setUser} = useUserContext();
+  const {userNotifiedPlaylists} = useUserNotifiedPlaylists();
 
-  //TODO: hook 
-  const {
-    data: user,
-    isLoading,
-    error,
-    failureReason,
-  } = useQuery({
-    queryKey: ['user'],
-    queryFn: getUserProfile,
-  });
+  if (!userNotifiedPlaylists) return;
 
-  const getPlaylists = useCallback(async () => {
-    if (user) {
-      const fetchedPlaylists = await getUserNotifiedPlaylists(user.id);
-
-      if (fetchedPlaylists) return fetchedPlaylists;
-      return [];
-    }
-  }, [user]);
-
-  const CONFIG = {
-    queryKey: ['userPlaylists'],
-    queryFn: getPlaylists,
-    enabled: !!user, // Start the query only when user is available
-  };
-
-  const userPlaylistsQuery = useQuery({
-    queryKey: ['userPlaylists'],
-    queryFn: getPlaylists,
-    enabled: !!user,
-    refetchInterval: 1000, // Start the query only when user is available
-  });
-
-  useEffect(() => {
-    if (user) {
-      registerUser(user);
-      setUser(user);
-    }
-  }, [user]);
-
-  if (!userPlaylistsQuery.data) return;
-
-  return <PlaylistList savedPlaylistsInfo={userPlaylistsQuery.data} />;
+  return <PlaylistList savedPlaylistsInfo={userNotifiedPlaylists} />;
 };
 
 export default HomeScreen;
