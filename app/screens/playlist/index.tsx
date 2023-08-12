@@ -20,9 +20,9 @@ import {useQuery} from '@tanstack/react-query';
 import GoBackButton from '../../features/commons/header/GoBackButton';
 import NotifyMeButton from '../../features/commons/header/NotifyMeButton';
 import TrackList from './components/TrackList';
-import {useTrackList} from './components/TrackList/hooks/useTrackList';
-import {usePlaylist} from './components/TrackList/hooks/usePlaylist';
+import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import PlaylistHeader from '../../features/commons/header/PlaylistHeader';
+import {useAllPlaylistTracks} from '../../features/commons/hooks/useAllPlaylistTracks';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -41,7 +41,7 @@ const PlaylistScreen = ({route}: Props) => {
     isFetching,
     error,
     refetch,
-  } = useTrackList(id);
+  } = useAllPlaylistTracks(id);
 
   const playlistData = useMemo(() => {
     return playlistReq.data;

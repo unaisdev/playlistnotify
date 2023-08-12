@@ -3,11 +3,11 @@ import {
   PlaylistModel,
   UserAddedPlaylistsResponse,
 } from '../../../../services/types';
-import {usePlaylist} from '../../../playlist/components/TrackList/hooks/usePlaylist';
+import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import React, {useCallback, useMemo} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {getPlaylistTracks} from '../../../../services/playlist';
-import {useAllPlaylistTracks} from '../../../../features/commons/header/NotifyMeButton/hooks/useAllPlaylistTracks';
+import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
 
 interface Props {
   playlist: PlaylistModel;
