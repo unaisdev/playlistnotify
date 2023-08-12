@@ -13,7 +13,7 @@ import {
   PlaylistResponse,
   UserAddedPlaylistsResponse,
 } from '../../services/types';
-import {usePlaylist} from '../playlist/components/TrackList/hooks/usePlaylist';
+import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import PlaylistList from './components/PlaylistList';
 import {useUserNotifiedPlaylists} from './hooks/useUserNotifiedPlaylists';
 

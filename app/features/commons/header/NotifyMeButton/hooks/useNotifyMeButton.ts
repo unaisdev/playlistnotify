@@ -1,16 +1,11 @@
-import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
-import {usePlaylist} from '../../../../../screens/playlist/components/TrackList/hooks/usePlaylist';
-import {useTrackList} from '../../../../../screens/playlist/components/TrackList/hooks/useTrackList';
 import {
-  getPlaylistTracks,
   isSavedPlaylistForNotify,
   removePlaylistForNotify,
   savePlaylistForNotify,
 } from '../../../../../services/playlist';
 import {useMemo, useState} from 'react';
-import {PlaylistItem} from '../../../../../services/types';
 import {useUserContext} from '../../../../../containers/userContext';
-import {useAllPlaylistTracks} from './useAllPlaylistTracks';
+import {useAllPlaylistTracks} from '../../../hooks/useAllPlaylistTracks';
 
 export const useNotifyMeButton = (playlistId: string) => {
   const [isSaved, setIsSaved] = useState(false);

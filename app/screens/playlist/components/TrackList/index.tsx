@@ -1,10 +1,6 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {PlaylistItem, PlaylistModel} from '../../../../services/types';
 import TrackItem from '../TrackItem';
-import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
-import {getPlaylistTracks} from '../../../../services/playlist';
-import {useTrackList} from './hooks/useTrackList';
-import {useEffect, useState} from 'react';
 import React from 'react';
 
 interface Props {

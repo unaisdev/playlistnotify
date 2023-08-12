@@ -1,14 +1,8 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
-import {getPlaylistTracks} from '../../../../../services/playlist';
+import {getPlaylistTracks} from '../../../services/playlist';
 
-interface Props {
-  playlistId: string;
-}
-
-//handle infinite scroll on tracklist
-export const useTrackList = (playlistId: string) => {
-  //receiving pageParam through the getgetNextPageParam property
-  const fetchPlaylists = async ({pageParam = ''}) => {
+export const useAllPlaylistTracks = (playlistId: string) => {
+  const fetchTracks = async ({pageParam = ''}) => {
     const res = await getPlaylistTracks(playlistId, pageParam);
     return res;
   };
@@ -22,18 +16,20 @@ export const useTrackList = (playlistId: string) => {
     error,
     refetch,
   } = useInfiniteQuery({
-    queryKey: ['playlistTracks', playlistId],
-    queryFn: fetchPlaylists,
+    queryKey: ['playlistAllTracks', playlistId],
+    queryFn: fetchTracks,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage?.next;
     },
     keepPreviousData: true,
   });
 
+  if (hasNextPage) fetchNextPage();
+
+  //flatMapping data for getting only tracks items
   const tracks = data?.pages.flatMap(page => page?.items ?? []) ?? [];
 
   return {
-    //flatMapping data for getting only tracks items
     tracks,
     fetchNextPage,
     isLoading,

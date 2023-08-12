@@ -6,11 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
-import {usePlaylist} from '../../../../screens/playlist/components/TrackList/hooks/usePlaylist';
-import {useTrackList} from '../../../../screens/playlist/components/TrackList/hooks/useTrackList';
+import {usePlaylist} from '../../hooks/usePlaylist';
 import {useNotifyMeButton} from './hooks/useNotifyMeButton';
 
 type Props = {

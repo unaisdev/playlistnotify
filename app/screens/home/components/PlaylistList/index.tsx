@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text} from 'react-native';
-import {usePlaylist} from '../../../playlist/components/TrackList/hooks/usePlaylist';
+import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import {useQueries, useQuery} from '@tanstack/react-query';
 import {useUserContext} from '../../../../containers/userContext';
 import {useCallback} from 'react';
