@@ -54,22 +54,28 @@ export const savePlaylistForNotify = async (
   playlistId: string,
   tracks: PlaylistItem[],
   userId: string,
-) => {
-  const data = await HttpClient<boolean>({
-    baseURL: API_URL,
-    url: '/addPlaylistForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
-    method: 'post',
-    data: {
-      playlistId: playlistId,
-      tracks: tracks,
-      userId: userId,
-    },
-  })
-    .then(({data}) => {
-      console.log(data);
-      return data;
-    })
-    .catch((error: AxiosError) => console.log(error.response?.data));
+): Promise<boolean> => {
+  try {
+    const data = await HttpClient<boolean>({
+      baseURL: API_URL,
+      url: '/addPlaylistForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+      method: 'post',
+      data: {
+        playlistId: playlistId,
+        tracks: tracks,
+        userId: userId,
+      },
+    });
+    // .then(({data}) => {
+    //   console.log(data);
+    //   return data;
+    // })
+    // .catch((error: AxiosError) => console.log(error.response?.data));
+
+    return data.data;
+  } catch {
+    return false;
+  }
 };
 
 export const removePlaylistForNotify = async (
