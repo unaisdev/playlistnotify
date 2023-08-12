@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {
   PlaylistModel,
   UserAddedPlaylistsResponse,
@@ -8,6 +8,12 @@ import React, {useCallback, useMemo} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {getPlaylistTracks} from '../../../../services/playlist';
 import {useAllPlaylistTracks} from '../../../../features/commons/header/NotifyMeButton/hooks/useAllPlaylistTracks';
+import NotifyMeButton from '../../../../features/commons/header/NotifyMeButton';
+import Animated, {
+  FadeInDown,
+  FadeInLeft,
+  FadeOutRight,
+} from 'react-native-reanimated';
 
 interface Props {
   playlist: PlaylistModel;
@@ -44,23 +50,34 @@ const PlaylistItem = ({playlist, savedPlaylistTracksIds}: Props) => {
   }, [tracks]);
 
   return (
-    <View>
-      <Text>{playlist.name}</Text>
-      {/* {tracks?.map(item => (
-        <Text style={{marginLeft: 12}}>{item.track.name}</Text>
-      ))} */}
-      {tracksUpdate?.resultNew?.map(item => (
-        <Text key={item.track.id} style={{marginLeft: 12, color: 'green'}}>
-          {JSON.stringify(item.track.id)}
-        </Text>
-      ))}
-      {tracksUpdate?.resultDeleted?.map((item, index) => (
-        <Text key={item + index} style={{marginLeft: 12, color: 'red'}}>
-          {JSON.stringify(item)}
-        </Text>
-      ))}
-    </View>
+    <Animated.View
+      style={styles.container}
+      entering={FadeInLeft.duration(800)}
+      exiting={FadeInLeft.duration(800)}>
+      <Image
+        source={{uri: playlist.images[0].url ?? ''}}
+        width={86}
+        height={86}
+      />
+      <View>
+        <Text>{playlist.name}</Text>
+        <NotifyMeButton id={playlist.id} />
+      </View>
+    </Animated.View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    gap: 8,
+    marginVertical: 8,
+    backgroundColor: 'red',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
 
 export default React.memo(PlaylistItem);

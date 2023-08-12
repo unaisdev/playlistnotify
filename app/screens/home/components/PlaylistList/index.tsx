@@ -37,7 +37,7 @@ const PlaylistList = ({savedPlaylistsInfo}: Props) => {
         return (
           <PlaylistItem
             playlist={item.data}
-            key={index}
+            key={item.data.id}
             savedPlaylistTracksIds={savedPlaylistTracksIds}
           />
         );
