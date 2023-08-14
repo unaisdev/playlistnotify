@@ -11,7 +11,7 @@ import {useCallback, useEffect, useMemo, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Linking} from 'react-native';
 import {RootStackParamList, RootTabsParamList} from '../../navigation';
-import {PlaylistModel} from '../../services/types';
+import {PlaylistItem, PlaylistModel} from '../../services/types';
 import LinearGradient from 'react-native-linear-gradient';
 import {getPlaylist, getPlaylistTracks} from '../../services/playlist';
 import Feather from 'react-native-vector-icons/Feather';
@@ -46,6 +46,10 @@ const PlaylistScreen = ({route}: Props) => {
   const playlistData = useMemo(() => {
     return playlistReq.data;
   }, [playlistReq]);
+
+  const playlistTracksData = useMemo<PlaylistItem[]>(() => {
+    return tracks;
+  }, [tracks]);
 
   if (!playlistData) return;
 
@@ -119,7 +123,7 @@ const PlaylistScreen = ({route}: Props) => {
         </View>
       </LinearGradient>
       <TrackList
-        tracks={tracks}
+        tracks={playlistTracksData}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage ?? false}
         isLoading={isLoading}
