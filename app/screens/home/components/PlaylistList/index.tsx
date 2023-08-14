@@ -4,9 +4,9 @@ import {useQueries, useQuery} from '@tanstack/react-query';
 import {useUserContext} from '../../../../containers/userContext';
 import {useCallback} from 'react';
 import {getUserNotifiedPlaylists} from '../../../../services/user';
-import PlaylistItem from '../PlaylistItem';
 import {getPlaylist} from '../../../../services/playlist';
 import {UserAddedPlaylistsResponse} from '../../../../services/types';
+import PlaylistListItem from '../PlaylistListItem';
 
 interface Props {
   savedPlaylistsInfo: UserAddedPlaylistsResponse[];
@@ -15,30 +15,19 @@ interface Props {
 const PlaylistList = ({savedPlaylistsInfo}: Props) => {
   const {user} = useUserContext();
 
-  const userPlaylistQueries = useQueries({
-    queries: savedPlaylistsInfo.map(notifiedPlaylist => {
-      return {
-        queryKey: ['notifiedPlaylist', notifiedPlaylist.playlistId],
-        queryFn: () => getPlaylist(notifiedPlaylist.playlistId),
-      };
-    }),
-  });
-
   return (
     <FlatList
       style={styles.container}
-      data={userPlaylistQueries}
+      data={savedPlaylistsInfo}
       renderItem={({item, index}) => {
-        const savedPlaylistTracksIds = savedPlaylistsInfo
-          .filter(itemFilter => itemFilter.playlistId === item.data?.id)
-          .flatMap(itemFlat => itemFlat.trackIds);
-
-        if (!item.data) return <></>;
+        console.log(item.playlistId);
+        if (!item) return <></>;
         return (
-          <PlaylistItem
-            playlist={item.data}
-            key={item.data.id}
-            savedPlaylistTracksIds={savedPlaylistTracksIds}
+          <PlaylistListItem
+            playlistId={item.playlistId}
+            key={item.playlistId}
+            savedPlaylistTracksIds={item.trackIds}
+            index={index}
           />
         );
       }}
