@@ -7,7 +7,7 @@ interface Props {
 
 export const usePlaylist = ({playlistId}: Props) => {
   const playlistReq = useQuery({
-    queryKey: ['playlist'],
+    queryKey: ['playlist', playlistId],
     queryFn: () => getPlaylist(playlistId),
   });
 
