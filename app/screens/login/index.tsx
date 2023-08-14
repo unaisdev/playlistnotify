@@ -10,22 +10,12 @@ type Props = {
 };
 
 const LoginScreen = ({navigation}: Props) => {
-  const {handleStartSession, isTokenValid, refreshToken} = useLogin();
-
-  const handleLogin = async () => {
-    const isValid = await isTokenValid();
-
-    if (!isValid) {
-      // await handleStartSession();
-      await refreshToken();
-    }
-
-    navigation.replace('Tabs');
-  };
+  const {handleLogin, isNewUser, isTokenValid, refreshToken} =
+    useLogin(navigation);
 
   const init = async () => {
     // Verificar si el token de acceso es válido al cargar la pantalla
-    // Si el token es válido, navegar a la pantalla principal automáticamente
+    // Si el token es válido, navegar a la pantalla principal
     const isValid = await isTokenValid();
 
     if (!isValid) await refreshToken();
