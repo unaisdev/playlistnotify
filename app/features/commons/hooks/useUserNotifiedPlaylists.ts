@@ -9,9 +9,6 @@ import {
 import {UserAddedPlaylistsResponse} from '../../../services/types';
 
 export const useUserNotifiedPlaylists = () => {
-  const [userNotifiedPlaylists, setUserNotifiedPlaylists] = useState<
-    UserAddedPlaylistsResponse[]
-  >([]);
   const {user} = useUserContext();
 
   const getPlaylists = async () => {
@@ -29,27 +26,9 @@ export const useUserNotifiedPlaylists = () => {
     keepPreviousData: true,
   });
 
-  useEffect(() => {
-    if (userNotifiedPlaylistsQuery.data)
-      setUserNotifiedPlaylists(userNotifiedPlaylistsQuery.data);
-  }, [userNotifiedPlaylistsQuery.data]);
-
-  // Function to add a playlist to userNotifiedPlaylists
-  const addUserNotifiedPlaylist = (newPlaylist: UserAddedPlaylistsResponse) => {
-    console.log('adding to notify: ' + newPlaylist);
-    setUserNotifiedPlaylists(prevPlaylists => [...prevPlaylists, newPlaylist]);
-  };
-
-  // Function to remove a playlist from userNotifiedPlaylists
-  const removeUserNotifiedPlaylist = (playlistId: string) => {
-    setUserNotifiedPlaylists(prevPlaylists =>
-      prevPlaylists.filter(playlist => playlist.playlistId !== playlistId),
-    );
-  };
+  const userNotifiedPlaylists = userNotifiedPlaylistsQuery.data;
 
   return {
     userNotifiedPlaylists,
-    addUserNotifiedPlaylist,
-    removeUserNotifiedPlaylist,
   };
 };

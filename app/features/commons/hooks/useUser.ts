@@ -1,7 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import {getUserProfile, registerUser} from '../../../services/user';
 import {useUserContext} from '../../../containers/userContext';
-import {useEffect} from 'react';
+import {useEffect, useMemo} from 'react';
 
 export const fetchUserProfile = () => {
   const {setUser} = useUserContext();
@@ -17,10 +17,12 @@ export const fetchUserProfile = () => {
     queryFn: getUserProfile,
   });
 
-  if (user) {
-    registerUser(user);
-    setUser(user);
-  }
+  useEffect(() => {
+    if (user) {
+      registerUser(user);
+      setUser(user);
+    }
+  }, [user]);
 
   return {
     user,
