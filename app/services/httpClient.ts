@@ -28,20 +28,7 @@ HttpClient.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // El token de acceso expiró o es inválido
       console.log('-----------------------------------------');
-      console.log('El token de acceso ha expirado, actualizando...');
-
-      const {refreshToken} = useLogin(); // Obtener la función refreshToken del hook
-
-      const refreshed = await refreshToken();
-      if (refreshed) {
-        // Reintentar la solicitud original con el nuevo token de acceso
-        error.config.headers.Authorization = `Bearer ${refreshed}`;
-        return axios.request(error.config);
-      } else {
-        console.log('Error al refrescar el token de acceso');
-        // Aquí puedes manejar el error de actualización del token
-      }
-      console.log('¡accessToken actualizado!');
+      console.log('El token de acceso ha expirado, hay que actualizarlo...');
 
       console.log('-----------------------------------------');
     }
