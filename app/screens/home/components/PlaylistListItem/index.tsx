@@ -26,6 +26,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
 import {TouchableOpacity} from 'react-native';
+import PlaylistSeenButton from '../PlaylistSeenButton';
+import BottomSheetUpdatedPlaylist from '../../../../features/commons/bottomSheet';
+import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
 
 interface Props {
   playlistId: string;
@@ -41,6 +44,17 @@ const PlaylistListItem = ({
   const {tracks, hasNextPage} = useAllPlaylistTracks(playlistId);
   const {data: playlist} = usePlaylist({playlistId: playlistId});
 
+  const {handlePresentModalPress, compareAllData} = useBottomSheetContext();
+
+  const onPress = () => {
+    if (playlist && tracksUpdate) {
+      compareAllData(playlist, tracksUpdate);
+    } else return;
+    setTimeout(() => {
+      handlePresentModalPress();
+    }, 400);
+  };
+
   const tracksUpdate = useMemo(() => {
     if (!hasNextPage) {
       const resultNew = tracks.filter(item1 => {
@@ -54,6 +68,7 @@ const PlaylistListItem = ({
           return item1 === item2.track.id;
         });
       });
+
       return {
         resultNew,
         resultDeleted,
@@ -61,10 +76,22 @@ const PlaylistListItem = ({
     }
   }, [tracks]);
 
-  if (!playlist) return;
+  if (!tracksUpdate)
+    return (
+      <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
+        <Text>Cargando...</Text>
+      </View>
+    );
+
+  if (!playlist)
+    return (
+      <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
+        <Text>Cargando...</Text>
+      </View>
+    );
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <Animated.View
         style={styles.container}
         entering={FadeInLeft.duration(800).delay(index * 300)}
@@ -75,20 +102,15 @@ const PlaylistListItem = ({
           width={86}
           height={86}
         />
-        <View>
-          <Text>{playlist.name}</Text>
-          <NotifyMeButton id={playlist.id} />
 
-          <Text>
-            AÑADIDAS:{' '}
-            {JSON.stringify(
-              tracksUpdate?.resultNew.map(item => item.track.name),
-            )}
-          </Text>
-          <Text>
-            ELIMINADOS:{' '}
-            {JSON.stringify(tracksUpdate?.resultDeleted.map(item => item))}
-          </Text>
+        <View style={styles.infoContainer}>
+          <View style={styles.inlineBetween}>
+            <Text>{playlist.name}</Text>
+            <NotifyMeButton id={playlist.id} />
+          </View>
+          <View style={{maxWidth: '80%'}}>
+            <PlaylistSeenButton />
+          </View>
         </View>
       </Animated.View>
     </TouchableOpacity>
@@ -97,15 +119,31 @@ const PlaylistListItem = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flex: 1,
     gap: 8,
     marginVertical: 8,
-    backgroundColor: 'red',
+    paddingHorizontal: 8,
+    height: 86,
+    // backgroundColor: 'red',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  inlineBetween: {
+    flexGrow: 1,
+    display: 'flex',
+    // backgroundColor: 'green',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  infoContainer: {
+    flexGrow: 1,
+    // backgroundColor: 'gray',
+    gap: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 });
 

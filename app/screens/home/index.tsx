@@ -1,32 +1,27 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
 
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {
-  getUserNotifiedPlaylists,
-  getUserPlaylists,
-  getUserProfile,
-  registerUser,
-} from '../../services/user';
-import {useUserContext} from '../../containers/userContext';
-import {UseQueryOptions, useQuery} from '@tanstack/react-query';
-import {
-  PlaylistResponse,
-  UserAddedPlaylistsResponse,
-} from '../../services/types';
-import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
+import {Button, View} from 'react-native';
+
 import PlaylistList from './components/PlaylistList';
+import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';
+
 import {useUserNotifiedPlaylists} from '../../features/commons/hooks/useUserNotifiedPlaylists';
+import {useBottomSheetContext} from '../../containers/bottomSheetContext';
 import {fetchUserProfile} from '../../features/commons/hooks/useUser';
 
 const HomeScreen = () => {
   const {user} = fetchUserProfile();
   const {userNotifiedPlaylists} = useUserNotifiedPlaylists();
+  const {ref, handlePresentModalPress} = useBottomSheetContext();
 
   if (!userNotifiedPlaylists) return;
 
-  userNotifiedPlaylists.map(item => console.log(item.playlistId));
-
-  return <PlaylistList savedPlaylistsInfo={userNotifiedPlaylists} />;
+  return (
+    <View style={{flex: 1}}>
+      <PlaylistList savedPlaylistsInfo={userNotifiedPlaylists} />
+      <BottomSheetUpdatedPlaylist ref={ref} />
+    </View>
+  );
 };
 
 export default HomeScreen;
