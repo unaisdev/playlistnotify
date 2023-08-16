@@ -39,7 +39,7 @@ export const getPlaylistTracks = async (
   try {
     const {data} = await HttpClient<PlaylistResponse>({
       baseURL: SPOTIFY_API_URL,
-      url: `/playlists/${id}/tracks`, // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+      url: `/playlists/${id}/tracks`,
       method: 'get',
     });
 
@@ -58,7 +58,7 @@ export const savePlaylistForNotify = async (
   try {
     const data = await HttpClient<boolean>({
       baseURL: API_URL,
-      url: '/addPlaylistForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+      url: '/addPlaylistForNotify',
       method: 'post',
       data: {
         playlistId: playlistId,
@@ -84,7 +84,7 @@ export const removePlaylistForNotify = async (
 ) => {
   const data = await HttpClient<boolean>({
     baseURL: API_URL,
-    url: '/deleteUserPlaylistsForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    url: '/deleteUserPlaylistsForNotify',
     method: 'post',
     data: {
       playlistId: playlistId,
@@ -104,7 +104,7 @@ export const isSavedPlaylistForNotify = async (
 ) => {
   return await HttpClient<boolean>({
     baseURL: API_URL,
-    url: '/isSavedPlaylistsForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    url: '/isSavedPlaylistsForNotify',
     method: 'post',
     data: {
       playlistId: playlistId,

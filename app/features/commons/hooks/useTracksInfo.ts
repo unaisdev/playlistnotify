@@ -14,9 +14,9 @@ export function useTracksInfo(trackIds: string[]) {
   const results = useQueries({queries});
 
   // Procesar los resultados de las consultas
-  const trackInfo = results.map(result => {
+  const tracksInfo = results.map(result => {
     return result.data; // Devolver los datos si están disponibles
   });
 
-  return trackInfo;
+  return tracksInfo;
 }

@@ -1,10 +1,10 @@
 import {createContext, useContext, useState} from 'react';
 import {User} from '../../services/types';
 
-interface UserContextType {
+type UserContextType = {
   user: User | undefined;
   setUser: (user: User) => void;
-}
+};
 
 export const UserContext = createContext<UserContextType>({
   user: undefined,

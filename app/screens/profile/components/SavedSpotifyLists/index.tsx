@@ -52,7 +52,7 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
   };
 
   return (
-    <GestureHandlerRootView>
+    <View>
       <Text style={{padding: 12, color: 'white'}}>{text}</Text>
       <FlatList
         horizontal
@@ -84,7 +84,7 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
           );
         }}
       />
-    </GestureHandlerRootView>
+    </View>
   );
 };
 
