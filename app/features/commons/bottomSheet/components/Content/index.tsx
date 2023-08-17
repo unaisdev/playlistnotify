@@ -1,5 +1,8 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {useBottomSheetContext} from '../../../../../containers/bottomSheetContext';
+import {
+  TracksCompared,
+  useBottomSheetContext,
+} from '../../../../../containers/bottomSheetContext';
 import {useTracksInfo} from '../../../hooks/useTracksInfo';
 import {
   PlaylistItem,
@@ -8,6 +11,7 @@ import {
 } from '../../../../../services/types';
 import {FlatList} from 'react-native-gesture-handler';
 import {BottomSheetFlatList, BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import {useCallback} from 'react';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];
@@ -15,36 +19,39 @@ type TracksListProps = {
 };
 
 const TracksList = ({tracksNew, tracksDel}: TracksListProps) => {
+  const renderItem = useCallback(
+    ({item, index}) => (
+      <View
+        key={item.track.id}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'row',
+          marginVertical: 4,
+        }}>
+        <Image
+          source={{uri: item.track.album.images[0]?.url ?? ''}}
+          width={40}
+          height={40}
+        />
+        <Text>{item.track.name}</Text>
+      </View>
+    ),
+    [],
+  );
+
   if (tracksNew)
     return (
-      <BottomSheetFlatList
+      <FlatList
         contentContainerStyle={{backgroundColor: 'green'}}
         data={tracksNew}
-        renderItem={({item, index}) => {
-          return (
-            <View
-              key={item.track.id}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: 'row',
-                marginVertical: 4,
-              }}>
-              <Image
-                source={{uri: item.track.album.images[0]?.url ?? ''}}
-                width={40}
-                height={40}
-              />
-              <Text>{item.track.name}</Text>
-            </View>
-          );
-        }}
+        renderItem={renderItem}
       />
     );
 
   if (tracksDel)
     return (
-      <BottomSheetFlatList
+      <FlatList
         data={tracksDel}
         contentContainerStyle={{backgroundColor: 'red'}}
         renderItem={({item, index}) => {
@@ -71,25 +78,25 @@ const TracksList = ({tracksNew, tracksDel}: TracksListProps) => {
 };
 
 const Content = () => {
-  const {playlist, tracksUpdated} = useBottomSheetContext();
+  const {tracksCompared} = useBottomSheetContext();
 
-  const tracksNew = tracksUpdated.resultNew;
-  const tracksDeleted = useTracksInfo(tracksUpdated.resultDeleted);
+  const tracksNew = tracksCompared.resultNew;
+  const tracksDeleted = useTracksInfo(tracksCompared.resultDeleted);
 
   const filteredTracksDeleted = tracksDeleted.filter(
     track => track !== undefined,
   ) as Track[];
 
-  if (!playlist) return <Text>ESTA VACIO PLAYLIST</Text>;
-
   return (
-    <BottomSheetScrollView enableFooterMarginAdjustment>
+    <BottomSheetScrollView
+      enableFooterMarginAdjustment
+      style={{flex: 1, backgroundColor: 'gray'}}>
       <View style={styles.container}>
         <View>
           <TracksList tracksNew={tracksNew} />
         </View>
 
-        <View>
+        <View style={{flex: 1}}>
           <TracksList tracksDel={filteredTracksDeleted} />
         </View>
       </View>
@@ -99,6 +106,8 @@ const Content = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    height: '100%',
     paddingHorizontal: 12,
     paddingVertical: 12,
   },
