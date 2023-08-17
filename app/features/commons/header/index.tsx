@@ -1,23 +1,22 @@
+import React from 'react';
+
 import {StyleSheet, Text, View} from 'react-native';
-import GoBackButton from './GoBackButton';
-import ProfileImageButton from './ProfileImageButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
-import NotifyMeButton from './NotifyMeButton';
 import {
   BottomTabBarButtonProps,
   BottomTabBarProps,
   BottomTabHeaderProps,
 } from '@react-navigation/bottom-tabs';
-import {useRoute} from '@react-navigation/native';
-import {useCallback, useEffect} from 'react';
 import Animated, {
   FadeInLeft,
   FadeInRight,
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
-import React from 'react';
+import ProfileImageButton from './ProfileImageButton';
+
+import {useRoute} from '@react-navigation/native';
 import {useUserContext} from '../../../containers/userContext';
 
 interface TabHeaderProps {

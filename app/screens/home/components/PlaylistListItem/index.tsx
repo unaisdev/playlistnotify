@@ -1,34 +1,20 @@
-import {
-  Alert,
-  Image,
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacityComponent,
-  View,
-} from 'react-native';
-import {
-  PlaylistItem,
-  PlaylistModel,
-  UserAddedPlaylistsResponse,
-} from '../../../../services/types';
-import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {useQuery} from '@tanstack/react-query';
-import {getPlaylistTracks} from '../../../../services/playlist';
-import NotifyMeButton from '../../../../features/commons/header/NotifyMeButton';
+
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+
 import Animated, {
-  FadeInDown,
   FadeInLeft,
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
-import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
-import {TouchableOpacity} from 'react-native';
+
+import NotifyMeButton from '../../../../features/commons/header/NotifyMeButton';
 import PlaylistSeenButton from '../PlaylistSeenButton';
 import BottomSheetUpdatedPlaylist from '../../../../features/commons/bottomSheet';
+
 import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
+import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
+import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 
 interface Props {
   playlistId: string;

@@ -1,6 +1,7 @@
+import React from 'react';
+
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {PlaylistItem} from '../../../../services/types';
-import React from 'react';
 
 interface Props {
   item: PlaylistItem;

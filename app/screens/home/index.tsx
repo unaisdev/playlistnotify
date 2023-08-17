@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, View} from 'react-native';
+import {View} from 'react-native';
 
 import PlaylistList from './components/PlaylistList';
 import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';

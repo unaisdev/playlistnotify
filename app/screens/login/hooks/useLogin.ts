@@ -1,12 +1,13 @@
-import {useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {authorize, refresh} from 'react-native-app-auth';
-import {ASYNC_STORAGE} from '../../../services/constants';
+
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../navigation';
-import {useQuery} from '@tanstack/react-query';
-import {getUserProfile, registerUser} from '../../../services/user';
+
+import {ASYNC_STORAGE} from '../../../services/constants';
+
 import {useUserContext} from '../../../containers/userContext';
+import {useCallback} from 'react';
 
 const CLIENT_ID = 'df7cd23d00fe4f989f0eaeaa638f03cf';
 const REDIRECT_URL = 'com.unaicanales.playlistnotify:/oauth';

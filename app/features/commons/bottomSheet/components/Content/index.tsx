@@ -1,13 +1,10 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
+import {BottomSheetFlatList, BottomSheetScrollView} from '@gorhom/bottom-sheet';
+
+import {PlaylistItem, Track} from '../../../../../services/types';
+
 import {useBottomSheetContext} from '../../../../../containers/bottomSheetContext';
 import {useTracksInfo} from '../../../hooks/useTracksInfo';
-import {
-  PlaylistItem,
-  PlaylistModel,
-  Track,
-} from '../../../../../services/types';
-import {FlatList} from 'react-native-gesture-handler';
-import {BottomSheetFlatList, BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];

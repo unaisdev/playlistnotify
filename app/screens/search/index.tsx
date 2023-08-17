@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+
 import {
   StyleSheet,
   TextInput,
@@ -6,13 +7,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {PlaylistModel} from '../../services/types';
+
 import SearchList from './components/searchList';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {fetchSearchPlaylists} from '../../services/search'; // Import your fetch function
-import {useQuery} from '@tanstack/react-query';
+
 import {useSearch} from './hooks/useSearch';
+import {useNavigation} from '@react-navigation/native';
 
 const SearchPlaylistScreen = () => {
   const navigation = useNavigation();

@@ -1,4 +1,5 @@
-import {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext, useState} from 'react';
+
 import {User} from '../../services/types';
 
 type UserContextType = {
