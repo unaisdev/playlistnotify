@@ -2,12 +2,12 @@ import {createContext, useCallback, useContext, useRef, useState} from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {PlaylistItem, PlaylistModel} from '../../services/types';
 
-export type TracksUpdated = {
+export type TracksCompared = {
   resultNew: PlaylistItem[];
   resultDeleted: string[];
 };
 
-const initialTracksUpdated = {
+const initialTracksCompared = {
   resultNew: [],
   resultDeleted: [],
 };
@@ -15,10 +15,7 @@ const initialTracksUpdated = {
 interface BottomSheetProps {
   compareAllData: (
     playlist: PlaylistModel,
-    tracksUpdated: {
-      resultNew: PlaylistItem[];
-      resultDeleted: string[];
-    },
+    tracksCompared: TracksCompared,
   ) => void;
   handlePresentModalPress: () => void;
   handleCloseModalPress: () => void;
@@ -28,10 +25,7 @@ interface BottomSheetProps {
 type BottomSheetType = {
   ref: React.ForwardedRef<BottomSheet>;
   playlist: PlaylistModel | null;
-  tracksUpdated: {
-    resultNew: PlaylistItem[];
-    resultDeleted: string[];
-  };
+  tracksCompared: TracksCompared;
 };
 
 type BottomSheetContextType = BottomSheetProps & BottomSheetType;
@@ -39,7 +33,7 @@ type BottomSheetContextType = BottomSheetProps & BottomSheetType;
 export const BottomSheetContext = createContext<BottomSheetContextType>({
   ref: null,
   playlist: null,
-  tracksUpdated: {
+  tracksCompared: {
     resultDeleted: [],
     resultNew: [],
   },
@@ -54,16 +48,17 @@ export const BottomSheetProvider = ({
 }: {
   children: React.ReactNode;
 }): React.ReactNode => {
-  const [tracksUpdated, setTracksUpdated] =
-    useState<TracksUpdated>(initialTracksUpdated);
+  const [tracksCompared, setTracksCompared] = useState<TracksCompared>(
+    initialTracksCompared,
+  );
   const [playlist, setPlaylist] = useState<PlaylistModel | null>(null);
 
   const bottomSheetModalRef = useRef<BottomSheet>(null);
 
   const compareAllData = useCallback(
-    (playlist: PlaylistModel, tracksUpdated: TracksUpdated) => {
+    (playlist: PlaylistModel, tracksCompared: TracksCompared) => {
       setPlaylist(playlist);
-      setTracksUpdated(tracksUpdated);
+      setTracksCompared(tracksCompared);
     },
     [],
   );
@@ -85,7 +80,7 @@ export const BottomSheetProvider = ({
       value={{
         ref: bottomSheetModalRef,
         playlist: playlist,
-        tracksUpdated: tracksUpdated,
+        tracksCompared: tracksCompared,
         handlePresentModalPress: handlePresentModalPress,
         handleCloseModalPress: handleCloseModalPress,
         handleSheetChanges: handleSheetChanges,
@@ -100,7 +95,7 @@ export const useBottomSheetContext = () => {
   const {
     ref,
     playlist,
-    tracksUpdated,
+    tracksCompared,
     handlePresentModalPress,
     handleCloseModalPress,
     handleSheetChanges,
@@ -109,10 +104,9 @@ export const useBottomSheetContext = () => {
   return {
     ref,
     playlist,
-    tracksUpdated,
+    tracksCompared,
     handlePresentModalPress,
     handleCloseModalPress,
-
     handleSheetChanges,
     compareAllData,
   };
