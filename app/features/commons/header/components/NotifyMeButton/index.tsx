@@ -1,3 +1,5 @@
+import React, {useEffect} from 'react';
+
 import {
   View,
   Text,
@@ -6,10 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {useEffect} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import React from 'react';
-import {usePlaylist} from '../../hooks/usePlaylist';
 import {useNotifyMeButton} from './hooks/useNotifyMeButton';
 
 type Props = {

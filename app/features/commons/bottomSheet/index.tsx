@@ -1,16 +1,13 @@
-import BottomSheet, {
-  BottomSheetBackdrop,
-  useBottomSheetTimingConfigs,
-} from '@gorhom/bottom-sheet';
-import {StyleSheet, Text, View} from 'react-native';
-import {PlaylistItem, PlaylistModel} from '../../../services/types';
-import {forwardRef, useCallback, useMemo, useRef} from 'react';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {useBottomSheetContext} from '../../../containers/bottomSheetContext';
+import React, {forwardRef, useMemo} from 'react';
+import {StyleSheet} from 'react-native';
+import {Easing} from 'react-native-reanimated';
+
+import BottomSheet, {useBottomSheetTimingConfigs} from '@gorhom/bottom-sheet';
 import CustomBackdrop from './components/Backdrop';
 import CustomFooter from './components/Footer';
 import Content from './components/Content';
-import {Easing} from 'react-native-reanimated';
+
+import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
 
 interface Props {}
 

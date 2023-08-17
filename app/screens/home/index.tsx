@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {Button, View} from 'react-native';
+import {View} from 'react-native';
 
 import PlaylistList from './components/PlaylistList';
 import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';
 
 import {useUserNotifiedPlaylists} from '../../features/commons/hooks/useUserNotifiedPlaylists';
 import {useBottomSheetContext} from '../../containers/bottomSheetContext';
-import {fetchUserProfile} from '../../features/commons/hooks/useUser';
+import { fetchUserProfile } from '@app/features/commons/hooks/useUser';
 
 const HomeScreen = () => {
   const {user} = fetchUserProfile();

@@ -1,12 +1,8 @@
-import {useMutation, useQuery} from '@tanstack/react-query';
-import {useCallback, useEffect, useState} from 'react';
+import {useQuery} from '@tanstack/react-query';
 import {useUserContext} from '../../../containers/userContext';
 import {
-  getUserProfile,
   getUserNotifiedPlaylists,
-  registerUser,
 } from '../../../services/user';
-import {UserAddedPlaylistsResponse} from '../../../services/types';
 
 export const useUserNotifiedPlaylists = () => {
   const {user} = useUserContext();

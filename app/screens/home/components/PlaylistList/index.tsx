@@ -1,12 +1,11 @@
 import {FlatList, StyleSheet, Text} from 'react-native';
-import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
-import {useQueries, useQuery} from '@tanstack/react-query';
-import {useUserContext} from '../../../../containers/userContext';
-import {useCallback} from 'react';
-import {getUserNotifiedPlaylists} from '../../../../services/user';
-import {getPlaylist} from '../../../../services/playlist';
-import {UserAddedPlaylistsResponse} from '../../../../services/types';
+
 import PlaylistListItem from '../PlaylistListItem';
+
+import {UserAddedPlaylistsResponse} from '../../../../services/types';
+
+import {useUserContext} from '../../../../containers/userContext';
+import {getUserNotifiedPlaylists} from '../../../../services/user';
 
 interface Props {
   savedPlaylistsInfo: UserAddedPlaylistsResponse[];

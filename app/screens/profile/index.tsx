@@ -1,11 +1,14 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {getUserPlaylists} from '../../services/user';
-import {useEffect, useState} from 'react';
-import {PlaylistModel} from '../../services/types';
-import SavedSpotifyLists from './components/SavedSpotifyLists';
-import {useUserContext} from '../../containers/userContext';
 import React from 'react';
+
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+
+import SavedSpotifyLists from './components/SavedSpotifyLists';
+
+import {PlaylistModel} from '../../services/types';
+
+import {useUserContext} from '../../containers/userContext';
+import {useEffect, useState} from 'react';
+import {getUserPlaylists} from '../../services/user';
 
 const ProfileScreen = () => {
   const {user} = useUserContext();

@@ -1,8 +1,10 @@
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootTabsParamList} from '@app/navigation';
+
+import {useUserContext} from '@app/containers/userContext';
 import {useNavigation} from '@react-navigation/native';
-import {useUserContext} from '../../../../containers/userContext';
-import {RootTabsParamList} from '../../../../navigation';
 
 interface Props {
   image_url?: string;

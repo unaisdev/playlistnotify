@@ -1,8 +1,5 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {
-  TracksCompared,
-  useBottomSheetContext,
-} from '../../../../../containers/bottomSheetContext';
+import {useBottomSheetContext} from '../../../../../containers/bottomSheetContext';
 import {useTracksInfo} from '../../../hooks/useTracksInfo';
 import {
   PlaylistItem,
@@ -11,7 +8,11 @@ import {
 } from '../../../../../services/types';
 import {FlatList} from 'react-native-gesture-handler';
 import {BottomSheetFlatList, BottomSheetScrollView} from '@gorhom/bottom-sheet';
-import {useCallback} from 'react';
+
+import {PlaylistItem, Track} from '@app/services/types';
+
+import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
+import {useTracksInfo} from '@app/hooks/useTracksInfo';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];

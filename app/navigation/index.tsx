@@ -1,30 +1,24 @@
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import {
-  NativeStackNavigationProp,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
-import HomeScreen from '../screens/home';
-import LoginScreen from '../screens/login';
-// import SearchPlaylistScreen from '../screens/searchPlaylist';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   BottomTabBar,
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import SearchPlaylistScreen from '../screens/search';
 import Animated, {
   FadeIn,
   FadeInUp,
   FadeOutDown,
   Layout,
 } from 'react-native-reanimated';
-import ProfileScreen from '../screens/profile';
-import {Text} from 'react-native';
-import PlaylistScreen from '../screens/playlist';
-import useLogin from '../screens/login/hooks/useLogin';
-import {useEffect} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import {TabHeader} from '../features/commons/header';
+import HomeScreen from '../screens/home';
+import LoginScreen from '../screens/login';
+import ProfileScreen from '../screens/profile';
+import PlaylistScreen from '../screens/playlist';
+import SearchPlaylistScreen from '../screens/search';
 
 export type RootStackParamList = {
   Tabs: undefined;

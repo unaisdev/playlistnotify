@@ -1,3 +1,5 @@
+import {useMemo} from 'react';
+
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {
   View,
@@ -6,23 +8,22 @@ import {
   Image,
   StyleSheet,
   ActivityIndicator,
+  Linking,
 } from 'react-native';
-import {useCallback, useEffect, useMemo, useState} from 'react';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Linking} from 'react-native';
-import {RootStackParamList, RootTabsParamList} from '../../navigation';
-import {PlaylistItem, PlaylistModel} from '../../services/types';
+
 import LinearGradient from 'react-native-linear-gradient';
-import {getPlaylist, getPlaylistTracks} from '../../services/playlist';
 import Feather from 'react-native-vector-icons/Feather';
+
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useQuery} from '@tanstack/react-query';
-import GoBackButton from '../../features/commons/header/GoBackButton';
-import NotifyMeButton from '../../features/commons/header/NotifyMeButton';
 import TrackList from './components/TrackList';
-import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import PlaylistHeader from '../../features/commons/header/PlaylistHeader';
+
+import {RootStackParamList} from '../../navigation';
+import {PlaylistItem} from '../../services/types';
+
 import {useAllPlaylistTracks} from '../../features/commons/hooks/useAllPlaylistTracks';
+import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
+import {useQuery} from '@tanstack/react-query';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;

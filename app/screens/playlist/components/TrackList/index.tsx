@@ -1,7 +1,9 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {PlaylistItem, PlaylistModel} from '../../../../services/types';
-import TrackItem from '../TrackItem';
 import React from 'react';
+
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import TrackItem from '../TrackItem';
+
+import {PlaylistItem, PlaylistModel} from '../../../../services/types';
 
 interface Props {
   tracks: PlaylistItem[];
