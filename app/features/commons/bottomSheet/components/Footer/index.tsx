@@ -2,7 +2,7 @@ import React from 'react';
 import {BottomSheetFooter, BottomSheetFooterProps} from '@gorhom/bottom-sheet';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {PlaylistModel} from '../../../../../services/types';
+import {PlaylistModel} from '@app/services/types';
 
 const CustomFooter: React.FC<
   BottomSheetFooterProps & {playlist?: PlaylistModel | null}

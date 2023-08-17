@@ -7,7 +7,7 @@ import CustomBackdrop from './components/Backdrop';
 import CustomFooter from './components/Footer';
 import Content from './components/Content';
 
-import {useBottomSheetContext} from '../../../containers/bottomSheetContext';
+import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
 
 interface Props {}
 
