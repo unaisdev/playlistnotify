@@ -3,20 +3,21 @@ import {BottomSheetFooter, BottomSheetFooterProps} from '@gorhom/bottom-sheet';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaylistModel} from '../../../../../services/types';
+import {useBottomSheetContext} from '../../../../../containers/bottomSheetContext';
 
-const CustomFooter: React.FC<
-  BottomSheetFooterProps & {playlist?: PlaylistModel | null}
-> = props => {
+const CustomFooter: React.FC<BottomSheetFooterProps> = props => {
+  const {playlist} = useBottomSheetContext();
+
   return (
     <BottomSheetFooter {...props}>
       <View style={styles.footerContent}>
         <Image
-          source={{uri: props.playlist?.images[0].url ?? ''}}
+          source={{uri: playlist?.images[0].url ?? ''}}
           width={36}
           height={36}
         />
         <View>
-          <Text style={styles.desc}>{props.playlist?.name}</Text>
+          <Text style={styles.desc}>{playlist?.name}</Text>
         </View>
       </View>
     </BottomSheetFooter>

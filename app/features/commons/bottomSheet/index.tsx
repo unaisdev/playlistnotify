@@ -22,8 +22,8 @@ const BottomSheetUpdatedPlaylist = (
     duration: 550,
     easing: Easing.exp,
   });
+
   const snapPoints = useMemo(() => ['85%'], []);
-  const {playlist, tracksUpdated} = useBottomSheetContext();
 
   return (
     <BottomSheet
@@ -31,9 +31,8 @@ const BottomSheetUpdatedPlaylist = (
       index={-1}
       backdropComponent={props => <CustomBackdrop {...props} />}
       containerStyle={styles.container}
-      footerComponent={props => <CustomFooter {...props} playlist={playlist} />}
+      footerComponent={props => <CustomFooter {...props} />}
       enablePanDownToClose
-      enableContentPanningGesture
       snapPoints={snapPoints}
       animationConfigs={animationConfigs}>
       <Content />
