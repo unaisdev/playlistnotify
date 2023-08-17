@@ -32,22 +32,25 @@ export const useNotifyMeButton = (playlistId: string) => {
       setIsSaved(isSaved ?? false);
     }
   };
-
+  
   const togglePlaylistSave = async () => {
     if (user) {
-      if (!isSaved) {
-        setLoading(true);
+      setLoading(true); // Show loading indicator
 
-        if (!hasNextPage)
+      try {
+        if (!isSaved) {
+          // Always save the playlist, regardless of hasNextPage
           await savePlaylistForNotify(playlistId, tracks, user?.id);
-
-        setLoading(false);
-        setIsSaved(true);
-        return;
+          setIsSaved(true);
+        } else {
+          await removePlaylistForNotify(playlistId, user?.id);
+          setIsSaved(false);
+        }
+      } catch (error) {
+        console.error('Error saving/removing playlist:', error);
       }
 
-      await removePlaylistForNotify(playlistId, user?.id);
-      setIsSaved(false);
+      setLoading(false); // Hide loading indicator
     }
   };
 
