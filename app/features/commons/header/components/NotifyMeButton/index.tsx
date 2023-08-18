@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import {
   View,
@@ -17,22 +17,52 @@ type Props = {
 
 const NotifyMeButton = ({id}: Props) => {
   const {
-    isSaved,
-    loading,
-    iconProps,
+    loadingToggle,
     canSavePlaylist,
-    checkPlaylistForNotify,
     togglePlaylistSave,
+    checkingSaved,
+    checkPlaylistForNotify,
   } = useNotifyMeButton(id);
 
+  const [isSaved, setIsSaved] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>();
+
   useEffect(() => {
-    checkPlaylistForNotify();
+    const init = async () => {
+      setLoading(true);
+
+      const isSaved = await checkPlaylistForNotify();
+      setIsSaved(isSaved ?? false);
+      setLoading(false);
+    };
+
+    init();
   }, []);
+
+  const iconProps = useMemo(() => {
+    if (isSaved)
+      return {
+        color: 'black',
+        iconName: 'notifications-active',
+      };
+
+    return {
+      color: 'gray',
+      iconName: 'notifications-off',
+    };
+  }, [isSaved]);
+
+  if (checkingSaved)
+    return (
+      <ActivityIndicator style={styles.inline} size="small" color="gray" />
+    );
 
   return (
     <View style={styles.inline}>
-      {loading && <ActivityIndicator size="small" color="gray" />}
-      <TouchableOpacity onPress={togglePlaylistSave} disabled={canSavePlaylist}>
+      {loadingToggle && <ActivityIndicator size="small" color="gray" />}
+      <TouchableOpacity
+        onPress={togglePlaylistSave}
+        disabled={canSavePlaylist || loadingToggle}>
         <MaterialIcons
           name={iconProps.iconName}
           size={26}
@@ -48,6 +78,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     height: 30,
     gap: 8,
   },

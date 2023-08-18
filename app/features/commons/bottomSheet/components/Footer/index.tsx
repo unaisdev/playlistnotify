@@ -5,16 +5,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import {PlaylistModel} from '@app/services/types';
 
 interface Props {
-  bottomSheetFooterProps: BottomSheetFooterProps;
   playlist?: PlaylistModel | null;
 }
 
-const CustomFooter: React.FC<Props> = ({
-  bottomSheetFooterProps,
+const CustomFooter: React.FC<BottomSheetFooterProps & Props> = (props, {
   playlist,
 }: Props) => {
   return (
-    <BottomSheetFooter {...bottomSheetFooterProps}>
+    <BottomSheetFooter {...props}>
       <View style={styles.footerContent}>
         <Image
           source={{uri: playlist?.images[0].url ?? ''}}

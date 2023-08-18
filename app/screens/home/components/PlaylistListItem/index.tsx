@@ -8,13 +8,13 @@ import Animated, {
   Layout,
 } from 'react-native-reanimated';
 
-import NotifyMeButton from '../../../../features/commons/header/NotifyMeButton';
 import PlaylistSeenButton from '../PlaylistSeenButton';
 import BottomSheetUpdatedPlaylist from '../../../../features/commons/bottomSheet';
 
 import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
 import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
 import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
+import NotifyMeButton from '@app/features/commons/header/components/NotifyMeButton';
 
 interface Props {
   playlistId: string;

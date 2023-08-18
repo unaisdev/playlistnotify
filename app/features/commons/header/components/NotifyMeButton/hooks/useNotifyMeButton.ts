@@ -1,42 +1,33 @@
 import React, {useMemo, useState} from 'react';
 
+import {useUserContext} from '@app/containers/userContext';
+import {useAllPlaylistTracks} from '@app/features/commons/hooks/useAllPlaylistTracks';
 import {
   isSavedPlaylistForNotify,
-  removePlaylistForNotify,
   savePlaylistForNotify,
-} from '../../../../../services/playlist';
-import {useUserContext} from '../../../../../containers/userContext';
-import {useAllPlaylistTracks} from '../../../hooks/useAllPlaylistTracks';
+  removePlaylistForNotify,
+} from '@app/services/playlist';
 
 export const useNotifyMeButton = (playlistId: string) => {
   const [isSaved, setIsSaved] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingToggle, setLoadingToggle] = useState(false);
+  const [checkingSaved, setCheckingSaved] = useState(false);
   const {tracks, hasNextPage} = useAllPlaylistTracks(playlistId);
   const {user} = useUserContext();
 
-  const iconProps = useMemo(() => {
-    if (isSaved)
-      return {
-        color: 'black',
-        iconName: 'notifications-active',
-      };
-
-    return {
-      color: 'gray',
-      iconName: 'notifications-off',
-    };
-  }, [isSaved]);
-
   const checkPlaylistForNotify = async () => {
     if (user) {
+      setCheckingSaved(true);
       const isSaved = await isSavedPlaylistForNotify(playlistId, user?.id);
       setIsSaved(isSaved ?? false);
+      setCheckingSaved(false);
+      return isSaved;
     }
   };
-  
+
   const togglePlaylistSave = async () => {
     if (user) {
-      setLoading(true); // Show loading indicator
+      setLoadingToggle(true); // Show loading indicator
 
       try {
         if (!isSaved) {
@@ -51,16 +42,15 @@ export const useNotifyMeButton = (playlistId: string) => {
         console.error('Error saving/removing playlist:', error);
       }
 
-      setLoading(false); // Hide loading indicator
+      setLoadingToggle(false); // Hide loading indicator
     }
   };
 
   return {
-    isSaved,
-    loading,
+    loadingToggle,
+    checkingSaved,
     canSavePlaylist: hasNextPage,
     checkPlaylistForNotify,
     togglePlaylistSave,
-    iconProps,
   };
 };

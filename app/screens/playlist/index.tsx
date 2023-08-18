@@ -16,7 +16,6 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
 import TrackList from './components/TrackList';
-import PlaylistHeader from '../../features/commons/header/PlaylistHeader';
 
 import {RootStackParamList} from '../../navigation';
 import {PlaylistItem} from '../../services/types';
@@ -24,6 +23,7 @@ import {PlaylistItem} from '../../services/types';
 import {useAllPlaylistTracks} from '../../features/commons/hooks/useAllPlaylistTracks';
 import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import {useQuery} from '@tanstack/react-query';
+import PlaylistHeader from '@app/features/commons/header/components/PlaylistHeader';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;

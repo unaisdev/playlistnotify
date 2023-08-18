@@ -14,10 +14,10 @@ import Animated, {
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
-import ProfileImageButton from './ProfileImageButton';
 
 import {useRoute} from '@react-navigation/native';
 import {useUserContext} from '../../../containers/userContext';
+import ProfileImageButton from './components/ProfileImageButton';
 
 interface TabHeaderProps {
   props: BottomTabHeaderProps;

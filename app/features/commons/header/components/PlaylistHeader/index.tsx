@@ -1,6 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-
-import GoBackButton from '../GoBackButton';
+import GoBackButton from '../../GoBackButton';
 import NotifyMeButton from '../NotifyMeButton';
 
 interface PlaylistHeaderProps {
