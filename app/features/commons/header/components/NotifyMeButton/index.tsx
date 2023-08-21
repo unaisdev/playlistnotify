@@ -19,38 +19,10 @@ const NotifyMeButton = ({id}: Props) => {
   const {
     loadingToggle,
     canSavePlaylist,
+    iconProps,
     togglePlaylistSave,
     checkingSaved,
-    checkPlaylistForNotify,
   } = useNotifyMeButton(id);
-
-  const [isSaved, setIsSaved] = useState<boolean>();
-  const [loading, setLoading] = useState<boolean>();
-
-  useEffect(() => {
-    const init = async () => {
-      setLoading(true);
-
-      const isSaved = await checkPlaylistForNotify();
-      setIsSaved(isSaved ?? false);
-      setLoading(false);
-    };
-
-    init();
-  }, []);
-
-  const iconProps = useMemo(() => {
-    if (isSaved)
-      return {
-        color: 'black',
-        iconName: 'notifications-active',
-      };
-
-    return {
-      color: 'gray',
-      iconName: 'notifications-off',
-    };
-  }, [isSaved]);
 
   if (checkingSaved)
     return (

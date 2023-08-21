@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import {useUserContext} from '@app/containers/userContext';
 import {useAllPlaylistTracks} from '@app/features/commons/hooks/useAllPlaylistTracks';
@@ -14,7 +14,7 @@ export const useNotifyMeButton = (playlistId: string) => {
   const [checkingSaved, setCheckingSaved] = useState(false);
   const {tracks, hasNextPage} = useAllPlaylistTracks(playlistId);
   const {user} = useUserContext();
-
+  
   const checkPlaylistForNotify = async () => {
     if (user) {
       setCheckingSaved(true);
@@ -24,6 +24,30 @@ export const useNotifyMeButton = (playlistId: string) => {
       return isSaved;
     }
   };
+
+  useEffect(() => {
+    const init = async () => {
+      const isSaved = await checkPlaylistForNotify();
+      setIsSaved(isSaved ?? false);
+    };
+
+    init();
+  }, []);
+
+  const iconProps = useMemo(() => {
+    if (isSaved)
+      return {
+        color: 'black',
+        iconName: 'notifications-active',
+      };
+
+    return {
+      color: 'gray',
+      iconName: 'notifications-off',
+    };
+  }, [isSaved]);
+
+ 
 
   const togglePlaylistSave = async () => {
     if (user) {
@@ -49,6 +73,7 @@ export const useNotifyMeButton = (playlistId: string) => {
   return {
     loadingToggle,
     checkingSaved,
+    iconProps,
     canSavePlaylist: hasNextPage,
     checkPlaylistForNotify,
     togglePlaylistSave,
