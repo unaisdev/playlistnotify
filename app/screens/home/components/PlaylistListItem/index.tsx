@@ -91,11 +91,16 @@ const PlaylistListItem = ({
 
         <View style={styles.infoContainer}>
           <View style={styles.inlineBetween}>
-            <Text>{playlist.name}</Text>
+            <Text style={styles.tittle} numberOfLines={2}>
+              {playlist.name}
+            </Text>
             <NotifyMeButton id={playlist.id} />
           </View>
           <View style={{maxWidth: '80%'}}>
-            <PlaylistSeenButton />
+            <Text style={styles.lastAct}>
+              Última actualización: hace dos horas
+            </Text>
+            {/* <PlaylistSeenButton /> */}
           </View>
         </View>
       </Animated.View>
@@ -106,6 +111,7 @@ const PlaylistListItem = ({
 const styles = StyleSheet.create({
   container: {
     gap: 8,
+
     marginVertical: 8,
     paddingHorizontal: 8,
     height: 86,
@@ -115,18 +121,26 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  tittle: {
+    maxWidth: 240,
+    // backgroundColor: 'red',
+  },
+  lastAct: {
+    opacity: 0.4,
+    fontSize: 10,
+  },
   inlineBetween: {
     flexGrow: 1,
     display: 'flex',
     // backgroundColor: 'green',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    gap: 8,
   },
   infoContainer: {
     flexGrow: 1,
     // backgroundColor: 'gray',
-    gap: 20,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',

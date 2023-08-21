@@ -58,71 +58,72 @@ const PlaylistScreen = ({route}: Props) => {
     <SafeAreaView style={{height: '100%'}}>
       <View>
         <PlaylistHeader id={id} />
-      </View>
-      <LinearGradient
-        start={{x: 1, y: 0}}
-        end={{x: 1, y: 1}}
-        locations={[1, 0.3, 0.9, 0]}
-        colors={[
-          'rgba(255, 255, 255, 1)',
-          'rgba(229, 231, 235, 1)',
-          'rgba(245, 211, 215, 0.5)',
-          'rgba(255, 255, 255, 0)',
-        ]}
-        style={styles.linearGradient}>
-        <Pressable
-          onPress={() => Linking.openURL(playlistData?.uri)}
-          style={styles.imageShadow}>
-          <Image
-            source={{uri: playlistData.images[0]?.url}}
-            style={styles.image}
-          />
-        </Pressable>
-        <View
-          style={{
-            display: 'flex',
-            flexGrow: 1,
-            justifyContent: 'space-evenly',
-          }}>
-          <View style={styles.topContent}>
-            <Pressable
-              style={styles.inline}
-              onPress={() => {
-                Linking.openURL(playlistData.owner.uri);
-              }}>
-              <Feather name="user" size={8} />
-              <Text style={{fontSize: 10}} numberOfLines={1}>
-                {playlistData.owner.display_name}
-              </Text>
-            </Pressable>
-          </View>
-          <View style={styles.bottomContent}>
-            <Pressable
-              onPress={() => {
-                Linking.openURL(playlistData.uri);
-              }}>
-              <Text style={styles.playlistName} numberOfLines={3}>
-                {playlistData.name}
-              </Text>
-            </Pressable>
-
-            <View style={styles.columnBetween}>
-              <Text style={{fontSize: 10}}>
-                {playlistData.tracks.total} canciones en esta lista
-              </Text>
-              <View style={styles.inline}>
-                <Text
-                  style={{
-                    fontSize: 10,
-                  }}>
-                  {playlistData?.followers.total}
+        <LinearGradient
+          start={{x: 1, y: 0}}
+          end={{x: 1, y: 1}}
+          locations={[1, 0.3, 0.9, 0]}
+          colors={[
+            'rgba(255, 255, 255, 1)',
+            'rgba(229, 231, 235, 1)',
+            'rgba(245, 211, 215, 0.5)',
+            'rgba(255, 255, 255, 0)',
+          ]}
+          style={styles.linearGradient}>
+          <Pressable
+            onPress={() => Linking.openURL(playlistData?.uri)}
+            style={styles.imageShadow}>
+            <Image
+              source={{uri: playlistData.images[0]?.url}}
+              style={styles.image}
+            />
+          </Pressable>
+          <View
+            style={{
+              display: 'flex',
+              flexGrow: 1,
+              justifyContent: 'space-evenly',
+            }}>
+            <View style={styles.topContent}>
+              <Pressable
+                style={styles.inline}
+                onPress={() => {
+                  Linking.openURL(playlistData.owner.uri);
+                }}>
+                <Feather name="user" size={8} />
+                <Text style={{fontSize: 10}} numberOfLines={1}>
+                  {playlistData.owner.display_name}
                 </Text>
-                <Feather name="users" size={8} />
+              </Pressable>
+            </View>
+            <View style={styles.bottomContent}>
+              <Pressable
+                onPress={() => {
+                  Linking.openURL(playlistData.uri);
+                }}>
+                <Text style={styles.playlistName} numberOfLines={3}>
+                  {playlistData.name}
+                </Text>
+              </Pressable>
+
+              <View style={styles.columnBetween}>
+                <Text style={{fontSize: 10}}>
+                  {playlistData.tracks.total} canciones en esta lista
+                </Text>
+                <View style={styles.inline}>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                    }}>
+                    {playlistData?.followers.total}
+                  </Text>
+                  <Feather name="users" size={8} />
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      </LinearGradient>
+        </LinearGradient>
+      </View>
+
       <TrackList
         tracks={playlistTracksData}
         fetchNextPage={fetchNextPage}
@@ -130,7 +131,7 @@ const PlaylistScreen = ({route}: Props) => {
         isLoading={isLoading}
         error={error}
       />
-      {isFetching && (
+      {isLoading && (
         <ActivityIndicator
           style={{margin: 12}}
           size={'small'}
