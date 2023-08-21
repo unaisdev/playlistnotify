@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import {API_URL, ASYNC_STORAGE} from './constants';
+import {API_URL, ASYNC_STORAGE, AUTH_CONFIG} from './constants';
 import useLogin from '../screens/login/hooks/useLogin';
+import {refresh} from 'react-native-app-auth';
 
 const HttpClient = axios.create();
 
@@ -25,14 +26,51 @@ HttpClient.interceptors.request.use(async config => {
 HttpClient.interceptors.response.use(
   response => response,
   async error => {
+    const refreshToken = await AsyncStorage.getItem(
+      ASYNC_STORAGE.REFRESH_TOKEN,
+    );
+
+    if (!refreshToken) return;
+
     if (error.response && error.response.status === 401) {
       // El token de acceso expiró o es inválido
       console.log('-----------------------------------------');
       console.log('El token de acceso ha expirado, hay que actualizarlo...');
-
       console.log('-----------------------------------------');
+
+      const refreshed = await refresh(AUTH_CONFIG, {
+        refreshToken: refreshToken,
+      });
+
+      if (refreshed && refreshed.accessToken) {
+        const nowSeconds = Date.now() / 1000;
+        const expiration =
+          new Date(refreshed.accessTokenExpirationDate).getTime() / 1000;
+
+        console.log('access token:', refreshed.accessToken);
+        console.log('token expires at:', expiration);
+        console.log('refresh token:', refreshed.refreshToken);
+
+        await AsyncStorage.setItem(
+          ASYNC_STORAGE.AUTH_TOKEN,
+          refreshed.accessToken,
+        );
+        await AsyncStorage.setItem(
+          ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
+          expiration.toString(),
+        );
+
+        // asdsdas
+        await AsyncStorage.setItem(
+          ASYNC_STORAGE.REFRESH_TOKEN,
+          refreshed.refreshToken ?? '',
+        );
+      }
+      console.log(refreshed.accessToken, 'refreshToken conseguido!');
     }
+
     return Promise.reject(error);
   },
 );
+
 export default HttpClient;

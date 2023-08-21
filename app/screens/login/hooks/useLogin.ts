@@ -4,30 +4,10 @@ import {authorize, refresh} from 'react-native-app-auth';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../navigation';
 
-import {ASYNC_STORAGE} from '../../../services/constants';
+import {ASYNC_STORAGE, AUTH_CONFIG} from '../../../services/constants';
 
 import {useUserContext} from '../../../containers/userContext';
 import {useCallback} from 'react';
-
-const CLIENT_ID = 'df7cd23d00fe4f989f0eaeaa638f03cf';
-const REDIRECT_URL = 'com.unaicanales.playlistnotify:/oauth';
-
-const discovery = {
-  authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-  tokenEndpoint: 'https://accounts.spotify.com/api/token',
-};
-
-const config = {
-  clientId: CLIENT_ID,
-  redirectUrl: REDIRECT_URL,
-  scopes: [
-    'user-read-email',
-    'user-read-private',
-    'playlist-read-private',
-    'playlist-read-collaborative',
-  ],
-  serviceConfiguration: discovery,
-};
 
 const useLogin = (
   navigation?: NativeStackNavigationProp<RootStackParamList>,
@@ -100,7 +80,7 @@ const useLogin = (
 
   const handleStartSession = useCallback(async () => {
     try {
-      const result = await authorize(config);
+      const result = await authorize(AUTH_CONFIG);
 
       if (result && result.accessToken) {
         const nowSeconds = Date.now() / 1000;
@@ -155,7 +135,7 @@ const useLogin = (
       }
 
       try {
-        const data = await refresh(config, {refreshToken});
+        const data = await refresh(AUTH_CONFIG, {refreshToken});
         if (data && data.accessToken && data.refreshToken) {
           await AsyncStorage.setItem(
             ASYNC_STORAGE.AUTH_TOKEN,
