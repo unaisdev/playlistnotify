@@ -19,6 +19,7 @@ import LoginScreen from '../screens/login';
 import ProfileScreen from '../screens/profile';
 import PlaylistScreen from '../screens/playlist';
 import SearchPlaylistScreen from '../screens/search';
+import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -47,6 +48,10 @@ const TabBar = (props: BottomTabBarProps) => {
 };
 
 const Tabs = () => {
+  const {user} = fetchUserProfile();
+
+  if (!user) return;
+
   return (
     <Tab.Navigator
       tabBar={TabBar}

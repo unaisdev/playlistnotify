@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {View} from 'react-native';
 
@@ -7,10 +7,9 @@ import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';
 
 import {useUserNotifiedPlaylists} from '../../features/commons/hooks/useUserNotifiedPlaylists';
 import {useBottomSheetContext} from '../../containers/bottomSheetContext';
-import { fetchUserProfile } from '@app/features/commons/hooks/useUser';
+import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
 
 const HomeScreen = () => {
-  const {user} = fetchUserProfile();
   const {userNotifiedPlaylists} = useUserNotifiedPlaylists();
   const {ref, handlePresentModalPress} = useBottomSheetContext();
 
