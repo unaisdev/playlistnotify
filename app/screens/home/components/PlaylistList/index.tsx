@@ -1,11 +1,15 @@
-import {FlatList, StyleSheet, Text} from 'react-native';
+import React from 'react';
+
+import {FlatList, StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 
 import PlaylistListItem from '../PlaylistListItem';
 
 import {UserAddedPlaylistsResponse} from '../../../../services/types';
 
 import {useUserContext} from '../../../../containers/userContext';
-import {getUserNotifiedPlaylists} from '../../../../services/user';
+import {Swipeable} from 'react-native-gesture-handler';
+import {SwipeableProps} from 'react-native-gesture-handler/lib/typescript/components/Swipeable';
+import FlatlistLeftActions from './FlatlistLeftAction';
 
 interface Props {
   savedPlaylistsInfo: UserAddedPlaylistsResponse[];
@@ -20,14 +24,21 @@ const PlaylistList = ({savedPlaylistsInfo}: Props) => {
       data={savedPlaylistsInfo}
       renderItem={({item, index}) => {
         console.log(item.playlistId);
+
         if (!item) return <></>;
         return (
-          <PlaylistListItem
-            playlistId={item.playlistId}
-            key={item.playlistId}
-            savedPlaylistTracksIds={item.trackIds}
-            index={index}
-          />
+          <Swipeable
+            leftThreshold={70}
+            renderLeftActions={props => (
+              <FlatlistLeftActions playlistId={item.playlistId} {...props} />
+            )}>
+            <PlaylistListItem
+              playlistId={item.playlistId}
+              key={item.playlistId}
+              savedPlaylistTracksIds={item.trackIds}
+              index={index}
+            />
+          </Swipeable>
         );
       }}
     />
