@@ -2,7 +2,7 @@ export const API_URL = 'https://api-spotify-playlists-0yk7-dev.fl0.io';
 export const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 
 //https://github.com/luggit/react-native-config
-export const CLIENT_ID = 'df7cd23d00fe4f989f0eaeaa638f03cf';
+export const CLIENT_ID = process.env.CLIENT_ID ?? '';
 ///////////////////////////////////////////////
 
 export const REDIRECT_URL = 'com.unaicanales.playlistnotify:/oauth';
