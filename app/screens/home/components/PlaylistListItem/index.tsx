@@ -8,8 +8,8 @@ import Animated, {
   Layout,
 } from 'react-native-reanimated';
 
-import PlaylistSeenButton from '../PlaylistSeenButton';
 import BottomSheetUpdatedPlaylist from '../../../../features/commons/bottomSheet';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
 import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
@@ -97,9 +97,19 @@ const PlaylistListItem = ({
 
             {/* <NotifyMeButton id={playlist.id} /> */}
           </View>
-          <View style={{maxWidth: '80%'}}>
-            <Text>ADD: {tracksUpdate.resultNew.length}</Text>
-            <Text>removed: {tracksUpdate.resultDeleted.length}</Text>
+          <View style={styles.inlineBetween}>
+            <View style={styles.inline}>
+              <Octicons name="diff-added" size={12} color={'black'} />
+              <Text style={{fontSize: 12}}>
+                {tracksUpdate.resultNew.length} añadidas
+              </Text>
+            </View>
+            <View style={styles.inline}>
+              <Octicons name="diff-removed" size={12} color={'black'} />
+              <Text style={{fontSize: 12}}>
+                {tracksUpdate.resultDeleted.length} eliminadas
+              </Text>
+            </View>
             {/* <Text style={styles.lastAct}>
               Última actualización: hace dos horas
             </Text> */}
@@ -114,7 +124,6 @@ const PlaylistListItem = ({
 const styles = StyleSheet.create({
   container: {
     gap: 8,
-
     marginVertical: 8,
     paddingHorizontal: 8,
     height: 86,
@@ -133,15 +142,21 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   inlineBetween: {
-    flexGrow: 1,
     display: 'flex',
-    // backgroundColor: 'green',
+    flexGrow: 1,
+    // backgroundColor: 'purple',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'flex-start',
+  },
+  inline: {
+    display: 'flex',
+    // backgroundColor: 'green',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
     gap: 8,
   },
   infoContainer: {
+    padding: 8,
     flexGrow: 1,
     // backgroundColor: 'gray',
     display: 'flex',

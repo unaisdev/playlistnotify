@@ -2,6 +2,7 @@
 #
 .DS_Store
 
+
 # Xcode
 #
 build/
@@ -33,6 +34,7 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
+android/gradle.properties
 
 # node.js
 #

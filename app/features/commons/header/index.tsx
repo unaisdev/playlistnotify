@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import {
   BottomTabBarButtonProps,
@@ -32,7 +32,8 @@ export const TabHeader = ({
   route,
 }: BottomTabHeaderProps) => {
   const currentTabName = route.name || TAB_NAME_DEFAULT;
-
+  //marginTop safe, hook SafeAreaView
+  const {top} = useSafeAreaInsets();
   const {user} = useUserContext();
 
   // Define the TAB_NAMES object
@@ -61,7 +62,7 @@ export const TabHeader = ({
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={[styles.container, {marginTop: top}]}>
       <View style={styles.contentContainer}>
         <TabHeaderText />
         <View
@@ -75,7 +76,7 @@ export const TabHeader = ({
           <ProfileImageButton />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -89,7 +90,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     width: '100%',
-    height: '100%',
     backgroundColor: 'black',
     display: 'flex',
     flexDirection: 'row',

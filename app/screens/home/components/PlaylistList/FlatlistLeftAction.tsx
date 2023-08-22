@@ -1,4 +1,4 @@
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, Alert, View} from 'react-native';
 import {SwipeableProps} from 'react-native-gesture-handler/lib/typescript/components/Swipeable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -8,11 +8,9 @@ type Props = {
 
 const FlatlistLeftActions = ({playlistId}: Props, props: SwipeableProps) => {
   return (
-    <TouchableOpacity
-      onPress={() => console.log(playlistId)}
-      style={styles.container}>
+    <View style={styles.container}>
       <MaterialIcons name={'delete-outline'} size={26} color={'black'} />
-    </TouchableOpacity>
+    </View>
   );
 };
 
