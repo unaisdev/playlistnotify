@@ -11,7 +11,8 @@ import Animated, {
   FadeOutDown,
   Layout,
 } from 'react-native-reanimated';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {TabHeader} from '../features/commons/header';
 import HomeScreen from '../screens/home';
@@ -56,6 +57,7 @@ const Tabs = () => {
     <Tab.Navigator
       tabBar={TabBar}
       screenOptions={() => ({
+        tabBarActiveTintColor: 'black',
         animation: 'fade',
         tabBarStyle: {
           paddingTop: 0,
@@ -76,8 +78,12 @@ const Tabs = () => {
           headerLeft: () => <></>,
           headerRight: () => <></>,
           headerTitle: () => <></>,
-          tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="home" size={size} color={color} />
+          tabBarIcon: ({color, size, focused}) => (
+            <MaterialCommunityIcons
+              name={focused ? 'home' : 'home-outline'}
+              size={size}
+              color={color}
+            />
           ),
           tabBarLabel: () => <></>,
         }}
@@ -99,8 +105,12 @@ const Tabs = () => {
           headerLeft: () => <></>,
           headerRight: () => <></>,
           headerTitle: () => <></>,
-          tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="search" size={size} color={color} />
+          tabBarIcon: ({color, size, focused}) => (
+            <Ionicons
+              name={focused ? 'search' : 'search-outline'}
+              size={size}
+              color={color}
+            />
           ),
           tabBarLabel: () => <></>,
         }}
