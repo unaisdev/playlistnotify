@@ -94,12 +94,15 @@ const PlaylistListItem = ({
             <Text style={styles.tittle} numberOfLines={2}>
               {playlist.name}
             </Text>
+
             {/* <NotifyMeButton id={playlist.id} /> */}
           </View>
           <View style={{maxWidth: '80%'}}>
-            <Text style={styles.lastAct}>
+            <Text>ADD: {tracksUpdate.resultNew.length}</Text>
+            <Text>removed: {tracksUpdate.resultDeleted.length}</Text>
+            {/* <Text style={styles.lastAct}>
               Última actualización: hace dos horas
-            </Text>
+            </Text> */}
             {/* <PlaylistSeenButton /> */}
           </View>
         </View>
