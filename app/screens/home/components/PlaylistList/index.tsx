@@ -28,7 +28,8 @@ const PlaylistList = ({savedPlaylistsInfo}: Props) => {
         if (!item) return <></>;
         return (
           <Swipeable
-            leftThreshold={70}
+            leftThreshold={60}
+            enableTrackpadTwoFingerGesture
             renderLeftActions={props => (
               <FlatlistLeftActions playlistId={item.playlistId} {...props} />
             )}>

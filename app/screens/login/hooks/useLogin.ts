@@ -29,12 +29,10 @@ const useLogin = (
         if (!refreshed) {
           const logged = await handleStartSession();
           if (!logged) return;
-
-          navigation?.replace('Tabs');
         }
-      } else {
-        navigation?.replace('Tabs');
       }
+
+      navigation?.replace('Tabs');
     }
   };
 
