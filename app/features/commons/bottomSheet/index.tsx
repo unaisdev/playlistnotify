@@ -28,7 +28,7 @@ const BottomSheetUpdatedPlaylist = (
       index={-1}
       backdropComponent={props => <CustomBackdrop {...props} />}
       containerStyle={styles.container}
-      footerComponent={props => <CustomFooter {...props} />}
+      footerComponent={props => <CustomFooter {...props}  />}
       enablePanDownToClose
       snapPoints={snapPoints}
       animationConfigs={animationConfigs}>
