@@ -19,18 +19,18 @@ import {useRoute} from '@react-navigation/native';
 import {useUserContext} from '../../../containers/userContext';
 import ProfileImageButton from './components/ProfileImageButton';
 
-interface TabHeaderProps {
-  props: BottomTabHeaderProps;
-}
-
 interface TabNames {
   [key: string]: string;
 }
 
 const TAB_NAME_DEFAULT = 'Default';
 
-export const TabHeader = ({props}: TabHeaderProps) => {
-  const route = useRoute();
+export const TabHeader = ({
+  layout,
+  navigation,
+  options,
+  route,
+}: BottomTabHeaderProps) => {
   const currentTabName = route.name || TAB_NAME_DEFAULT;
 
   const {user} = useUserContext();

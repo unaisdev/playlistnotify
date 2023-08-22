@@ -69,7 +69,7 @@ const Tabs = () => {
         headerRightContainerStyle: {
           paddingRight: 16,
         },
-        header: props => <TabHeader props={props} />,
+        header: props => <TabHeader {...props} />,
       })}>
       <Tab.Screen
         name="Home"
