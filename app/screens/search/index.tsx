@@ -13,67 +13,23 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {useSearch} from './hooks/useSearch';
 import {useNavigation} from '@react-navigation/native';
+import SearchBar from './components/searchBar';
 
 const SearchPlaylistScreen = () => {
   const navigation = useNavigation();
-  const inputRef = useRef<TextInput>(null);
-
-  const {searchPhrase, handleSearchTextChange, data, isLoading, isFetching} =
-    useSearch();
-
-  const handlePress = () => {
-    // Handle press logic
-  };
-
-  const handleBlur = () => {
-    // Handle blur logic
-  };
-
-  const handleClear = () => {
-    inputRef.current?.blur();
-    // setSearchPhrase('');
-  };
+  const {data, handleSearchTextChange, isFetching, isLoading} = useSearch();
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.searchBarContainer}
-        onPress={handlePress}
-        activeOpacity={1}>
-        <View style={styles.searchBar}>
-          <View>
-            {isFetching ? (
-              <ActivityIndicator size={'small'} color={'gray'} />
-            ) : (
-              <MaterialIcons name="search" size={20} color="white" />
-            )}
-          </View>
-
-          <TextInput
-            ref={inputRef}
-            style={styles.input}
-            placeholder="¿En qué lista quieres activar las notificaciones?"
-            value={searchPhrase}
-            onChangeText={handleSearchTextChange}
-            onBlur={handleBlur}
-            onFocus={() => {}}
-            placeholderTextColor="#d3d3d3"
-          />
-          <View>
-            {data?.length === 0 && (
-              <TouchableOpacity onPress={handleClear}>
-                {/* Renderizar tu icono de limpiar aquí */}
-              </TouchableOpacity>
-            )}
-          </View>
-        </View>
-      </TouchableOpacity>
+      <SearchBar
+        handleSearchTextChange={handleSearchTextChange}
+        isFetching={isFetching}
+        isLoading={isLoading}
+      />
       <SearchList searchResults={data || []} />
     </View>
   );
 };
-
-export default SearchPlaylistScreen;
 
 const styles = StyleSheet.create({
   container: {},
@@ -101,3 +57,5 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
 });
+
+export default SearchPlaylistScreen;
