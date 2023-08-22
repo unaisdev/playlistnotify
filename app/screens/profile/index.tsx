@@ -30,13 +30,13 @@ const ProfileScreen = () => {
   }, []);
 
   if (!user) return;
-  if (!userPlaylists) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
+  // if (!userPlaylists) {
+  //   return (
+  //     <View>
+  //       <Text>Loading...</Text>
+  //     </View>
+  //   );
+  // }
 
   return (
     <View style={{backgroundColor: 'black', height: '100%'}}>
@@ -68,7 +68,7 @@ const ProfileScreen = () => {
         <View>
           <SavedSpotifyLists
             text={'Tus listas'}
-            playlists={userPlaylists.filter(item =>
+            playlists={userPlaylists?.filter(item =>
               item.owner.display_name.includes(user.display_name),
             )}
           />
@@ -77,7 +77,7 @@ const ProfileScreen = () => {
         <View>
           <SavedSpotifyLists
             text={'Tus listas guardadas'}
-            playlists={userPlaylists.filter(
+            playlists={userPlaylists?.filter(
               item => !item.owner.display_name.includes(user.display_name),
             )}
           />

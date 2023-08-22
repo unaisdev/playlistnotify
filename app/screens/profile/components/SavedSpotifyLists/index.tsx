@@ -29,7 +29,7 @@ import {
 
 type Props = {
   text: string;
-  playlists: PlaylistModel[];
+  playlists: PlaylistModel[] | undefined;
 };
 
 const SavedSpotifyLists = ({playlists, text}: Props) => {
@@ -48,42 +48,45 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
 
   const handleOpenPlaylist = (id: string) => {
     navigation.navigate('Playlist', {id: id});
-    console.log('Openning playlist ' + id);
   };
 
   return (
     <View>
       <Text style={{padding: 12, color: 'white'}}>{text}</Text>
-      <FlatList
-        horizontal
-        contentContainerStyle={{
-          paddingHorizontal: 6,
-        }}
-        showsHorizontalScrollIndicator={false}
-        data={playlists}
-        keyExtractor={item => item.id} // Utiliza una propiedad única como clave
-        renderItem={({item, index}) => {
-          return (
-            <Animated.View
-              key={item.id}
-              entering={FadeInDown.duration(800).delay(index * 100)}
-              exiting={FadeOutRight.duration(800)}>
-              <TouchableOpacity
-                key={`${item.id}_${index}`}
-                ref={containerRef}
-                onPress={() => handleOpenPlaylist(item.id)}>
-                <Animated.View style={[animatedStyle]}>
-                  <PlaylistInfo
-                    id={item.id}
-                    image_url={item.images[0]?.url}
-                    name={item.name}
-                  />
-                </Animated.View>
-              </TouchableOpacity>
-            </Animated.View>
-          );
-        }}
-      />
+      {playlists ? (
+        <FlatList
+          horizontal
+          contentContainerStyle={{
+            paddingHorizontal: 6,
+          }}
+          showsHorizontalScrollIndicator={false}
+          data={playlists}
+          keyExtractor={item => item.id} // Utiliza una propiedad única como clave
+          renderItem={({item, index}) => {
+            return (
+              <Animated.View
+                key={item.id}
+                entering={FadeInDown.duration(800).delay(index * 100)}
+                exiting={FadeOutRight.duration(800)}>
+                <TouchableOpacity
+                  key={`${item.id}_${index}`}
+                  ref={containerRef}
+                  onPress={() => handleOpenPlaylist(item.id)}>
+                  <Animated.View style={[animatedStyle]}>
+                    <PlaylistInfo
+                      id={item.id}
+                      image_url={item.images[0]?.url}
+                      name={item.name}
+                    />
+                  </Animated.View>
+                </TouchableOpacity>
+              </Animated.View>
+            );
+          }}
+        />
+      ) : (
+        <View style={{height: 150}}></View>
+      )}
     </View>
   );
 };
