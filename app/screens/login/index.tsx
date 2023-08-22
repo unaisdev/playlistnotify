@@ -20,7 +20,7 @@ const LoginScreen = ({navigation}: Props) => {
 
     if (!isValid) await refreshToken();
 
-    // navigation.replace('Tabs');
+    navigation.replace('Tabs');
   };
 
   useEffect(() => {
