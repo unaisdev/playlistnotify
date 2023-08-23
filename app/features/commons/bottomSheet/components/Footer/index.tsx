@@ -12,7 +12,11 @@ const CustomFooter: React.FC<BottomSheetFooterProps> = props => {
     <BottomSheetFooter {...props}>
       <View style={styles.footerContent}>
         <Image
-          source={{uri: playlist?.images[0].url ?? ''}}
+          source={{
+            uri:
+              playlist?.images[0].url ??
+              'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2',
+          }}
           width={46}
           height={46}
         />

@@ -5,17 +5,17 @@ import {RootTabsParamList} from '@app/navigation';
 
 import {useUserContext} from '@app/containers/userContext';
 import {useNavigation} from '@react-navigation/native';
+import {useMemo} from 'react';
 
-interface Props {
-  image_url?: string;
-}
-
-const ProfileImageButton = ({}: Props) => {
+const useProfileImageButton = () => {
   const {user} = useUserContext();
 
-  const imageUrl =
-    user?.images[0].url ??
-    'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=300';
+  const imageUrl = useMemo(() => {
+    if (user?.images[0] == null)
+      return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=300';
+
+    return user.images[0].url;
+  }, [user?.images]);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
@@ -23,6 +23,15 @@ const ProfileImageButton = ({}: Props) => {
   const handlePress = () => {
     navigation.navigate('Profile');
   };
+
+  return {
+    imageUrl,
+    handlePress,
+  };
+};
+
+const ProfileImageButton = () => {
+  const {handlePress, imageUrl} = useProfileImageButton();
 
   return (
     <TouchableOpacity onPress={handlePress} style={{}}>

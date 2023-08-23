@@ -15,42 +15,39 @@ type TracksListProps = {
 };
 
 const TracksList = ({tracksNew, tracksDel}: TracksListProps) => {
-  const renderItem = useCallback(
-    ({item, index}) => (
-      <View
-        key={item.track.id}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          marginVertical: 4,
-        }}>
-        <Image
-          source={{uri: item.track.album.images[0]?.url ?? ''}}
-          width={40}
-          height={40}
-        />
-        <Text>{item.track.name}</Text>
-      </View>
-    ),
-    [],
-  );
-
   if (tracksNew)
     return (
-      <FlatList
-        contentContainerStyle={{backgroundColor: 'green'}}
-        data={tracksNew}
-        renderItem={renderItem}
-      />
+      <View style={{backgroundColor: 'green'}}>
+        {tracksNew.map((item, index) => {
+          return (
+            <View
+              key={item.track.id}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'row',
+                marginVertical: 4,
+              }}>
+              <Image
+                source={{
+                  uri:
+                    item.track.album.images[0]?.url ??
+                    'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2',
+                }}
+                width={40}
+                height={40}
+              />
+              <Text>{item.track.name}</Text>
+            </View>
+          );
+        })}
+      </View>
     );
 
   if (tracksDel)
     return (
-      <FlatList
-        data={tracksDel}
-        contentContainerStyle={{backgroundColor: 'red'}}
-        renderItem={({item, index}) => {
+      <View style={{backgroundColor: 'red'}}>
+        {tracksDel.map((item, index) => {
           return (
             <View
               key={item.id}
@@ -61,15 +58,19 @@ const TracksList = ({tracksNew, tracksDel}: TracksListProps) => {
                 marginVertical: 4,
               }}>
               <Image
-                source={{uri: item.album.images[0]?.url ?? ''}}
+                source={{
+                  uri:
+                    item.album.images[0]?.url ??
+                    'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2',
+                }}
                 width={40}
                 height={40}
               />
               <Text>{item.name}</Text>
             </View>
           );
-        }}
-      />
+        })}
+      </View>
     );
 };
 

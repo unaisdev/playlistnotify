@@ -40,13 +40,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={{backgroundColor: 'black', height: '100%'}}>
-      <ScrollView
-        overScrollMode="always"
-        contentContainerStyle={{
-          paddingVertical: 12,
-          flexGrow: 1,
-        }}
-        style={styles.container}>
+      <View style={styles.container}>
         <View style={{padding: 12}}>
           <Text
             style={{
@@ -82,7 +76,7 @@ const ProfileScreen = () => {
             )}
           />
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 };

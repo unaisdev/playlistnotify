@@ -84,7 +84,11 @@ const PlaylistListItem = ({
         exiting={FadeInLeft.duration(800)}
         layout={Layout.duration(800).delay(800)}>
         <Image
-          source={{uri: playlist.images[0].url ?? ''}}
+          source={{
+            uri:
+              playlist.images[0].url ??
+              'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2',
+          }}
           width={86}
           height={86}
         />

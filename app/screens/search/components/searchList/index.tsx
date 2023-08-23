@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   StyleSheet,
+  FlatList,
 } from 'react-native';
 import Animated, {
   FadeInDown,
@@ -21,28 +22,28 @@ type Props = {
 };
 
 const SearchList = ({searchResults}: Props) => {
+  if (searchResults.length === 0)
+    return (
+      <Text
+        style={{textAlign: 'center'}}
+        //   className="p-4 text-xs text-gray-400  text-center"
+      >
+        Haz una búsqueda para ver aquí los resultados
+      </Text>
+    );
+
   return (
-    <ScrollView
+    <FlatList
+      data={searchResults}
+      renderItem={({item, index}) => {
+        return <SearchItem index={index} item={item} />;
+      }}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
         marginHorizontal: 12,
         paddingVertical: 6,
-      }}>
-      {searchResults.length === 0 && (
-        <Animated.Text
-          entering={FadeInDown.duration(800)}
-          exiting={FadeOutRight.duration(800)}
-          layout={Layout.duration(800)}
-          style={{textAlign: 'center'}}
-          //   className="p-4 text-xs text-gray-400  text-center"
-        >
-          Haz una búsqueda para ver aquí los resultados
-        </Animated.Text>
-      )}
-      {searchResults.map((item, index) => (
-        <SearchItem key={item.id} item={item} index={index} />
-      ))}
-    </ScrollView>
+      }}
+    />
   );
 };
 
