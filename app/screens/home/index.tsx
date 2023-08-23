@@ -8,7 +8,8 @@ import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';
 import {useUserNotifiedPlaylists} from '../../features/commons/hooks/useUserNotifiedPlaylists';
 import {useBottomSheetContext} from '../../containers/bottomSheetContext';
 import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
-import I18nApp from '@app/locale/i18n';
+import {useTranslation} from 'react-i18next';
+import i18n from '@app/services/i18next';
 
 const HomeScreen = () => {
   const {userNotifiedPlaylists} = useUserNotifiedPlaylists();
@@ -16,9 +17,9 @@ const HomeScreen = () => {
 
   if (!userNotifiedPlaylists)
     return (
-      <View style={styles.loadingContainer}>
+      <View style={[styles.loadingContainer]}>
         <Text style={styles.loadingText}>
-          {I18nApp.t('loading_notified_playlists')}
+          {i18n.t('loading_notified_playlists')}
         </Text>
         <ActivityIndicator />
       </View>
