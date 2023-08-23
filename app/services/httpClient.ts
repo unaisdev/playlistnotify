@@ -16,6 +16,8 @@ HttpClient.interceptors.request.use(async config => {
   if (!config.headers?.Authorization) {
     const auth = await EncryptedStorage.getItem(ASYNC_STORAGE.AUTH_TOKEN);
 
+    // console.log('auth');
+    // console.log(auth);
     config.headers.Authorization = `Bearer ${auth}`;
   }
 
@@ -26,13 +28,12 @@ HttpClient.interceptors.request.use(async config => {
 HttpClient.interceptors.response.use(
   response => response,
   async error => {
-    const refreshToken = await EncryptedStorage.getItem(
-      ASYNC_STORAGE.REFRESH_TOKEN,
-    );
-
-    if (!refreshToken) return;
-
     if (error.response && error.response.status === 401) {
+      const refreshToken = await EncryptedStorage.getItem(
+        ASYNC_STORAGE.REFRESH_TOKEN,
+      );
+
+      if (!refreshToken) return;
       // El token de acceso expiró o es inválido
       console.log('-----------------------------------------');
       console.log('El token de acceso ha expirado, hay que actualizarlo...');
@@ -41,6 +42,8 @@ HttpClient.interceptors.response.use(
       const refreshed = await refresh(AUTH_CONFIG, {
         refreshToken: refreshToken,
       });
+
+      console.log(refreshed);
 
       if (refreshed && refreshed.accessToken) {
         const nowSeconds = Date.now() / 1000;
@@ -61,9 +64,11 @@ HttpClient.interceptors.response.use(
         );
 
         // asdsdas
+        if (!refreshed.refreshToken) return;
+
         await EncryptedStorage.setItem(
           ASYNC_STORAGE.REFRESH_TOKEN,
-          refreshed.refreshToken ?? '',
+          refreshed.refreshToken,
         );
       }
       console.log(refreshed.accessToken, 'refreshToken conseguido!');
