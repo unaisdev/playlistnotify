@@ -13,6 +13,10 @@ interface Props {
 const ProfileImageButton = ({}: Props) => {
   const {user} = useUserContext();
 
+  const imageUrl =
+    user?.images[0].url ??
+    'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=300';
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
 
@@ -22,12 +26,10 @@ const ProfileImageButton = ({}: Props) => {
 
   return (
     <TouchableOpacity onPress={handlePress} style={{}}>
-      {user?.images[0].url && (
-        <Image
-          source={{uri: user?.images[0].url}}
-          style={{width: 30, height: 30, borderRadius: 1000}}
-        />
-      )}
+      <Image
+        source={{uri: imageUrl}}
+        style={{width: 30, height: 30, borderRadius: 1000}}
+      />
     </TouchableOpacity>
   );
 };
