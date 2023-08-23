@@ -14,12 +14,12 @@ import Animated, {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {TabHeader} from '../features/commons/header';
-import HomeScreen from '../screens/home';
-import LoginScreen from '../screens/login';
-import ProfileScreen from '../screens/profile';
-import PlaylistScreen from '../screens/playlist';
-import SearchPlaylistScreen from '../screens/search';
+import {TabHeader} from '@app/features/commons/header';
+import HomeScreen from '@app/screens/home';
+import LoginScreen from '@app/screens/login';
+import ProfileScreen from '@app/screens/profile';
+import PlaylistScreen from '@app/screens/playlist';
+import SearchPlaylistScreen from '@app/screens/search';
 import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
 
 export type RootStackParamList = {
@@ -57,11 +57,11 @@ const Tabs = () => {
     <Tab.Navigator
       tabBar={TabBar}
       screenOptions={() => ({
-        tabBarActiveTintColor: 'black',
+        tabBarActiveTintColor: 'gray',
         animation: 'fade',
         tabBarStyle: {
           paddingTop: 0,
-          backgroundColor: '#191414',
+          backgroundColor: '#000',
         },
         headerLeftContainerStyle: {
           paddingLeft: 16,
