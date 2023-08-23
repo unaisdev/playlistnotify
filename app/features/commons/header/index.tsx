@@ -49,15 +49,13 @@ export const TabHeader = ({
     if (!user) return;
 
     return (
-      <Animated.Text
-        entering={FadeInLeft.duration(600).delay(200)}
-        exiting={FadeOutRight.duration(600)}
+      <Text
         style={{
           color: 'white',
           flexGrow: 1,
         }}>
         {TAB_NAMES[currentTabName]}
-      </Animated.Text>
+      </Text>
     );
   };
 
