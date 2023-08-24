@@ -1,6 +1,7 @@
 import React, {useCallback} from 'react';
 
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
+import Text from '@app/features/commons/components/Text';
 
 import {
   FlatList,
@@ -99,16 +100,16 @@ const Content = () => {
   ) as Track[];
 
   return (
-    <BottomSheetScrollView enableFooterMarginAdjustment style={{flex: 1}}>
-      <View style={{paddingVertical: 20}}>
-        <View style={styles.inline}>
-          <TouchableOpacity style={{padding: 12}} onPress={goToFirstIndex}>
-            <Text>AÑADIDAS</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{padding: 12}} onPress={goToSecondIndex}>
-            <Text>ELIMINADAS</Text>
-          </TouchableOpacity>
-        </View>
+    <View style={{paddingVertical: 20, flex: 1}}>
+      <View style={styles.inline}>
+        <TouchableOpacity style={{padding: 12}} onPress={goToFirstIndex}>
+          <Text>AÑADIDAS</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{padding: 12}} onPress={goToSecondIndex}>
+          <Text>ELIMINADAS</Text>
+        </TouchableOpacity>
+      </View>
+      <BottomSheetScrollView enableFooterMarginAdjustment>
         <SwiperFlatListWithGestureHandler
           ref={scrollRef}
           horizontal
@@ -121,8 +122,8 @@ const Content = () => {
             <TracksList tracksDel={filteredTracksDeleted} />
           </View>
         </SwiperFlatListWithGestureHandler>
-      </View>
-    </BottomSheetScrollView>
+      </BottomSheetScrollView>
+    </View>
   );
 };
 
