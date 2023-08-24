@@ -42,6 +42,8 @@ const SearchList = ({searchResults}: Props) => {
       contentContainerStyle={{
         marginHorizontal: 12,
         paddingVertical: 6,
+        //check avoiding bottomNavBar margin
+        paddingBottom: 96,
       }}
     />
   );

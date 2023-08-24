@@ -38,14 +38,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootTabsParamList>();
 
 const TabBar = (props: BottomTabBarProps) => {
-  return (
-    <Animated.View
-      entering={FadeInUp}
-      exiting={FadeOutDown}
-      layout={Layout.duration(1500)}>
-      <BottomTabBar {...props} />
-    </Animated.View>
-  );
+  return <BottomTabBar {...props} />;
 };
 
 const Tabs = () => {
@@ -57,8 +50,8 @@ const Tabs = () => {
     <Tab.Navigator
       tabBar={TabBar}
       screenOptions={() => ({
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: 'gray',
-        animation: 'fade',
         tabBarStyle: {
           paddingTop: 0,
           backgroundColor: '#000',

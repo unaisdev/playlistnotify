@@ -7,13 +7,11 @@ import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';
 
 import {useUserNotifiedPlaylists} from '../../features/commons/hooks/useUserNotifiedPlaylists';
 import {useBottomSheetContext} from '../../containers/bottomSheetContext';
-import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
-import {useTranslation} from 'react-i18next';
 import i18n from '@app/services/i18next';
 
 const HomeScreen = () => {
   const {userNotifiedPlaylists} = useUserNotifiedPlaylists();
-  const {ref, handlePresentModalPress} = useBottomSheetContext();
+  const {ref} = useBottomSheetContext();
 
   if (!userNotifiedPlaylists)
     return (
