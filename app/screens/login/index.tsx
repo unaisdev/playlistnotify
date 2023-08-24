@@ -18,7 +18,10 @@ const LoginScreen = ({navigation}: Props) => {
     // Si el token es válido, navegar a la pantalla principal
     const isValid = await isTokenValid();
 
-    if (!isValid) await refreshToken();
+    if (!isValid) {
+      await refreshToken();
+      return;
+    }
 
     navigation.replace('Tabs');
   };
