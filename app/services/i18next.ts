@@ -1,8 +1,18 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
+import Backend from 'i18next-http-backend';
 
-import en from '../features/locales/en';
-import es from '../features/locales/es';
+import en from '../features/locales/en.json';
+import es from '../features/locales/es.json';
+
+const resources = {
+  en: {
+    translation: en,
+  },
+  es: {
+    translation: es,
+  },
+};
 
 i18n
   // detect user language
@@ -18,18 +28,7 @@ i18n
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
-    resources: {
-      en: {
-        translation: {
-          en,
-        },
-      },
-      es: {
-        translation: {
-          es,
-        },
-      },
-    },
+    resources: resources,
   });
 
 export default i18n;
