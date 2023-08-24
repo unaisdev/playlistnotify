@@ -1,7 +1,9 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import Text from '@app/features/commons/components/Text';
+
 import useLogin from './hooks/useLogin';
 import {RootStackParamList} from '../../navigation';
 

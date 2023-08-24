@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 import PlaylistList from './components/PlaylistList';
+import Text from '@app/features/commons/components/Text';
 import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';
 
 import {useUserNotifiedPlaylists} from '../../features/commons/hooks/useUserNotifiedPlaylists';

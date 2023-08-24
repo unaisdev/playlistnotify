@@ -1,5 +1,6 @@
-import {View, Text, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import Animated from 'react-native-reanimated';
+import Text from '@app/features/commons/components/Text';
 
 interface Props {
   id: string;
@@ -12,7 +13,7 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
     <Animated.View
       style={{
         display: 'flex',
-        width: 96, 
+        width: 96,
         gap: 6,
         flexDirection: 'column',
         alignItems: 'flex-start',
@@ -40,7 +41,9 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
         />
       )}
 
-      <Text style={{color: 'white', fontSize: 10}} numberOfLines={2}>{name}</Text>
+      <Text style={{color: 'white', fontSize: 10}} numberOfLines={2}>
+        {name}
+      </Text>
     </Animated.View>
   );
 };

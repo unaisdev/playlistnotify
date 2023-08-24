@@ -1,4 +1,5 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
+import Text from '@app/features/commons/components/Text';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootTabsParamList} from '@app/navigation';

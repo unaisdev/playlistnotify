@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import Text from '@app/features/commons/components/Text';
 
 import SavedSpotifyLists from './components/SavedSpotifyLists';
 

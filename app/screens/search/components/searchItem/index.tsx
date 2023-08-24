@@ -1,5 +1,5 @@
 import React from 'react';
-import {Linking, Pressable, Text, View, Image} from 'react-native';
+import {Linking, Pressable, View, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Animated, {
@@ -7,6 +7,8 @@ import Animated, {
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
+import Text from '@app/features/commons/components/Text';
+
 import Feather from 'react-native-vector-icons/Feather';
 import {RootStackParamList} from '../../../../navigation';
 import {PlaylistModel} from '../../../../services/types';

@@ -1,6 +1,7 @@
-import {TouchableOpacity, Text, StyleSheet, Alert, View} from 'react-native';
+import {TouchableOpacity, StyleSheet, Alert, View} from 'react-native';
 import {SwipeableProps} from 'react-native-gesture-handler/lib/typescript/components/Swipeable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Text from '@app/features/commons/components/Text';
 
 type Props = {
   playlistId: string;

@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import Text from '@app/features/commons/components/Text';
 
 import Animated, {
   FadeInLeft,

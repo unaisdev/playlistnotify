@@ -1,9 +1,10 @@
 import React from 'react';
 import {BottomSheetFooter, BottomSheetFooterProps} from '@gorhom/bottom-sheet';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaylistModel} from '@app/services/types';
 import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
+import Text from '@app/features/commons/components/Text';
 
 const CustomFooter: React.FC<BottomSheetFooterProps> = props => {
   const {playlist} = useBottomSheetContext();
