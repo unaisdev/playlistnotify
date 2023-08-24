@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 
 import {FlatList} from 'react-native-gesture-handler';
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
@@ -8,6 +8,7 @@ import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import {useBottomSheetContext} from '../../../../../containers/bottomSheetContext';
 import {PlaylistItem, Track} from '../../../../../services/types';
 import {useTracksInfo} from '@app/features/commons/hooks/useTracksInfo';
+import SwiperFlatList from 'react-native-swiper-flatlist';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];
@@ -88,18 +89,29 @@ const Content = () => {
     <BottomSheetScrollView
       enableFooterMarginAdjustment
       style={{flex: 1, backgroundColor: 'gray'}}>
-      <View style={styles.container}>
-        <View>
+      <SwiperFlatList
+        autoplay
+        autoplayDelay={2}
+        autoplayLoop
+        index={2}
+        showPagination>
+        <View style={[styles.child, {backgroundColor: 'tomato'}]}>
           <TracksList tracksNew={tracksNew} />
         </View>
-
-        <View style={{flex: 1}}>
+        <View style={[styles.child, {backgroundColor: 'thistle'}]}>
           <TracksList tracksDel={filteredTracksDeleted} />
         </View>
+      </SwiperFlatList>
+      <View style={styles.container}>
+        <View></View>
+
+        <View style={{flex: 1}}></View>
       </View>
     </BottomSheetScrollView>
   );
 };
+
+const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -108,6 +120,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 12,
   },
+  child: {width, justifyContent: 'center'},
+  text: {fontSize: width * 0.5, textAlign: 'center'},
 });
 
 export default Content;
