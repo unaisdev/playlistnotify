@@ -20,18 +20,18 @@ const BottomSheetUpdatedPlaylist = (
     easing: Easing.exp,
   });
 
-  const snapPoints = useMemo(() => ['85%'], []);
+  const snapPoints = useMemo(() => ['65%'], []);
 
   return (
     <BottomSheet
       ref={ref}
       index={-1}
-      backdropComponent={props => <CustomBackdrop {...props} />}
-      containerStyle={styles.container}
-      footerComponent={props => <CustomFooter {...props} />}
-      enablePanDownToClose
       snapPoints={snapPoints}
-      animationConfigs={animationConfigs}>
+      backdropComponent={props => <CustomBackdrop {...props} />}
+      footerComponent={props => <CustomFooter {...props} />}
+      containerStyle={styles.container}
+      animationConfigs={animationConfigs}
+      enablePanDownToClose>
       <Content />
     </BottomSheet>
   );
