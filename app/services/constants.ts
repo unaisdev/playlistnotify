@@ -2,7 +2,7 @@ export const API_URL = 'https://api-spotify-playlists-0yk7-dev.fl0.io';
 export const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 
 //https://github.com/luggit/react-native-config
-export const CLIENT_ID = process.env.CLIENT_ID ?? '';
+export const CLIENT_ID = 'df7cd23d00fe4f989f0eaeaa638f03cf';
 ///////////////////////////////////////////////
 
 export const REDIRECT_URL = 'com.unaicanales.playlistnotify:/oauth';
@@ -39,3 +39,9 @@ export const ASYNC_STORAGE = {
   REFRESH_TOKEN: 'AuthRefreshToken',
   AUTH_TOKEN_EXPIRATION: 'AccessTokenExpiration',
 };
+
+export const DEFAULT_PROFILE_IMAGE_URL =
+  'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=300';
+
+export const DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK =
+  'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2/image-size/original?v=mpbl-1&px=-1';
