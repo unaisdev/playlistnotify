@@ -1,5 +1,4 @@
 import {Image, TouchableOpacity, View} from 'react-native';
-import Text from '@app/features/commons/components/Text';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootTabsParamList} from '@app/navigation';
@@ -7,13 +6,13 @@ import {RootTabsParamList} from '@app/navigation';
 import {useUserContext} from '@app/containers/userContext';
 import {useNavigation} from '@react-navigation/native';
 import {useMemo} from 'react';
+import {DEFAULT_PROFILE_IMAGE_URL} from '@app/services/constants';
 
 const useProfileImageButton = () => {
   const {user} = useUserContext();
 
   const imageUrl = useMemo(() => {
-    if (user?.images[0] == null)
-      return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=300';
+    if (user?.images[0] == null) return DEFAULT_PROFILE_IMAGE_URL;
 
     return user.images[0].url;
   }, [user?.images]);

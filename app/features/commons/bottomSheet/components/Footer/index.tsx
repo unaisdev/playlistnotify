@@ -4,7 +4,8 @@ import {Image, StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaylistModel} from '@app/services/types';
 import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
-import Text from '@app/features/commons/components/Text';
+import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
+import Text from '@app/features/commons/layout/Text';
 
 const CustomFooter: React.FC<BottomSheetFooterProps> = props => {
   const {playlist} = useBottomSheetContext();
@@ -14,9 +15,7 @@ const CustomFooter: React.FC<BottomSheetFooterProps> = props => {
       <View style={styles.footerContent}>
         <Image
           source={{
-            uri:
-              playlist?.images[0].url ??
-              'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2',
+            uri: playlist?.images[0].url ?? DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK,
           }}
           width={46}
           height={46}

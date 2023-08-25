@@ -2,7 +2,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import Text from '@app/features/commons/components/Text';
+import Text from '@app/features/commons/layout/Text';
 
 import useLogin from './hooks/useLogin';
 import {RootStackParamList} from '../../navigation';
@@ -12,8 +12,7 @@ type Props = {
 };
 
 const LoginScreen = ({navigation}: Props) => {
-  const {handleLogin, isNewUser, isTokenValid, refreshToken} =
-    useLogin(navigation);
+  const {handleLogin, isTokenValid, refreshToken} = useLogin(navigation);
 
   const init = async () => {
     // Verificar si el token de acceso es válido al cargar la pantalla

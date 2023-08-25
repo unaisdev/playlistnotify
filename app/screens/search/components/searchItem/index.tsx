@@ -7,7 +7,7 @@ import Animated, {
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
-import Text from '@app/features/commons/components/Text';
+import Text from '@app/features/commons/layout/Text';
 
 import Feather from 'react-native-vector-icons/Feather';
 import {RootStackParamList} from '../../../../navigation';

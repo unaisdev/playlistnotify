@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Alert, View, Pressable, StyleSheet, Modal} from 'react-native';
-import Text from '@app/features/commons/components/Text';
+import Text from '@app/features/commons/layout/Text';
 
 const AppModal = () => {
   const [modalVisible, setModalVisible] = useState(false);

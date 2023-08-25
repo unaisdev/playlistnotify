@@ -3,12 +3,12 @@ import React, {useEffect} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 import PlaylistList from './components/PlaylistList';
-import Text from '@app/features/commons/components/Text';
-import BottomSheetUpdatedPlaylist from '../../features/commons/bottomSheet';
+import BottomSheetUpdatedPlaylist from '@app/features/commons/bottomSheet';
 
 import {useUserNotifiedPlaylists} from '../../features/commons/hooks/useUserNotifiedPlaylists';
 import {useBottomSheetContext} from '../../containers/bottomSheetContext';
 import i18n from '@app/services/i18next';
+import Text from '@app/features/commons/layout/Text';
 
 const HomeScreen = () => {
   const {userNotifiedPlaylists} = useUserNotifiedPlaylists();

@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
-import Text from '@app/features/commons/components/Text';
+import Text from '@app/features/commons/layout/Text';
 
 import Animated, {
   FadeInLeft,
@@ -16,6 +16,7 @@ import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
 import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
 import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import NotifyMeButton from '@app/features/commons/header/components/NotifyMeButton';
+import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 
 interface Props {
   playlistId: string;
@@ -86,9 +87,7 @@ const PlaylistListItem = ({
         layout={Layout.duration(800).delay(800)}>
         <Image
           source={{
-            uri:
-              playlist.images[0].url ??
-              'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2',
+            uri: playlist.images[0].url ?? DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK,
           }}
           width={86}
           height={86}
