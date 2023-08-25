@@ -23,7 +23,7 @@ import {PlaylistItem} from '../../services/types';
 import {useAllPlaylistTracks} from '../../features/commons/hooks/useAllPlaylistTracks';
 import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import {useQuery} from '@tanstack/react-query';
-import PlaylistHeader from '@app/features/commons/header/components/PlaylistHeader';
+import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeader';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;

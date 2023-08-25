@@ -18,7 +18,7 @@ import Animated, {
 import {useRoute} from '@react-navigation/native';
 import {useUserContext} from '../../../containers/userContext';
 import ProfileImageButton from './components/ProfileImageButton';
-import Text from '@app/features/commons/components/Text';
+import Text from '@app/features/commons/layout/Text';
 
 interface TabNames {
   [key: string]: string;

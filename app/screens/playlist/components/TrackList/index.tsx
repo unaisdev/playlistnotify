@@ -2,7 +2,7 @@ import React from 'react';
 
 import {FlatList, StyleSheet, View} from 'react-native';
 import TrackItem from '../TrackItem';
-import Text from '@app/features/commons/components/Text';
+import Text from '@app/features/commons/layout/Text';
 
 import {PlaylistItem, PlaylistModel} from '../../../../services/types';
 

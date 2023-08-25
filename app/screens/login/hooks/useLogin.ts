@@ -65,8 +65,8 @@ const useLogin = (
         : parseFloat(tokenExp);
       const nowSeconds = Date.now() / 1000;
 
-      console.log('expiration:', expiration);
-      console.log('nowSeconds:', nowSeconds);
+      console.log('expiration:', new Date(expiration * 1000));
+      console.log('nowSeconds:', new Date(nowSeconds * 1000));
       console.log('isTokenValid:', expiration >= nowSeconds);
 
       return expiration >= nowSeconds;
