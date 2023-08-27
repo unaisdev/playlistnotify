@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 
 import {useUserContext} from '@app/containers/userContext';
-import {useAllPlaylistTracks} from '@app/features/commons/hooks/useAllPlaylistTracks';
+import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
 import {
   isSavedPlaylistForNotify,
   savePlaylistForNotify,
@@ -12,9 +12,9 @@ export const useNotifyMeButton = (playlistId: string) => {
   const [isSaved, setIsSaved] = useState(false);
   const [loadingToggle, setLoadingToggle] = useState(false);
   const [checkingSaved, setCheckingSaved] = useState(false);
-  const {tracks, hasNextPage} = useAllPlaylistTracks(playlistId);
+  const {tracks, hasNextPage} = usePlaylistAllTracks(playlistId);
   const {user} = useUserContext();
-  
+
   const checkPlaylistForNotify = async () => {
     if (user) {
       setCheckingSaved(true);
@@ -46,8 +46,6 @@ export const useNotifyMeButton = (playlistId: string) => {
       iconName: 'notifications-off',
     };
   }, [isSaved]);
-
- 
 
   const togglePlaylistSave = async () => {
     if (user) {

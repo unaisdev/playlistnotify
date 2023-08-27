@@ -19,7 +19,7 @@ import TrackList from './components/TrackList';
 import {RootStackParamList} from '../../navigation';
 import {PlaylistItem} from '../../services/types';
 
-import {useAllPlaylistTracks} from '../../features/commons/hooks/useAllPlaylistTracks';
+import {usePlaylistAllTracks} from '../../features/commons/hooks/usePlaylistAllTracks';
 import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import {useQuery} from '@tanstack/react-query';
 import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeader';
@@ -42,7 +42,7 @@ const PlaylistScreen = ({route}: Props) => {
     isFetching,
     error,
     refetch,
-  } = useAllPlaylistTracks(id);
+  } = usePlaylistAllTracks(id);
 
   const playlistData = useMemo(() => {
     return playlistReq.data;

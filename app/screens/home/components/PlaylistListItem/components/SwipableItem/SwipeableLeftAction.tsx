@@ -7,7 +7,7 @@ type Props = {
   playlistId: string;
 };
 
-const FlatlistLeftActions = ({playlistId}: Props, props: SwipeableProps) => {
+const SwipeableLeftActions = ({playlistId}: Props, props: SwipeableProps) => {
   return (
     <View style={styles.container}>
       <MaterialIcons name={'delete-outline'} size={26} color={'black'} />
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FlatlistLeftActions;
+export default SwipeableLeftActions;

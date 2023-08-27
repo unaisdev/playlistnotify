@@ -8,28 +8,33 @@ import {
   Alert,
   ActivityIndicator,
   RefreshControl,
+  Image,
 } from 'react-native';
 
 import PlaylistListItem from '../PlaylistListItem';
 
-import {UserAddedPlaylistsResponse} from '../../../../services/types';
 
 import {useUserContext} from '../../../../containers/userContext';
-import {Swipeable} from 'react-native-gesture-handler';
-import {SwipeableProps} from 'react-native-gesture-handler/lib/typescript/components/Swipeable';
-import FlatlistLeftActions from './FlatlistLeftAction';
-import {removePlaylistForNotify} from '@app/services/playlist';
 import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
 import {useUserNotifiedPlaylists} from '@app/features/commons/hooks/useUserNotifiedPlaylists';
 import i18n from '@app/services/i18next';
 import Text from '@app/features/commons/layout/Text';
+import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
 
 const PlaylistList = () => {
   const {user} = useUserContext();
-  const {userNotifiedPlaylists, refetchUserNotifiesPlaylists, isRefetching} =
-    useUserNotifiedPlaylists();
+  const {
+    userNotifiedPlaylists,
+    refetchUserNotifiesPlaylists,
+    isLoading,
+    isRefetching,
+  } = useUserNotifiedPlaylists();
 
-  if (!userNotifiedPlaylists)
+  const refetch = () => {
+    refetchUserNotifiesPlaylists();
+  };
+
+  if (isLoading)
     return (
       <View style={[styles.loadingContainer]}>
         <Text style={styles.loadingText}>
@@ -42,8 +47,26 @@ const PlaylistList = () => {
   if (userNotifiedPlaylists.length === 0)
     return (
       <View style={styles.loadingContainer}>
-        <Text style={styles.loadingText}>
+        <Image
+          style={{
+            width: '80%',
+            height: '40%',
+            objectFit: 'contain',
+            borderRadius: 20,
+            backgroundColor: 'gray',
+          }}
+          source={require('../../../../assets/images/no_playlists_for_notify.jpg')}
+        />
+        <Text style={styles.noDataText}>
           ¡No tienes ninguna playlist añadida!
+        </Text>
+        <Text style={styles.noDataDesc}>
+          Para poder notificarte sobre la actualización de una lista de
+          reproducción, primero deberás de activar las notificaciones en alguna
+          lista. Puedes acceder a tu perfil en la parte superior derecha, o ir
+          al buscador en la parte inferior. Selecciona una lista de la que
+          quieras recibir notificaciones cuando se actualiza, y dicha lista
+          aparecerá aqui.
         </Text>
       </View>
     );
@@ -55,13 +78,16 @@ const PlaylistList = () => {
       style={styles.container}
       data={userNotifiedPlaylists}
       refreshControl={
-        <RefreshControl
-          refreshing={isRefetching}
-          onRefresh={refetchUserNotifiesPlaylists}
-        />
+        <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
       }
       renderItem={({item, index}) => (
-        <SwipeableItem item={item} key={item.id} index={index} />
+        <SwipeableItem item={item} key={item.id}>
+          <PlaylistListItem
+            index={index}
+            playlistId={item.playlistId}
+            savedPlaylistTracksIds={item.trackIds}
+          />
+        </SwipeableItem>
       )}
     />
   );
@@ -73,12 +99,15 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 20,
   },
   loadingText: {maxWidth: 300, textAlign: 'center'},
+  noDataText: {maxWidth: 300, textAlign: 'left', fontWeight: '700'},
+  noDataDesc: {maxWidth: 400, textAlign: 'left', fontWeight: '400'},
 });
 
 export default PlaylistList;

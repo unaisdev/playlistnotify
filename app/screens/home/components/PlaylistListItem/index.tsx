@@ -13,7 +13,7 @@ import BottomSheetUpdatedPlaylist from '../../../../features/commons/bottomSheet
 import Octicons from 'react-native-vector-icons/Octicons';
 
 import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
-import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPlaylistTracks';
+import {usePlaylistAllTracks} from '../../../../features/commons/hooks/usePlaylistAllTracks';
 import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import NotifyMeButton from '@app/features/commons/header/components/NotifyMeButton';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
@@ -31,7 +31,7 @@ const PlaylistListItem = ({
   savedPlaylistTracksIds,
   index,
 }: Props) => {
-  const {tracks, hasNextPage} = useAllPlaylistTracks(playlistId);
+  const {tracks, hasNextPage} = usePlaylistAllTracks(playlistId);
   const {data: playlist} = usePlaylist({playlistId: playlistId});
 
   const {handlePresentModalPress, compareAllData} = useBottomSheetContext();
@@ -40,7 +40,14 @@ const PlaylistListItem = ({
     if (playlist && tracksUpdate) {
       compareAllData(playlist, tracksUpdate);
     } else return;
+
     setTimeout(() => {
+      if (
+        tracksUpdate?.resultDeleted.length === 0 &&
+        tracksUpdate.resultNew.length === 0
+      )
+        return;
+
       handlePresentModalPress();
     }, 400);
   };
@@ -66,6 +73,15 @@ const PlaylistListItem = ({
     }
   }, [tracks]);
 
+  const hasAddedOrDeleted = useMemo(() => {
+    if (
+      tracksUpdate?.resultDeleted.length === 0 &&
+      tracksUpdate.resultNew.length === 0
+    )
+      return {opacity: 0.4};
+    return {opacity: 1};
+  }, [tracksUpdate]);
+
   if (!tracksUpdate)
     return (
       <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
@@ -81,12 +97,12 @@ const PlaylistListItem = ({
     );
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} style={hasAddedOrDeleted}>
       <Animated.View
         style={styles.container}
         entering={FadeInLeft.duration(800).delay(index * 300)}
         exiting={FadeInLeft.duration(800)}
-        layout={Layout.duration(800).delay(800)}>
+        layout={Layout.delay(1600)}>
         <Image
           source={{
             uri: playlist.images[0].url ?? DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK,
@@ -100,29 +116,30 @@ const PlaylistListItem = ({
             <Text style={styles.tittle} numberOfLines={2}>
               {playlist.name}
             </Text>
-
-            {/* <NotifyMeButton id={playlist.id} /> */}
           </View>
-          <View style={styles.inlineBetween}>
+          {tracksUpdate.resultNew.length === 0 &&
+          tracksUpdate.resultDeleted.length === 0 ? (
             <View style={styles.inline}>
-              <Octicons name="diff-added" size={12} color={'black'} />
-              <Text style={{fontSize: 12}}>
-                {tracksUpdate.resultNew.length}{' '}
-                {i18n.t('tracks_added').toLowerCase()}
-              </Text>
+              <Text>{i18n.t('no_tracks_new_or_deleted')}</Text>
             </View>
-            <View style={styles.inline}>
-              <Octicons name="diff-removed" size={12} color={'black'} />
-              <Text style={{fontSize: 12}}>
-                {tracksUpdate.resultDeleted.length}{' '}
-                {i18n.t('tracks_deleted').toLowerCase()}
-              </Text>
+          ) : (
+            <View style={styles.inlineBetween}>
+              <View style={styles.inline}>
+                <Octicons name="diff-added" size={12} color={'black'} />
+                <Text style={{fontSize: 12}}>
+                  {tracksUpdate.resultNew.length}{' '}
+                  {i18n.t('tracks_added').toLowerCase()}
+                </Text>
+              </View>
+              <View style={styles.inline}>
+                <Octicons name="diff-removed" size={12} color={'black'} />
+                <Text style={{fontSize: 12}}>
+                  {tracksUpdate.resultDeleted.length}{' '}
+                  {i18n.t('tracks_deleted').toLowerCase()}
+                </Text>
+              </View>
             </View>
-            {/* <Text style={styles.lastAct}>
-              Última actualización: hace dos horas
-            </Text> */}
-            {/* <PlaylistSeenButton /> */}
-          </View>
+          )}
         </View>
       </Animated.View>
     </TouchableOpacity>

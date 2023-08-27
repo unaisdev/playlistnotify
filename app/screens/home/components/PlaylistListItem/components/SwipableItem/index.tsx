@@ -1,17 +1,15 @@
 import {removePlaylistForNotify} from '@app/services/playlist';
-import {useRef} from 'react';
+import {PropsWithChildren, useRef} from 'react';
 import {Alert} from 'react-native';
 import PlaylistListItem from '../..';
-import FlatlistLeftActions from '../../../PlaylistList/FlatlistLeftAction';
+import SwipeableLeftAction from './SwipeableLeftAction';
 import {Swipeable} from 'react-native-gesture-handler';
 import {UserAddedPlaylistsResponse} from '@app/services/types';
 
-type Props = {
-  index: number;
-  item: UserAddedPlaylistsResponse;
-};
-
-const SwipeableItem = ({index, item}: Props) => {
+const SwipeableItem = ({
+  children,
+  item,
+}: PropsWithChildren & {item: UserAddedPlaylistsResponse}) => {
   const swipableRef = useRef<Swipeable | null>(null);
 
   const showAlert = () =>
@@ -38,7 +36,6 @@ const SwipeableItem = ({index, item}: Props) => {
       },
     );
 
-  if (!item) return <></>;
   return (
     <Swipeable
       ref={swipableRef}
@@ -46,14 +43,9 @@ const SwipeableItem = ({index, item}: Props) => {
       enableTrackpadTwoFingerGesture
       onSwipeableOpen={showAlert}
       renderLeftActions={props => (
-        <FlatlistLeftActions playlistId={item.playlistId} {...props} />
+        <SwipeableLeftAction playlistId={item.playlistId} {...props} />
       )}>
-      <PlaylistListItem
-        playlistId={item.playlistId}
-        key={item.playlistId}
-        savedPlaylistTracksIds={item.trackIds}
-        index={index}
-      />
+      {children}
     </Swipeable>
   );
 };

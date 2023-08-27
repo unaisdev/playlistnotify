@@ -1,7 +1,7 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 import {getPlaylistTracks} from '../../../services/playlist';
 
-export const useAllPlaylistTracks = (playlistId: string) => {
+export const usePlaylistAllTracks = (playlistId: string) => {
   const fetchTracks = async ({pageParam = ''}) => {
     const res = await getPlaylistTracks(playlistId, pageParam);
     return res;
