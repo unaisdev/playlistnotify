@@ -1,8 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {useUserContext} from '../../../containers/userContext';
-import {
-  getUserNotifiedPlaylists,
-} from '../../../services/user';
+import {getUserNotifiedPlaylists} from '../../../services/user';
 
 export const useUserNotifiedPlaylists = () => {
   const {user} = useUserContext();
@@ -15,16 +13,16 @@ export const useUserNotifiedPlaylists = () => {
     }
   };
 
-  const userNotifiedPlaylistsQuery = useQuery({
+  const {data, refetch, isRefetching} = useQuery({
     queryKey: ['userPlaylists'],
     queryFn: getPlaylists,
     enabled: !!user, // Start the query only when user is available
     keepPreviousData: true,
   });
 
-  const userNotifiedPlaylists = userNotifiedPlaylistsQuery.data;
-
   return {
-    userNotifiedPlaylists,
+    userNotifiedPlaylists: data,
+    refetchUserNotifiesPlaylists: refetch,
+    isRefetching,
   };
 };
