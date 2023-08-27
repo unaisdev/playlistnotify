@@ -14,13 +14,14 @@ import Animated, {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {TabHeader} from '@app/features/commons/header';
 import HomeScreen from '@app/screens/home';
 import LoginScreen from '@app/screens/login';
 import ProfileScreen from '@app/screens/profile';
 import PlaylistScreen from '@app/screens/playlist';
 import SearchPlaylistScreen from '@app/screens/search';
 import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
+import SettingsScreen from '@app/screens/settings';
+import TabHeader from '@app/features/commons/header';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -32,6 +33,7 @@ export type RootTabsParamList = {
   Home: undefined;
   Profile: undefined;
   SearchPlaylist: undefined;
+  Settings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -106,6 +108,16 @@ const Tabs = () => {
             />
           ),
           tabBarLabel: () => <></>,
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          headerLeft: () => <></>,
+          headerRight: () => <></>,
+          headerTitle: () => <></>,
+          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>

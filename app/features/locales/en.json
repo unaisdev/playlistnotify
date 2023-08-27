@@ -1,3 +1,31 @@
 {
-  "loading_notified_playlists": "We are fetching data from playlists you selected for notify. Hold on a second..."
+  "home": {
+    "title": "Welcome, "
+  },
+  "profile": {
+    "title": "Your profile",
+    "desc_text": "Here you see your playlists from Spotify, even the liked ones.",
+    "your_lists": "Lists created by you",
+    "liked_lists": "Lists you like"
+  },
+  "search": {
+    "title": "Are you looking for a playlist?",
+    "input_placeholder": "Search for a playlist",
+    "search_for": "Type for searching a playlist...",
+    "results_empty": "There is no playlist with that name"
+  },
+  "playlist": {
+    "number_tracks_playlist": "Songs in this playlist"
+  },
+  "settings": {
+    "title": "Settings",
+    "darkMode": "Dark Mode:",
+    "language": "Language: "
+  },
+  "es_language": "Spanish",
+  "en_language": "English",
+  "simple_loading": "Loading...",
+  "tracks_added": "Added",
+  "tracks_deleted": "Deleted",
+  "loading_notified_playlists": "We are fetching data from playlists you selected for notification. Hold on a second..."
 }

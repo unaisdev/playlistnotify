@@ -8,6 +8,8 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from '../../hooks/useSearch';
 import {useRef} from 'react';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import i18n from '@app/services/i18next';
 
 type Props = {
   handleSearchTextChange: (text: string) => void;
@@ -28,6 +30,7 @@ const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
   };
 
   const handleClear = () => {
+    handleSearchTextChange('');
     inputRef.current?.blur();
     // setSearchPhrase('');
   };
@@ -49,7 +52,7 @@ const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
         <TextInput
           ref={inputRef}
           style={styles.input}
-          placeholder="¿En qué lista quieres activar las notificaciones?"
+          placeholder={i18n.t('search.input_placeholder')}
           value={searchPhrase}
           onChangeText={handleSearchTextChange}
           onBlur={handleBlur}
@@ -59,7 +62,7 @@ const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
         <View>
           {data?.length === 0 && (
             <TouchableOpacity onPress={handleClear}>
-              {/* Renderizar tu icono de limpiar aquí */}
+              <MaterialCommunityIcons name="close" size={16} color={'white'} />
             </TouchableOpacity>
           )}
         </View>

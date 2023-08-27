@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {ScrollView, StyleSheet, View} from 'react-native';
-import Text from '@app/features/commons/components/Text';
+import Text from '@app/features/commons/layout/Text';
 
 import SavedSpotifyLists from './components/SavedSpotifyLists';
 
@@ -10,20 +10,12 @@ import {PlaylistModel} from '../../services/types';
 import {useUserContext} from '../../containers/userContext';
 import {useEffect, useState} from 'react';
 import {getUserPlaylists} from '../../services/user';
+import {useProfile} from './hooks/useProfile';
+import i18n from '@app/services/i18next';
+import {withTranslation} from 'react-i18next';
 
 const ProfileScreen = () => {
-  const {user} = useUserContext();
-
-  const [userPlaylists, setUserPlaylists] = useState<PlaylistModel[]>();
-
-  const init = async () => {
-    const userPlaylists = await getUserPlaylists();
-    setUserPlaylists(userPlaylists);
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
+  const {user, userPlaylists, isLoading} = useProfile();
 
   if (!user) return;
 
@@ -36,23 +28,24 @@ const ProfileScreen = () => {
             fontSize: 12,
             color: 'white',
           }}>
-          Tanto aquí, como en el buscador, podrás elegir las listas de las que
-          quieres recibir notificaciones en Spotify.
+          {i18n.t('profile.desc_text')}
         </Text>
       </View>
 
       <SavedSpotifyLists
-        text={'Tus listas'}
+        text={i18n.t('profile.your_lists')}
         playlists={userPlaylists?.filter(item =>
           item.owner.display_name.includes(user.display_name),
         )}
+        isLoadingData={isLoading}
       />
 
       <SavedSpotifyLists
-        text={'Tus listas guardadas'}
+        text={i18n.t('profile.liked_lists')}
         playlists={userPlaylists?.filter(
           item => !item.owner.display_name.includes(user.display_name),
         )}
+        isLoadingData={isLoading}
       />
     </View>
   );
@@ -64,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default withTranslation()(ProfileScreen);

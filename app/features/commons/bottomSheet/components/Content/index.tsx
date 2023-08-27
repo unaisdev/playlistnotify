@@ -19,6 +19,8 @@ import AddedTracks from './components/AddedTracks';
 import DeletedTracks from './components/DeletedTracks';
 import {useBSContent} from './hooks/useBSContent';
 import Text from '@app/features/commons/layout/Text';
+import i18n from '@app/services/i18next';
+import {withTranslation} from 'react-i18next';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];
@@ -33,10 +35,10 @@ const Content = () => {
     <View style={{paddingVertical: 20, flex: 1}}>
       <View style={styles.inline}>
         <TouchableOpacity style={{padding: 12}} onPress={goToFirstIndex}>
-          <Text>AÑADIDAS</Text>
+          <Text>{i18n.t('tracks_added')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{padding: 12}} onPress={goToSecondIndex}>
-          <Text>ELIMINADAS</Text>
+          <Text>{i18n.t('tracks_deleted')}</Text>
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView enableFooterMarginAdjustment>
@@ -84,4 +86,4 @@ const styles = StyleSheet.create({
   child: {width, justifyContent: 'center'},
 });
 
-export default Content;
+export default withTranslation()(Content);

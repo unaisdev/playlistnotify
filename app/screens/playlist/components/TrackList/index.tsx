@@ -5,6 +5,7 @@ import TrackItem from '../TrackItem';
 import Text from '@app/features/commons/layout/Text';
 
 import {PlaylistItem, PlaylistModel} from '../../../../services/types';
+import i18n from '@app/services/i18next';
 
 interface Props {
   tracks: PlaylistItem[];
@@ -30,7 +31,7 @@ const TrackList = ({
   if (isLoading) {
     return (
       <View style={styles.center}>
-        <Text>Loading...</Text>
+        <Text>{i18n.t('simple_loading')}</Text>
       </View>
     );
   }

@@ -17,6 +17,8 @@ import {useAllPlaylistTracks} from '../../../../features/commons/hooks/useAllPla
 import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import NotifyMeButton from '@app/features/commons/header/components/NotifyMeButton';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
+import i18n from '@app/services/i18next';
+import {withTranslation} from 'react-i18next';
 
 interface Props {
   playlistId: string;
@@ -67,14 +69,14 @@ const PlaylistListItem = ({
   if (!tracksUpdate)
     return (
       <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
-        <Text>Cargando...</Text>
+        <Text>{i18n.t('simple_loading')}</Text>
       </View>
     );
 
   if (!playlist)
     return (
       <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
-        <Text>Cargando...</Text>
+        <Text>{i18n.t('simple_loading')}</Text>
       </View>
     );
 
@@ -105,13 +107,15 @@ const PlaylistListItem = ({
             <View style={styles.inline}>
               <Octicons name="diff-added" size={12} color={'black'} />
               <Text style={{fontSize: 12}}>
-                {tracksUpdate.resultNew.length} añadidas
+                {tracksUpdate.resultNew.length}{' '}
+                {i18n.t('tracks_added').toLowerCase()}
               </Text>
             </View>
             <View style={styles.inline}>
               <Octicons name="diff-removed" size={12} color={'black'} />
               <Text style={{fontSize: 12}}>
-                {tracksUpdate.resultDeleted.length} eliminadas
+                {tracksUpdate.resultDeleted.length}{' '}
+                {i18n.t('tracks_deleted').toLowerCase()}
               </Text>
             </View>
             {/* <Text style={styles.lastAct}>
@@ -169,4 +173,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.memo(PlaylistListItem);
+export default withTranslation()(React.memo(PlaylistListItem));

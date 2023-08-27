@@ -2,7 +2,6 @@ import React from 'react';
 
 import {StyleSheet, View} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
-import Feather from 'react-native-vector-icons/Feather';
 import {
   BottomTabBarButtonProps,
   BottomTabBarProps,
@@ -19,6 +18,8 @@ import {useRoute} from '@react-navigation/native';
 import {useUserContext} from '../../../containers/userContext';
 import ProfileImageButton from './components/ProfileImageButton';
 import Text from '@app/features/commons/layout/Text';
+import SettingsButton from './components/SettingsButton';
+import i18n from '@app/services/i18next';
 
 interface TabNames {
   [key: string]: string;
@@ -26,26 +27,17 @@ interface TabNames {
 
 const TAB_NAME_DEFAULT = 'Default';
 
-export const TabHeader = ({
-  layout,
-  navigation,
-  options,
-  route,
-}: BottomTabHeaderProps) => {
-  const currentTabName = route.name || TAB_NAME_DEFAULT;
-  //marginTop safe, hook SafeAreaView
-  const {top} = useSafeAreaInsets();
+const TabHeader = ({route}: BottomTabHeaderProps) => {
   const {user} = useUserContext();
-
-  // Define the TAB_NAMES object
-  const TAB_NAMES: TabNames = {
-    Home: `¡Bienvenido, ${user?.display_name || 'Invitado'}!`,
-    Profile: 'Tu perfil',
-    SearchPlaylist: '¿Buscas alguna lista?',
-  };
 
   const TabHeaderText = () => {
     const currentTabName = route.name || TAB_NAME_DEFAULT;
+    const TAB_NAMES: TabNames = {
+      Home: `${i18n.t('home.title')} ${user?.display_name || 'Invitado'}`,
+      Profile: i18n.t('profile.title'),
+      SearchPlaylist: i18n.t('search.title'),
+      Settings: i18n.t('settings.title'),
+    };
 
     if (!user) return;
 
@@ -61,21 +53,16 @@ export const TabHeader = ({
   };
 
   return (
-    <View style={[styles.container, {marginTop: top}]}>
+    // <View style={[styles.container, {marginTop: top}]}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
         <TabHeaderText />
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 20,
-          }}>
-          <Feather name="settings" size={18} color={'white'} />
+        <View style={styles.rightHeader}>
+          <SettingsButton />
           <ProfileImageButton />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -97,4 +84,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 12,
   },
+  rightHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
+  },
 });
+
+export default TabHeader;

@@ -4,14 +4,11 @@ import {initReactI18next} from 'react-i18next';
 import en from '../features/locales/en.json';
 import es from '../features/locales/es.json';
 
-const resources = {
-  en: {
-    translation: en,
-  },
-  es: {
-    translation: es,
-  },
-};
+export const defaultNS = ['en', 'es'];
+export const resources = {
+  en: en,
+  es: es,
+} as const;
 
 i18n
   // detect user language
@@ -22,12 +19,22 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     compatibilityJSON: 'v3',
+
     debug: true,
-    fallbackLng: 'en',
+    defaultNS: 'translation',
+    //https://github.com/i18next/i18next/issues/1068
+    fallbackLng: ['en', 'es'],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
-    resources: resources,
+    resources: {
+      en: {
+        translation: en,
+      },
+      es: {
+        translation: es,
+      },
+    },
   });
 
 export default i18n;
