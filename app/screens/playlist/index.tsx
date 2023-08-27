@@ -3,7 +3,6 @@ import {useMemo} from 'react';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {
   View,
-  Text,
   Pressable,
   Image,
   StyleSheet,
@@ -24,6 +23,7 @@ import {useAllPlaylistTracks} from '../../features/commons/hooks/useAllPlaylistT
 import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import {useQuery} from '@tanstack/react-query';
 import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeader';
+import Text from '@app/features/commons/layout/Text';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -89,7 +89,7 @@ const PlaylistScreen = ({route}: Props) => {
                 onPress={() => {
                   Linking.openURL(playlistData.owner.uri);
                 }}>
-                <Feather name="user" size={8} />
+                <Feather name="user" size={8} color={'black'} />
                 <Text style={{fontSize: 10}} numberOfLines={1}>
                   {playlistData.owner.display_name}
                 </Text>
@@ -116,7 +116,7 @@ const PlaylistScreen = ({route}: Props) => {
                     }}>
                     {playlistData?.followers.total}
                   </Text>
-                  <Feather name="users" size={8} />
+                  <Feather name="users" size={8} color={'black'} />
                 </View>
               </View>
             </View>

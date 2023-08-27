@@ -10,15 +10,14 @@ import {DEFAULT_PROFILE_IMAGE_URL} from '@app/services/constants';
 
 const useProfileImageButton = () => {
   const {user} = useUserContext();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
 
   const imageUrl = useMemo(() => {
     if (user?.images[0] == null) return DEFAULT_PROFILE_IMAGE_URL;
 
     return user.images[0].url;
   }, [user?.images]);
-
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
 
   const handlePress = () => {
     navigation.navigate('Profile');

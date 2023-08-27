@@ -5,8 +5,10 @@ import {
   Pressable,
   FlatList,
   TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
-import {useEffect, useRef, useState} from 'react';
+import {useRef} from 'react';
 import PlaylistInfo from './PlaylistInfo';
 import {RootStackParamList, RootTabsParamList} from '../../../../navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -15,24 +17,20 @@ import Animated, {
   FadeInDown,
   FadeOutRight,
   Layout,
-  useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
 import React from 'react';
 import {PlaylistModel} from '../../../../services/types';
-import {
-  GestureHandlerRootView,
-  TapGestureHandler,
-} from 'react-native-gesture-handler';
 
 type Props = {
   text: string;
   playlists: PlaylistModel[] | undefined;
+  isLoadingData: boolean;
 };
 
-const SavedSpotifyLists = ({playlists, text}: Props) => {
+const SavedSpotifyLists = ({playlists, text, isLoadingData}: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -50,10 +48,21 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
     navigation.navigate('Playlist', {id: id});
   };
 
+  const playlistsNullOrEmptyText = isLoadingData ? (
+    <View style={styles.emptyListContainer}>
+      <ActivityIndicator />
+    </View>
+  ) : playlists?.length === 0 ? (
+    <View style={styles.emptyListContainer}>
+      <Text>No tienes playlists propias / guardadas</Text>
+    </View>
+  ) : null;
+
   return (
-    <View>
+    <View style={{height: 180}}>
       <Text style={{padding: 12, color: 'white'}}>{text}</Text>
-      {playlists ? (
+      <View style={{alignItems: 'center'}}>
+        {playlistsNullOrEmptyText}
         <FlatList
           horizontal
           contentContainerStyle={{
@@ -84,11 +93,17 @@ const SavedSpotifyLists = ({playlists, text}: Props) => {
             );
           }}
         />
-      ) : (
-        <View style={{height: 150}}></View>
-      )}
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  emptyListContainer: {
+    height: 150,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});
 
 export default React.memo(SavedSpotifyLists);

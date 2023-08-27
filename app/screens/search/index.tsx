@@ -6,6 +6,9 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 
 import SearchList from './components/searchList';
@@ -14,25 +17,30 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from './hooks/useSearch';
 import {useNavigation} from '@react-navigation/native';
 import SearchBar from './components/searchBar';
+import {withTranslation} from 'react-i18next';
 
 const SearchPlaylistScreen = () => {
   const navigation = useNavigation();
   const {data, handleSearchTextChange, isFetching, isLoading} = useSearch();
-
+  const handleViewPress = () => {
+    Keyboard.dismiss();
+  };
   return (
-    <View style={styles.container}>
-      <SearchBar
-        handleSearchTextChange={handleSearchTextChange}
-        isFetching={isFetching}
-        isLoading={isLoading}
-      />
-      <SearchList searchResults={data || []} />
-    </View>
+    <TouchableWithoutFeedback onPress={handleViewPress}>
+      <View style={styles.container}>
+        <SearchBar
+          handleSearchTextChange={handleSearchTextChange}
+          isFetching={isFetching}
+          isLoading={isLoading}
+        />
+        <SearchList searchResults={data || []} />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {flex: 1},
   searchBarContainer: {
     alignItems: 'center',
     flexDirection: 'column',
@@ -58,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchPlaylistScreen;
+export default withTranslation()(SearchPlaylistScreen);

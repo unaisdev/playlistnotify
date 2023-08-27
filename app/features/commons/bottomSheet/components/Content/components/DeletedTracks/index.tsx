@@ -9,7 +9,7 @@ type TracksListProps = {
 
 const DeletedTracks = ({tracksDel}: TracksListProps) => {
   return (
-    <View style={{backgroundColor: 'green'}}>
+    <View style={{backgroundColor: 'red'}}>
       {tracksDel?.map((item, index) => {
         return (
           <View key={item.id} style={styles.inlineCenter}>

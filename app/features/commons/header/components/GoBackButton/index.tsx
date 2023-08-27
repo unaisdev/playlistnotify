@@ -22,7 +22,7 @@ const GoBackButton = ({}: Props) => {
 
   return (
     <TouchableOpacity style={{height: 28}} onPress={handlePress}>
-      <MaterialCommunityIcons name="arrow-left" size={22} />
+      <MaterialCommunityIcons name="arrow-left" size={22} color={'black'} />
     </TouchableOpacity>
   );
 };
