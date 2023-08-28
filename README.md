@@ -1,14 +1,16 @@
 
+
+
 # Playlist Tracker / Notify
 
-Did you want to know the **lasts updates** on your favourite **Spotify playlist**? 
+<div align="right">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" style="width: 90px; opacity: 0.2" alt="google-play-badge">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png" style="width: 90px; opacity: 0.2" alt="app-store-badge-128x128">
+</div>
+
+Somewhere, sometime... Did you wanted to know the **latest updates** on your favourite **Spotify playlist**? 
 
 This will be your **Android & iOS mobile application** for it!
-
-<img src="https://freeiconshop.com/wp-content/uploads/edd/google-play-badge.png"> ESTADO: Prueba Interna
-
-
-<img src="https://freeiconshop.com/wp-content/uploads/edd/app-store-badge-128x128.png" > Not released yet
 
 
 
