@@ -16,10 +16,10 @@ import Animated, {
 
 import {useRoute} from '@react-navigation/native';
 import {useUserContext} from '../../../containers/userContext';
-import ProfileImageButton from './components/ProfileImageButton';
+import ProfileImageButton from '../../../features/commons/header/components/ProfileImageButton';
 import Text from '@app/features/commons/layout/Text';
-import SettingsButton from './components/SettingsButton';
-import i18n from '@app/services/i18next';
+import SettingsButton from '../../../features/commons/header/components/SettingsButton';
+import i18n from '@app/features/locales/i18next';
 
 interface TabNames {
   [key: string]: string;

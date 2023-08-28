@@ -9,7 +9,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from '../../hooks/useSearch';
 import {useRef} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import i18n from '@app/services/i18next';
+import i18n from '@app/features/locales/i18next';
 
 type Props = {
   handleSearchTextChange: (text: string) => void;

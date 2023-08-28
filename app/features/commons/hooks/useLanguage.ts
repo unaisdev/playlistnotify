@@ -1,6 +1,7 @@
-import i18n from '@app/services/i18next';
+import {useTranslation} from 'react-i18next';
 
 export function useLanguage() {
+  const {i18n} = useTranslation();
   const currentLanguage = i18n.language;
   const languagesAvailable = i18n.languages.filter(
     lang => lang !== currentLanguage,

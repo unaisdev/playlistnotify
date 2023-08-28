@@ -3,8 +3,7 @@ import {FlatList} from 'react-native';
 import {PlaylistModel} from '../../../../services/types';
 import SearchItem from '../searchItem';
 import Text from '@app/features/commons/layout/Text';
-import i18n from '@app/services/i18next';
-import {withTranslation} from 'react-i18next';
+import i18n from '@app/features/locales/i18next';
 
 type Props = {
   searchResults: PlaylistModel[];
@@ -38,4 +37,4 @@ const SearchList = ({searchResults}: Props) => {
   );
 };
 
-export default withTranslation()(React.memo(SearchList));
+export default React.memo(SearchList);

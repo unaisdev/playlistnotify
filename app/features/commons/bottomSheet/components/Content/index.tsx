@@ -19,8 +19,7 @@ import AddedTracks from './components/AddedTracks';
 import DeletedTracks from './components/DeletedTracks';
 import {useBSContent} from './hooks/useBSContent';
 import Text from '@app/features/commons/layout/Text';
-import i18n from '@app/services/i18next';
-import {withTranslation} from 'react-i18next';
+import i18n from '@app/features/locales/i18next';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];
@@ -86,4 +85,4 @@ const styles = StyleSheet.create({
   child: {width, justifyContent: 'center'},
 });
 
-export default withTranslation()(Content);
+export default Content;

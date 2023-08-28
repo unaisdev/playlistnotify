@@ -6,6 +6,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import Animated, {
+  Easing,
   FadeIn,
   FadeInUp,
   FadeOutDown,
@@ -21,7 +22,8 @@ import PlaylistScreen from '@app/screens/playlist';
 import SearchPlaylistScreen from '@app/screens/search';
 import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
 import SettingsScreen from '@app/screens/settings';
-import TabHeader from '@app/features/commons/header';
+import TabHeader from '@app/navigation/components/TabHeader';
+import TabBar from './components/TabBar';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -38,10 +40,6 @@ export type RootTabsParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootTabsParamList>();
-
-const TabBar = (props: BottomTabBarProps) => {
-  return <BottomTabBar {...props} />;
-};
 
 const Tabs = () => {
   const {user} = fetchUserProfile();
@@ -86,12 +84,12 @@ const Tabs = () => {
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{
+        options={({route}) => ({
           headerLeft: () => <></>,
           headerRight: () => <></>,
           headerTitle: () => <></>,
           tabBarButton: () => null,
-        }}
+        })}
       />
       <Tab.Screen
         name="SearchPlaylist"

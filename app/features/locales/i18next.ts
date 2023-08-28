@@ -1,8 +1,8 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
-import en from '../features/locales/en.json';
-import es from '../features/locales/es.json';
+import en from './en.json';
+import es from './es.json';
 
 export const defaultNS = ['en', 'es'];
 export const resources = {

@@ -11,8 +11,7 @@ import {useUserContext} from '../../containers/userContext';
 import {useEffect, useState} from 'react';
 import {getUserPlaylists} from '../../services/user';
 import {useProfile} from './hooks/useProfile';
-import i18n from '@app/services/i18next';
-import {withTranslation} from 'react-i18next';
+import i18n from '@app/features/locales/i18next';
 
 const ProfileScreen = () => {
   const {user, userPlaylists, isLoading} = useProfile();
@@ -57,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTranslation()(ProfileScreen);
+export default ProfileScreen;

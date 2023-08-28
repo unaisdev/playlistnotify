@@ -17,7 +17,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from './hooks/useSearch';
 import {useNavigation} from '@react-navigation/native';
 import SearchBar from './components/searchBar';
-import {withTranslation} from 'react-i18next';
 
 const SearchPlaylistScreen = () => {
   const navigation = useNavigation();
@@ -66,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTranslation()(SearchPlaylistScreen);
+export default SearchPlaylistScreen;

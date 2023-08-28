@@ -5,7 +5,7 @@ import TrackItem from '../TrackItem';
 import Text from '@app/features/commons/layout/Text';
 
 import {PlaylistItem, PlaylistModel} from '../../../../services/types';
-import i18n from '@app/services/i18next';
+import i18n from '@app/features/locales/i18next';
 
 interface Props {
   tracks: PlaylistItem[];
