@@ -1,18 +1,21 @@
 import Text from '@app/features/commons/layout/Text';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import i18n from '@app/services/i18next';
+import i18n from '@app/features/locales/i18next';
 import {SelectList} from 'react-native-dropdown-select-list';
 import {useState} from 'react';
 import {useLanguage} from '@app/features/commons/hooks/useLanguage';
-import {withTranslation} from 'react-i18next';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {Switch} from 'react-native-gesture-handler';
 
 const SettingsScreen = () => {
   const {currentLanguage, changeLanguage, languagesAvailable} = useLanguage();
-  console.log(languagesAvailable);
+  const {theme, toggleTheme} = useTheme();
+
   return (
     <View style={styles.container}>
       <View style={styles.item}>
         <Text>{i18n.t('settings.darkMode')}</Text>
+        <Switch value={theme === 'dark'} onChange={() => toggleTheme()} />
       </View>
       <View style={styles.item}>
         <Text>{i18n.t('settings.language')}</Text>
@@ -48,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTranslation()(SettingsScreen);
+export default SettingsScreen;
