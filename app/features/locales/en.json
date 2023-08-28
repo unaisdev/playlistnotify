@@ -19,8 +19,8 @@
   },
   "settings": {
     "title": "Settings",
-    "darkMode": "Dark Mode:",
-    "language": "Language: "
+    "darkMode": "Dark Mode",
+    "language": "Language"
   },
   "es_language": "Spanish",
   "en_language": "English",

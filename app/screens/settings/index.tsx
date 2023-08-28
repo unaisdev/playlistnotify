@@ -6,16 +6,17 @@ import {useState} from 'react';
 import {useLanguage} from '@app/features/commons/hooks/useLanguage';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {Switch} from 'react-native-gesture-handler';
+import Layout from '@app/features/commons/layout/Layout';
 
 const SettingsScreen = () => {
   const {currentLanguage, changeLanguage, languagesAvailable} = useLanguage();
-  const {theme, toggleTheme} = useTheme();
+  const {theme, isDarkMode, toggleTheme} = useTheme();
 
   return (
-    <View style={styles.container}>
+    <Layout style={{gap: 20}}>
       <View style={styles.item}>
         <Text>{i18n.t('settings.darkMode')}</Text>
-        <Switch value={theme === 'dark'} onChange={() => toggleTheme()} />
+        <Switch value={isDarkMode} onChange={() => toggleTheme()} />
       </View>
       <View style={styles.item}>
         <Text>{i18n.t('settings.language')}</Text>
@@ -25,29 +26,38 @@ const SettingsScreen = () => {
               <TouchableOpacity
                 key={item.key}
                 onPress={() => changeLanguage(item.key)}
-                style={{backgroundColor: 'red', borderRadius: 10, padding: 6}}>
+                style={{
+                  backgroundColor: '#D0C4C5',
+                  borderRadius: 6,
+                  paddingHorizontal: 12,
+                  paddingVertical: 6,
+                }}>
                 <Text>{item.value}</Text>
               </TouchableOpacity>
             );
           })}
         </View>
       </View>
-    </View>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    gap: 8,
-  },
   item: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 12,
+  },
+  spacer: {
+    borderTopWidth: 1,
+    marginHorizontal: 80,
+
+    color: 'black',
   },
 });
 
