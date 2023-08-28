@@ -20,5 +20,11 @@ This will be your **Android & iOS mobile application** for it!
 
 **Server:** Node, Express, TypeScript and *Hosted on <a href="https://www.fl0.com">FL0</a>*
 
+<br />
+<br />
+<div align="center">
+    <div align="center">POWERED BY</div><a href="https://developer.spotify.com"><img src="https://developer.spotify.com/images/spotify-for-developers-logo.svg#s4d-logo" style="width: 380px" /></a>
+</div>
+
 
 
