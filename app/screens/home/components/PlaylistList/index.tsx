@@ -13,13 +13,15 @@ import {
 
 import PlaylistListItem from '../PlaylistListItem';
 
+import {UserAddedPlaylistsResponse} from '../../../../services/types';
 
 import {useUserContext} from '../../../../containers/userContext';
 import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
 import {useUserNotifiedPlaylists} from '@app/features/commons/hooks/useUserNotifiedPlaylists';
-import i18n from '@app/services/i18next';
+import i18n from '@app/features/locales/i18next';
 import Text from '@app/features/commons/layout/Text';
 import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
+import Animated, {Layout} from 'react-native-reanimated';
 
 const PlaylistList = () => {
   const {user} = useUserContext();
@@ -44,7 +46,7 @@ const PlaylistList = () => {
       </View>
     );
 
-  if (userNotifiedPlaylists.length === 0)
+  if (userNotifiedPlaylists?.length === 0)
     return (
       <View style={styles.loadingContainer}>
         <Image
@@ -74,21 +76,25 @@ const PlaylistList = () => {
   console.log('render');
 
   return (
-    <FlatList
+    <Animated.FlatList
       style={styles.container}
+      itemLayoutAnimation={Layout.duration(600).delay(700)}
       data={userNotifiedPlaylists}
       refreshControl={
         <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
       }
-      renderItem={({item, index}) => (
-        <SwipeableItem item={item} key={item.id}>
-          <PlaylistListItem
-            index={index}
-            playlistId={item.playlistId}
-            savedPlaylistTracksIds={item.trackIds}
-          />
-        </SwipeableItem>
-      )}
+      renderItem={({item, index}) => {
+        return (
+          <SwipeableItem item={item} key={item.id}>
+            <PlaylistListItem
+              index={index}
+              playlistId={item.playlistId}
+              savedPlaylistTracksIds={item.trackIds}
+              isRefetching={isRefetching}
+            />
+          </SwipeableItem>
+        );
+      }}
     />
   );
 };

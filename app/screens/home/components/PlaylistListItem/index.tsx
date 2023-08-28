@@ -17,24 +17,29 @@ import {usePlaylistAllTracks} from '../../../../features/commons/hooks/usePlayli
 import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import NotifyMeButton from '@app/features/commons/header/components/NotifyMeButton';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
-import i18n from '@app/services/i18next';
-import {withTranslation} from 'react-i18next';
+import i18n from '@app/features/locales/i18next';
 
 interface Props {
   playlistId: string;
   savedPlaylistTracksIds: string[];
   index: number;
+  isRefetching: boolean;
 }
 
 const PlaylistListItem = ({
   playlistId,
   savedPlaylistTracksIds,
   index,
+  isRefetching,
 }: Props) => {
-  const {tracks, hasNextPage} = usePlaylistAllTracks(playlistId);
+  const {tracks, hasNextPage, refetch} = usePlaylistAllTracks(playlistId);
   const {data: playlist} = usePlaylist({playlistId: playlistId});
 
   const {handlePresentModalPress, compareAllData} = useBottomSheetContext();
+
+  useEffect(() => {
+    refetch();
+  }, [isRefetching]);
 
   const onPress = () => {
     if (playlist && tracksUpdate) {
@@ -74,11 +79,13 @@ const PlaylistListItem = ({
   }, [tracks]);
 
   const hasAddedOrDeleted = useMemo(() => {
-    if (
-      tracksUpdate?.resultDeleted.length === 0 &&
-      tracksUpdate.resultNew.length === 0
-    )
+    const hasnotAddedTracks = tracksUpdate?.resultNew.length === 0;
+    const hasnotDeletedTracks = tracksUpdate?.resultDeleted.length === 0;
+
+    if (hasnotAddedTracks && hasnotDeletedTracks) {
       return {opacity: 0.4};
+    }
+
     return {opacity: 1};
   }, [tracksUpdate]);
 
@@ -101,8 +108,8 @@ const PlaylistListItem = ({
       <Animated.View
         style={styles.container}
         entering={FadeInLeft.duration(800).delay(index * 300)}
-        exiting={FadeInLeft.duration(800)}
-        layout={Layout.delay(1600)}>
+        exiting={FadeOutRight.duration(800)}
+        layout={Layout.duration(1200).delay(1600)}>
         <Image
           source={{
             uri: playlist.images[0].url ?? DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK,
@@ -190,4 +197,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTranslation()(React.memo(PlaylistListItem));
+export default React.memo(PlaylistListItem);

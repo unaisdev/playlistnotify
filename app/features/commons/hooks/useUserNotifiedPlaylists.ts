@@ -4,10 +4,9 @@ import {getUserNotifiedPlaylists} from '../../../services/user';
 import {useEffect} from 'react';
 
 export const useUserNotifiedPlaylists = () => {
-  const {user, userNotifiedPlaylists, setUserNotifiedPlaylists} =
-    useUserContext();
+  const {user} = useUserContext();
 
-  const getPlaylists = async () => {
+  const getNotifiedPlaylists = async () => {
     if (user) {
       const fetchedPlaylists = await getUserNotifiedPlaylists(user.id);
 
@@ -17,17 +16,13 @@ export const useUserNotifiedPlaylists = () => {
 
   const {data, refetch, isRefetching, isLoading} = useQuery({
     queryKey: ['userPlaylists'],
-    queryFn: getPlaylists,
+    queryFn: getNotifiedPlaylists,
     enabled: !!user, // Start the query only when user is available
     keepPreviousData: true,
   });
 
-  useEffect(() => {
-    if (data) setUserNotifiedPlaylists(data);
-  }, [data]);
-
   return {
-    userNotifiedPlaylists,
+    userNotifiedPlaylists: data,
     isLoading,
     refetchUserNotifiesPlaylists: refetch,
     isRefetching,
