@@ -77,8 +77,8 @@ If there's anything you'd like to chat about, please feel free to join our [Gitt
 - `npm install` to install dependencies
 - `cd ios / pod install` to install POD dependencies (iOS building only)
 - `npm start` to start the Metro bundler and run the app (`npm start -- --clear-cache` will boot the application with no cache data.
-- `npm android (npm react-native run-android)` to start the packager and run the app in the the Android device/emulator
-- `npm ios (npm react-native run-ios)` to start the packager and run the app in the the Android device/emulator
+- `npm android (npx react-native run-android)` to start the packager and run the app in the the Android device/emulator
+- `npm ios (npx react-native run-ios)` to start the packager and run the app in the the Android device/emulator
 
 Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
 
