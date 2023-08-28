@@ -17,6 +17,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from './hooks/useSearch';
 import {useNavigation} from '@react-navigation/native';
 import SearchBar from './components/searchBar';
+import Layout from '@app/features/commons/layout/Layout';
 
 const SearchPlaylistScreen = () => {
   const navigation = useNavigation();
@@ -26,14 +27,14 @@ const SearchPlaylistScreen = () => {
   };
   return (
     <TouchableWithoutFeedback onPress={handleViewPress}>
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <SearchBar
           handleSearchTextChange={handleSearchTextChange}
           isFetching={isFetching}
           isLoading={isLoading}
         />
         <SearchList searchResults={data || []} />
-      </View>
+      </Layout>
     </TouchableWithoutFeedback>
   );
 };

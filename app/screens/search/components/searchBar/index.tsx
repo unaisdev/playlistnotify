@@ -9,7 +9,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from '../../hooks/useSearch';
 import {useRef} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import i18n from '@app/features/locales/i18next';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   handleSearchTextChange: (text: string) => void;
@@ -19,6 +19,7 @@ type Props = {
 
 const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
   const {searchPhrase, data} = useSearch();
+  const {t} = useTranslation();
   const inputRef = useRef<TextInput>(null);
 
   const handlePress = () => {
@@ -52,7 +53,7 @@ const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
         <TextInput
           ref={inputRef}
           style={styles.input}
-          placeholder={i18n.t('search.input_placeholder')}
+          placeholder={t('search.input_placeholder')}
           value={searchPhrase}
           onChangeText={handleSearchTextChange}
           onBlur={handleBlur}

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 import {View} from 'react-native';
 
-import BottomSheetUpdatedPlaylist from '@app/features/commons/bottomSheet';
+import BottomSheetUpdatedPlaylist from '@app/features/commons/components/bottomSheet';
 
 import {useBottomSheetContext} from '../../containers/bottomSheetContext';
 import PlaylistList from './components/PlaylistList';

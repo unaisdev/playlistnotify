@@ -16,10 +16,11 @@ import Animated, {
 
 import {useRoute} from '@react-navigation/native';
 import {useUserContext} from '../../../containers/userContext';
-import ProfileImageButton from '../../../features/commons/header/components/ProfileImageButton';
 import Text from '@app/features/commons/layout/Text';
-import SettingsButton from '../../../features/commons/header/components/SettingsButton';
 import i18n from '@app/features/locales/i18next';
+import {useTranslation} from 'react-i18next';
+import SettingsButton from '@app/features/commons/components/header/SettingsButton';
+import ProfileImageButton from '@app/features/commons/components/header/ProfileImageButton';
 
 interface TabNames {
   [key: string]: string;
@@ -29,14 +30,15 @@ const TAB_NAME_DEFAULT = 'Default';
 
 const TabHeader = ({route}: BottomTabHeaderProps) => {
   const {user} = useUserContext();
+  const {t} = useTranslation();
 
   const TabHeaderText = () => {
     const currentTabName = route.name || TAB_NAME_DEFAULT;
     const TAB_NAMES: TabNames = {
-      Home: `${i18n.t('home.title')} ${user?.display_name || 'Invitado'}`,
-      Profile: i18n.t('profile.title'),
-      SearchPlaylist: i18n.t('search.title'),
-      Settings: i18n.t('settings.title'),
+      Home: `${t('home.title')} ${user?.display_name || 'Invitado'}`,
+      Profile: t('profile.title'),
+      SearchPlaylist: t('search.title'),
+      Settings: t('settings.title'),
     };
 
     if (!user) return;

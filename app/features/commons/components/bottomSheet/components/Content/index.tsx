@@ -9,8 +9,8 @@ import {
 } from 'react-native-gesture-handler';
 import {BottomSheetScrollView, TouchableOpacity} from '@gorhom/bottom-sheet';
 
-import {useBottomSheetContext} from '../../../../../containers/bottomSheetContext';
-import {PlaylistItem, Track} from '../../../../../services/types';
+import {useBottomSheetContext} from '../../../../../../containers/bottomSheetContext';
+import {PlaylistItem, Track} from '../../../../../../services/types';
 import {useTracksInfo} from '@app/features/commons/hooks/useTracksInfo';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import {SwiperFlatListWithGestureHandler} from 'react-native-swiper-flatlist/WithGestureHandler';
@@ -20,6 +20,7 @@ import DeletedTracks from './components/DeletedTracks';
 import {useBSContent} from './hooks/useBSContent';
 import Text from '@app/features/commons/layout/Text';
 import i18n from '@app/features/locales/i18next';
+import {useTranslation} from 'react-i18next';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];
@@ -29,15 +30,16 @@ type TracksListProps = {
 const Content = () => {
   const {tracksNew, tracksDel, scrollRef, goToFirstIndex, goToSecondIndex} =
     useBSContent();
+  const {t} = useTranslation();
 
   return (
     <View style={{paddingVertical: 20, flex: 1}}>
       <View style={styles.inline}>
         <TouchableOpacity style={{padding: 12}} onPress={goToFirstIndex}>
-          <Text>{i18n.t('tracks_added')}</Text>
+          <Text>{t('tracks_added')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{padding: 12}} onPress={goToSecondIndex}>
-          <Text>{i18n.t('tracks_deleted')}</Text>
+          <Text>{t('tracks_deleted')}</Text>
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView enableFooterMarginAdjustment>

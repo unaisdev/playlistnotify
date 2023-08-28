@@ -4,19 +4,22 @@ import {PlaylistModel} from '../../../../services/types';
 import SearchItem from '../searchItem';
 import Text from '@app/features/commons/layout/Text';
 import i18n from '@app/features/locales/i18next';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   searchResults: PlaylistModel[];
 };
 
 const SearchList = ({searchResults}: Props) => {
+  const {t} = useTranslation();
+
   if (searchResults.length === 0)
     return (
       <Text
         style={{textAlign: 'center'}}
         //   className="p-4 text-xs text-gray-400  text-center"
       >
-        {i18n.t('search.search_for')}
+        {t('search.search_for')}
       </Text>
     );
 

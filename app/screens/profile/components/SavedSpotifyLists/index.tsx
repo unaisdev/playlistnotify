@@ -1,7 +1,6 @@
 import {
   ScrollView,
   View,
-  Text,
   Pressable,
   FlatList,
   TouchableOpacity,
@@ -23,6 +22,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import {PlaylistModel} from '../../../../services/types';
+import Text from '@app/features/commons/layout/Text';
 
 type Props = {
   text: string;
@@ -60,7 +60,7 @@ const SavedSpotifyLists = ({playlists, text, isLoadingData}: Props) => {
 
   return (
     <View style={{height: 180}}>
-      <Text style={{padding: 12, color: 'white'}}>{text}</Text>
+      <Text>{text}</Text>
       <View style={{alignItems: 'center'}}>
         {playlistsNullOrEmptyText}
         <FlatList

@@ -9,7 +9,7 @@ import Animated, {
   Layout,
 } from 'react-native-reanimated';
 
-import BottomSheetUpdatedPlaylist from '../../../../features/commons/bottomSheet';
+import BottomSheetUpdatedPlaylist from '../../../../features/commons/components/bottomSheet';
 import Octicons from 'react-native-vector-icons/Octicons';
 
 import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
@@ -18,6 +18,7 @@ import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import NotifyMeButton from '@app/features/commons/header/components/NotifyMeButton';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 import i18n from '@app/features/locales/i18next';
+import {useTranslation} from 'react-i18next';
 
 interface Props {
   playlistId: string;
@@ -34,6 +35,7 @@ const PlaylistListItem = ({
 }: Props) => {
   const {tracks, hasNextPage, refetch} = usePlaylistAllTracks(playlistId);
   const {data: playlist} = usePlaylist({playlistId: playlistId});
+  const {t} = useTranslation();
 
   const {handlePresentModalPress, compareAllData} = useBottomSheetContext();
 
@@ -92,14 +94,14 @@ const PlaylistListItem = ({
   if (!tracksUpdate)
     return (
       <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
-        <Text>{i18n.t('simple_loading')}</Text>
+        <Text>{t('simple_loading')}</Text>
       </View>
     );
 
   if (!playlist)
     return (
       <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
-        <Text>{i18n.t('simple_loading')}</Text>
+        <Text>{t('simple_loading')}</Text>
       </View>
     );
 
@@ -127,7 +129,7 @@ const PlaylistListItem = ({
           {tracksUpdate.resultNew.length === 0 &&
           tracksUpdate.resultDeleted.length === 0 ? (
             <View style={styles.inline}>
-              <Text>{i18n.t('no_tracks_new_or_deleted')}</Text>
+              <Text>{t('no_tracks_new_or_deleted')}</Text>
             </View>
           ) : (
             <View style={styles.inlineBetween}>
@@ -135,14 +137,14 @@ const PlaylistListItem = ({
                 <Octicons name="diff-added" size={12} color={'black'} />
                 <Text style={{fontSize: 12}}>
                   {tracksUpdate.resultNew.length}{' '}
-                  {i18n.t('tracks_added').toLowerCase()}
+                  {t('tracks_added').toLowerCase()}
                 </Text>
               </View>
               <View style={styles.inline}>
                 <Octicons name="diff-removed" size={12} color={'black'} />
                 <Text style={{fontSize: 12}}>
                   {tracksUpdate.resultDeleted.length}{' '}
-                  {i18n.t('tracks_deleted').toLowerCase()}
+                  {t('tracks_deleted').toLowerCase()}
                 </Text>
               </View>
             </View>

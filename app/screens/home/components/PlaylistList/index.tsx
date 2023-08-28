@@ -22,9 +22,12 @@ import i18n from '@app/features/locales/i18next';
 import Text from '@app/features/commons/layout/Text';
 import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
 import Animated, {Layout} from 'react-native-reanimated';
+import {useTranslation} from 'react-i18next';
 
 const PlaylistList = () => {
   const {user} = useUserContext();
+  const {t} = useTranslation();
+
   const {
     userNotifiedPlaylists,
     refetchUserNotifiesPlaylists,
@@ -40,7 +43,7 @@ const PlaylistList = () => {
     return (
       <View style={[styles.loadingContainer]}>
         <Text style={styles.loadingText}>
-          {i18n.t('loading_notified_playlists')}
+          {t('loading_notified_playlists')}
         </Text>
         <ActivityIndicator />
       </View>

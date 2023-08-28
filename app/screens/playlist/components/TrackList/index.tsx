@@ -6,6 +6,7 @@ import Text from '@app/features/commons/layout/Text';
 
 import {PlaylistItem, PlaylistModel} from '../../../../services/types';
 import i18n from '@app/features/locales/i18next';
+import {useTranslation} from 'react-i18next';
 
 interface Props {
   tracks: PlaylistItem[];
@@ -22,6 +23,8 @@ const TrackList = ({
   isLoading,
   error,
 }: Props) => {
+  const {t} = useTranslation();
+
   const handleEndReached = async () => {
     if (hasNextPage) {
       await fetchNextPage();
@@ -31,7 +34,7 @@ const TrackList = ({
   if (isLoading) {
     return (
       <View style={styles.center}>
-        <Text>{i18n.t('simple_loading')}</Text>
+        <Text>{t('simple_loading')}</Text>
       </View>
     );
   }

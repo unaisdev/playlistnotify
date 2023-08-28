@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     aspectRatio: 1 / 1,
   },
   nameText: {
-    color: 'white',
     fontSize: 10,
   },
 });
