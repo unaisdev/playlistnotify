@@ -1,4 +1,15 @@
 import 'react-native';
+
+// ********************************************************************************************
+/////// This function makes styles={styles.container(isDarkMode)} not giving TypeScript errors
+///////
+/////// const styles = StyleSheet.create({
+///////     container: (isDarkMode: boolean) => ({
+///////       backgroundColor: isDarkMode ? 'white' : 'black',
+///////     })
+///////   })
+// ********************************************************************************************
+
 declare module 'react-native' {
   namespace StyleSheet {
     type Style = ViewStyle | TextStyle | Imagestyle;
