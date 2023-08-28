@@ -14,11 +14,12 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
   return (
     <Animated.View style={styles.container}>
       {image_url ? (
-        <Image source={{uri: image_url}} style={styles.image} />
+        <Image source={{uri: image_url}} width={96} height={96} />
       ) : (
         <Image
           source={{uri: DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK}}
-          style={styles.image}
+          width={96}
+          height={96}
         />
       )}
 

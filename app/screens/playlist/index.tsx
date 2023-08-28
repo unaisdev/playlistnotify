@@ -74,7 +74,8 @@ const PlaylistScreen = ({route}: Props) => {
             style={styles.imageShadow}>
             <Image
               source={{uri: playlistData.images[0]?.url}}
-              style={styles.image}
+              width={88}
+              height={88}
             />
           </Pressable>
           <View
