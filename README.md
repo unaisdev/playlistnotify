@@ -37,12 +37,7 @@
 View added or deleted tracks from Spotify playlists you select. Built with React Native, Playlist Tracker will ask you for permissions when you login through Spotify and then be able to select the lists you want to 'be watching'. And is 100% free!
 
 
-Things you can do:
 
-* View playlist info tracks, total tracks, name, desc...
-* Add playlist for notify when updated
-* Check the tracks added or deleted
- 
 <br />
 
 ## Features
@@ -59,6 +54,12 @@ Things you can do:
 * <a href="https://github.com/gusgard/react-native-swiper-flatlist">react-native-swiper-flatlist</a>
 * <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>
 
+
+## Things you can do
+
+* View playlist info tracks, total tracks, name, desc...
+* Add playlist for notify when updated
+* Check the tracks added or deleted
   
 <br />
 
