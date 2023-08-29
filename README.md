@@ -27,6 +27,7 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Things you can do](#things-you-can-do)
 - [Feedback](#feedback)
 - [Build Process](#build-process)
 
