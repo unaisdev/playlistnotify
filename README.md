@@ -54,6 +54,7 @@ View added or deleted tracks from Spotify playlists you select. Built with React
 * <a href="https://github.com/gusgard/react-native-swiper-flatlist">react-native-swiper-flatlist</a>
 * <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>
 
+<br/>
 
 ## Things you can do
 
