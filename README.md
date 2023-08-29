@@ -27,7 +27,7 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Things you can do](#things-you-can-do)
+- [Stack](#stack)
 - [Feedback](#feedback)
 - [Build Process](#build-process)
 
@@ -35,13 +35,31 @@
 
 ## Introduction
 
-View added or deleted tracks from Spotify playlists you select. Built with React Native, Playlist Tracker will ask you for permissions when you login through Spotify and then be able to select the lists you want to 'be watching'. And is 100% free!
+In today's digital age, music has become an integral part of our lives, and music streaming platforms like Spotify give us instant access to a wide range of songs and playlists. However, keeping up with updates to our favorite playlists can be a challenge. It is in this context that we present our exciting app project developed in React Native: an innovative solution for tracking updates on Spotify playlists.
 
-
+Our app aims to simplify the experience of tracking updates to personal playlists and those that have been added to the "Like" list in your Spotify account. With direct integration of the Spotify API, our app offers an intuitive and easy-to-use interface that allows users to stay informed about songs that are added or removed from their favorite playlists.
 
 <br />
 
 ## Features
+
+* **Spotify connection:**<br/>
+   Our application securely connects to your Spotify account, allowing you to access your personal playlists and those you have marked as favorites.
+
+* **Update Tracking:**<br/> Ever wondered which new songs have been added to your playlists or which ones have been removed? Our application will notify you every time an update is made to a playlist you are following.
+
+* **Playlist Browsing:**<br/> Browse your personal playlists and those you've marked as favorites conveniently, directly from the app.
+
+* **Playlist Detail View:**<br/> Get a detailed view of the songs that make up a particular playlist. Easily identify recent additions and deletions.
+
+* **Custom Notifications:**<br/> Don't want to miss any updates on a specific playlist? Our application allows you to activate custom notifications for selected playlists, making sure you are always aware of changes.
+
+* **Intuitive Interface:**<br/> Designed with the user experience in mind, our interface is easy to navigate and provides a smooth and enjoyable user experience.
+
+
+<br />
+
+## Stack
 
 * <a href="https://github.com/TanStack/query">@tanstack/react-query</a>
 * <a href="https://github.com/react-navigation/react-navigation">@react-navigation</a>
@@ -56,14 +74,6 @@ View added or deleted tracks from Spotify playlists you select. Built with React
 * <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>
 
 <br/>
-
-## Things you can do
-
-* View playlist info tracks, total tracks, name, desc...
-* Add playlist for notify when updated
-* Check the tracks added or deleted
-  
-<br />
 
 ## Feedback
 
