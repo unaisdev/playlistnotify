@@ -19,7 +19,7 @@ const styling = (isDarkMode: boolean) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: isDarkMode ? 'black' : 'white',
+      backgroundColor: isDarkMode ? '#212121' : 'white',
     },
   });
 };

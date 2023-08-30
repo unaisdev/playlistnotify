@@ -20,7 +20,7 @@ const BottomSheetUpdatedPlaylist = (
     easing: Easing.exp,
   });
 
-  const snapPoints = useMemo(() => ['65%'], []);
+  const snapPoints = useMemo(() => ['65%', '85%'], []);
 
   return (
     <BottomSheet

@@ -21,6 +21,7 @@ import {useBSContent} from './hooks/useBSContent';
 import Text from '@app/features/commons/layout/Text';
 import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
+import Layout from '@app/features/commons/layout/TabLayout';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];
@@ -33,7 +34,7 @@ const Content = () => {
   const {t} = useTranslation();
 
   return (
-    <View style={{paddingVertical: 20, flex: 1}}>
+    <Layout style={{paddingVertical: 0, paddingHorizontal: 0}}>
       <View style={styles.inline}>
         <TouchableOpacity style={{padding: 12}} onPress={goToFirstIndex}>
           <Text>{t('tracks_added')}</Text>
@@ -47,28 +48,22 @@ const Content = () => {
           ref={scrollRef}
           horizontal
           index={0}
-          style={{flex: 1, backgroundColor: 'gray'}}>
-          <View style={[styles.child, {backgroundColor: 'tomato'}]}>
+          style={{flex: 1}}>
+          <View style={[styles.child]}>
             <AddedTracks tracksNew={tracksNew} />
           </View>
-          <View style={[styles.child, {backgroundColor: 'thistle'}]}>
+          <View style={[styles.child]}>
             <DeletedTracks tracksDel={tracksDel} />
           </View>
         </SwiperFlatListWithGestureHandler>
       </BottomSheetScrollView>
-    </View>
+    </Layout>
   );
 };
 
 const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: '100%',
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-  },
   inline: {
     top: 0,
     zIndex: 10,
@@ -78,13 +73,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 12,
   },
-  inlineCenter: {
+  child: {
+    width,
     display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginVertical: 4,
+    justifyContent: 'flex-start',
   },
-  child: {width, justifyContent: 'center'},
 });
 
 export default Content;

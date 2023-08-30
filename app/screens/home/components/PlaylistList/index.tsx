@@ -1,4 +1,4 @@
-import React, {LegacyRef, RefObject, useRef} from 'react';
+import React, {LegacyRef, RefObject, useEffect, useRef, useState} from 'react';
 
 import {
   FlatList,
@@ -13,7 +13,7 @@ import {
 
 import PlaylistListItem from '../PlaylistListItem';
 
-import {UserAddedPlaylistsResponse} from '../../../../services/types';
+import {User, UserAddedPlaylistsResponse} from '../../../../services/types';
 
 import {useUserContext} from '../../../../containers/userContext';
 import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
@@ -25,6 +25,8 @@ import Animated, {Layout} from 'react-native-reanimated';
 import {useTranslation} from 'react-i18next';
 
 const PlaylistList = () => {
+  const [userNotified, setUserNotified] =
+    useState<UserAddedPlaylistsResponse[]>();
   const {user} = useUserContext();
   const {t} = useTranslation();
 
@@ -35,8 +37,9 @@ const PlaylistList = () => {
     isRefetching,
   } = useUserNotifiedPlaylists();
 
-  const refetch = () => {
-    refetchUserNotifiesPlaylists();
+  const refetch = async () => {
+    const refeth = await refetchUserNotifiesPlaylists();
+    refeth.data?.map(item => console.log(item.playlistId));
   };
 
   if (isLoading)
@@ -86,9 +89,15 @@ const PlaylistList = () => {
       refreshControl={
         <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
       }
-      renderItem={({item, index}) => {
+      renderItem={({
+        item,
+        index,
+      }: {
+        item: UserAddedPlaylistsResponse;
+        index: number;
+      }) => {
         return (
-          <SwipeableItem item={item} key={item.id}>
+          <SwipeableItem item={item} key={item.playlistId}>
             <PlaylistListItem
               index={index}
               playlistId={item.playlistId}
@@ -111,7 +120,7 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: 20,
   },
   loadingText: {maxWidth: 300, textAlign: 'center'},

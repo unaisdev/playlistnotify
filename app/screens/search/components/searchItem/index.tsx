@@ -27,7 +27,8 @@ const SearchItem = ({item, index}: Props) => {
       key={item.id}
       entering={FadeInDown.duration(300).delay(index * 100)}
       exiting={FadeOutRight.duration(300)}
-      layout={Layout.duration(800).delay(index * 100)}>
+      layout={Layout.duration(800).delay(index * 100)}
+      style={{width: '100%'}}>
       <Pressable
         onPress={() => {
           navigation.navigate('Playlist', {id: item.id});
@@ -37,39 +38,53 @@ const SearchItem = ({item, index}: Props) => {
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
-          paddingVertical: 8,
-          columnGap: 12,
+          justifyContent: 'flex-start',
+          width: '100%',
+          marginVertical: 8,
+          gap: 12,
         }}>
         <Image
           style={{width: 58, height: 58}}
           source={{uri: item.images[0]?.url}}
         />
-        <View>
-          {/* className="flex-row justify-between flex-grow" */}
+        <View
+          style={{
+            display: 'flex',
+            height: '100%',
+            flexGrow: 1,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}>
           <View>
-            <Text
-              //   className="font-semibold mb-1 text-black w-[180px]"
-              numberOfLines={1}>
+            <Text textType="bold" numberOfLines={2} style={{width: 260}}>
               {item.name}
             </Text>
-            {/* <Text>{item.collaborative ? "Col." : ""}</Text> */}
+          </View>
+
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Text textType="light" style={{fontSize: 10}}>
+              {item.tracks.total} canciones
+            </Text>
             <Pressable
-              //   className="flex flex-row items-center justify-start w-auto "
               onPress={() => {
                 Linking.openURL(item.owner.uri);
+              }}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 4,
               }}>
-              <Feather name="user" size={10} color="black" />
-              <Text
-              //   className="pl-1 text-xs text-black" numberOfLines={1}
-              >
+              <Feather name="user" size={8} color="black" />
+              <Text textType="regular" style={{fontSize: 10}}>
                 {item.owner?.display_name}
               </Text>
             </Pressable>
-          </View>
-          <View
-          //   className="flex justify-end"
-          >
-            <Text style={{fontSize: 10}}>{item.tracks.total} canciones</Text>
           </View>
         </View>
       </Pressable>

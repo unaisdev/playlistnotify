@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 10,
     marginHorizontal: 10,
+    gap: 4,
   },
   image: {
     width: 96,

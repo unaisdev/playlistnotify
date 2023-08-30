@@ -19,8 +19,8 @@ import {useUserContext} from '../../../containers/userContext';
 import Text from '@app/features/commons/layout/Text';
 import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
-import SettingsButton from '@app/features/commons/components/header/SettingsButton';
-import ProfileImageButton from '@app/features/commons/components/header/ProfileImageButton';
+import SettingsButton from '@app/features/commons/components/Header/SettingsButton';
+import ProfileImageButton from '@app/features/commons/components/Header/ProfileImageButton';
 
 interface TabNames {
   [key: string]: string;
@@ -45,6 +45,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
 
     return (
       <Text
+        textType="bold"
         style={{
           color: 'white',
           flexGrow: 1,

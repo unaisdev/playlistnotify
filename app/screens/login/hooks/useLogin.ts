@@ -3,7 +3,7 @@ import {authorize, refresh} from 'react-native-app-auth';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../navigation';
 
-import {ASYNC_STORAGE, AUTH_CONFIG} from '../../../services/constants';
+import {ENCRYPTED_STORAGE, AUTH_CONFIG} from '../../../services/constants';
 
 import {useUserContext} from '../../../containers/userContext';
 import {useCallback} from 'react';
@@ -13,6 +13,13 @@ const useLogin = (
   navigation?: NativeStackNavigationProp<RootStackParamList>,
 ) => {
   const {setUser} = useUserContext();
+
+  const init = async () => {
+    const newUser = await isNewUser();
+    if (newUser) return;
+
+    handleLogin();
+  };
 
   const handleLogin = async () => {
     const newUser = await isNewUser();
@@ -38,11 +45,13 @@ const useLogin = (
 
   const isNewUser = async () => {
     const tokenExp = await EncryptedStorage.getItem(
-      ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
+      ENCRYPTED_STORAGE.AUTH_TOKEN_EXPIRATION,
     );
-    const accessToken = await EncryptedStorage.getItem(ASYNC_STORAGE.AUTH_TOKEN);
+    const accessToken = await EncryptedStorage.getItem(
+      ENCRYPTED_STORAGE.AUTH_TOKEN,
+    );
     const refreshToken = await EncryptedStorage.getItem(
-      ASYNC_STORAGE.REFRESH_TOKEN,
+      ENCRYPTED_STORAGE.REFRESH_TOKEN,
     );
 
     if (!tokenExp && !accessToken && !refreshToken) return true;
@@ -53,7 +62,7 @@ const useLogin = (
   const isTokenValid = async () => {
     try {
       const tokenExp = await EncryptedStorage.getItem(
-        ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
+        ENCRYPTED_STORAGE.AUTH_TOKEN_EXPIRATION,
       );
       if (!tokenExp) {
         console.log('No expiration token!');
@@ -90,15 +99,15 @@ const useLogin = (
         console.log('refresh token:', result.refreshToken);
 
         await EncryptedStorage.setItem(
-          ASYNC_STORAGE.AUTH_TOKEN,
+          ENCRYPTED_STORAGE.AUTH_TOKEN,
           result.accessToken,
         );
         await EncryptedStorage.setItem(
-          ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
+          ENCRYPTED_STORAGE.AUTH_TOKEN_EXPIRATION,
           expiration.toString(),
         );
         await EncryptedStorage.setItem(
-          ASYNC_STORAGE.REFRESH_TOKEN,
+          ENCRYPTED_STORAGE.REFRESH_TOKEN,
           result.refreshToken,
         );
 
@@ -114,7 +123,7 @@ const useLogin = (
 
   const refreshToken = async () => {
     const tokenExp = await EncryptedStorage.getItem(
-      ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
+      ENCRYPTED_STORAGE.AUTH_TOKEN_EXPIRATION,
     );
     if (!tokenExp) return;
 
@@ -125,7 +134,7 @@ const useLogin = (
 
     if (expiration && expiration <= nowSeconds + 4000) {
       const refreshToken = await EncryptedStorage.getItem(
-        ASYNC_STORAGE.REFRESH_TOKEN,
+        ENCRYPTED_STORAGE.REFRESH_TOKEN,
       );
       if (!refreshToken) {
         console.log('No refresh token found.');
@@ -136,15 +145,15 @@ const useLogin = (
         const data = await refresh(AUTH_CONFIG, {refreshToken});
         if (data && data.accessToken && data.refreshToken) {
           await EncryptedStorage.setItem(
-            ASYNC_STORAGE.AUTH_TOKEN,
+            ENCRYPTED_STORAGE.AUTH_TOKEN,
             data.accessToken,
           );
           await EncryptedStorage.setItem(
-            ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
+            ENCRYPTED_STORAGE.AUTH_TOKEN_EXPIRATION,
             data.accessTokenExpirationDate,
           );
           await EncryptedStorage.setItem(
-            ASYNC_STORAGE.REFRESH_TOKEN,
+            ENCRYPTED_STORAGE.REFRESH_TOKEN,
             data.refreshToken,
           );
 
@@ -160,6 +169,7 @@ const useLogin = (
   };
 
   return {
+    init,
     handleLogin,
     handleStartSession,
     isNewUser,

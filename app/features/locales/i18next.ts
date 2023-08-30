@@ -4,7 +4,6 @@ import {initReactI18next} from 'react-i18next';
 import en from './en.json';
 import es from './es.json';
 
-export const defaultNS = ['en', 'es'];
 export const resources = {
   en: en,
   es: es,
@@ -19,7 +18,6 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     compatibilityJSON: 'v3',
-
     debug: true,
     defaultNS: 'translation',
     //https://github.com/i18next/i18next/issues/1068

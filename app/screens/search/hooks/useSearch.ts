@@ -1,12 +1,20 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef, useMemo} from 'react';
 import {fetchSearchPlaylists} from '../../../services/search';
 import {PlaylistModel} from '../../../services/types';
+import {TextInput} from 'react-native';
 
 export const useSearch = () => {
   const [searchPhrase, setSearchPhrase] = useState<string | undefined>();
+  const inputRef = useRef<TextInput>(null);
   const debouncedSearchTerm = useDebounce(searchPhrase, 500);
   const queryClient = useQueryClient();
+
+  const userHasTypedOnInput = useMemo(() => {
+    console.log(debouncedSearchTerm);
+
+    if (debouncedSearchTerm) return debouncedSearchTerm.length > 0;
+  }, [debouncedSearchTerm]);
 
   //isLoading only return true if it is hard "first" loading
   //isFetching always when makes a request
@@ -46,6 +54,20 @@ export const useSearch = () => {
     },
   );
 
+  const handleFocus = () => {
+    inputRef.current?.focus();
+  };
+
+  const handleBlur = () => {
+    inputRef.current?.blur();
+  };
+
+  const handleClear = () => {
+    handleSearchTextChange('');
+    inputRef.current?.blur();
+    inputRef.current?.clear();
+  };
+
   const handleSearchTextChange = (searchText: string) => {
     setSearchPhrase(searchText);
   };
@@ -59,9 +81,14 @@ export const useSearch = () => {
 
   return {
     data,
+    inputRef,
     isLoading,
     isFetching,
+    userHasTypedOnInput,
     searchPhrase,
+    handleBlur,
+    handleClear,
+    handleFocus,
     handleSearchTextChange,
   };
 };

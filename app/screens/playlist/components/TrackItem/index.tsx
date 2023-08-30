@@ -1,8 +1,7 @@
 import React from 'react';
 
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {PlaylistItem} from '../../../../services/types';
-import Text from '@app/features/commons/layout/Text';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 
 interface Props {
@@ -51,8 +50,10 @@ const TrackItem = ({item}: Props) => {
           style={styles.image}
         />
         <View style={{gap: 4}}>
-          <Text>{item.track.name}</Text>
-          <Text>{artists}</Text>
+          <Text style={{maxWidth: 260}}>{item.track.name}</Text>
+          <Text numberOfLines={2} style={{maxWidth: 260}}>
+            {artists}
+          </Text>
         </View>
       </View>
 

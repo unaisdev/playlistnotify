@@ -1,7 +1,7 @@
 import Text from '@app/features/commons/layout/Text';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 import {PlaylistItem, Track} from '@app/services/types';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, Dimensions} from 'react-native';
 
 type TracksListProps = {
   tracksDel?: Track[];
@@ -9,10 +9,15 @@ type TracksListProps = {
 
 const DeletedTracks = ({tracksDel}: TracksListProps) => {
   return (
-    <View style={{backgroundColor: 'red'}}>
+    <View>
       {tracksDel?.map((item, index) => {
         return (
-          <View key={item.id} style={styles.inlineCenter}>
+          <View
+            key={item.id}
+            style={[
+              styles.inlineCenter,
+              {backgroundColor: 'red', paddingHorizontal: 12},
+            ]}>
             <Image
               source={{
                 uri:
@@ -30,22 +35,9 @@ const DeletedTracks = ({tracksDel}: TracksListProps) => {
   );
 };
 
+const {width} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: '100%',
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-  },
-  inline: {
-    top: 0,
-    zIndex: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginHorizontal: 12,
-  },
   inlineCenter: {
     display: 'flex',
     alignItems: 'center',

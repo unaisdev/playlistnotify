@@ -8,6 +8,7 @@ import {I18nextProvider} from 'react-i18next';
 import i18n from '@app/features/locales/i18next';
 import {StatusBar} from 'react-native';
 import {ThemeProvider} from '@app/containers/themeContext';
+import MyStatusBar from '@app/features/commons/components/StatusBar';
 
 const queryClient = new QueryClient();
 
@@ -19,8 +20,8 @@ const App = () => {
           <UserProvider>
             <BottomSheetProvider>
               <GestureHandlerRootView style={{flex: 1}}>
+                <MyStatusBar />
                 <StackNavigation />
-                <StatusBar />
               </GestureHandlerRootView>
             </BottomSheetProvider>
           </UserProvider>

@@ -60,7 +60,7 @@ const SavedSpotifyLists = ({playlists, text, isLoadingData}: Props) => {
 
   return (
     <View style={{height: 180}}>
-      <Text>{text}</Text>
+      <Text style={{padding: 12}}>{text}</Text>
       <View style={{alignItems: 'center'}}>
         {playlistsNullOrEmptyText}
         <FlatList

@@ -4,12 +4,20 @@ import {
   ActivityIndicator,
   TextInput,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from '../../hooks/useSearch';
-import {useRef} from 'react';
+import {useMemo, useRef, useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTranslation} from 'react-i18next';
+import Animated, {
+  FadeInDown,
+  FadeInLeft,
+  FadeOutLeft,
+  FadeOutRight,
+  Layout,
+} from 'react-native-reanimated';
 
 type Props = {
   handleSearchTextChange: (text: string) => void;
@@ -18,37 +26,40 @@ type Props = {
 };
 
 const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
-  const {searchPhrase, data} = useSearch();
+  const {
+    searchPhrase,
+    data,
+    inputRef,
+    userHasTypedOnInput,
+    handleBlur,
+    handleClear,
+    handleFocus,
+  } = useSearch();
   const {t} = useTranslation();
-  const inputRef = useRef<TextInput>(null);
 
-  const handlePress = () => {
-    // Handle press logic
-  };
-
-  const handleBlur = () => {
-    // Handle blur logic
-  };
-
-  const handleClear = () => {
-    handleSearchTextChange('');
-    inputRef.current?.blur();
-    // setSearchPhrase('');
-  };
+  console.log(userHasTypedOnInput);
 
   return (
     <TouchableOpacity
       style={styles.searchBarContainer}
-      onPress={handlePress}
+      onPress={handleFocus}
       activeOpacity={1}>
-      <View style={styles.searchBar}>
-        <View>
-          {isFetching ? (
+      <Animated.View layout={Layout.duration(600)} style={styles.searchBar}>
+        {isFetching ? (
+          <Animated.View
+            entering={FadeInLeft.duration(300)}
+            exiting={FadeOutLeft.duration(300)}
+            style={{marginRight: 12}}>
             <ActivityIndicator size={'small'} color={'gray'} />
-          ) : (
+          </Animated.View>
+        ) : (
+          <Animated.View
+            entering={FadeInLeft.duration(300)}
+            exiting={FadeOutLeft}
+            style={{marginRight: 12}}>
             <MaterialIcons name="search" size={20} color="white" />
-          )}
-        </View>
+          </Animated.View>
+        )}
 
         <TextInput
           ref={inputRef}
@@ -57,45 +68,37 @@ const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
           value={searchPhrase}
           onChangeText={handleSearchTextChange}
           onBlur={handleBlur}
-          onFocus={() => {}}
+          onFocus={handleFocus}
           placeholderTextColor="#d3d3d3"
         />
-        <View>
-          {data?.length === 0 && (
-            <TouchableOpacity onPress={handleClear}>
-              <MaterialCommunityIcons name="close" size={16} color={'white'} />
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
+        {userHasTypedOnInput && (
+          <TouchableOpacity onPress={handleClear}>
+            <MaterialCommunityIcons name="close" size={16} color={'white'} />
+          </TouchableOpacity>
+        )}
+      </Animated.View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
   searchBarContainer: {
     alignItems: 'center',
     flexDirection: 'column',
     width: '100%',
-    paddingHorizontal: 12,
-    marginVertical: 12,
   },
   searchBar: {
-    paddingHorizontal: 14,
-    paddingVertical: 10,
     flexDirection: 'row',
     width: '100%',
     backgroundColor: '#000',
-    borderRadius: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 18,
   },
   input: {
     fontSize: 13,
     color: '#fff',
     flexGrow: 1,
-    marginLeft: 12,
   },
 });
 

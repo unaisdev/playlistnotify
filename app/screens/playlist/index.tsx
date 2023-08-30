@@ -5,6 +5,7 @@ import {
   View,
   Pressable,
   Image,
+  Text,
   StyleSheet,
   ActivityIndicator,
   Linking,
@@ -23,8 +24,7 @@ import {usePlaylistAllTracks} from '../../features/commons/hooks/usePlaylistAllT
 import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import {useQuery} from '@tanstack/react-query';
 import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeader';
-import Text from '@app/features/commons/layout/Text';
-import Layout from '@app/features/commons/layout/Layout';
+import Layout from '@app/features/commons/layout/TabLayout';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -56,7 +56,7 @@ const PlaylistScreen = ({route}: Props) => {
   if (!playlistData) return;
 
   return (
-    <Layout>
+    <SafeAreaView style={{flex: 1}}>
       <View>
         <PlaylistHeader id={id} />
         <LinearGradient
@@ -140,7 +140,7 @@ const PlaylistScreen = ({route}: Props) => {
           color={'black'}
         />
       )}
-    </Layout>
+    </SafeAreaView>
   );
 };
 

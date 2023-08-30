@@ -12,10 +12,10 @@ type Props = {
 };
 
 const LoginScreen = ({navigation}: Props) => {
-  const {handleLogin, isTokenValid, refreshToken} = useLogin(navigation);
+  const {handleLogin, isTokenValid, refreshToken, init} = useLogin(navigation);
 
   useEffect(() => {
-    handleLogin();
+    init();
   }, []);
 
   return (

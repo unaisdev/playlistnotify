@@ -9,13 +9,12 @@ import Animated, {
   Layout,
 } from 'react-native-reanimated';
 
-import BottomSheetUpdatedPlaylist from '../../../../features/commons/components/bottomSheet';
+import BottomSheetUpdatedPlaylist from '../../../../features/commons/components/BottomSheet';
 import Octicons from 'react-native-vector-icons/Octicons';
 
 import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
 import {usePlaylistAllTracks} from '../../../../features/commons/hooks/usePlaylistAllTracks';
 import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
-import NotifyMeButton from '@app/features/commons/header/components/NotifyMeButton';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';

@@ -12,7 +12,7 @@ import {useEffect, useState} from 'react';
 import {getUserPlaylists} from '../../services/user';
 import {useProfile} from './hooks/useProfile';
 import i18n from '@app/features/locales/i18next';
-import Layout from '@app/features/commons/layout/Layout';
+import Layout from '@app/features/commons/layout/TabLayout';
 import {useTranslation} from 'react-i18next';
 
 const ProfileScreen = () => {
@@ -22,10 +22,11 @@ const ProfileScreen = () => {
   if (!user) return;
 
   return (
-    <Layout style={[styles.container]}>
+    <Layout style={{paddingHorizontal: 0, paddingVertical: 0}}>
       <Text
         style={{
           fontSize: 12,
+          padding: 12,
         }}>
         {t('profile.desc_text')}
       </Text>
@@ -48,11 +49,5 @@ const ProfileScreen = () => {
     </Layout>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default ProfileScreen;

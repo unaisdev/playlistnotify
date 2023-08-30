@@ -34,7 +34,7 @@ export const SEARCH_TYPE = {
   AUDIOBOOK: 'audiobook',
 };
 
-export const ASYNC_STORAGE = {
+export const ENCRYPTED_STORAGE = {
   AUTH_TOKEN: 'AuthToken',
   REFRESH_TOKEN: 'AuthRefreshToken',
   AUTH_TOKEN_EXPIRATION: 'AccessTokenExpiration',
