@@ -16,16 +16,15 @@ type Props = {} & StatusBarProps;
 const MyStatusBar = ({...props}: Props) => {
   const {isDarkMode} = useTheme();
 
-  const styleStatusBar = () => {
-    return StyleSheet.create({});
-  };
-
   const styles = styling(isDarkMode);
 
   return (
     <View style={[styles.statusBar]}>
       <SafeAreaView>
-        <StatusBar translucent {...props} />
+        <StatusBar
+          translucent
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        />
       </SafeAreaView>
     </View>
   );
