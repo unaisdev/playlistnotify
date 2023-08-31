@@ -24,6 +24,9 @@ import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
 import SettingsScreen from '@app/screens/settings';
 import TabHeader from '@app/navigation/components/TabHeader';
 import TabBar from './components/TabBar';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useEffect} from 'react';
+import {getThemeFromStorage} from '@app/services/storage';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -123,6 +126,19 @@ const Tabs = () => {
 };
 
 const AppNavigator = () => {
+  const {setTheme} = useTheme();
+
+  useEffect(() => {
+    const init = async () => {
+      const themeStorage = await getThemeFromStorage();
+      console.log('themeStorage');
+      console.log(themeStorage);
+      if (themeStorage) setTheme(themeStorage);
+    };
+
+    init();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{}}>
