@@ -7,8 +7,11 @@ import {
   savePlaylistForNotify,
   removePlaylistForNotify,
 } from '@app/services/playlist';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 
 export const useNotifyMeButton = (playlistId: string) => {
+  const {isDarkMode} = useTheme();
+
   const [isSaved, setIsSaved] = useState(false);
   const [loadingToggle, setLoadingToggle] = useState(false);
   const [checkingSaved, setCheckingSaved] = useState(false);
@@ -37,7 +40,7 @@ export const useNotifyMeButton = (playlistId: string) => {
   const iconProps = useMemo(() => {
     if (isSaved)
       return {
-        color: 'black',
+        color: isDarkMode ? 'white' : 'black',
         iconName: 'notifications-active',
       };
 

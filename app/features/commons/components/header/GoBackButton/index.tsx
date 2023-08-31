@@ -7,10 +7,12 @@ import {RootStackParamList} from '../../../../../navigation';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 
 interface Props {}
 
 const GoBackButton = ({}: Props) => {
+  const {isDarkMode} = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -18,11 +20,13 @@ const GoBackButton = ({}: Props) => {
     navigation.goBack();
   };
 
+  const color = isDarkMode ? 'white' : 'black';
+
   if (!navigation.canGoBack()) return;
 
   return (
     <TouchableOpacity style={{height: 28}} onPress={handlePress}>
-      <MaterialCommunityIcons name="arrow-left" size={22} color={'black'} />
+      <MaterialCommunityIcons name="arrow-left" size={22} color={color} />
     </TouchableOpacity>
   );
 };

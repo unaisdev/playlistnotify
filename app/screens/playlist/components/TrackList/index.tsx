@@ -49,6 +49,7 @@ const TrackList = ({
   return (
     <FlatList
       scrollEnabled
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.listContainer}
       data={tracks}
       renderItem={({item, index}) => {
