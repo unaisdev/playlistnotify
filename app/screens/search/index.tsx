@@ -20,7 +20,17 @@ import SearchBar from './components/searchBar';
 import Layout from '@app/features/commons/layout/TabLayout';
 
 const SearchPlaylistScreen = () => {
-  const {data, handleSearchTextChange, isFetching, isLoading} = useSearch();
+  const {
+    data,
+    handleSearchTextChange,
+    isFetching,
+    isLoading,
+    handleBlur,
+    handleClear,
+    handleFocus,
+    inputRef,
+    searchPhrase,
+  } = useSearch();
 
   const handleViewPress = () => {
     Keyboard.dismiss();
@@ -30,6 +40,11 @@ const SearchPlaylistScreen = () => {
     <TouchableWithoutFeedback onPress={handleViewPress}>
       <View style={{flex: 1, borderTopWidth: 1, borderTopColor: 'white'}}>
         <SearchBar
+          handleBlur={handleBlur}
+          handleClear={handleClear}
+          handleFocus={handleFocus}
+          inputRef={inputRef}
+          searchPhrase={searchPhrase}
           handleSearchTextChange={handleSearchTextChange}
           isFetching={isFetching}
           isLoading={isLoading}

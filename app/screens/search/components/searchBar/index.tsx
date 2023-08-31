@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from '../../hooks/useSearch';
-import {useMemo, useRef, useState} from 'react';
+import {RefObject, useMemo, useRef, useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTranslation} from 'react-i18next';
 import Animated, {
@@ -20,24 +20,30 @@ import Animated, {
 } from 'react-native-reanimated';
 
 type Props = {
-  handleSearchTextChange: (text: string) => void;
+  searchPhrase: string;
   isLoading: boolean;
   isFetching: boolean;
+  inputRef: RefObject<TextInput>;
+  handleSearchTextChange: (text: string) => void;
+
+  handleBlur: () => void;
+  handleClear: () => void;
+  handleFocus: () => void;
 };
 
-const SearchBar = ({handleSearchTextChange, isFetching, isLoading}: Props) => {
-  const {
-    searchPhrase,
-    data,
-    inputRef,
-    userHasTypedOnInput,
-    handleBlur,
-    handleClear,
-    handleFocus,
-  } = useSearch();
+const SearchBar = ({
+  handleSearchTextChange,
+  isFetching,
+  isLoading,
+  handleBlur,
+  handleClear,
+  handleFocus,
+  inputRef,
+  searchPhrase,
+}: Props) => {
   const {t} = useTranslation();
 
-  console.log(userHasTypedOnInput);
+  const userHasTypedOnInput = searchPhrase ? searchPhrase?.length > 0 : false;
 
   return (
     <TouchableOpacity
