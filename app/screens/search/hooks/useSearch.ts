@@ -1,21 +1,14 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {useState, useEffect, useRef, useMemo} from 'react';
+import {useState, useEffect, useRef, useMemo, useCallback} from 'react';
 import {fetchSearchPlaylists} from '../../../services/search';
 import {PlaylistModel} from '../../../services/types';
 import {TextInput} from 'react-native';
 
 export const useSearch = () => {
-  const [searchPhrase, setSearchPhrase] = useState<string | undefined>();
+  const [searchPhrase, setSearchPhrase] = useState<string>('');
   const inputRef = useRef<TextInput>(null);
   const debouncedSearchTerm = useDebounce(searchPhrase, 500);
   const queryClient = useQueryClient();
-
-  const userHasTypedOnInput = useMemo(() => {
-    console.log(debouncedSearchTerm);
-
-    if (debouncedSearchTerm) return debouncedSearchTerm.length > 0;
-  }, [debouncedSearchTerm]);
-
   //isLoading only return true if it is hard "first" loading
   //isFetching always when makes a request
   const {data, isLoading, isFetching, error} = useQuery({
@@ -72,20 +65,21 @@ export const useSearch = () => {
     setSearchPhrase(searchText);
   };
 
-  useEffect(() => {
+  const updateSearchResults = useCallback(() => {
     mutation.mutate(debouncedSearchTerm);
     // debouncedSearchTerm is require in order to make the side effect
-    // every X ms
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    updateSearchResults();
+  }, [updateSearchResults]);
 
   return {
     data,
+    searchPhrase,
     inputRef,
     isLoading,
     isFetching,
-    userHasTypedOnInput,
-    searchPhrase,
     handleBlur,
     handleClear,
     handleFocus,
