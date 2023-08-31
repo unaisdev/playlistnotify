@@ -6,6 +6,7 @@ import Text from '@app/features/commons/layout/Text';
 
 import useLogin from './hooks/useLogin';
 import {RootStackParamList} from '../../navigation';
+import Layout from '@app/features/commons/layout/TabLayout';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -19,7 +20,7 @@ const LoginScreen = ({navigation}: Props) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Layout style={styles.container}>
       <Text>Conéctate con</Text>
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Image
@@ -27,7 +28,7 @@ const LoginScreen = ({navigation}: Props) => {
           style={styles.spotify_logo}
         />
       </TouchableOpacity>
-    </View>
+    </Layout>
   );
 };
 

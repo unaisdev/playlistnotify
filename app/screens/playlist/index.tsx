@@ -5,7 +5,6 @@ import {
   View,
   Pressable,
   Image,
-  Text,
   StyleSheet,
   ActivityIndicator,
   Linking,
@@ -25,6 +24,8 @@ import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import {useQuery} from '@tanstack/react-query';
 import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeader';
 import Layout from '@app/features/commons/layout/TabLayout';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import Text from '@app/features/commons/layout/Text';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -32,6 +33,7 @@ interface Props {
 
 const PlaylistScreen = ({route}: Props) => {
   const {id} = route.params;
+  const {isDarkMode} = useTheme();
 
   const playlistReq = usePlaylist({playlistId: id});
 
@@ -53,23 +55,29 @@ const PlaylistScreen = ({route}: Props) => {
     return tracks;
   }, [tracks]);
 
+  const lightModeColors = [
+    'rgba(255, 255, 255, 1)',
+    'rgba(229, 231, 235, 1)',
+    'rgba(245, 211, 215, 0.5)',
+    'rgba(255, 255, 255, 0)',
+  ];
+
+  const darkModeColors = [
+    'rgba(0, 0, 0, 1)',
+    'rgba(31, 41, 55, 1)',
+    'rgba(59, 130, 246, 0.5)',
+    'rgba(0, 0, 0, 0)',
+  ];
+
+  const gradientColors = isDarkMode ? darkModeColors : lightModeColors;
+
   if (!playlistData) return;
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View>
+    <Layout style={{flex: 1}}>
+      <Layout style={{flex: 0, paddingHorizontal: 0, paddingVertical: 0}}>
         <PlaylistHeader id={id} />
-        <LinearGradient
-          start={{x: 1, y: 0}}
-          end={{x: 1, y: 1}}
-          locations={[1, 0.3, 0.9, 0]}
-          colors={[
-            'rgba(255, 255, 255, 1)',
-            'rgba(229, 231, 235, 1)',
-            'rgba(245, 211, 215, 0.5)',
-            'rgba(255, 255, 255, 0)',
-          ]}
-          style={styles.linearGradient}>
+        <View style={styles.playlistInfo}>
           <Pressable
             onPress={() => Linking.openURL(playlistData?.uri)}
             style={styles.imageShadow}>
@@ -123,8 +131,8 @@ const PlaylistScreen = ({route}: Props) => {
               </View>
             </View>
           </View>
-        </LinearGradient>
-      </View>
+        </View>
+      </Layout>
 
       <TrackList
         tracks={playlistTracksData}
@@ -140,7 +148,7 @@ const PlaylistScreen = ({route}: Props) => {
           color={'black'}
         />
       )}
-    </SafeAreaView>
+    </Layout>
   );
 };
 
@@ -159,8 +167,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  linearGradient: {
-    paddingHorizontal: 12,
+  playlistInfo: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
