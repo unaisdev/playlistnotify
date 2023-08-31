@@ -1,4 +1,11 @@
-import React, {LegacyRef, RefObject, useEffect, useRef, useState} from 'react';
+import React, {
+  LegacyRef,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   FlatList,
@@ -9,6 +16,8 @@ import {
   ActivityIndicator,
   RefreshControl,
   Image,
+  Keyboard,
+  ScrollView,
 } from 'react-native';
 
 import PlaylistListItem from '../PlaylistListItem';
@@ -21,26 +30,56 @@ import {useUserNotifiedPlaylists} from '@app/features/commons/hooks/useUserNotif
 import i18n from '@app/features/locales/i18next';
 import Text from '@app/features/commons/layout/Text';
 import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
-import Animated, {Layout} from 'react-native-reanimated';
+import Animated, {
+  FadeIn,
+  FadeInLeft,
+  FadeOutRight,
+  Layout,
+  LayoutAnimationType,
+  SlideInRight,
+  SlideOutRight,
+} from 'react-native-reanimated';
 import {useTranslation} from 'react-i18next';
+import {removePlaylistForNotify} from '@app/services/playlist';
+import {useHome} from '../../hooks';
+
+const AnimatedFlatList = Animated.createAnimatedComponent(
+  FlatList<UserAddedPlaylistsResponse>,
+);
 
 const PlaylistList = () => {
-  const [userNotified, setUserNotified] =
-    useState<UserAddedPlaylistsResponse[]>();
-  const {user} = useUserContext();
   const {t} = useTranslation();
+  const {isLoading, isRefetching, refetch, userNotifiedPlaylists} = useHome();
 
-  const {
-    userNotifiedPlaylists,
-    refetchUserNotifiesPlaylists,
-    isLoading,
-    isRefetching,
-  } = useUserNotifiedPlaylists();
+  const showAlert = (item: UserAddedPlaylistsResponse) =>
+    Alert.alert(
+      'Confirmar Acción',
+      '¿Estás seguro de que deseas realizar esta acción?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Acción cancelada'),
+          style: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          onPress: async () => {
+            await removePlaylistForNotify(item.playlistId, item.userId);
+            refetch();
+            // swipableRef?.current?.close();
+          },
+          style: 'destructive',
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
 
-  const refetch = async () => {
-    const refeth = await refetchUserNotifiesPlaylists();
-    refeth.data?.map(item => console.log(item.playlistId));
-  };
+  useEffect(() => {
+    if (userNotifiedPlaylists)
+      userNotifiedPlaylists.map(item => console.log(item.playlistId));
+  }, [userNotifiedPlaylists]);
 
   if (isLoading)
     return (
@@ -79,13 +118,13 @@ const PlaylistList = () => {
       </View>
     );
 
-  console.log('render');
-
   return (
     <Animated.FlatList
       style={styles.container}
-      itemLayoutAnimation={Layout.duration(600).delay(700)}
+      contentContainerStyle={{flex: 1}}
       data={userNotifiedPlaylists}
+      itemLayoutAnimation={Layout.duration(1000).delay(1000)}
+      keyExtractor={(item, index) => item.id}
       refreshControl={
         <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
       }
@@ -97,14 +136,18 @@ const PlaylistList = () => {
         index: number;
       }) => {
         return (
-          <SwipeableItem item={item} key={item.playlistId}>
-            <PlaylistListItem
-              index={index}
-              playlistId={item.playlistId}
-              savedPlaylistTracksIds={item.trackIds}
-              isRefetching={isRefetching}
-            />
-          </SwipeableItem>
+          <Animated.View
+            entering={FadeInLeft.duration(1000).delay(index * 200)}
+            exiting={FadeOutRight.duration(1000)}>
+            <SwipeableItem onSwipped={() => showAlert(item)}>
+              <PlaylistListItem
+                index={index}
+                playlistId={item.playlistId}
+                savedPlaylistTracksIds={item.trackIds}
+                isRefetching={isRefetching}
+              />
+            </SwipeableItem>
+          </Animated.View>
         );
       }}
     />

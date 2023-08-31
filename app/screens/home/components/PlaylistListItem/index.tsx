@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
-import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
 import Text from '@app/features/commons/layout/Text';
 
 import Animated, {
@@ -18,6 +18,7 @@ import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
+import {removePlaylistForNotify} from '@app/services/playlist';
 
 interface Props {
   playlistId: string;
@@ -41,6 +42,8 @@ const PlaylistListItem = ({
   useEffect(() => {
     refetch();
   }, [isRefetching]);
+
+ 
 
   const onPress = () => {
     if (playlist && tracksUpdate) {
@@ -106,11 +109,7 @@ const PlaylistListItem = ({
 
   return (
     <TouchableOpacity onPress={onPress} style={hasAddedOrDeleted}>
-      <Animated.View
-        style={styles.container}
-        entering={FadeInLeft.duration(800).delay(index * 300)}
-        exiting={FadeOutRight.duration(800)}
-        layout={Layout.duration(1200).delay(1600)}>
+      <View style={styles.container}>
         <Image
           source={{
             uri: playlist.images[0].url ?? DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK,
@@ -149,7 +148,7 @@ const PlaylistListItem = ({
             </View>
           )}
         </View>
-      </Animated.View>
+      </View>
     </TouchableOpacity>
   );
 };
