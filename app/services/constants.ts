@@ -40,6 +40,11 @@ export const ENCRYPTED_STORAGE = {
   AUTH_TOKEN_EXPIRATION: 'AccessTokenExpiration',
 };
 
+export const ASYNC_STORAGE = {
+  THEME: 'theme',
+  LANGUAGE: 'language',
+};
+
 export const DEFAULT_PROFILE_IMAGE_URL =
   'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=300';
 

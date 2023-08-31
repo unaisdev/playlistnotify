@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL, ASYNC_STORAGE, AUTH_CONFIG} from './constants';
+import {API_URL, ENCRYPTED_STORAGE, AUTH_CONFIG} from './constants';
 import useLogin from '../screens/login/hooks/useLogin';
 import {refresh} from 'react-native-app-auth';
 import EncryptedStorage from 'react-native-encrypted-storage';
@@ -14,7 +14,7 @@ HttpClient.defaults.headers.common = {
 
 HttpClient.interceptors.request.use(async config => {
   if (!config.headers?.Authorization) {
-    const auth = await EncryptedStorage.getItem(ASYNC_STORAGE.AUTH_TOKEN);
+    const auth = await EncryptedStorage.getItem(ENCRYPTED_STORAGE.AUTH_TOKEN);
 
     // console.log('auth');
     // console.log(auth);
@@ -30,7 +30,7 @@ HttpClient.interceptors.response.use(
   async error => {
     if (error.response && error.response.status === 401) {
       const refreshToken = await EncryptedStorage.getItem(
-        ASYNC_STORAGE.REFRESH_TOKEN,
+        ENCRYPTED_STORAGE.REFRESH_TOKEN,
       );
 
       if (!refreshToken) return;
@@ -55,11 +55,11 @@ HttpClient.interceptors.response.use(
         console.log('refresh token:', refreshed.refreshToken);
 
         await EncryptedStorage.setItem(
-          ASYNC_STORAGE.AUTH_TOKEN,
+          ENCRYPTED_STORAGE.AUTH_TOKEN,
           refreshed.accessToken,
         );
         await EncryptedStorage.setItem(
-          ASYNC_STORAGE.AUTH_TOKEN_EXPIRATION,
+          ENCRYPTED_STORAGE.AUTH_TOKEN_EXPIRATION,
           expiration.toString(),
         );
 
@@ -67,7 +67,7 @@ HttpClient.interceptors.response.use(
         if (!refreshed.refreshToken) return;
 
         await EncryptedStorage.setItem(
-          ASYNC_STORAGE.REFRESH_TOKEN,
+          ENCRYPTED_STORAGE.REFRESH_TOKEN,
           refreshed.refreshToken,
         );
       }
