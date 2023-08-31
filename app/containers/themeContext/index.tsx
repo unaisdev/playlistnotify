@@ -1,23 +1,44 @@
 import {APP_THEME, APP_THEME_TYPE} from '@app/features/commons/theme/types';
-import {PropsWithChildren, createContext, useContext, useState} from 'react';
+import {saveThemeOnStorage} from '@app/services/storage';
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 type ThemeContextType = {
   theme: APP_THEME_TYPE;
   toggleTheme: () => void;
   isDarkMode: boolean;
+  setTheme: (theme: APP_THEME_TYPE) => void;
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
   theme: APP_THEME.DEFAULT,
   toggleTheme: () => {},
   isDarkMode: false,
+  setTheme: () => {},
 });
 
 export const ThemeProvider = ({children}: PropsWithChildren) => {
-  const [theme, setTheme] = useState<APP_THEME_TYPE>(APP_THEME.DEFAULT);
+  const [theme, setTheme] = useState<APP_THEME_TYPE>(APP_THEME.DARK_THEME);
+
+  useEffect(() => {
+    const init = async () => {
+      await saveThemeOnStorage(theme);
+    };
+
+    init();
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme(prev => (prev === 'dark' ? 'default' : 'dark'));
+  };
+
+  const putTheme = (theme: APP_THEME_TYPE) => {
+    setTheme(theme);
   };
 
   const isDarkMode = theme === 'dark';
@@ -26,6 +47,7 @@ export const ThemeProvider = ({children}: PropsWithChildren) => {
     theme,
     toggleTheme: toggleTheme,
     isDarkMode: isDarkMode,
+    setTheme: putTheme,
   };
 
   return (
@@ -36,6 +58,6 @@ export const ThemeProvider = ({children}: PropsWithChildren) => {
 };
 
 export const useThemeContext = () => {
-  const {theme, toggleTheme, isDarkMode} = useContext(ThemeContext);
-  return {theme, toggleTheme, isDarkMode};
+  const {theme, toggleTheme, isDarkMode, setTheme} = useContext(ThemeContext);
+  return {theme, toggleTheme, isDarkMode, setTheme};
 };
