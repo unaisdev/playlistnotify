@@ -19,8 +19,10 @@
   },
   "settings": {
     "title": "Ajustes",
+    "appsettings_title": "Configuración de la aplicación",
     "darkMode": "Modo nocturno",
-    "language": "Idioma"
+    "language": "Idioma",
+    "logout": "Cerrar sesión"
   },
   "es_language": "Castellano",
   "en_language": "Inglés",

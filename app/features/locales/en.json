@@ -19,8 +19,10 @@
   },
   "settings": {
     "title": "Settings",
-    "darkMode": "Dark Mode",
-    "language": "Language"
+    "appsettings_title": "Application settings",
+    "darkMode": "Dark mode",
+    "language": "Language",
+    "logout": "Logout"
   },
   "es_language": "Spanish",
   "en_language": "English",

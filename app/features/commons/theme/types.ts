@@ -1,5 +1,3 @@
-import {ValueOf} from 'react-native-gesture-handler/lib/typescript/typeUtils';
-
 export const APP_THEME = {
   DEFAULT: 'default',
   DARK_THEME: 'dark',
