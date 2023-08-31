@@ -8,42 +8,18 @@ import {UserAddedPlaylistsResponse} from '@app/services/types';
 
 const SwipeableItem = ({
   children,
-  item,
-}: PropsWithChildren & {item: UserAddedPlaylistsResponse}) => {
+  onSwipped,
+}: PropsWithChildren & {onSwipped: () => void}) => {
   const swipableRef = useRef<Swipeable | null>(null);
-
-  const showAlert = () =>
-    Alert.alert(
-      'Confirmar Acción',
-      '¿Estás seguro de que deseas realizar esta acción?',
-      [
-        {
-          text: 'Cancelar',
-          onPress: () => console.log('Acción cancelada'),
-          style: 'cancel',
-        },
-        {
-          text: 'Eliminar',
-          onPress: () => {
-            removePlaylistForNotify(item.playlistId, item.userId);
-            swipableRef?.current?.close();
-          },
-          style: 'destructive',
-        },
-      ],
-      {
-        cancelable: true,
-      },
-    );
 
   return (
     <Swipeable
       ref={swipableRef}
       leftThreshold={60}
       enableTrackpadTwoFingerGesture
-      onSwipeableOpen={showAlert}
+      onSwipeableOpen={onSwipped}
       renderLeftActions={props => (
-        <SwipeableLeftAction playlistId={item.playlistId} {...props} />
+        <SwipeableLeftAction {...props} />
       )}>
       {children}
     </Swipeable>

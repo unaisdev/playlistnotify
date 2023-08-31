@@ -3,11 +3,7 @@ import {SwipeableProps} from 'react-native-gesture-handler/lib/typescript/compon
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Text from '@app/features/commons/layout/Text';
 
-type Props = {
-  playlistId: string;
-};
-
-const SwipeableLeftActions = ({playlistId}: Props, props: SwipeableProps) => {
+const SwipeableLeftActions = (props: SwipeableProps) => {
   return (
     <View style={styles.container}>
       <MaterialIcons name={'delete-outline'} size={26} color={'black'} />
