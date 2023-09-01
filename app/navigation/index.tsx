@@ -131,7 +131,7 @@ const Tabs = () => {
 };
 
 const AppNavigator = () => {
-  const {theme, setTheme} = useTheme();
+  const {isDarkMode, setTheme} = useTheme();
 
   useEffect(() => {
     const init = async () => {
@@ -145,7 +145,7 @@ const AppNavigator = () => {
   }, []);
 
   return (
-    <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
       <Stack.Navigator
         screenOptions={{
           orientation: 'portrait_up',
