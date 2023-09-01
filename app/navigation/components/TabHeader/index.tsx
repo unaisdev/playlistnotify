@@ -72,7 +72,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    display: 'flex',
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     width: '100%',
     backgroundColor: 'black',
-    display: 'flex',
+
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   rightHeader: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 20,

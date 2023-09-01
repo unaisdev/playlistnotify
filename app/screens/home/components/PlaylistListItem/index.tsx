@@ -43,8 +43,6 @@ const PlaylistListItem = ({
     refetch();
   }, [isRefetching]);
 
- 
-
   const onPress = () => {
     if (playlist && tracksUpdate) {
       compareAllData(playlist, tracksUpdate);
@@ -160,7 +158,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     height: 86,
     // backgroundColor: 'red',
-    display: 'flex',
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -174,14 +172,12 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   inlineBetween: {
-    display: 'flex',
     flexGrow: 1,
     // backgroundColor: 'purple',
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
   inline: {
-    display: 'flex',
     // backgroundColor: 'green',
     flexDirection: 'row',
     alignItems: 'flex-end',
@@ -191,7 +187,7 @@ const styles = StyleSheet.create({
     padding: 8,
     flexGrow: 1,
     // backgroundColor: 'gray',
-    display: 'flex',
+
     flexDirection: 'column',
     justifyContent: 'space-between',
   },

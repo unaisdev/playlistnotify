@@ -39,7 +39,6 @@ const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   inlineCenter: {
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     marginVertical: 4,

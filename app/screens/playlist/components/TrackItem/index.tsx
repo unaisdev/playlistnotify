@@ -70,7 +70,7 @@ const TrackItem = ({item}: Props) => {
 const styles = StyleSheet.create({
   item: {
     width: '100%',
-    display: 'flex',
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
   },
   inline: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,

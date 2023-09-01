@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   inline: {
     top: 0,
     zIndex: 10,
-    display: 'flex',
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   child: {
     width,
-    display: 'flex',
+
     justifyContent: 'flex-start',
   },
 });

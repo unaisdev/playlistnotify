@@ -24,7 +24,7 @@ const PlaylistHeader = ({id}: PlaylistHeaderProps) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    display: 'flex',
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

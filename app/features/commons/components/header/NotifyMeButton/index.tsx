@@ -47,7 +47,7 @@ const NotifyMeButton = ({id}: Props) => {
 
 const styles = StyleSheet.create({
   inline: {
-    display: 'flex',
+    
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

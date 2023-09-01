@@ -14,7 +14,7 @@ const SwipeableLeftActions = (props: SwipeableProps) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
-    display: 'flex',
+
     justifyContent: 'center',
     padding: 8,
     margin: 4,

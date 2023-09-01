@@ -32,7 +32,6 @@ const PlaylistInfo = ({id, image_url, name}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     width: 96,
     flexDirection: 'column',
     alignItems: 'flex-start',

@@ -89,7 +89,6 @@ const PlaylistScreen = ({route}: Props) => {
           </Pressable>
           <View
             style={{
-              display: 'flex',
               flexGrow: 1,
               justifyContent: 'space-evenly',
             }}>
@@ -155,7 +154,7 @@ const PlaylistScreen = ({route}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    display: 'flex',
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -168,7 +167,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   playlistInfo: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -176,7 +174,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: 'black',
-    display: 'flex',
+
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -196,14 +194,12 @@ const styles = StyleSheet.create({
     height: 88,
   },
   topContent: {
-    display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
     paddingVertical: 8,
     paddingRight: 16,
   },
   inline: {
-    display: 'flex',
     gap: 4,
     flexDirection: 'row',
     alignItems: 'center',
@@ -212,7 +208,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     flexGrow: 1,
     paddingVertical: 6,
-    display: 'flex',
+
     justifyContent: 'flex-end',
   },
   playlistName: {
@@ -223,7 +219,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   columnBetween: {
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     gap: 8,

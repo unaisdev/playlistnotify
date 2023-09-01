@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     width: '100%',
-    display: 'flex',
+
     justifyContent: 'center',
     alignItems: 'center',
     gap: 20,

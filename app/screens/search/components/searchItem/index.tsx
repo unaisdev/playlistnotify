@@ -49,7 +49,6 @@ const SearchItem = ({item, index}: Props) => {
         />
         <View
           style={{
-            display: 'flex',
             height: '100%',
             flexGrow: 1,
             flexDirection: 'column',
@@ -63,7 +62,6 @@ const SearchItem = ({item, index}: Props) => {
 
           <View
             style={{
-              display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
@@ -75,7 +73,6 @@ const SearchItem = ({item, index}: Props) => {
                 Linking.openURL(item.owner.uri);
               }}
               style={{
-                display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
                 gap: 4,

@@ -111,13 +111,12 @@ const SettingsScreen = () => {
 const styling = (isDarkMode: boolean) => {
   return StyleSheet.create({
     container: {
-      display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
     },
     itemWrapper: {
       width: '100%',
-      display: 'flex',
+
       alignItems: 'center',
     },
     itemContainer: {
@@ -128,7 +127,6 @@ const styling = (isDarkMode: boolean) => {
       rowGap: 16,
     },
     item: {
-      display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -141,7 +139,7 @@ const styling = (isDarkMode: boolean) => {
     itemLogout: {
       width: '80%',
       columnGap: 10,
-      display: 'flex',
+
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
