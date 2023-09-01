@@ -17,7 +17,7 @@
     <p>Only available for <strong>Beta testing</strong>. You wanna join? Send me your Google Play account e-mail to <a href="mailto:unaicanales@gmail.com">unaisdev@gmail.com</a></p>
      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" style="width: 140px; opacity: 0.2" alt="google-play-badge">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png" style="width: 140px; opacity: 0.2" alt="app-store-badge-128x128">
-    <p>(App Store not released)</p>
+    <p>App Store not released</p>
 </div>
 
 <br />
@@ -66,6 +66,7 @@ Our app aims to simplify the experience of tracking updates to personal playlist
 * <a href="https://github.com/FormidableLabs/react-native-app-auth">react-native-app-auth</a>
 * <a href="https://github.com/i18next/react-i18next">react-i18next</a>
 * <a href="https://github.com/emeraldsanto/react-native-encrypted-storage">react-native-encrypted-storage</a>
+* <a href="https://github.com/react-native-async-storage/async-storage">react-native-async-storage</a>
 <br/>
 
 * <a href="https://github.com/software-mansion/react-native-reanimated">react-native-reanimated</a>
