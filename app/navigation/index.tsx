@@ -1,4 +1,8 @@
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   BottomTabBar,
@@ -53,6 +57,7 @@ const Tabs = () => {
     <Tab.Navigator
       tabBar={TabBar}
       screenOptions={() => ({
+        orientation: 'portrait_up',
         tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: 'gray',
         tabBarStyle: {
@@ -126,7 +131,7 @@ const Tabs = () => {
 };
 
 const AppNavigator = () => {
-  const {setTheme} = useTheme();
+  const {theme, setTheme} = useTheme();
 
   useEffect(() => {
     const init = async () => {
@@ -140,8 +145,11 @@ const AppNavigator = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{}}>
+    <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack.Navigator
+        screenOptions={{
+          orientation: 'portrait_up',
+        }}>
         <Stack.Screen
           name="Login"
           component={LoginScreen}
