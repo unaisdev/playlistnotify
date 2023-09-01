@@ -1,4 +1,8 @@
 {
+  "login": {
+    "connect": "Conéctate con",
+    "spotify_connect": "Conéctate con Spotify"
+  },
   "home": {
     "title": "Bienvenido,"
   },

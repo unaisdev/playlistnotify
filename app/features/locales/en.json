@@ -1,4 +1,8 @@
 {
+  "login": {
+    "connect": "Login via",
+    "spotify_connect": "Log in with Spotify"
+  },
   "home": {
     "title": "Welcome,"
   },
