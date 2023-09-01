@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Linking,
+  Platform,
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -74,7 +75,7 @@ const PlaylistScreen = ({route}: Props) => {
   if (!playlistData) return;
 
   return (
-    <Layout style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1}}>
       <Layout style={{flex: 0, paddingHorizontal: 0, paddingVertical: 0}}>
         <PlaylistHeader id={id} />
         <View style={styles.playlistInfo}>
@@ -98,7 +99,11 @@ const PlaylistScreen = ({route}: Props) => {
                 onPress={() => {
                   Linking.openURL(playlistData.owner.uri);
                 }}>
-                <Feather name="user" size={8} color={'black'} />
+                <Feather
+                  name="user"
+                  size={8}
+                  color={isDarkMode ? 'white' : 'black'}
+                />
                 <Text style={{fontSize: 10}} numberOfLines={1}>
                   {playlistData.owner.display_name}
                 </Text>
@@ -118,15 +123,19 @@ const PlaylistScreen = ({route}: Props) => {
                 <Text style={{fontSize: 10}}>
                   {playlistData.tracks.total} canciones en esta lista
                 </Text>
-                <View style={styles.inline}>
+                {/* <View style={styles.inline}>
                   <Text
                     style={{
                       fontSize: 10,
                     }}>
                     {playlistData?.followers.total}
                   </Text>
-                  <Feather name="users" size={8} color={'black'} />
-                </View>
+                  <Feather
+                    name="users"
+                    size={8}
+                    color={isDarkMode ? 'white' : 'black'}
+                  />
+                </View> */}
               </View>
             </View>
           </View>
@@ -147,7 +156,7 @@ const PlaylistScreen = ({route}: Props) => {
           color={'black'}
         />
       )}
-    </Layout>
+    </SafeAreaView>
   );
 };
 
@@ -168,26 +177,28 @@ const styles = StyleSheet.create({
   },
   playlistInfo: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
+    padding: 8,
   },
-  contentContainer: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'black',
 
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-  },
   imageShadow: {
     width: 96,
     height: 96,
-    shadowColor: '#000',
-    shadowOffset: {width: 1, height: 3},
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
+    elevation: 14,
+    justifyContent: 'center',
+    ...Platform.select({
+      ios: {
+        shadowColor: 'rgba(0,0,0, .9)',
+        shadowOffset: {height: 3, width: 5},
+        shadowOpacity: 1,
+        shadowRadius: 5,
+      },
+      android: {
+        elevation: 20,
+        zIndex: 20,
+      },
+    }),
   },
   image: {
     width: 88,
@@ -200,7 +211,7 @@ const styles = StyleSheet.create({
     paddingRight: 16,
   },
   inline: {
-    gap: 4,
+    columnGap: 4,
     flexDirection: 'row',
     alignItems: 'center',
   },

@@ -67,6 +67,7 @@ const TrackList = ({
 const styles = StyleSheet.create({
   listContainer: {
     paddingVertical: 12,
+    paddingHorizontal: 6,
   },
   center: {
     width: '100%',

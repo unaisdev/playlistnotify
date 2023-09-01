@@ -19,6 +19,7 @@ import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
 import {removePlaylistForNotify} from '@app/services/playlist';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 
 interface Props {
   playlistId: string;
@@ -36,7 +37,7 @@ const PlaylistListItem = ({
   const {tracks, hasNextPage, refetch} = usePlaylistAllTracks(playlistId);
   const {data: playlist} = usePlaylist({playlistId: playlistId});
   const {t} = useTranslation();
-
+  const {isDarkMode} = useTheme();
   const {handlePresentModalPress, compareAllData} = useBottomSheetContext();
 
   useEffect(() => {
@@ -130,14 +131,22 @@ const PlaylistListItem = ({
           ) : (
             <View style={styles.inlineBetween}>
               <View style={styles.inline}>
-                <Octicons name="diff-added" size={12} color={'black'} />
+                <Octicons
+                  name="diff-added"
+                  size={12}
+                  color={isDarkMode ? 'white' : 'black'}
+                />
                 <Text style={{fontSize: 12}}>
                   {tracksUpdate.resultNew.length}{' '}
                   {t('tracks_added').toLowerCase()}
                 </Text>
               </View>
               <View style={styles.inline}>
-                <Octicons name="diff-removed" size={12} color={'black'} />
+                <Octicons
+                  name="diff-removed"
+                  size={12}
+                  color={isDarkMode ? 'white' : 'black'}
+                />
                 <Text style={{fontSize: 12}}>
                   {tracksUpdate.resultDeleted.length}{' '}
                   {t('tracks_deleted').toLowerCase()}
