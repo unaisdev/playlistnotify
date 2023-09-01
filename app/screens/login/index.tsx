@@ -7,6 +7,7 @@ import Text from '@app/features/commons/layout/Text';
 import useLogin from './hooks/useLogin';
 import {RootStackParamList} from '../../navigation';
 import Layout from '@app/features/commons/layout/TabLayout';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -14,6 +15,7 @@ type Props = {
 
 const LoginScreen = ({navigation}: Props) => {
   const {handleLogin, isTokenValid, refreshToken, init} = useLogin(navigation);
+  const {t} = useTranslation();
 
   useEffect(() => {
     init();
@@ -21,39 +23,77 @@ const LoginScreen = ({navigation}: Props) => {
 
   return (
     <Layout style={styles.container}>
-      <Text>Conéctate con</Text>
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Image
-          source={require('../../assets/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_White.png')}
-          style={styles.spotify_logo}
-        />
-      </TouchableOpacity>
+      <View style={styles.header}></View>
+      <View style={styles.body}>
+        <Text textType="bold" style={{fontSize: 34}}>
+          Playlist Notify
+        </Text>
+        <TouchableOpacity onPress={handleLogin} style={styles.button}>
+          <Image
+            source={require('../../assets/spotify-icons-logos/icons/01_RGB/02_PNG/Spotify_Icon_RGB_Green.png')}
+            style={styles.spotify_logo}
+          />
+          <Text>{t('login.spotify_connect')}</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.footer}>
+        <View style={styles.footerContainer}>
+          <Text textType="light" style={{fontSize: 12}}>
+            Powered by
+          </Text>
+          <Image
+            source={require('../../assets/spotify-icons-logos/logos/spotify-for-developers-white.png')}
+            style={styles.spotify_devs_logo}
+          />
+        </View>
+      </View>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     gap: 8,
   },
+  header: {flex: 1, justifyContent: 'center'},
+  body: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 22,
+  },
+  footer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    columnGap: 12,
+  },
   spotify_logo: {
-    width: 100,
+    width: 35,
+    height: 35,
+    objectFit: 'contain',
+  },
+  spotify_devs_logo: {
+    width: 160,
     height: 40,
     objectFit: 'contain',
   },
   button: {
-    display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    columnGap: 16,
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#000',
-    borderRadius: 12,
+    borderRadius: 16,
+    paddingHorizontal: 50,
+    paddingVertical: 12,
     color: 'white',
-    width: 160,
-    height: 60,
-    objectFit: 'contain',
   },
   button_pass: {
     backgroundColor: 'black',
