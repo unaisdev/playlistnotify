@@ -20,6 +20,7 @@ import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
 import {removePlaylistForNotify} from '@app/services/playlist';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import SkeletonItem from './components/SkeletonItem';
 
 interface Props {
   playlistId: string;
@@ -35,7 +36,7 @@ const PlaylistListItem = ({
   isRefetching,
 }: Props) => {
   const {tracks, hasNextPage, refetch} = usePlaylistAllTracks(playlistId);
-  const {data: playlist} = usePlaylist({playlistId: playlistId});
+  const {data: playlist, isLoading} = usePlaylist({playlistId: playlistId});
   const {t} = useTranslation();
   const {isDarkMode} = useTheme();
   const {handlePresentModalPress, compareAllData} = useBottomSheetContext();
@@ -92,71 +93,67 @@ const PlaylistListItem = ({
     return {opacity: 1};
   }, [tracksUpdate]);
 
-  if (!tracksUpdate)
-    return (
-      <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
-        <Text>{t('simple_loading')}</Text>
-      </View>
-    );
+  if (!playlist) return <SkeletonItem />;
 
-  if (!playlist)
-    return (
-      <View style={{height: 86, backgroundColor: 'red', marginVertical: 8}}>
-        <Text>{t('simple_loading')}</Text>
-      </View>
-    );
+  if (!tracksUpdate) return <SkeletonItem />;
 
   return (
-    <TouchableOpacity onPress={onPress} style={hasAddedOrDeleted}>
-      <View style={styles.container}>
-        <Image
-          source={{
-            uri: playlist.images[0].url ?? DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK,
-          }}
-          width={86}
-          height={86}
-        />
+    <Animated.View
+      key={playlist.id}
+      entering={FadeInLeft.duration(500).delay(index * 200)}
+      exiting={FadeOutRight.duration(500)}
+      layout={Layout.duration(1000)}>
+      <TouchableOpacity onPress={onPress} style={hasAddedOrDeleted}>
+        <View style={styles.container}>
+          <Image
+            source={{
+              uri: playlist.images[0].url ?? DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK,
+            }}
+            width={86}
+            height={86}
+          />
 
-        <View style={styles.infoContainer}>
-          <View style={styles.inlineBetween}>
-            <Text style={styles.tittle} numberOfLines={2}>
-              {playlist.name}
-            </Text>
-          </View>
-          {tracksUpdate.resultNew.length === 0 &&
-          tracksUpdate.resultDeleted.length === 0 ? (
-            <View style={styles.inline}>
-              <Text>{t('no_tracks_new_or_deleted')}</Text>
-            </View>
-          ) : (
+          <View style={styles.infoContainer}>
             <View style={styles.inlineBetween}>
-              <View style={styles.inline}>
-                <Octicons
-                  name="diff-added"
-                  size={12}
-                  color={isDarkMode ? 'white' : 'black'}
-                />
-                <Text style={{fontSize: 12}}>
-                  {tracksUpdate.resultNew.length}{' '}
-                  {t('tracks_added').toLowerCase()}
-                </Text>
-              </View>
-              <View style={styles.inline}>
-                <Octicons
-                  name="diff-removed"
-                  size={12}
-                  color={isDarkMode ? 'white' : 'black'}
-                />
-                <Text style={{fontSize: 12}}>
-                  {tracksUpdate.resultDeleted.length}{' '}
-                  {t('tracks_deleted').toLowerCase()}
-                </Text>
-              </View>
+              <Text style={styles.title} numberOfLines={2}>
+                {playlist.name}
+              </Text>
             </View>
-          )}
+            {tracksUpdate.resultNew.length === 0 &&
+            tracksUpdate.resultDeleted.length === 0 ? (
+              <View style={styles.inline}>
+                <Text>{t('no_tracks_new_or_deleted')}</Text>
+              </View>
+            ) : (
+              <View style={styles.inlineBetween}>
+                <View style={styles.inline}>
+                  <Octicons
+                    name="diff-added"
+                    size={12}
+                    color={isDarkMode ? 'white' : 'black'}
+                  />
+                  <Text style={{fontSize: 12}}>
+                    {tracksUpdate.resultNew.length}{' '}
+                    {t('tracks_added').toLowerCase()}
+                  </Text>
+                </View>
+                <View style={styles.inline}>
+                  <Octicons
+                    name="diff-removed"
+                    size={12}
+                    color={isDarkMode ? 'white' : 'black'}
+                  />
+                  <Text style={{fontSize: 12}}>
+                    {tracksUpdate.resultDeleted.length}{' '}
+                    {t('tracks_deleted').toLowerCase()}
+                  </Text>
+                </View>
+              </View>
+            )}
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
@@ -172,7 +169,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  tittle: {
+  title: {
     maxWidth: 240,
     // backgroundColor: 'red',
   },

@@ -43,13 +43,27 @@ import {useTranslation} from 'react-i18next';
 import {removePlaylistForNotify} from '@app/services/playlist';
 import {useHome} from '../../hooks';
 
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import PlaylistInfo from '@app/screens/profile/components/SavedSpotifyLists/PlaylistInfo';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '@app/navigation';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 const AnimatedFlatList = Animated.createAnimatedComponent(
   FlatList<UserAddedPlaylistsResponse>,
 );
 
+const defaultPlaylist = {
+  id: '4OYwdvuAT2msLdqmNVUQD4',
+  image_url: 'https://i.scdn.co/image/ab67706c0000bebbe90f0c084516e558ffab5594',
+  name: 'holAloh',
+};
+
 const PlaylistList = () => {
   const {t} = useTranslation();
   const {isLoading, isRefetching, refetch, userNotifiedPlaylists} = useHome();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const showAlert = (item: UserAddedPlaylistsResponse) =>
     Alert.alert(
@@ -93,37 +107,71 @@ const PlaylistList = () => {
 
   if (userNotifiedPlaylists?.length === 0)
     return (
-      <View style={styles.loadingContainer}>
-        <Image
-          style={{
-            width: '80%',
-            height: '40%',
-            objectFit: 'contain',
-            borderRadius: 20,
-            backgroundColor: 'gray',
-          }}
-          source={require('../../../../assets/images/no_playlists_for_notify.jpg')}
-        />
-        <Text style={styles.noDataText}>
-          ¡No tienes ninguna playlist añadida!
-        </Text>
-        <Text style={styles.noDataDesc}>
-          Para poder notificarte sobre la actualización de una lista de
-          reproducción, primero deberás de activar las notificaciones en alguna
-          lista. Puedes acceder a tu perfil en la parte superior derecha, o ir
-          al buscador en la parte inferior. Selecciona una lista de la que
-          quieras recibir notificaciones cuando se actualiza, y dicha lista
-          aparecerá aqui.
-        </Text>
-      </View>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+        }
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginVertical: 12,
+          marginHorizontal: 20,
+          rowGap: 48,
+        }}
+        style={styles.nodataContainer}>
+        <View style={{rowGap: 12}}>
+          <Text style={styles.noDataText}>
+            ¿Todavía no has seleccionado ninguna lista para que te notifiquemos?
+          </Text>
+
+          <Text style={styles.noDataDesc}>
+            Para poder notificarte sobre la actualización de una lista de
+            reproducción, primero deberás de seleccionar alguna.
+          </Text>
+          <Text>
+            Accede a tu perfil desde la parte superior derecha, tu foto de
+            perfil, para ver tus playlists o utiliza el buscador para encontrar
+            una en concreto.
+          </Text>
+          {/* <View style={styles.inline}>
+            <Text>Puedes probar con esta: </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Playlist', {id: defaultPlaylist.id});
+              }}>
+              <PlaylistInfo
+                id={defaultPlaylist.id}
+                image_url={defaultPlaylist.image_url}
+                name={defaultPlaylist.name}
+              />
+            </TouchableOpacity>
+          </View> */}
+          <View style={styles.inline}>
+            <Text style={{flex: 1}}>
+              Marca el icono de notificación en la cabecera de las listas de
+              reproducción.
+            </Text>
+            <View style={[styles.inline, {flex: 1, justifyContent: 'center'}]}>
+              <MaterialIcon name="notifications-off" size={24} color={'gray'} />
+              <MaterialIcon name="arrow-right-alt" size={24} color={'gray'} />
+              <MaterialIcon
+                name="notifications-active"
+                size={24}
+                color={'black'}
+              />
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     );
 
   return (
     <Animated.FlatList
       style={styles.container}
-      contentContainerStyle={{flex: 1}}
       data={userNotifiedPlaylists}
-      itemLayoutAnimation={Layout.duration(1000).delay(1000)}
+      scrollEnabled
+      itemLayoutAnimation={Layout.duration(500).delay(500)}
       keyExtractor={(item, index) => item.id}
       refreshControl={
         <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
@@ -136,18 +184,14 @@ const PlaylistList = () => {
         index: number;
       }) => {
         return (
-          <Animated.View
-            entering={FadeInLeft.duration(1000).delay(index * 200)}
-            exiting={FadeOutRight.duration(1000)}>
-            <SwipeableItem onSwipped={() => showAlert(item)}>
-              <PlaylistListItem
-                index={index}
-                playlistId={item.playlistId}
-                savedPlaylistTracksIds={item.trackIds}
-                isRefetching={isRefetching}
-              />
-            </SwipeableItem>
-          </Animated.View>
+          <SwipeableItem onSwipped={() => showAlert(item)}>
+            <PlaylistListItem
+              index={index}
+              playlistId={item.playlistId}
+              savedPlaylistTracksIds={item.trackIds}
+              isRefetching={isRefetching}
+            />
+          </SwipeableItem>
         );
       }}
     />
@@ -158,16 +202,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  inline: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   loadingContainer: {
     flex: 1,
-    width: '100%',
-
     justifyContent: 'center',
     alignItems: 'center',
     gap: 20,
   },
+  nodataContainer: {
+    flex: 1,
+    paddingHorizontal: 32,
+  },
   loadingText: {maxWidth: 300, textAlign: 'center'},
-  noDataText: {maxWidth: 300, textAlign: 'left', fontWeight: '700'},
+  noDataText: {
+    maxWidth: 300,
+    textAlign: 'left',
+    fontWeight: '700',
+    fontSize: 16,
+  },
   noDataDesc: {maxWidth: 400, textAlign: 'left', fontWeight: '400'},
 });
 
