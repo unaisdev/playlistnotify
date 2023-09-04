@@ -14,10 +14,10 @@
     <br/>
 </div>
 <div align="center">
-    <p>Only available for <strong>Beta testing</strong>. You wanna join? Send me your Google Play account e-mail to <a href="mailto:unaicanales@gmail.com">unaisdev@gmail.com</a></p>
+    <p>Only available for <strong>Beta testing</strong>. You wanna join? Send me your Google Play and Spotify account e-mail to <a href="mailto:unaicanales@gmail.com">unaisdev@gmail.com</a></p>
      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" style="width: 140px; opacity: 0.2" alt="google-play-badge">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png" style="width: 140px; opacity: 0.2" alt="app-store-badge-128x128">
-    <p>(App Store not released)</p>
+    <p>App Store not released</p>
 </div>
 
 <br />
@@ -66,8 +66,10 @@ Our app aims to simplify the experience of tracking updates to personal playlist
 * <a href="https://github.com/FormidableLabs/react-native-app-auth">react-native-app-auth</a>
 * <a href="https://github.com/i18next/react-i18next">react-i18next</a>
 * <a href="https://github.com/emeraldsanto/react-native-encrypted-storage">react-native-encrypted-storage</a>
+* <a href="https://github.com/react-native-async-storage/async-storage">react-native-async-storage</a>
 <br/>
 
+* <a href="https://github.com/software-mansion/react-native-gesture-handler">react-native-gesture-handler</a>
 * <a href="https://github.com/software-mansion/react-native-reanimated">react-native-reanimated</a>
 * <a href="https://github.com/gorhom/react-native-bottom-sheet">@gorhom/react-native-bottom-sheet</a>
 * <a href="https://github.com/gusgard/react-native-swiper-flatlist">react-native-swiper-flatlist</a>
@@ -103,8 +105,6 @@ Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a det
     <a href="https://developer.spotify.com"><img src="https://developer.spotify.com/images/spotify-for-developers-logo.svg#s4d-logo" style="width: 380px" /></a><br/>
     <a href="https://www.fl0.com"><img src="https://images.crunchbase.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/rucikbnjqz2ktuchdhih" style="width: 100px" /></a>
 </div>
-<br />
-<br />
 <hr />
 <br />
 
