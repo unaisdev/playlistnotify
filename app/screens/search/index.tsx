@@ -38,7 +38,7 @@ const SearchPlaylistScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={handleViewPress}>
-      <View style={{flex: 1, borderTopWidth: 1, borderTopColor: 'white'}}>
+      <View style={{flex: 1}}>
         <SearchBar
           handleBlur={handleBlur}
           handleClear={handleClear}

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 18,
+    padding: 14,
   },
   input: {
     fontSize: 13,

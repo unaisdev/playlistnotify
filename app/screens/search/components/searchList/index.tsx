@@ -44,8 +44,9 @@ const styling = (isDarkMode: boolean) => {
       backgroundColor: isDarkMode ? '#212121' : 'white',
     },
     containerFlatlist: {
-      paddingHorizontal: 12,
-      paddingVertical: 4,
+      paddingHorizontal: 8,
+      paddingVertical: 10,
+      rowGap: 10,
     },
   });
 };

@@ -12,6 +12,7 @@ import Text from '@app/features/commons/layout/Text';
 import Feather from 'react-native-vector-icons/Feather';
 import {RootStackParamList} from '../../../../navigation';
 import {PlaylistModel} from '../../../../services/types';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 
 type Props = {
   item: PlaylistModel;
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const SearchItem = ({item, index}: Props) => {
+  const {isDarkMode} = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -40,7 +42,6 @@ const SearchItem = ({item, index}: Props) => {
           alignItems: 'center',
           justifyContent: 'flex-start',
           width: '100%',
-          marginVertical: 8,
           gap: 12,
         }}>
         <Image
@@ -77,7 +78,11 @@ const SearchItem = ({item, index}: Props) => {
                 alignItems: 'center',
                 gap: 4,
               }}>
-              <Feather name="user" size={8} color="black" />
+              <Feather
+                name="user"
+                size={8}
+                color={isDarkMode ? 'white' : 'black'}
+              />
               <Text textType="regular" style={{fontSize: 10}}>
                 {item.owner?.display_name}
               </Text>

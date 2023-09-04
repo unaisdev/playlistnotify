@@ -83,12 +83,7 @@ const SettingsScreen = () => {
                       <TouchableOpacity
                         key={item.key}
                         onPress={() => changeLanguage(item.key)}
-                        style={{
-                          backgroundColor: '#D0C4C5',
-                          borderRadius: 6,
-                          paddingHorizontal: 12,
-                          paddingVertical: 6,
-                        }}>
+                        style={styles.itemLanguage}>
                         <Text>{item.value}</Text>
                       </TouchableOpacity>
                     );
@@ -114,6 +109,12 @@ const styling = (isDarkMode: boolean) => {
       alignItems: 'center',
       justifyContent: 'space-between',
     },
+    itemLanguage: {
+      backgroundColor: isDarkMode ? '#212121' : '#E0E0E0',
+      borderRadius: 6,
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+    },
     itemWrapper: {
       width: '100%',
 
@@ -121,7 +122,7 @@ const styling = (isDarkMode: boolean) => {
     },
     itemContainer: {
       width: '90%',
-      backgroundColor: isDarkMode ? 'gray' : '#EEEEEE',
+      backgroundColor: isDarkMode ? '#424242' : '#FAFAFA',
       borderRadius: 8,
       padding: 18,
       rowGap: 16,
@@ -143,7 +144,7 @@ const styling = (isDarkMode: boolean) => {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'red',
+      backgroundColor: '#F44336',
       paddingVertical: 12,
       borderRadius: 12,
       marginBottom: 10,
