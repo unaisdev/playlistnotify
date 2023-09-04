@@ -68,7 +68,7 @@ Our app aims to simplify the experience of tracking updates to personal playlist
 * <a href="https://github.com/emeraldsanto/react-native-encrypted-storage">react-native-encrypted-storage</a>
 * <a href="https://github.com/react-native-async-storage/async-storage">react-native-async-storage</a>
 <br/>
-
+* <a href="https://github.com/software-mansion/react-native-gesture-handler">react-native-gesture-handler</a>
 * <a href="https://github.com/software-mansion/react-native-reanimated">react-native-reanimated</a>
 * <a href="https://github.com/gorhom/react-native-bottom-sheet">@gorhom/react-native-bottom-sheet</a>
 * <a href="https://github.com/gusgard/react-native-swiper-flatlist">react-native-swiper-flatlist</a>
