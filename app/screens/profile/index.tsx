@@ -1,9 +1,7 @@
-import React, {useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Text from '@app/features/commons/layout/Text';
-
-import SavedSpotifyLists from './components/SavedSpotifyLists';
 
 import {PlaylistModel} from '../../services/types';
 
@@ -17,48 +15,56 @@ import {useTranslation} from 'react-i18next';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import FilterLists from './components/FilterLists';
 import {usePlaylist} from '@app/features/commons/hooks/usePlaylist';
+import SearchList from '../search/components/searchList';
+import PlaylistList from './components/PlaylistList';
 
 const ProfileScreen = () => {
   const {user, userPlaylists, isLoading} = useProfile();
+  const [playlists, setPlaylists] = useState<PlaylistModel[]>([]);
+
   const {t} = useTranslation();
+
+  useEffect(() => {
+    if (userPlaylists) {
+      setPlaylists(userPlaylists); // Inicializa playlists con userPlaylists cuando esté disponible
+    }
+  }, [userPlaylists]);
 
   if (!user) return;
 
-  const ownPlaylists = useMemo(() => {
-    return userPlaylists?.filter(item =>
-      item.owner.display_name.includes(user.display_name),
-    );
-  }, [userPlaylists]);
+  if (!userPlaylists) return;
 
-  const likedPlaylists = useMemo(() => {
-    return userPlaylists?.filter(
-      item => !item.owner.display_name.includes(user.display_name),
+  // Función genérica de filtro
+  const applyFilter = (filterFn: (playlist: PlaylistModel) => boolean) => {
+    setPlaylists(userPlaylists.filter(filterFn));
+  };
+
+  // Filtrar listas de reproducción del usuario
+  const filterOwnPlaylists = () => {
+    applyFilter(playlist =>
+      playlist.owner.display_name.includes(user.display_name),
     );
-  }, [userPlaylists]);
+  };
+
+  // Filtrar listas de reproducción de Spotify
+  const filterSpotifyPlaylists = () => {
+    applyFilter(playlist => playlist.owner.display_name.includes('Spotify'));
+  };
+
+  // Filtrar por número máximo de pistas
+  const filterMaxTracksNum = (maxTracks: number) => {
+    applyFilter(playlist => playlist.tracks.total < maxTracks);
+  };
 
   return (
     <Layout style={{paddingHorizontal: 0, paddingVertical: 0}}>
-      <FilterLists />
-
-      <Text
-        style={{
-          fontSize: 12,
-          padding: 12,
-        }}>
-        {t('profile.desc_text')}
-      </Text>
-
-      <SavedSpotifyLists
-        text={t('profile.your_lists')}
-        playlists={ownPlaylists}
-        isLoadingData={isLoading}
+      <FilterLists
+        filterAll={() => setPlaylists(userPlaylists)}
+        filterOwnPlaylists={filterOwnPlaylists}
+        filterSpotifyPlaylists={filterSpotifyPlaylists}
+        filterByTracksNum={filterMaxTracksNum}
       />
-
-      <SavedSpotifyLists
-        text={t('profile.liked_lists')}
-        playlists={likedPlaylists}
-        isLoadingData={isLoading}
-      />
+      <PlaylistList searchResults={playlists} />
     </Layout>
   );
 };

@@ -130,9 +130,8 @@ const PlaylistList = () => {
             reproducción, primero deberás de seleccionar alguna.
           </Text>
           <Text>
-            Accede a tu perfil desde la parte superior derecha, tu foto de
-            perfil, para ver tus playlists o utiliza el buscador para encontrar
-            una en concreto.
+            Accede desde tu foto de perfil a tus playlists, en la parte superior
+            derecha, o utiliza el buscador para encontrar una en concreto.
           </Text>
           {/* <View style={styles.inline}>
             <Text>Puedes probar con esta: </Text>
