@@ -24,7 +24,7 @@
   "settings": {
     "title": "Ajustes",
     "appsettings_title": "Configuración de la aplicación",
-    "darkMode": "Modo nocturno",
+    "darkMode": "Modo oscuro",
     "language": "Idioma",
     "logout": "Cerrar sesión"
   },

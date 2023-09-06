@@ -4,7 +4,11 @@
     "spotify_connect": "Log in with Spotify"
   },
   "home": {
-    "title": "Welcome,"
+    "title": "Welcome,",
+    "empty_notification_playlists_title": "You don't have playlist for ",
+    "empty_notification_playlists_first_text": "",
+    "empty_notification_playlists_second_text": "",
+    "empty_notification_playlists_third_text": ""
   },
   "profile": {
     "title": "Your profile",
