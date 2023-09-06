@@ -9,6 +9,7 @@ export const useSearch = () => {
   const inputRef = useRef<TextInput>(null);
   const debouncedSearchTerm = useDebounce(searchPhrase, 500);
   const queryClient = useQueryClient();
+
   //isLoading only return true if it is hard "first" loading
   //isFetching always when makes a request
   const {data, isLoading, isFetching, error} = useQuery({
@@ -17,6 +18,7 @@ export const useSearch = () => {
       if (debouncedSearchTerm) return fetchSearchPlaylists(debouncedSearchTerm);
       return [];
     },
+    retry: 3,
     keepPreviousData: true,
     staleTime: 2000,
   });

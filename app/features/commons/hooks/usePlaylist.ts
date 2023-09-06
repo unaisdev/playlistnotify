@@ -9,6 +9,7 @@ export const usePlaylist = ({playlistId}: Props) => {
   const playlistReq = useQuery({
     queryKey: ['playlist', playlistId],
     queryFn: () => getPlaylist(playlistId),
+    retry: 3,
   });
 
   return playlistReq;

@@ -17,6 +17,7 @@ export const fetchUserProfile = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: getUserProfile,
+    retry: 3,
   });
 
   useEffect(() => {
