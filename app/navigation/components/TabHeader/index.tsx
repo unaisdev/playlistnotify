@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {
   BottomTabBarButtonProps,
@@ -21,6 +21,7 @@ import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
 import SettingsButton from '@app/features/commons/components/Header/SettingsButton';
 import ProfileImageButton from '@app/features/commons/components/Header/ProfileImageButton';
+import AppModal from '@app/features/commons/modal';
 
 interface TabNames {
   [key: string]: string;
@@ -31,6 +32,11 @@ const TAB_NAME_DEFAULT = 'Default';
 const TabHeader = ({route}: BottomTabHeaderProps) => {
   const {user} = useUserContext();
   const {t} = useTranslation();
+  const [betaModalVisible, setBetaModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setBetaModalVisible(prev => !prev);
+  };
 
   const TabHeaderText = () => {
     const currentTabName = route.name || TAB_NAME_DEFAULT;
@@ -48,7 +54,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
         textType="bold"
         style={{
           color: 'white',
-          flexGrow: 1,
+          maxWidth: 240,
         }}>
         {TAB_NAMES[currentTabName]}
       </Text>
@@ -61,10 +67,16 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
       <View style={styles.contentContainer}>
         <TabHeaderText />
         <View style={styles.rightHeader}>
+          <TouchableOpacity
+            onPress={() => setBetaModalVisible(true)}
+            style={styles.capsule}>
+            <Text style={{fontSize: 11, color: 'green'}}>Beta</Text>
+          </TouchableOpacity>
           <SettingsButton />
           <ProfileImageButton />
         </View>
       </View>
+      <AppModal modalVisible={betaModalVisible} toggleModal={toggleModal} />
     </SafeAreaView>
   );
 };
@@ -76,6 +88,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  capsule: {
+    borderWidth: 1,
+    borderColor: 'green',
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
   contentContainer: {
     width: '100%',
