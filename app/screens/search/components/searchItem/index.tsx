@@ -29,7 +29,7 @@ const SearchItem = ({item, index}: Props) => {
       key={item.id}
       entering={FadeInDown.duration(300).delay(index * 100)}
       exiting={FadeOutRight.duration(300)}
-      layout={Layout.duration(800).delay(index * 100)}
+      layout={Layout.duration(800)}
       style={{width: '100%'}}>
       <Pressable
         onPress={() => {
@@ -53,7 +53,7 @@ const SearchItem = ({item, index}: Props) => {
             height: '100%',
             flexGrow: 1,
             flexDirection: 'column',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
           }}>
           <View>
             <Text textType="bold" numberOfLines={2} style={{width: 260}}>

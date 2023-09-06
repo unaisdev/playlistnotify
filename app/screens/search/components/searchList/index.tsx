@@ -6,7 +6,9 @@ import Text from '@app/features/commons/layout/Text';
 import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {Layout as LayoutR} from 'react-native-reanimated';
 import Layout from '@app/features/commons/layout/TabLayout';
+import Animated from 'react-native-reanimated';
 
 type Props = {
   searchResults: PlaylistModel[];
@@ -26,9 +28,10 @@ const SearchList = ({searchResults}: Props) => {
     );
 
   return (
-    <FlatList
+    <Animated.FlatList
       style={styles.flatList}
       data={searchResults}
+      itemLayoutAnimation={LayoutR.duration(500)}
       renderItem={({item, index}) => {
         return <SearchItem index={index} item={item} />;
       }}

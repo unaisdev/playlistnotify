@@ -94,12 +94,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   searchBar: {
+    height: 44,
     flexDirection: 'row',
     width: '100%',
     backgroundColor: '#000',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 14,
+    paddingHorizontal: 16,
   },
   input: {
     fontSize: 13,
