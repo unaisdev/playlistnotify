@@ -1,12 +1,8 @@
-import React, {useCallback, useMemo} from 'react';
-
+import React, {useCallback, useMemo, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Text from '@app/features/commons/layout/Text';
-
 import {PlaylistModel} from '../../services/types';
-
 import {useUserContext} from '../../containers/userContext';
-import {useEffect, useState} from 'react';
 import {getUserPlaylists} from '../../services/user';
 import {useProfile} from './hooks/useProfile';
 import i18n from '@app/features/locales/i18next';
@@ -24,36 +20,37 @@ const ProfileScreen = () => {
 
   const {t} = useTranslation();
 
-  useEffect(() => {
+  // Use useMemo to memoize userPlaylists and update playlists only when it changes
+  useMemo(() => {
     if (userPlaylists) {
-      setPlaylists(userPlaylists); // Inicializa playlists con userPlaylists cuando esté disponible
+      setPlaylists(userPlaylists);
     }
   }, [userPlaylists]);
 
-  if (!user) return;
+  if (!user) return null;
 
-  if (!userPlaylists) return;
+  if (!userPlaylists) return null;
 
-  // Función genérica de filtro
-  const applyFilter = (filterFn: (playlist: PlaylistModel) => boolean) => {
-    setPlaylists(userPlaylists.filter(filterFn));
-  };
+  const ownPlaylists = userPlaylists.filter(playlist =>
+    playlist.owner.display_name.includes(user.display_name),
+  );
 
-  // Filtrar listas de reproducción del usuario
+  const spotifyPLaylists = userPlaylists.filter(playlist =>
+    playlist.owner.display_name.includes('Spotify'),
+  );
+
   const filterOwnPlaylists = () => {
-    applyFilter(playlist =>
-      playlist.owner.display_name.includes(user.display_name),
-    );
+    setPlaylists(ownPlaylists);
   };
 
-  // Filtrar listas de reproducción de Spotify
   const filterSpotifyPlaylists = () => {
-    applyFilter(playlist => playlist.owner.display_name.includes('Spotify'));
+    setPlaylists(spotifyPLaylists);
   };
 
-  // Filtrar por número máximo de pistas
   const filterMaxTracksNum = (maxTracks: number) => {
-    applyFilter(playlist => playlist.tracks.total < maxTracks);
+    setPlaylists(
+      userPlaylists.filter(playlist => playlist.tracks.total < maxTracks),
+    );
   };
 
   return (
