@@ -6,7 +6,6 @@ type Props = {
   filterFn: () => void;
   filterText: string;
   isSelected: boolean;
-  
 };
 
 const FilterItem = ({filterFn, filterText, isSelected}: Props) => {
@@ -21,10 +20,11 @@ const FilterItem = ({filterFn, filterText, isSelected}: Props) => {
         paddingVertical: 4,
         alignItems: 'center',
         borderRadius: 12,
-        backgroundColor: isSelected ? '#424242' : '#BDBDBD',
+        backgroundColor: '#BDBDBD',
+        opacity: isSelected ? 1 : 0.5,
       }}
       onPress={handlePress}>
-      <Text colorReverted>{filterText}</Text>
+      <Text>{filterText}</Text>
     </TouchableOpacity>
   );
 };
