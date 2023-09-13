@@ -13,6 +13,7 @@ export const getUserProfile = async () => {
       method: 'get',
     });
 
+    console.log(data);
     return data as User;
   } catch (error) {
     console.log('getUserProfile', error);
@@ -76,5 +77,7 @@ export const registerUser = async (user: User) => {
       console.log(data);
       return data;
     })
-    .catch((error: AxiosError) => console.log(error.response?.data));
+    .catch((error: AxiosError) =>
+      console.log(error.response?.data, error.response?.status),
+    );
 };
