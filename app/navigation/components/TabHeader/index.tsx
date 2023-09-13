@@ -70,7 +70,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
           <TouchableOpacity
             onPress={() => setBetaModalVisible(true)}
             style={styles.capsule}>
-            <Text style={{fontSize: 11, color: 'green'}}>Beta</Text>
+            <Text style={{fontSize: 12, color: 'green'}}>Beta</Text>
           </TouchableOpacity>
           <SettingsButton />
           <ProfileImageButton />
