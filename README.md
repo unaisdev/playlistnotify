@@ -17,8 +17,8 @@
     <p>Only available for <strong>Beta testing</strong>. You wanna join? Send me your Google Play and Spotify account e-mail to <a href="mailto:unaicanales@gmail.com">unaisdev@gmail.com</a></p>
      <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" style="width: 140px; opacity: 0.2" alt="google-play-badge"></a>
     <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png" style="width: 140px; opacity: 0.2" alt="app-store-badge-128x128"></a>
-    <p>Play Store (Android): released for internal testing</p>
-    <p>App Store (iOS): not released yet</p>
+    <p>Play Store: released for internal testing</p>
+    <p>App Store: not released yet</p>
 </div>
 
 Some screenshots:
