@@ -24,16 +24,18 @@
 Some screenshots:
 
 <div align="center">
+    <img src="https://i.ibb.co/RPNXT1T/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-14-at-17-43-16.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-14-at-17-43-16" border="0" style="width: 30%;"/>
     <img src="https://i.ibb.co/FqMn8nr/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-35.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-35" border="0" style="width: 30%;" />
         <img src="https://i.ibb.co/zFH9g31/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-56-04.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-56-04" border="0" style="width: 30%;"/>
-        <img src="https://i.ibb.co/Fz4MyQB/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-04-13.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-04-13" border="0" style="width: 30%;"/>
-
 </div>
 
+<br />
+<br />
 
 <div align="center">
         <img src="https://i.ibb.co/GVd4npc/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-01-45.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-01-45" border="0" style="width: 30%;"/>
     <img src="https://i.ibb.co/Scwtv5B/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-51.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-51" border="0"  style="width: 30%;" />
+    <img src="https://i.ibb.co/Fz4MyQB/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-04-13.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-04-13" border="0" style="width: 30%;"/>
 </div>
 
 <br />
