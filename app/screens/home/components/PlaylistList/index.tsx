@@ -43,8 +43,6 @@ import {useTranslation} from 'react-i18next';
 import {removePlaylistForNotify} from '@app/services/playlist';
 import {useHome} from '../../hooks';
 
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import PlaylistInfo from '@app/screens/profile/components/SavedSpotifyLists/PlaylistInfo';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '@app/navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -59,9 +57,20 @@ const defaultPlaylist = {
   name: 'holAloh',
 };
 
-const PlaylistList = () => {
+type Props = {
+  isLoading: boolean;
+  isRefetching: boolean;
+  refetch: () => void;
+  userNotifiedPlaylists: UserAddedPlaylistsResponse[];
+};
+
+const PlaylistList = ({
+  isLoading,
+  isRefetching,
+  refetch,
+  userNotifiedPlaylists,
+}: Props) => {
   const {t} = useTranslation();
-  const {isLoading, isRefetching, refetch, userNotifiedPlaylists} = useHome();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -95,75 +104,7 @@ const PlaylistList = () => {
       userNotifiedPlaylists.map(item => console.log(item.playlistId));
   }, [userNotifiedPlaylists]);
 
-  if (isLoading)
-    return (
-      <View style={[styles.loadingContainer]}>
-        <Text style={styles.loadingText}>
-          {t('loading_notified_playlists')}
-        </Text>
-        <ActivityIndicator />
-      </View>
-    );
-
-  if (userNotifiedPlaylists?.length === 0)
-    return (
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-        }
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 12,
-          marginHorizontal: 20,
-          rowGap: 48,
-        }}
-        style={styles.nodataContainer}>
-        <View style={{rowGap: 12}}>
-          <Text style={styles.noDataText}>
-            ¿Todavía no has seleccionado ninguna lista para que te notifiquemos?
-          </Text>
-
-          <Text style={styles.noDataDesc}>
-            Para poder notificarte sobre la actualización de una lista de
-            reproducción, primero deberás de seleccionar alguna.
-          </Text>
-          <Text>
-            Accede desde tu foto de perfil a tus playlists, en la parte superior
-            derecha, o utiliza el buscador para encontrar una en concreto.
-          </Text>
-          {/* <View style={styles.inline}>
-            <Text>Puedes probar con esta: </Text>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Playlist', {id: defaultPlaylist.id});
-              }}>
-              <PlaylistInfo
-                id={defaultPlaylist.id}
-                image_url={defaultPlaylist.image_url}
-                name={defaultPlaylist.name}
-              />
-            </TouchableOpacity>
-          </View> */}
-          <View style={styles.inline}>
-            <Text style={{flex: 1}}>
-              Marca el icono de notificación en la cabecera de las listas de
-              reproducción.
-            </Text>
-            <View style={[styles.inline, {flex: 1, justifyContent: 'center'}]}>
-              <MaterialIcon name="notifications-off" size={24} color={'gray'} />
-              <MaterialIcon name="arrow-right-alt" size={24} color={'gray'} />
-              <MaterialIcon
-                name="notifications-active"
-                size={24}
-                color={'black'}
-              />
-            </View>
-          </View>
-        </View>
-      </ScrollView>
-    );
+  
 
   return (
     <Animated.FlatList
