@@ -27,6 +27,7 @@ import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeade
 import Layout from '@app/features/commons/layout/TabLayout';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import Text from '@app/features/commons/layout/Text';
+import {useTranslation} from 'react-i18next';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -35,6 +36,7 @@ interface Props {
 const PlaylistScreen = ({route}: Props) => {
   const {id} = route.params;
   const {isDarkMode} = useTheme();
+  const {t} = useTranslation();
 
   const playlistReq = usePlaylist({playlistId: id});
 
@@ -121,7 +123,8 @@ const PlaylistScreen = ({route}: Props) => {
 
               <View style={styles.columnBetween}>
                 <Text style={{fontSize: 10}}>
-                  {playlistData.tracks.total} canciones en esta lista
+                  {playlistData.tracks.total}{' '}
+                  {t('playlist.number_tracks_playlist')}
                 </Text>
                 {/* <View style={styles.inline}>
                   <Text
