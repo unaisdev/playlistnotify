@@ -19,7 +19,7 @@
     "results_empty": "No existe ninguna lista con ese nombre"
   },
   "playlist": {
-    "number_tracks_playlist": "Canciones en esta lista"
+    "number_tracks_playlist": "canciones en esta lista"
   },
   "settings": {
     "title": "Ajustes",
@@ -33,6 +33,7 @@
   "simple_loading": "Cargando...",
   "tracks_added": "Añadidas",
   "tracks_deleted": "Eliminadas",
+  "tracks": "canciones",
   "no_tracks_new_or_deleted": "No hay canciones nuevas o eliminadas",
   "loading_notified_playlists": "Estamos obteniendo datos de las listas que seleccionaste para notificación. Espera un momento..."
 }

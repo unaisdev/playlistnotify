@@ -13,6 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {RootStackParamList} from '../../../../navigation';
 import {PlaylistModel} from '../../../../services/types';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   item: PlaylistModel;
@@ -21,6 +22,7 @@ type Props = {
 
 const SearchItem = ({item, index}: Props) => {
   const {isDarkMode} = useTheme();
+  const {t} = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -67,7 +69,7 @@ const SearchItem = ({item, index}: Props) => {
               justifyContent: 'space-between',
             }}>
             <Text textType="light" style={{fontSize: 10}}>
-              {item.tracks.total} canciones
+              {item.tracks.total} {t('tracks')}
             </Text>
             <Pressable
               onPress={() => {

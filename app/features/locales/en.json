@@ -23,7 +23,7 @@
     "results_empty": "There is no playlist with that name"
   },
   "playlist": {
-    "number_tracks_playlist": "Songs in this playlist"
+    "number_tracks_playlist": "tracks in this playlist"
   },
   "settings": {
     "title": "Settings",
@@ -37,6 +37,7 @@
   "simple_loading": "Loading...",
   "tracks_added": "Added",
   "tracks_deleted": "Deleted",
+  "tracks": "tracks",
   "no_tracks_new_or_deleted": "There are no added or deleted tracks",
   "loading_notified_playlists": "We are fetching data from playlists you selected for notification. Hold on a second..."
 }
