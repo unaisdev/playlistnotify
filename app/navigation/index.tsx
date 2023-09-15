@@ -31,10 +31,12 @@ import TabBar from './components/TabBar';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {useEffect} from 'react';
 import {getThemeFromStorage} from '@app/services/storage';
+import OnBoarding from '@app/screens/onboarding';
 
 export type RootStackParamList = {
   Tabs: undefined;
   Login: undefined;
+  OnBoarding: undefined;
   Playlist: {id: string};
 };
 
@@ -59,7 +61,7 @@ const Tabs = () => {
       screenOptions={() => ({
         orientation: 'portrait_up',
         tabBarHideOnKeyboard: true,
-        tabBarActiveTintColor: 'gray',
+        tabBarActiveTintColor: 'white',
         tabBarStyle: {
           paddingTop: 0,
           backgroundColor: '#000',
@@ -150,6 +152,11 @@ const AppNavigator = () => {
         screenOptions={{
           orientation: 'portrait_up',
         }}>
+        {/* <Stack.Screen
+          name="OnBoarding"
+          component={OnBoarding}
+          options={{headerShown: false}}
+        /> */}
         <Stack.Screen
           name="Login"
           component={LoginScreen}
