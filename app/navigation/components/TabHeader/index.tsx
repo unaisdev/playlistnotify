@@ -30,6 +30,7 @@ interface TabNames {
 const TAB_NAME_DEFAULT = 'Default';
 
 const TabHeader = ({route}: BottomTabHeaderProps) => {
+  const {top} = useSafeAreaInsets();
   const {user} = useUserContext();
   const {t} = useTranslation();
   const [betaModalVisible, setBetaModalVisible] = useState(false);
@@ -63,7 +64,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
 
   return (
     // <View style={[styles.container, {marginTop: top}]}>
-    <View style={styles.container}>
+    <View style={[styles.container, {marginTop: top}]}>
       <View style={styles.contentContainer}>
         <TabHeaderText />
         <View style={styles.rightHeader}>
