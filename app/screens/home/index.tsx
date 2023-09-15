@@ -40,33 +40,36 @@ const HomeScreen = () => {
 
   if (userNotifiedPlaylists?.length === 0)
     return (
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-        }
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 12,
-          marginHorizontal: 20,
-          rowGap: 48,
-        }}
-        style={styles.nodataContainer}>
-        <View style={{rowGap: 12}}>
-          <Text style={styles.noDataText}>
-            ¿Todavía no has seleccionado ninguna lista para que te notifiquemos?
-          </Text>
+      <Layout>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+          }
+          contentContainerStyle={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginVertical: 12,
+            marginHorizontal: 20,
+            rowGap: 48,
+          }}
+          style={styles.nodataContainer}>
+          <View style={{rowGap: 12}}>
+            <Text style={styles.noDataText}>
+              ¿Todavía no has seleccionado ninguna lista para que te
+              notifiquemos?
+            </Text>
 
-          <Text style={styles.noDataDesc}>
-            Para poder notificarte sobre la actualización de una lista de
-            reproducción, primero deberás de seleccionar alguna.
-          </Text>
-          <Text>
-            Accede desde tu foto de perfil a tus playlists, en la parte superior
-            derecha, o utiliza el buscador para encontrar una en concreto.
-          </Text>
-          {/* <View style={styles.inline}>
+            <Text style={styles.noDataDesc}>
+              Para poder notificarte sobre la actualización de una lista de
+              reproducción, primero deberás de seleccionar alguna.
+            </Text>
+            <Text>
+              Accede desde tu foto de perfil a tus playlists, en la parte
+              superior derecha, o utiliza el buscador para encontrar una en
+              concreto.
+            </Text>
+            {/* <View style={styles.inline}>
           <Text>Puedes probar con esta: </Text>
           <TouchableOpacity
             onPress={() => {
@@ -79,23 +82,29 @@ const HomeScreen = () => {
             />
           </TouchableOpacity>
         </View> */}
-          <View style={styles.inline}>
-            <Text style={{flex: 1}}>
-              Marca el icono de notificación en la cabecera de las listas de
-              reproducción.
-            </Text>
-            <View style={[styles.inline, {flex: 1, justifyContent: 'center'}]}>
-              <MaterialIcon name="notifications-off" size={24} color={'gray'} />
-              <MaterialIcon name="arrow-right-alt" size={24} color={'gray'} />
-              <MaterialIcon
-                name="notifications-active"
-                size={24}
-                color={'black'}
-              />
+            <View style={styles.inline}>
+              <Text style={{flex: 1}}>
+                Marca el icono de notificación en la cabecera de las listas de
+                reproducción.
+              </Text>
+              <View
+                style={[styles.inline, {flex: 1, justifyContent: 'center'}]}>
+                <MaterialIcon
+                  name="notifications-off"
+                  size={24}
+                  color={'gray'}
+                />
+                <MaterialIcon name="arrow-right-alt" size={24} color={'gray'} />
+                <MaterialIcon
+                  name="notifications-active"
+                  size={24}
+                  color={'black'}
+                />
+              </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </Layout>
     );
 
   return (
@@ -139,7 +148,8 @@ const styles = StyleSheet.create({
     maxWidth: 300,
     textAlign: 'left',
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 24,
+    marginBottom: 30,
   },
   noDataDesc: {maxWidth: 400, textAlign: 'left', fontWeight: '400'},
 });
