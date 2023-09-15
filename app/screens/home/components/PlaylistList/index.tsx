@@ -104,12 +104,11 @@ const PlaylistList = ({
       userNotifiedPlaylists.map(item => console.log(item.playlistId));
   }, [userNotifiedPlaylists]);
 
-  
-
   return (
     <Animated.FlatList
       style={styles.container}
       data={userNotifiedPlaylists}
+      contentContainerStyle={{flex: 1}}
       scrollEnabled
       itemLayoutAnimation={Layout.duration(500).delay(500)}
       keyExtractor={(item, index) => item.id}
