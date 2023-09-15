@@ -54,7 +54,10 @@ const useLogin = (
       ENCRYPTED_STORAGE.REFRESH_TOKEN,
     );
 
-    if (!tokenExp && !accessToken && !refreshToken) return true;
+    if (!tokenExp && !accessToken && !refreshToken) {
+      console.log('new user is here');
+      return true;
+    }
 
     return false;
   };

@@ -58,12 +58,12 @@ const FilterLists = ({
         contentContainerStyle={styles.containerScroll}>
         <FilterItem
           filterFn={handleTapFilterOwn}
-          filterText="Propias"
+          filterText="Tus listas"
           isSelected={selectedFilter === 'OwnFilter'}
         />
         <FilterItem
           filterFn={handleTapFilterSpotify}
-          filterText="Spotify"
+          filterText="De Spotify"
           isSelected={selectedFilter === 'SpotifyFilter'}
         />
       </ScrollView>

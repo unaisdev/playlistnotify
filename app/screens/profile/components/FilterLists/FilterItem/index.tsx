@@ -16,10 +16,10 @@ const FilterItem = ({filterFn, filterText, isSelected}: Props) => {
   return (
     <TouchableOpacity
       style={{
-        paddingHorizontal: 12,
-        paddingVertical: 4,
+        paddingHorizontal: 20,
+        paddingVertical: 6,
         alignItems: 'center',
-        borderRadius: 12,
+        borderRadius: 20,
         backgroundColor: '#BDBDBD',
         opacity: isSelected ? 1 : 0.5,
       }}

@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const OrderBy = () => {
-  const [filterOption, setFilterOption] = useState('Created order');
+  const [filterOption, setFilterOption] = useState('Your own order');
 
   return (
     <View style={styles.container}>
