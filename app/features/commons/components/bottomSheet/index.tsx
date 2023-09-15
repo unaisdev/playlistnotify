@@ -1,8 +1,11 @@
-import React, {forwardRef, useMemo} from 'react';
+import React, {FC, forwardRef, useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 import {Easing} from 'react-native-reanimated';
 
-import BottomSheet, {useBottomSheetTimingConfigs} from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetFooterProps,
+  useBottomSheetTimingConfigs,
+} from '@gorhom/bottom-sheet';
 import CustomBackdrop from './components/Backdrop';
 import CustomFooter from './components/Footer';
 
@@ -10,10 +13,11 @@ import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
 
 interface Props {
   content: React.ReactNode;
+  footer?: FC<BottomSheetFooterProps>;
 }
 
 const BottomSheetUpdatedPlaylist = (
-  {content}: Props,
+  {content, footer}: Props,
   ref: React.ForwardedRef<BottomSheet>,
 ) => {
   const animationConfigs = useBottomSheetTimingConfigs({
@@ -29,7 +33,7 @@ const BottomSheetUpdatedPlaylist = (
       index={-1}
       snapPoints={snapPoints}
       backdropComponent={props => <CustomBackdrop {...props} />}
-      footerComponent={props => <CustomFooter {...props} />}
+      footerComponent={footer}
       containerStyle={styles.container}
       animationConfigs={animationConfigs}
       enablePanDownToClose>
