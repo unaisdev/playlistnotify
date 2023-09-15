@@ -1,17 +1,32 @@
-/**
- * @format
- */
-
-import 'react-native';
-import React from 'react';
+import {render} from '@testing-library/react-native';
 import App from '../App';
+import LoginScreen from '@app/screens/login';
+import {RootStackParamList} from '@app/navigation';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-// Note: import explicitly to use the types shiped with jest.
-import {it} from '@jest/globals';
+type NavigationScreenPropAlias = NativeStackNavigationProp<RootStackParamList>;
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
+);
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+describe('app root testing', () => {
+  test('rendering good', () => {
+    expect(render(<App />).toJSON());
+  });
+
+  test('rendering good', () => {
+    const mockedCanGoBack = jest.fn().mockReturnValue(true);
+
+    const mockedGoBack = jest.fn();
+
+    const mockedNavigation = {
+      canGoBack: mockedCanGoBack,
+      goBack: mockedGoBack,
+    };
+
+    expect(
+      render(<LoginScreen navigation={mockedNavigation as any} />).toJSON(),
+    );
+  });
 });

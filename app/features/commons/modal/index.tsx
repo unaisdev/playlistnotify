@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {Alert, View, Pressable, StyleSheet, Modal} from 'react-native';
 import Text from '@app/features/commons/layout/Text';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,6 +11,7 @@ type Props = {
 const AppModal = ({modalVisible, toggleModal}: Props) => {
   return (
     <Modal
+      testID="test-modal"
       animationType="slide"
       transparent={true}
       visible={modalVisible}
@@ -22,6 +22,7 @@ const AppModal = ({modalVisible, toggleModal}: Props) => {
       <View style={styles.centeredView}>
         <View style={{width: '70%', alignItems: 'flex-end', paddingTop: 20}}>
           <Pressable
+            testID="closeModalButton"
             style={[styles.button, styles.buttonClose]}
             onPress={() => toggleModal()}>
             <MaterialCommunityIcons name="close" size={22} color={'black'} />

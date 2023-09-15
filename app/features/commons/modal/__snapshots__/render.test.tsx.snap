@@ -1,0 +1,551 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render having props modalVisible & toggleFn 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  testID="test-modal"
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "flex-end",
+          "paddingTop": 20,
+          "width": "70%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "borderTopLeftRadius": 8,
+              "borderTopRightRadius": 8,
+              "elevation": 2,
+              "padding": 4,
+            },
+            {
+              "backgroundColor": "#F4511E",
+            },
+          ]
+        }
+        testID="closeModalButton"
+      >
+        <MockedMaterialCommunityIcons
+          color="black"
+          name="close"
+          size={22}
+        />
+      </View>
+    </View>
+    <View
+      style={
+        [
+          {
+            "backgroundColor": "white",
+            "flex": 1,
+          },
+          {
+            "paddingHorizontal": 12,
+            "paddingVertical": 12,
+          },
+          [
+            {
+              "alignItems": "flex-start",
+              "borderRadius": 20,
+              "elevation": 20,
+              "justifyContent": "space-between",
+              "paddingHorizontal": 20,
+              "paddingVertical": 20,
+              "rowGap": 12,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 20,
+                "width": 10,
+              },
+              "shadowOpacity": 0.1,
+              "shadowRadius": 4,
+              "width": "80%",
+            },
+            {
+              "flex": 0,
+              "padding": 20,
+            },
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#4CAF50",
+              "borderRadius": 12,
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingRight": 12,
+            }
+          }
+        >
+          <MockedMaterialCommunityIcons
+            color="black"
+            name="beta"
+            size={22}
+            style={
+              {
+                "padding": 8,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                undefined,
+                {
+                  "color": "white",
+                },
+              ]
+            }
+          >
+            BETA Release
+          </Text>
+        </View>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "color": "black",
+            },
+            undefined,
+            {
+              "textAlign": "left",
+            },
+            undefined,
+          ]
+        }
+      >
+        Comentar que podrían ocurrir fallos en cualquier momento. Gracias por tu comprensión y paciencia.
+      </Text>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "rowGap": 18,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "black",
+              },
+              undefined,
+              {
+                "fontSize": 14,
+                "opacity": 0.7,
+              },
+              undefined,
+            ]
+          }
+        >
+          Made by Unai Canales with 
+          &lt;3
+        </Text>
+        <View
+          style={
+            {
+              "alignItems": "center",
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                {
+                  "fontSize": 12,
+                  "opacity": 0.7,
+                },
+                undefined,
+              ]
+            }
+          >
+            Playlist Notify
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                {
+                  "fontSize": 12,
+                  "opacity": 0.7,
+                },
+                undefined,
+              ]
+            }
+          >
+            -
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                {
+                  "fontSize": 12,
+                  "opacity": 0.7,
+                },
+                undefined,
+              ]
+            }
+          >
+            Versión ß 1.0
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`render renders AppModal without crashing 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "flex-end",
+          "paddingTop": 20,
+          "width": "70%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "borderTopLeftRadius": 8,
+              "borderTopRightRadius": 8,
+              "elevation": 2,
+              "padding": 4,
+            },
+            {
+              "backgroundColor": "#F4511E",
+            },
+          ]
+        }
+      >
+        <MockedMaterialCommunityIcons
+          color="black"
+          name="close"
+          size={22}
+        />
+      </View>
+    </View>
+    <View
+      style={
+        [
+          {
+            "backgroundColor": "white",
+            "flex": 1,
+          },
+          {
+            "paddingHorizontal": 12,
+            "paddingVertical": 12,
+          },
+          [
+            {
+              "alignItems": "flex-start",
+              "borderRadius": 20,
+              "elevation": 20,
+              "justifyContent": "space-between",
+              "paddingHorizontal": 20,
+              "paddingVertical": 20,
+              "rowGap": 12,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 20,
+                "width": 10,
+              },
+              "shadowOpacity": 0.1,
+              "shadowRadius": 4,
+              "width": "80%",
+            },
+            {
+              "flex": 0,
+              "padding": 20,
+            },
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#4CAF50",
+              "borderRadius": 12,
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingRight": 12,
+            }
+          }
+        >
+          <MockedMaterialCommunityIcons
+            color="black"
+            name="beta"
+            size={22}
+            style={
+              {
+                "padding": 8,
+              }
+            }
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                undefined,
+                {
+                  "color": "white",
+                },
+              ]
+            }
+          >
+            BETA Release
+          </Text>
+        </View>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "color": "black",
+            },
+            undefined,
+            {
+              "textAlign": "left",
+            },
+            undefined,
+          ]
+        }
+      >
+        Comentar que podrían ocurrir fallos en cualquier momento. Gracias por tu comprensión y paciencia.
+      </Text>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "rowGap": 18,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "black",
+              },
+              undefined,
+              {
+                "fontSize": 14,
+                "opacity": 0.7,
+              },
+              undefined,
+            ]
+          }
+        >
+          Made by Unai Canales with 
+          &lt;3
+        </Text>
+        <View
+          style={
+            {
+              "alignItems": "center",
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                {
+                  "fontSize": 12,
+                  "opacity": 0.7,
+                },
+                undefined,
+              ]
+            }
+          >
+            Playlist Notify
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                {
+                  "fontSize": 12,
+                  "opacity": 0.7,
+                },
+                undefined,
+              ]
+            }
+          >
+            -
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "color": "black",
+                },
+                undefined,
+                {
+                  "fontSize": 12,
+                  "opacity": 0.7,
+                },
+                undefined,
+              ]
+            }
+          >
+            Versión ß 1.0
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
