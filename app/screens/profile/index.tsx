@@ -13,6 +13,7 @@ import FilterLists from './components/FilterLists';
 import {usePlaylist} from '@app/features/commons/hooks/usePlaylist';
 import SearchList from '../search/components/searchList';
 import PlaylistList from './components/PlaylistList';
+import OrderBy from './components/OrderBy';
 
 const ProfileScreen = () => {
   const {user, userPlaylists, isLoading} = useProfile();
@@ -61,7 +62,7 @@ const ProfileScreen = () => {
         filterSpotifyPlaylists={filterSpotifyPlaylists}
         filterByTracksNum={filterMaxTracksNum}
       />
-      <PlaylistList searchResults={playlists} />
+      <PlaylistList profilePlaylists={playlists} />
     </Layout>
   );
 };

@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   searchBar: {
-    height: 44,
+    height: 60,
     flexDirection: 'row',
     width: '100%',
     backgroundColor: '#000',

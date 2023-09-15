@@ -46,6 +46,12 @@ const FilterLists = ({
 
   return (
     <View style={styles.container}>
+      {/* <MaterialCommunityIcons
+        name="filter"
+        size={16}
+        color={'white'}
+        style={{padding: 16}}
+      /> */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -61,19 +67,13 @@ const FilterLists = ({
           isSelected={selectedFilter === 'SpotifyFilter'}
         />
       </ScrollView>
-      <MaterialCommunityIcons
-        name="filter"
-        size={16}
-        color={'white'}
-        style={{padding: 16}}
-      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 44,
+    height: 60,
     backgroundColor: 'black',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     gap: 8,
-    paddingHorizontal: 12,
+    paddingHorizontal: 20,
   },
 });
 

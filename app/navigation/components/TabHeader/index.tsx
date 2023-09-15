@@ -63,7 +63,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
 
   return (
     // <View style={[styles.container, {marginTop: top}]}>
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.contentContainer}>
         <TabHeaderText />
         <View style={styles.rightHeader}>
@@ -77,14 +77,14 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
         </View>
       </View>
       <AppModal modalVisible={betaModalVisible} toggleModal={toggleModal} />
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-
+    backgroundColor: 'red',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 12,
+    paddingHorizontal: 20,
     paddingVertical: 12,
   },
   rightHeader: {

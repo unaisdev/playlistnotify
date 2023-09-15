@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {PlaylistModel} from '../../../../services/types';
 import Text from '@app/features/commons/layout/Text';
 import i18n from '@app/features/locales/i18next';
@@ -9,12 +9,13 @@ import {Layout as LayoutR} from 'react-native-reanimated';
 import Layout from '@app/features/commons/layout/TabLayout';
 import Animated from 'react-native-reanimated';
 import Item from './Item';
+import OrderBy from '../OrderBy';
 
 type Props = {
-  searchResults: PlaylistModel[];
+  profilePlaylists: PlaylistModel[];
 };
 
-const PlaylistList = ({searchResults}: Props) => {
+const PlaylistList = ({profilePlaylists}: Props) => {
   const {t} = useTranslation();
   const {isDarkMode} = useTheme();
 
@@ -23,7 +24,8 @@ const PlaylistList = ({searchResults}: Props) => {
   return (
     <Animated.FlatList
       style={styles.flatList}
-      data={searchResults}
+      data={profilePlaylists}
+      ListHeaderComponent={<OrderBy />}
       itemLayoutAnimation={LayoutR.duration(500)}
       renderItem={({item, index}) => {
         return <Item index={index} item={item} />;
@@ -41,7 +43,7 @@ const styling = (isDarkMode: boolean) => {
     },
     containerFlatlist: {
       paddingHorizontal: 8,
-      paddingVertical: 10,
+      paddingBottom: 10,
       rowGap: 10,
     },
   });

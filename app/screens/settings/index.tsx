@@ -60,23 +60,18 @@ const SettingsScreen = () => {
               <Text textType="regular">{t('settings.darkMode')}</Text>
 
               <View style={styles.inlineGap}>
+                <Switch value={isDarkMode} onChange={() => toggleTheme()} />
                 <MaterialCommunityIcons
                   name="theme-light-dark"
                   color={isDarkMode ? 'white' : 'black'}
                   size={20}
                 />
-                <Switch value={isDarkMode} onChange={() => toggleTheme()} />
               </View>
             </View>
             <View style={styles.item}>
               <Text textType="regular">{t('settings.language')}</Text>
 
               <View style={styles.inlineGap}>
-                <FontAwesome
-                  name="language"
-                  color={isDarkMode ? 'white' : 'black'}
-                  size={20}
-                />
                 <View style={{flexDirection: 'row', gap: 8}}>
                   {languagesAvailable.map(item => {
                     return (
@@ -89,6 +84,11 @@ const SettingsScreen = () => {
                     );
                   })}
                 </View>
+                <FontAwesome
+                  name="language"
+                  color={isDarkMode ? 'white' : 'black'}
+                  size={20}
+                />
               </View>
             </View>
           </View>
