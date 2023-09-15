@@ -15,9 +15,27 @@
 </div>
 <div align="center">
     <p>Only available for <strong>Beta testing</strong>. You wanna join? Send me your Google Play and Spotify account e-mail to <a href="mailto:unaicanales@gmail.com">unaisdev@gmail.com</a></p>
-     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" style="width: 140px; opacity: 0.2" alt="google-play-badge">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png" style="width: 140px; opacity: 0.2" alt="app-store-badge-128x128">
-    <p>App Store not released</p>
+     <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" style="width: 140px; opacity: 0.2" alt="google-play-badge"></a>
+    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png" style="width: 140px; opacity: 0.2" alt="app-store-badge-128x128"></a>
+    <p>Play Store: released for internal testing</p>
+    <p>App Store: not released yet</p>
+</div>
+
+Some screenshots:
+
+<div align="center">
+    <img src="https://i.ibb.co/RPNXT1T/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-14-at-17-43-16.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-14-at-17-43-16" border="0" style="width: 30%;"/>
+    <img src="https://i.ibb.co/FqMn8nr/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-35.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-35" border="0" style="width: 30%;" />
+        <img src="https://i.ibb.co/zFH9g31/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-56-04.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-56-04" border="0" style="width: 30%;"/>
+</div>
+
+<br />
+<br />
+
+<div align="center">
+        <img src="https://i.ibb.co/GVd4npc/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-01-45.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-01-45" border="0" style="width: 30%;"/>
+    <img src="https://i.ibb.co/Scwtv5B/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-51.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-19-54-51" border="0"  style="width: 30%;" />
+    <img src="https://i.ibb.co/Fz4MyQB/Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-04-13.png" alt="Simulator-Screenshot-i-Phone-SE-3rd-generation-2023-09-13-at-20-04-13" border="0" style="width: 30%;"/>
 </div>
 
 <br />
