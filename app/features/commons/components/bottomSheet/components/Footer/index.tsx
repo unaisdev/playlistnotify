@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import {BottomSheetFooter, BottomSheetFooterProps} from '@gorhom/bottom-sheet';
 import {Image, StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,11 +7,14 @@ import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 import Text from '@app/features/commons/layout/Text';
 
-const CustomFooter: React.FC<BottomSheetFooterProps> = props => {
+type Props = PropsWithChildren & BottomSheetFooterProps;
+
+const CustomFooter = ({animatedFooterPosition, children}: Props) => {
   const {playlist} = useBottomSheetContext();
 
   return (
-    <BottomSheetFooter {...props}>
+    <BottomSheetFooter animatedFooterPosition={animatedFooterPosition}>
+      {children}
       <View style={styles.footerContent}>
         <Image
           source={{

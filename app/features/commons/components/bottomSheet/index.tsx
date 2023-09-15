@@ -5,14 +5,15 @@ import {Easing} from 'react-native-reanimated';
 import BottomSheet, {useBottomSheetTimingConfigs} from '@gorhom/bottom-sheet';
 import CustomBackdrop from './components/Backdrop';
 import CustomFooter from './components/Footer';
-import Content from './components/Content';
 
 import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
 
-interface Props {}
+interface Props {
+  content: React.ReactNode;
+}
 
 const BottomSheetUpdatedPlaylist = (
-  {}: Props,
+  {content}: Props,
   ref: React.ForwardedRef<BottomSheet>,
 ) => {
   const animationConfigs = useBottomSheetTimingConfigs({
@@ -32,7 +33,7 @@ const BottomSheetUpdatedPlaylist = (
       containerStyle={styles.container}
       animationConfigs={animationConfigs}
       enablePanDownToClose>
-      <Content />
+      {content}
     </BottomSheet>
   );
 };

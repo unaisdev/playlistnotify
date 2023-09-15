@@ -9,8 +9,6 @@ import {
 } from 'react-native-gesture-handler';
 import {BottomSheetScrollView, TouchableOpacity} from '@gorhom/bottom-sheet';
 
-import {useBottomSheetContext} from '../../../../../../containers/bottomSheetContext';
-import {PlaylistItem, Track} from '../../../../../../services/types';
 import {useTracksInfo} from '@app/features/commons/hooks/useTracksInfo';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import {SwiperFlatListWithGestureHandler} from 'react-native-swiper-flatlist/WithGestureHandler';
@@ -22,13 +20,14 @@ import Text from '@app/features/commons/layout/Text';
 import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
 import Layout from '@app/features/commons/layout/TabLayout';
+import { PlaylistItem, Track } from '@app/services/types';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];
   tracksDel?: Track[];
 };
 
-const Content = () => {
+const BottomSheetContent = () => {
   const {tracksNew, tracksDel, scrollRef, goToFirstIndex, goToSecondIndex} =
     useBSContent();
   const {t} = useTranslation();
@@ -78,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Content;
+export default BottomSheetContent;
