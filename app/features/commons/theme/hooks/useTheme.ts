@@ -1,4 +1,4 @@
-import {useThemeContext} from '@app/containers/themeContext';
+import {useThemeContext} from '@app/containers/ThemeContext';
 
 export function useTheme() {
   const context = useThemeContext();

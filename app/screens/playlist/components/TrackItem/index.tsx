@@ -1,9 +1,11 @@
 import React from 'react';
 
 import {Image, StyleSheet, View} from 'react-native';
-import {PlaylistItem} from '../../../../services/types';
-import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
+
 import Text from '@app/features/commons/layout/Text';
+import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
+
+import {PlaylistItem} from '../../../../services/types';
 
 interface Props {
   item: PlaylistItem;

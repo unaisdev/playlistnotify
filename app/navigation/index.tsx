@@ -1,37 +1,30 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  BottomTabBar,
-  BottomTabBarProps,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
-import Animated, {
-  Easing,
-  FadeIn,
-  FadeInUp,
-  FadeOutDown,
-  Layout,
-} from 'react-native-reanimated';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useEffect} from 'react';
 
 import HomeScreen from '@app/screens/home';
 import LoginScreen from '@app/screens/login';
 import ProfileScreen from '@app/screens/profile';
 import PlaylistScreen from '@app/screens/playlist';
-import SearchPlaylistScreen from '@app/screens/search';
-import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
 import SettingsScreen from '@app/screens/settings';
-import TabHeader from '@app/navigation/components/TabHeader';
-import TabBar from './components/TabBar';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {useEffect} from 'react';
+import SearchPlaylistScreen from '@app/screens/search';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {getThemeFromStorage} from '@app/services/storage';
-import OnBoarding from '@app/screens/onboarding';
+import TabHeader from '@app/navigation/components/TabHeader';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
+import {
+  BottomTabBar,
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
+
+import TabBar from './components/TabBar';
 
 export type RootStackParamList = {
   Tabs: undefined;

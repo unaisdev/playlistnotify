@@ -1,4 +1,5 @@
 import React, {FC, forwardRef, useMemo} from 'react';
+
 import {StyleSheet} from 'react-native';
 import {Easing} from 'react-native-reanimated';
 
@@ -6,10 +7,8 @@ import BottomSheet, {
   BottomSheetFooterProps,
   useBottomSheetTimingConfigs,
 } from '@gorhom/bottom-sheet';
-import CustomBackdrop from './components/Backdrop';
-import CustomFooter from './components/Footer';
 
-import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
+import CustomBackdrop from './components/Backdrop';
 
 interface Props {
   snapPoints: string[];

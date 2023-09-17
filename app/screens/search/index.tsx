@@ -1,23 +1,23 @@
-import React, {useState, useRef} from 'react';
+import React, {useRef, useState} from 'react';
 
 import {
+  ActivityIndicator,
+  Keyboard,
+  KeyboardAvoidingView,
   StyleSheet,
   TextInput,
-  View,
   TouchableOpacity,
-  ActivityIndicator,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard,
+  View,
 } from 'react-native';
 
-import SearchList from './components/searchList';
+import {useNavigation} from '@react-navigation/native';
+import Layout from '@app/features/commons/layout/TabLayout';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {useSearch} from './hooks/useSearch';
-import {useNavigation} from '@react-navigation/native';
 import SearchBar from './components/searchBar';
-import Layout from '@app/features/commons/layout/TabLayout';
+import SearchList from './components/searchList';
 
 const SearchPlaylistScreen = () => {
   const {

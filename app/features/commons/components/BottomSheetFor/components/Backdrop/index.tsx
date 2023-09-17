@@ -1,11 +1,11 @@
 import React from 'react';
+
 import {StyleSheet} from 'react-native';
 
 import {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
 } from '@gorhom/bottom-sheet';
-
 
 const CustomBackdrop: React.FC<BottomSheetBackdropProps> = props => {
   return (

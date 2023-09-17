@@ -1,27 +1,15 @@
 import React, {useState} from 'react';
-
+import {useTranslation} from 'react-i18next';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
-import {
-  BottomTabBarButtonProps,
-  BottomTabBarProps,
-  BottomTabHeaderProps,
-} from '@react-navigation/bottom-tabs';
-import Animated, {
-  FadeInLeft,
-  FadeInRight,
-  FadeOutRight,
-  Layout,
-} from 'react-native-reanimated';
 
-import {useRoute} from '@react-navigation/native';
-import {useUserContext} from '../../../containers/userContext';
+import AppModal from '@app/features/commons/modal';
 import Text from '@app/features/commons/layout/Text';
-import i18n from '@app/features/locales/i18next';
-import {useTranslation} from 'react-i18next';
 import SettingsButton from '@app/features/commons/components/Header/SettingsButton';
 import ProfileImageButton from '@app/features/commons/components/Header/ProfileImageButton';
-import AppModal from '@app/features/commons/modal';
+import {BottomTabHeaderProps} from '@react-navigation/bottom-tabs';
+
+import {useUserContext} from '../../../containers/UserContext';
 
 interface TabNames {
   [key: string]: string;

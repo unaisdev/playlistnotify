@@ -1,12 +1,12 @@
+import {useMemo} from 'react';
+
 import {Image, TouchableOpacity, View} from 'react-native';
 
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootTabsParamList} from '@app/navigation';
-
-import {useUserContext} from '@app/containers/userContext';
 import {useNavigation} from '@react-navigation/native';
-import {useMemo} from 'react';
+import {useUserContext} from '@app/containers/UserContext';
 import {DEFAULT_PROFILE_IMAGE_URL} from '@app/services/constants';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const useProfileImageButton = () => {
   const {user} = useUserContext();

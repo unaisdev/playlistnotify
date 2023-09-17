@@ -1,5 +1,5 @@
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {useEffect, useState} from 'react';
+
 import {StyleSheet, Text, View} from 'react-native';
 import Animated, {
   FadeIn,
@@ -10,6 +10,8 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
+
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 
 const SkeletonItem = () => {
   const [isLoading, setIsLoading] = useState(true);

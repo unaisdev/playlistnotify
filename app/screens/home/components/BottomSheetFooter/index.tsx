@@ -1,8 +1,8 @@
-import {useBottomSheetContext} from '@app/containers/bottomSheetContext';
+import {Image, StyleSheet, View} from 'react-native';
+
 import Text from '@app/features/commons/layout/Text';
-import playlist from '@app/screens/playlist';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
-import {View, Image, StyleSheet} from 'react-native';
+import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 
 const BottomSheetFooter = () => {
   const {playlist} = useBottomSheetContext();

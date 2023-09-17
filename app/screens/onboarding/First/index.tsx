@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, ScrollView, Image, StyleSheet} from 'react-native';
-import Animated, {FadeIn, FadeOut, Layout} from 'react-native-reanimated';
+
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import Animated, {FadeIn, FadeOut, Layout} from 'react-native-reanimated';
 
 const First = () => {
   return (

@@ -1,6 +1,8 @@
-import {Alert, View, Pressable, StyleSheet, Modal} from 'react-native';
+import {Alert, Modal, Pressable, StyleSheet, View} from 'react-native';
+
 import Text from '@app/features/commons/layout/Text';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import Layout from '../layout/TabLayout';
 
 type Props = {

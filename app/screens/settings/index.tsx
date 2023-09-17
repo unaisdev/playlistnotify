@@ -1,21 +1,19 @@
-import Text from '@app/features/commons/layout/Text';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import i18n from '@app/features/locales/i18next';
-import {SelectList} from 'react-native-dropdown-select-list';
-import {useState} from 'react';
-import {useLanguage} from '@app/features/commons/hooks/useLanguage';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {Switch} from 'react-native-gesture-handler';
-import Layout from '@app/features/commons/layout/TabLayout';
 import {useTranslation} from 'react-i18next';
+import {Switch} from 'react-native-gesture-handler';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {ENCRYPTED_STORAGE} from '@app/services/constants';
-import {useNavigation} from '@react-navigation/native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+
+import Text from '@app/features/commons/layout/Text';
 import {RootStackParamList} from '@app/navigation';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
+import Layout from '@app/features/commons/layout/TabLayout';
+import {ENCRYPTED_STORAGE} from '@app/services/constants';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useLanguage} from '@app/features/commons/hooks/useLanguage';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 
 const logoutUser = async () => {
   await EncryptedStorage.removeItem(ENCRYPTED_STORAGE.AUTH_TOKEN);

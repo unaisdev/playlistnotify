@@ -1,16 +1,14 @@
+import {RefObject, useMemo, useRef, useState} from 'react';
+
+import {useTranslation} from 'react-i18next';
 import {
+  ActivityIndicator,
+  Keyboard,
+  StyleSheet,
+  TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator,
-  TextInput,
-  StyleSheet,
-  Keyboard,
 } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useSearch} from '../../hooks/useSearch';
-import {RefObject, useMemo, useRef, useState} from 'react';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useTranslation} from 'react-i18next';
 import Animated, {
   FadeInDown,
   FadeInLeft,
@@ -18,6 +16,11 @@ import Animated, {
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {useSearch} from '../../hooks/useSearch';
 
 type Props = {
   searchPhrase: string;

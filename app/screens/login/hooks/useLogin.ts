@@ -1,13 +1,13 @@
-import {authorize, refresh} from 'react-native-app-auth';
+import { useCallback } from 'react';
 
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../navigation';
-
-import {ENCRYPTED_STORAGE, AUTH_CONFIG} from '../../../services/constants';
-
-import {useUserContext} from '../../../containers/userContext';
-import {useCallback} from 'react';
+import { authorize, refresh } from 'react-native-app-auth';
 import EncryptedStorage from 'react-native-encrypted-storage';
+
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import { RootStackParamList } from '../../../navigation';
+import { useUserContext } from '../../../containers/UserContext';
+import { AUTH_CONFIG, ENCRYPTED_STORAGE } from '../../../services/constants';
 
 const useLogin = (
   navigation?: NativeStackNavigationProp<RootStackParamList>,

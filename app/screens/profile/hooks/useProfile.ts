@@ -1,4 +1,4 @@
-import {useUserContext} from '@app/containers/userContext';
+import {useUserContext} from '@app/containers/UserContext';
 import {PlaylistModel} from '@app/services/types';
 import {getUserPlaylists} from '@app/services/user';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -10,7 +10,7 @@ export function useProfile() {
   const {data, isLoading} = useQuery({
     queryKey: ['userSpotifyPlaylists'],
     queryFn: () => getUserPlaylists(),
-    retry: 3,
+    retry: true,
   });
 
   return {

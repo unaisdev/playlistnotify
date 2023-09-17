@@ -1,26 +1,17 @@
 import React, {useCallback, useState} from 'react';
 
+import {useTranslation} from 'react-i18next';
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
 
-import {
-  FlatList,
-  GestureHandlerRootView,
-  ScrollView,
-} from 'react-native-gesture-handler';
-import {BottomSheetScrollView, TouchableOpacity} from '@gorhom/bottom-sheet';
-
-import {useTracksInfo} from '@app/features/commons/hooks/useTracksInfo';
-import SwiperFlatList from 'react-native-swiper-flatlist';
-import {SwiperFlatListWithGestureHandler} from 'react-native-swiper-flatlist/WithGestureHandler';
-import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
-import AddedTracks from './components/AddedTracks';
-import DeletedTracks from './components/DeletedTracks';
-import {useBSContent} from './hooks/useBSContent';
 import Text from '@app/features/commons/layout/Text';
-import i18n from '@app/features/locales/i18next';
-import {useTranslation} from 'react-i18next';
+import {PlaylistItem, Track} from '@app/services/types';
 import Layout from '@app/features/commons/layout/TabLayout';
-import { PlaylistItem, Track } from '@app/services/types';
+import {BottomSheetScrollView, TouchableOpacity} from '@gorhom/bottom-sheet';
+import {SwiperFlatListWithGestureHandler} from 'react-native-swiper-flatlist/WithGestureHandler';
+
+import AddedTracks from './components/AddedTracks';
+import {useBSContent} from './hooks/useBSContent';
+import DeletedTracks from './components/DeletedTracks';
 
 type TracksListProps = {
   tracksNew?: PlaylistItem[];

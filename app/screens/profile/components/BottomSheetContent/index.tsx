@@ -1,12 +1,13 @@
+import {View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+
+import Text from '@app/features/commons/layout/Text';
+import Layout from '@app/features/commons/layout/TabLayout';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {
   SORTED_TYPE_KEYS,
   useBottomSheetProfileContext,
 } from '@app/containers/BottomSheetProfileContext';
-import Layout from '@app/features/commons/layout/TabLayout';
-import Text from '@app/features/commons/layout/Text';
-import {View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
 const BottomSheetProfileContent = () => {
   const {setSorted} = useBottomSheetProfileContext();

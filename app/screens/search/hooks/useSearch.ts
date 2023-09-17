@@ -1,8 +1,11 @@
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {useState, useEffect, useRef, useMemo, useCallback} from 'react';
-import {fetchSearchPlaylists} from '../../../services/search';
-import {PlaylistModel} from '../../../services/types';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+
 import {TextInput} from 'react-native';
+
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+
+import {PlaylistModel} from '../../../services/types';
+import {fetchSearchPlaylists} from '../../../services/search';
 
 export const useSearch = () => {
   const [searchPhrase, setSearchPhrase] = useState<string>('');

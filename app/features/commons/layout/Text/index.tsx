@@ -1,5 +1,7 @@
 import {PropsWithChildren, useMemo} from 'react';
+
 import {Text as RNText, StyleSheet, TextProps} from 'react-native';
+
 import {useTheme} from '../../theme/hooks/useTheme';
 
 interface CustomTextProps extends TextProps {

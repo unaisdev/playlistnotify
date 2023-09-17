@@ -1,18 +1,21 @@
-import React, {useCallback, useMemo, useEffect, useState, useRef} from 'react';
-import {PlaylistModel} from '../../services/types';
-import {useProfile} from './hooks/useProfile';
-import Layout from '@app/features/commons/layout/TabLayout';
+import React, {useMemo, useRef, useState} from 'react';
+
 import {useTranslation} from 'react-i18next';
-import FilterLists from './components/FilterLists';
-import PlaylistList from './components/PlaylistList';
-import OrderBy from './components/OrderBy';
+
+import Layout from '@app/features/commons/layout/TabLayout';
 import BottomSheetProfile from '@app/features/commons/components/BottomSheetFor';
-import BottomSheetProfileContent from './components/BottomSheetContent';
-import BottomSheetProfileFooter from './components/BottomSheetFooter';
 import {
   BottomSheetProfileProvider,
   useBottomSheetProfileContext,
 } from '@app/containers/BottomSheetProfileContext';
+
+import OrderBy from './components/OrderBy';
+import {useProfile} from './hooks/useProfile';
+import FilterLists from './components/FilterLists';
+import {PlaylistModel} from '../../services/types';
+import PlaylistList from './components/PlaylistList';
+import BottomSheetProfileFooter from './components/BottomSheetFooter';
+import BottomSheetProfileContent from './components/BottomSheetContent';
 
 const ProfileScreen = () => {
   const {user, userPlaylists, isLoading} = useProfile();

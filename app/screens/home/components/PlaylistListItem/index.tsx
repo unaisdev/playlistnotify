@@ -1,26 +1,22 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 
-import {Image, StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
-import Text from '@app/features/commons/layout/Text';
-
+import {useTranslation} from 'react-i18next';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Animated, {
   FadeInLeft,
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
 
-import BottomSheetUpdatedPlaylist from '../../../../features/commons/components/BottomSheet';
+import Text from '@app/features/commons/layout/Text';
 import Octicons from 'react-native-vector-icons/Octicons';
-
-import {useBottomSheetContext} from '../../../../containers/bottomSheetContext';
-import {usePlaylistAllTracks} from '../../../../features/commons/hooks/usePlaylistAllTracks';
-import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
-import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
-import i18n from '@app/features/locales/i18next';
-import {useTranslation} from 'react-i18next';
-import {removePlaylistForNotify} from '@app/services/playlist';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
+
 import SkeletonItem from './components/SkeletonItem';
+import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
+import {useBottomSheetContext} from '../../../../containers/BottomSheetHomeContext';
+import {usePlaylistAllTracks} from '../../../../features/commons/hooks/usePlaylistAllTracks';
 
 interface Props {
   playlistId: string;

@@ -1,14 +1,14 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React from 'react';
 
 import {
-  View,
-  Text,
-  Pressable,
   ActivityIndicator,
-  TouchableOpacity,
   StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import {useNotifyMeButton} from './hooks/useNotifyMeButton';
 
 type Props = {
@@ -47,7 +47,6 @@ const NotifyMeButton = ({id}: Props) => {
 
 const styles = StyleSheet.create({
   inline: {
-    
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

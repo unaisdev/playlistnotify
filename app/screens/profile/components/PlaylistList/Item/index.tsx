@@ -1,19 +1,20 @@
 import React from 'react';
-import {Linking, Pressable, View, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+import {useTranslation} from 'react-i18next';
+import {Image, Linking, Pressable, View} from 'react-native';
 import Animated, {
   FadeInDown,
   FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
-import Text from '@app/features/commons/layout/Text';
 
-import Feather from 'react-native-vector-icons/Feather';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {RootStackParamList} from '@app/navigation';
 import {PlaylistModel} from '@app/services/types';
-import {useTranslation} from 'react-i18next';
+import Text from '@app/features/commons/layout/Text';
+import {RootStackParamList} from '@app/navigation';
+import Feather from 'react-native-vector-icons/Feather';
+import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type Props = {
   item: PlaylistModel;

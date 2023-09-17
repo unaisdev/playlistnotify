@@ -1,8 +1,9 @@
-import {useBottomSheetProfileContext} from '@app/containers/BottomSheetProfileContext';
-import Text from '@app/features/commons/layout/Text';
 import {StyleSheet, Touchable, TouchableOpacity, View} from 'react-native';
+
+import Text from '@app/features/commons/layout/Text';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useBottomSheetProfileContext} from '@app/containers/BottomSheetProfileContext';
 
 type Props = {
   handleBottomSheetOpen: () => void;

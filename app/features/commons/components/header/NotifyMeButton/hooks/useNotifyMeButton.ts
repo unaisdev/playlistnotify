@@ -1,13 +1,13 @@
 import React, {useEffect, useMemo, useState} from 'react';
 
-import {useUserContext} from '@app/containers/userContext';
+import {useUserContext} from '@app/containers/UserContext';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
 import {
   isSavedPlaylistForNotify,
-  savePlaylistForNotify,
   removePlaylistForNotify,
+  savePlaylistForNotify,
 } from '@app/services/playlist';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 
 export const useNotifyMeButton = (playlistId: string) => {
   const {isDarkMode} = useTheme();

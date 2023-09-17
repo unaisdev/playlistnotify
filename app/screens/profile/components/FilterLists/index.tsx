@@ -1,13 +1,16 @@
+import {useEffect, useState} from 'react';
+
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+
 import Text from '@app/features/commons/layout/Text';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {View, ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FilterItem from './FilterItem';
-import {useEffect, useState} from 'react';
 import {
   SELECT_FILTERS,
   useProfileFiltersStore,
 } from '@app/features/stores/ProfileStore';
+
+import FilterItem from './FilterItem';
 
 type Props = {
   filterAll: () => void;

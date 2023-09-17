@@ -1,15 +1,18 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import {PlaylistModel} from '../../../../services/types';
-import Text from '@app/features/commons/layout/Text';
-import i18n from '@app/features/locales/i18next';
+
 import {useTranslation} from 'react-i18next';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {Layout as LayoutR} from 'react-native-reanimated';
-import Layout from '@app/features/commons/layout/TabLayout';
 import Animated from 'react-native-reanimated';
+import {FlatList, StyleSheet, View} from 'react-native';
+import {Layout as LayoutR} from 'react-native-reanimated';
+
+import i18n from '@app/features/locales/i18next';
+import Text from '@app/features/commons/layout/Text';
+import Layout from '@app/features/commons/layout/TabLayout';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+
 import Item from './Item';
 import OrderBy from '../OrderBy';
+import {PlaylistModel} from '../../../../services/types';
 
 type Props = {
   profilePlaylists: PlaylistModel[];

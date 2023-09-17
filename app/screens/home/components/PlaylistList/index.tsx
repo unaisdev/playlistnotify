@@ -1,55 +1,17 @@
-import React, {
-  LegacyRef,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, {useEffect} from 'react';
 
-import {
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Alert,
-  ActivityIndicator,
-  RefreshControl,
-  Image,
-  Keyboard,
-  ScrollView,
-} from 'react-native';
-
-import PlaylistListItem from '../PlaylistListItem';
-
-import {User, UserAddedPlaylistsResponse} from '../../../../services/types';
-
-import {useUserContext} from '../../../../containers/userContext';
-import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
-import {useUserNotifiedPlaylists} from '@app/features/commons/hooks/useUserNotifiedPlaylists';
-import i18n from '@app/features/locales/i18next';
-import Text from '@app/features/commons/layout/Text';
-import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
-import Animated, {
-  FadeIn,
-  FadeInLeft,
-  FadeOutRight,
-  Layout,
-  LayoutAnimationType,
-  SlideInRight,
-  SlideOutRight,
-} from 'react-native-reanimated';
 import {useTranslation} from 'react-i18next';
-import {removePlaylistForNotify} from '@app/services/playlist';
-import {useHome} from '../../hooks';
+import Animated, {Layout} from 'react-native-reanimated';
+import {Alert, RefreshControl, StyleSheet} from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '@app/navigation';
+import {useNavigation} from '@react-navigation/native';
+import {removePlaylistForNotify} from '@app/services/playlist';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-const AnimatedFlatList = Animated.createAnimatedComponent(
-  FlatList<UserAddedPlaylistsResponse>,
-);
+import PlaylistListItem from '../PlaylistListItem';
+import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
+import {UserAddedPlaylistsResponse} from '../../../../services/types';
 
 const defaultPlaylist = {
   id: '4OYwdvuAT2msLdqmNVUQD4',

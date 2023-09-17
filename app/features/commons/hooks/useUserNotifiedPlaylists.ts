@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {useUserContext} from '../../../containers/userContext';
+import {useUserContext} from '../../../containers/UserContext';
 import {getUserNotifiedPlaylists} from '../../../services/user';
 import {useEffect} from 'react';
 

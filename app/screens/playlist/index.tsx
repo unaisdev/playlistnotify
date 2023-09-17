@@ -11,7 +11,6 @@ import {
   Platform,
 } from 'react-native';
 
-import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -22,7 +21,6 @@ import {PlaylistItem} from '../../services/types';
 
 import {usePlaylistAllTracks} from '../../features/commons/hooks/usePlaylistAllTracks';
 import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
-import {useQuery} from '@tanstack/react-query';
 import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeader';
 import Layout from '@app/features/commons/layout/TabLayout';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';

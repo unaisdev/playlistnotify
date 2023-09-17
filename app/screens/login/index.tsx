@@ -1,13 +1,14 @@
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+
 import Text from '@app/features/commons/layout/Text';
+import Layout from '@app/features/commons/layout/TabLayout';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import useLogin from './hooks/useLogin';
-import {RootStackParamList} from '../../navigation';
-import Layout from '@app/features/commons/layout/TabLayout';
-import {useTranslation} from 'react-i18next';
+import { RootStackParamList } from '../../navigation';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList>;

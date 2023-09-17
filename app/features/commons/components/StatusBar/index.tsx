@@ -1,11 +1,12 @@
 import {
-  View,
+  Platform,
   SafeAreaView,
   StatusBar,
   StatusBarProps,
-  Platform,
   StyleSheet,
+  View,
 } from 'react-native';
+
 import {useTheme} from '../../theme/hooks/useTheme';
 
 const STATUSBAR_HEIGHT = StatusBar.currentHeight;

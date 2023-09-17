@@ -1,11 +1,10 @@
 import React from 'react';
 
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import TrackItem from '../TrackItem';
-
-import {PlaylistItem, PlaylistModel} from '../../../../services/types';
-import i18n from '@app/features/locales/i18next';
 import {useTranslation} from 'react-i18next';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+
+import TrackItem from '../TrackItem';
+import {PlaylistItem, PlaylistModel} from '../../../../services/types';
 
 interface Props {
   tracks: PlaylistItem[];

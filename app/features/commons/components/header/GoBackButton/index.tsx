@@ -1,13 +1,11 @@
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import Text from '@app/features/commons/layout/Text';
-
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../../../navigation';
-
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {RootStackParamList} from '../../../../../navigation';
 
 interface Props {}
 

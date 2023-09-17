@@ -1,7 +1,7 @@
-import {TouchableOpacity, StyleSheet, Alert, View} from 'react-native';
-import {SwipeableProps} from 'react-native-gesture-handler/lib/typescript/components/Swipeable';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Text from '@app/features/commons/layout/Text';
+import {SwipeableProps} from 'react-native-gesture-handler/lib/typescript/components/Swipeable';
 
 const SwipeableLeftActions = (props: SwipeableProps) => {
   return (

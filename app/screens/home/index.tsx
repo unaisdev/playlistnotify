@@ -1,5 +1,6 @@
 import React, {useEffect, useMemo} from 'react';
 
+import {useTranslation} from 'react-i18next';
 import {
   ActivityIndicator,
   RefreshControl,
@@ -8,17 +9,16 @@ import {
   View,
 } from 'react-native';
 
+import Text from '@app/features/commons/layout/Text';
+import Layout from '@app/features/commons/layout/TabLayout';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 import BottomSheetUpdatedPlaylist from '@app/features/commons/components/BottomSheetFor';
 
-import PlaylistList from './components/PlaylistList';
-import Layout from '@app/features/commons/layout/TabLayout';
 import {useHome} from './hooks';
-import Text from '@app/features/commons/layout/Text';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {useTranslation} from 'react-i18next';
+import PlaylistList from './components/PlaylistList';
 import BottomSheetFooter from './components/BottomSheetFooter';
 import BottomSheetContent from './components/BottomSheetContent';
-import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 
 const HomeScreen = () => {
   const {isLoading, isRefetching, refetch, userNotifiedPlaylists} = useHome();

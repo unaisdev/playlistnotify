@@ -1,14 +1,16 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
-import {PlaylistModel} from '../../../../services/types';
-import SearchItem from '../searchItem';
-import Text from '@app/features/commons/layout/Text';
-import i18n from '@app/features/locales/i18next';
+
 import {useTranslation} from 'react-i18next';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {Layout as LayoutR} from 'react-native-reanimated';
-import Layout from '@app/features/commons/layout/TabLayout';
 import Animated from 'react-native-reanimated';
+import {StyleSheet} from 'react-native';
+import {Layout as LayoutR} from 'react-native-reanimated';
+
+import Text from '@app/features/commons/layout/Text';
+import Layout from '@app/features/commons/layout/TabLayout';
+import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+
+import SearchItem from '../searchItem';
+import {PlaylistModel} from '../../../../services/types';
 
 type Props = {
   searchResults: PlaylistModel[];

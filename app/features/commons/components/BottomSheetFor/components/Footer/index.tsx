@@ -1,4 +1,5 @@
 import React, {PropsWithChildren} from 'react';
+
 import {BottomSheetFooter, BottomSheetFooterProps} from '@gorhom/bottom-sheet';
 
 type Props = PropsWithChildren & BottomSheetFooterProps;

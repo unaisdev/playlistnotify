@@ -1,5 +1,5 @@
 import {StyleSheet, TextProps, View, ViewProps} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+
 import {insets} from '../../theme/metrics';
 import {useTheme} from '../../theme/hooks/useTheme';
 

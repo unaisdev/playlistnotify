@@ -1,8 +1,9 @@
+import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import {RootTabsParamList} from '@app/navigation';
+import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import Feather from 'react-native-vector-icons/Feather';
 
 const SettingsButton = () => {
   const navigation =
