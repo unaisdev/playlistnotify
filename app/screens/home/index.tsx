@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 
 import {
   ActivityIndicator,
@@ -8,9 +8,8 @@ import {
   View,
 } from 'react-native';
 
-import BottomSheetUpdatedPlaylist from '@app/features/commons/components/BottomSheet';
+import BottomSheetUpdatedPlaylist from '@app/features/commons/components/BottomSheetFor';
 
-import {useBottomSheetContext} from '../../containers/bottomSheetContext';
 import PlaylistList from './components/PlaylistList';
 import Layout from '@app/features/commons/layout/TabLayout';
 import {useHome} from './hooks';
@@ -19,12 +18,14 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useTranslation} from 'react-i18next';
 import BottomSheetFooter from './components/BottomSheetFooter';
 import BottomSheetContent from './components/BottomSheetContent';
+import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 
 const HomeScreen = () => {
   const {isLoading, isRefetching, refetch, userNotifiedPlaylists} = useHome();
   const {t} = useTranslation();
 
   const {ref} = useBottomSheetContext();
+  const snapPoints = useMemo(() => ['65%', '85%'], []);
 
   if (isLoading)
     return (
@@ -117,6 +118,7 @@ const HomeScreen = () => {
       />
       <BottomSheetUpdatedPlaylist
         ref={ref}
+        snapPoints={snapPoints}
         content={<BottomSheetContent />}
         footer={props => <BottomSheetFooter />}
       />

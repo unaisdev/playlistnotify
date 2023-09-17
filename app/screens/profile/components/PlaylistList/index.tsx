@@ -25,7 +25,6 @@ const PlaylistList = ({profilePlaylists}: Props) => {
     <Animated.FlatList
       style={styles.flatList}
       data={profilePlaylists}
-      ListHeaderComponent={<OrderBy />}
       itemLayoutAnimation={LayoutR.duration(500)}
       renderItem={({item, index}) => {
         return <Item index={index} item={item} />;

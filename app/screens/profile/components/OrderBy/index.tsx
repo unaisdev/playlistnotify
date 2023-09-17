@@ -1,19 +1,26 @@
+import {useBottomSheetProfileContext} from '@app/containers/BottomSheetProfileContext';
 import Text from '@app/features/commons/layout/Text';
-import {useState} from 'react';
 import {StyleSheet, Touchable, TouchableOpacity, View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const OrderBy = () => {
-  const [filterOption, setFilterOption] = useState('Your own order');
+type Props = {
+  handleBottomSheetOpen: () => void;
+};
+
+const OrderBy = ({handleBottomSheetOpen}: Props) => {
+  const {sortedType} = useBottomSheetProfileContext();
+
+  const handlePress = () => {
+    handleBottomSheetOpen();
+    console.log('opened');
+  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => console.log('pressed')}
-        style={styles.inline}>
+      <TouchableOpacity onPress={handlePress} style={styles.inline}>
         <FontAwesome name="unsorted" size={18} color={'white'} />
-        <Text style={{fontSize: 12}}>{filterOption}</Text>
+        <Text style={{fontSize: 12}}>{sortedType}</Text>
       </TouchableOpacity>
       <TouchableOpacity>
         <MaterialCommunityIcons

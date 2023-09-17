@@ -1,4 +1,5 @@
 import React, {
+  PropsWithChildren,
   createContext,
   useCallback,
   useContext,
@@ -51,11 +52,7 @@ export const BottomSheetContext = createContext<BottomSheetContextType>({
   compareAllData: () => ({}),
 });
 
-export const BottomSheetProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}): React.ReactNode => {
+export const BottomSheetHomeProvider = ({children}: PropsWithChildren) => {
   const [tracksCompared, setTracksCompared] = useState<TracksCompared>(
     initialTracksCompared,
   );
