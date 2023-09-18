@@ -6,7 +6,7 @@ import Layout from '@app/features/commons/layout/TabLayout';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {
   SORTED_TYPE_KEYS,
-@  useProfileContext,
+  useProfileContext,
 } from '@app/containers/ProfileContext';
 import {useTranslation} from 'react-i18next';
 import {BottomSheetView} from '@gorhom/bottom-sheet';
