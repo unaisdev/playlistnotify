@@ -5,17 +5,19 @@ import {Text as RNText, StyleSheet, TextProps} from 'react-native';
 import {useTheme} from '../../theme/hooks/useTheme';
 
 interface CustomTextProps extends TextProps {
-  textType?: 'regular' | 'bold' | 'light';
+  textType?: 'regular' | 'bold' | 'light' | 'semi';
   colorReverted?: boolean;
 }
 
-type Props = CustomTextProps & PropsWithChildren;
+type Props = CustomTextProps & TextProps;
 
 const Text: React.FC<Props> = ({
   children,
   textType,
   style: comingStyles,
   colorReverted,
+  ellipsizeMode,
+  numberOfLines,
 }) => {
   const {isDarkMode} = useTheme();
 
@@ -25,6 +27,7 @@ const Text: React.FC<Props> = ({
     if (textType === 'bold') return styles.bold;
     if (textType === 'light') return styles.light;
     if (textType === 'regular') return styles.regular;
+    if (textType === 'semi') return styles.semi;
   }, [textType]);
 
   const colorRevertedStyle = useMemo(() => {
@@ -32,7 +35,10 @@ const Text: React.FC<Props> = ({
   }, [colorReverted]);
 
   return (
-    <RNText style={[styles.textColor, style, comingStyles, colorRevertedStyle]}>
+    <RNText
+      ellipsizeMode={ellipsizeMode}
+      numberOfLines={numberOfLines}
+      style={[styles.textColor, style, comingStyles, colorRevertedStyle]}>
       {children}
     </RNText>
   );
@@ -54,6 +60,9 @@ const styling = (isDarkMode: boolean) => {
     },
     light: {
       fontWeight: '200',
+    },
+    semi: {
+      fontWeight: '600',
     },
   });
 };
