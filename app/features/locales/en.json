@@ -14,7 +14,10 @@
     "title": "Your profile",
     "desc_text": "Here you see your playlists from Spotify, even the liked ones.",
     "your_lists": "Lists created by you",
-    "liked_lists": "Lists you like"
+    "liked_lists": "Lists you like",
+    "order_alphabetical": "Alphabetical order",
+    "order_recent": "Most recent",
+    "order_createdby": "Created by"
   },
   "search": {
     "title": "Are you looking for a playlist?",

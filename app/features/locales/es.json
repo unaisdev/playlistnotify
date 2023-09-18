@@ -10,7 +10,10 @@
     "title": "Tu perfil",
     "desc_text": "Tanto aquí, como en el buscador, podrás elegir las listas de las que quieres recibir notificaciones en Spotify.",
     "your_lists": "Listas creadas por ti",
-    "liked_lists": "Listas que te gustan"
+    "liked_lists": "Listas que te gustan",
+    "order_alphabetical": "Orden alfabético",
+    "order_recent": "Recientes",
+    "order_createdby": "Creador"
   },
   "search": {
     "title": "¿Buscas alguna lista?",
