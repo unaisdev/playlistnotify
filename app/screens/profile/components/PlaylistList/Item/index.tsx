@@ -32,8 +32,7 @@ const PlaylistItem = ({item, index}: Props) => {
       key={item.id}
       entering={FadeInDown.duration(300).delay(index * 25)}
       exiting={FadeOutRight.duration(300)}
-      layout={Layout.duration(800).delay(400)}
-      style={{width: '100%'}}>
+      layout={Layout.duration(800).delay(400)}>
       <Pressable
         onPress={() => {
           navigation.navigate('Playlist', {id: item.id});
@@ -53,7 +52,6 @@ const PlaylistItem = ({item, index}: Props) => {
         />
         <View
           style={{
-            height: '100%',
             flexGrow: 1,
             flexDirection: 'column',
             justifyContent: 'center',

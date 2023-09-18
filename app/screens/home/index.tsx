@@ -25,7 +25,7 @@ const HomeScreen = () => {
   const {t} = useTranslation();
 
   const {ref} = useBottomSheetContext();
-  const snapPoints = useMemo(() => ['65%', '85%'], []);
+  const snapPoints = useMemo(() => ['50%'], []);
 
   if (isLoading)
     return (

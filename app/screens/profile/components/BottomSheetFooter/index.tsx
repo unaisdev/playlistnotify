@@ -1,12 +1,12 @@
 import Text from '@app/features/commons/layout/Text';
 import {View} from 'react-native';
 
-const BottomSheetProfileContent = () => {
+const BottomSheetFooter = () => {
   return (
-    <View>
-      <Text>Footer</Text>
+    <View style={{flex: 0}}>
+      <Text colorReverted>Footer</Text>
     </View>
   );
 };
 
-export default BottomSheetProfileContent;
+export default BottomSheetFooter;

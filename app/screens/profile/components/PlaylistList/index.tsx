@@ -24,11 +24,22 @@ const PlaylistList = ({profilePlaylists}: Props) => {
 
   const styles = styling(isDarkMode);
 
+  if (profilePlaylists.length === 0)
+    return (
+      <View style={{flex: 1, marginTop: 20}}>
+        <Text style={{fontSize: 12, textAlign: 'center'}}>
+          Parece que ninguna lista corresponde con tus filtros
+        </Text>
+      </View>
+    );
+
   return (
     <Animated.FlatList
       style={styles.flatList}
       data={profilePlaylists}
-      itemLayoutAnimation={LayoutR.duration(500)}
+      scrollEnabled
+      keyExtractor={(item, index) => item.id}
+      itemLayoutAnimation={LayoutR.duration(500).delay(500)}
       renderItem={({item, index}) => {
         return <Item index={index} item={item} />;
       }}
@@ -41,11 +52,12 @@ const PlaylistList = ({profilePlaylists}: Props) => {
 const styling = (isDarkMode: boolean) => {
   return StyleSheet.create({
     flatList: {
+      flex: 1,
       backgroundColor: isDarkMode ? '#212121' : 'white',
     },
     containerFlatlist: {
       paddingHorizontal: 8,
-      paddingBottom: 10,
+      paddingVertical: 10,
       rowGap: 10,
     },
   });

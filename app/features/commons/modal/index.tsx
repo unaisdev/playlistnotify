@@ -22,7 +22,7 @@ const AppModal = ({modalVisible, toggleModal}: Props) => {
         toggleModal();
       }}>
       <View style={styles.centeredView}>
-        <View style={{width: '70%', alignItems: 'flex-end', paddingTop: 20}}>
+        <View style={{width: '70%', alignItems: 'flex-end', paddingTop: 100}}>
           <Pressable
             testID="closeModalButton"
             style={[styles.button, styles.buttonClose]}
