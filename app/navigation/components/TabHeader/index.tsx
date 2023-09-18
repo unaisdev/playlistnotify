@@ -21,11 +21,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
   const {top} = useSafeAreaInsets();
   const {user} = useUserContext();
   const {t} = useTranslation();
-  const [betaModalVisible, setBetaModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setBetaModalVisible(prev => !prev);
-  };
 
   const TabHeaderText = () => {
     const currentTabName = route.name || TAB_NAME_DEFAULT;
@@ -41,9 +37,10 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
     return (
       <Text
         textType="bold"
+        numberOfLines={1}
         style={{
           color: 'white',
-          maxWidth: 240,
+          maxWidth: 260,
         }}>
         {TAB_NAMES[currentTabName]}
       </Text>
@@ -56,16 +53,10 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
       <View style={styles.contentContainer}>
         <TabHeaderText />
         <View style={styles.rightHeader}>
-          <TouchableOpacity
-            onPress={() => setBetaModalVisible(true)}
-            style={styles.capsule}>
-            <Text style={{fontSize: 12, color: 'green'}}>Beta</Text>
-          </TouchableOpacity>
           <SettingsButton />
           <ProfileImageButton />
         </View>
       </View>
-      <AppModal modalVisible={betaModalVisible} toggleModal={toggleModal} />
     </View>
   );
 };
@@ -78,13 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  capsule: {
-    borderWidth: 1,
-    borderColor: 'green',
-    borderRadius: 12,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-  },
+ 
   contentContainer: {
     width: '100%',
     backgroundColor: 'black',

@@ -14,6 +14,8 @@ import {useLanguage} from '@app/features/commons/hooks/useLanguage';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
+import {useState} from 'react';
+import AppModal from '@app/features/commons/modal';
 
 const logoutUser = async () => {
   await EncryptedStorage.removeItem(ENCRYPTED_STORAGE.AUTH_TOKEN);
@@ -22,6 +24,8 @@ const logoutUser = async () => {
 };
 
 const SettingsScreen = () => {
+  const [betaModalVisible, setBetaModalVisible] = useState(false);
+
   const {currentLanguage, changeLanguage, languagesAvailable} = useLanguage();
   const {theme, isDarkMode, toggleTheme} = useTheme();
   const navigation =
@@ -30,6 +34,10 @@ const SettingsScreen = () => {
   const {t} = useTranslation();
 
   const styles = styling(isDarkMode);
+
+  const toggleModal = () => {
+    setBetaModalVisible(prev => !prev);
+  };
 
   const handleLogout = () => {
     logoutUser();
@@ -41,6 +49,15 @@ const SettingsScreen = () => {
   return (
     <Layout style={styles.container}>
       <View style={{width: '100%'}}>
+        <View style={{alignItems: 'flex-end'}}>
+          <TouchableOpacity
+            onPress={() => setBetaModalVisible(true)}
+            style={styles.capsule}>
+            <Text style={{fontSize: 12, color: 'green', textAlign: 'center'}}>
+              Beta
+            </Text>
+          </TouchableOpacity>
+        </View>
         <View style={[styles.inlineGap, {padding: 20}]}>
           <MaterialIcons
             name="app-settings-alt"
@@ -97,6 +114,7 @@ const SettingsScreen = () => {
         <MaterialCommunityIcons name="logout" color={'black'} size={16} />
         <Text>{t('settings.logout')}</Text>
       </TouchableOpacity>
+      <AppModal modalVisible={betaModalVisible} toggleModal={toggleModal} />
     </Layout>
   );
 };
@@ -125,6 +143,7 @@ const styling = (isDarkMode: boolean) => {
       padding: 18,
       rowGap: 16,
     },
+
     item: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -151,6 +170,13 @@ const styling = (isDarkMode: boolean) => {
       flexDirection: 'row',
       alignItems: 'center',
       columnGap: 10,
+    },
+    capsule: {
+      borderWidth: 1,
+      borderColor: 'green',
+      borderRadius: 12,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
     },
   });
 };
