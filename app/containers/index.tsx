@@ -1,5 +1,5 @@
 import {BottomSheetHomeProvider} from '@app/containers/BottomSheetHomeContext';
-import {BottomSheetProfileProvider} from '@app/containers/BottomSheetProfileContext';
+import {ProfileProvider} from '@app/containers/ProfileContext';
 import {ThemeProvider} from '@app/containers/ThemeContext';
 import {UserProvider} from '@app/containers/UserContext';
 import {PropsWithChildren} from 'react';
@@ -8,9 +8,9 @@ const GlobalContext = ({children}: PropsWithChildren) => {
   return (
     <ThemeProvider>
       <UserProvider>
-        <BottomSheetProfileProvider>
+        <ProfileProvider>
           <BottomSheetHomeProvider>{children}</BottomSheetHomeProvider>
-        </BottomSheetProfileProvider>
+        </ProfileProvider>
       </UserProvider>
     </ThemeProvider>
   );

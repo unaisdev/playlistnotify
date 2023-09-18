@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@gorhom/bottom-sheet": "4.4.7",
+    "@gorhom/bottom-sheet": "^4.5.1",
     "@react-native-async-storage/async-storage": "1.19.3",
     "@react-native-community/cli-doctor": "11.3.6",
     "@react-navigation/bottom-tabs": "^ 6.5.8",
