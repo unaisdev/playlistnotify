@@ -11,6 +11,10 @@ import {
 } from '@app/features/stores/ProfileStore';
 
 import FilterItem from './FilterItem';
+import {
+  SORTED_TYPE_KEYS,
+  useProfileContext,
+} from '@app/containers/ProfileContext';
 
 type Props = {
   filterAll: () => void;
@@ -27,9 +31,11 @@ const FilterLists = ({
 }: Props) => {
   const {isDarkMode} = useTheme();
   const {selectedFilter, setSelectedFilter} = useProfileFiltersStore();
+  const {setSorted} = useProfileContext();
 
   useEffect(() => {
     if (selectedFilter === SELECT_FILTERS.ALL) filterAll();
+    setSorted(SORTED_TYPE_KEYS.RECENT_ADDED);
   }, [selectedFilter]);
 
   const handleTapFilterOwn = () => {
