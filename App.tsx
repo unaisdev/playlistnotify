@@ -8,7 +8,7 @@ import i18n from '@app/features/locales/i18next';
 import {StatusBar} from 'react-native';
 import {ThemeProvider} from '@app/containers/ThemeContext';
 import MyStatusBar from '@app/features/commons/components/StatusBar';
-import {BottomSheetProfileProvider} from '@app/containers/BottomSheetProfileContext';
+import {BottomSheetProfileProvider} from '@app/containers/ProfileContext';
 import {BottomSheetHomeProvider} from '@app/containers/BottomSheetHomeContext';
 import GlobalContext from '@app/containers';
 
