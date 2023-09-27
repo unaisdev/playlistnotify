@@ -18,6 +18,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useSearch} from './hooks/useSearch';
 import SearchBar from './components/searchBar';
 import SearchList from './components/searchList';
+import Categories from './components/Categories';
 
 const SearchPlaylistScreen = () => {
   const {
@@ -33,6 +34,7 @@ const SearchPlaylistScreen = () => {
   } = useSearch();
 
   const handleViewPress = () => {
+    console.log('pressssss')
     Keyboard.dismiss();
   };
 
@@ -49,7 +51,11 @@ const SearchPlaylistScreen = () => {
           isFetching={isFetching}
           isLoading={isLoading}
         />
-        <SearchList searchResults={data || []} />
+          {!data || data?.length === 0 ? (
+            <Categories />
+          ) : (
+            <SearchList searchResults={data} />
+          )}
       </View>
     </TouchableWithoutFeedback>
   );

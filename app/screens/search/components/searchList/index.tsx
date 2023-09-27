@@ -22,13 +22,6 @@ const SearchList = ({searchResults}: Props) => {
 
   const styles = styling(isDarkMode);
 
-  if (searchResults.length === 0)
-    return (
-      <Layout style={{flex: 0, height: '100%'}}>
-        <Text style={{textAlign: 'center'}}>{t('search.search_for')}</Text>
-      </Layout>
-    );
-
   return (
     <Animated.FlatList
       style={styles.flatList}
