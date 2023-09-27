@@ -11,13 +11,17 @@ import {useTranslation} from 'react-i18next';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 
 type Props = {
+  selectedDisplay: string;
   handleBottomSheetOpen: () => void;
+  toggleSelectedDisplay: () => void;
 };
 
-const OrderBy = ({handleBottomSheetOpen}: Props) => {
+const OrderBy = ({selectedDisplay, handleBottomSheetOpen, toggleSelectedDisplay}: Props) => {
   const {sortedType} = useProfileContext();
   const {isDarkMode} = useTheme();
   const {t} = useTranslation();
+
+  const iconSelectedDisplay = selectedDisplay === 'row' ? 'view-grid-outline': 'format-list-bulleted-square'
 
   const handlePress = () => {
     handleBottomSheetOpen();
@@ -42,9 +46,9 @@ const OrderBy = ({handleBottomSheetOpen}: Props) => {
         />
         <Text style={{fontSize: 12}}>{customText}</Text>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={toggleSelectedDisplay}>
         <MaterialCommunityIcons
-          name="view-grid-outline"
+          name={iconSelectedDisplay}
           size={18}
           color={isDarkMode ? 'white' : 'black'}
         />

@@ -16,13 +16,16 @@ import {PlaylistModel} from '../../../../services/types';
 
 type Props = {
   profilePlaylists: PlaylistModel[];
+  selectedDisplay: string;
 };
 
-const PlaylistList = ({profilePlaylists}: Props) => {
+const PlaylistList = ({profilePlaylists, selectedDisplay}: Props) => {
   const {t} = useTranslation();
   const {isDarkMode} = useTheme();
 
   const styles = styling(isDarkMode);
+
+  const numColumns = selectedDisplay === 'square' ? 2 : 1;
 
   if (profilePlaylists.length === 0)
     return (
@@ -35,16 +38,26 @@ const PlaylistList = ({profilePlaylists}: Props) => {
 
   return (
     <Animated.FlatList
+      key={numColumns}
       style={styles.flatList}
       data={profilePlaylists}
       scrollEnabled
       keyExtractor={(item, index) => item.id}
       itemLayoutAnimation={LayoutR.duration(500).delay(500)}
       renderItem={({item, index}) => {
-        return <Item index={index} item={item} />;
+        return (
+          <Item index={index} item={item} selectedDisplay={selectedDisplay} />
+        );
       }}
+      numColumns={numColumns}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.containerFlatlist}
+      contentContainerStyle={[
+        styles.containerFlatlist,
+        {
+          rowGap: selectedDisplay === 'square' ? 20 : 10,
+          paddingHorizontal: selectedDisplay === 'square' ? 0 : 12,
+        },
+      ]}
     />
   );
 };
@@ -56,9 +69,8 @@ const styling = (isDarkMode: boolean) => {
       backgroundColor: isDarkMode ? '#212121' : 'white',
     },
     containerFlatlist: {
-      paddingHorizontal: 8,
       paddingVertical: 10,
-      rowGap: 10,
+      columnGap: 30,
     },
   });
 };

@@ -1,6 +1,5 @@
 import {useProfile} from '@app/screens/profile/hooks/useProfile';
 import {PlaylistModel, User} from '@app/services/types';
-import {getUserPlaylists} from '@app/services/user';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {useQuery} from '@tanstack/react-query';
 import {
@@ -12,6 +11,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import {useUserContext} from '../UserContext';
 
 export const SORTED_TYPE_KEYS = {
   RECENT_ADDED: 'Recent',
@@ -32,12 +32,7 @@ type ContextType = {
   handlePresentModalPress: () => void;
   handleCloseModalPress: () => void;
   handleSheetChanges: (index: number) => void;
-  orderRecent: () => void; // Nueva función
-  orderAlphabetically: () => void; // Nueva función
-  groupPlaylistsByOwner: () => void; // Nueva función
-  filterOwnPlaylists: () => void; // Nueva función
-  filterSpotifyPlaylists: () => void; // Nueva función
-  filterMaxTracksNum: (maxTracks: number) => void; // Nueva función
+
 };
 
 export const ProfileContext = createContext<ContextType>({
@@ -50,24 +45,14 @@ export const ProfileContext = createContext<ContextType>({
   handlePresentModalPress: () => ({}),
   handleCloseModalPress: () => ({}),
   handleSheetChanges: (index: number) => ({}),
-  orderRecent: () => {},
-  orderAlphabetically: () => {},
-  groupPlaylistsByOwner: () => {},
-  filterOwnPlaylists: () => {},
-  filterSpotifyPlaylists: () => {},
-  filterMaxTracksNum: (maxTracks: number) => {},
+ 
 });
 
 export const ProfileProvider = ({children}: PropsWithChildren) => {
-  const {user, userPlaylists} = useProfile();
-
-  const [playlists, setUserPlaylists] = useState<PlaylistModel[]>([]);
+  const {user} = useUserContext();
+  const [userPlaylists, setUserPlaylists] = useState<PlaylistModel[]>([]);
   const [sortedType, setSortedType] = useState(SORTED_TYPE_KEYS.RECENT_ADDED);
   const bottomSheetModalRef = useRef<BottomSheet>(null);
-
-  useEffect(() => {
-    if (userPlaylists) setUserPlaylists(userPlaylists);
-  }, [userPlaylists]);
 
   const setSorted = (sorted: SORTED_TYPE) => {
     setSortedType(sorted);
@@ -89,33 +74,6 @@ export const ProfileProvider = ({children}: PropsWithChildren) => {
     console.log('handleSheetChanges', index);
   }, []);
 
-  const orderRecent = () => {};
-
-  const orderAlphabetically = () => {};
-
-  const groupPlaylistsByOwner = () => {};
-
-  const filterOwnPlaylists = () => {
-    const ownPlaylists = userPlaylists?.filter(playlist =>
-      playlist.owner.display_name.includes(user?.display_name ?? ''),
-    );
-
-    setUserPlaylists(ownPlaylists);
-  };
-
-  const filterSpotifyPlaylists = () => {
-    const spotifyPLaylists = [...userPlaylists].filter(playlist =>
-      playlist.owner.display_name.includes('Spotify'),
-    );
-
-    setUserPlaylists(spotifyPLaylists);
-  };
-
-  const filterMaxTracksNum = (maxTracks: number) => {
-    setUserPlaylists(
-      userPlaylists?.filter(playlist => playlist.tracks.total < maxTracks),
-    );
-  };
 
   return (
     <ProfileContext.Provider
@@ -123,18 +81,13 @@ export const ProfileProvider = ({children}: PropsWithChildren) => {
         user: user,
         sortedType: sortedType,
         ref: bottomSheetModalRef,
-        userPlaylists: playlists ?? [],
+        userPlaylists: userPlaylists,
         setUserPlaylists: setUserPlaylistsFiltered,
         setSorted: setSorted,
         handlePresentModalPress: handlePresentModalPress,
         handleCloseModalPress: handleCloseModalPress,
         handleSheetChanges: handleSheetChanges,
-        orderRecent: orderRecent,
-        orderAlphabetically: orderAlphabetically,
-        groupPlaylistsByOwner: groupPlaylistsByOwner,
-        filterOwnPlaylists: filterOwnPlaylists,
-        filterSpotifyPlaylists: filterSpotifyPlaylists,
-        filterMaxTracksNum: filterMaxTracksNum,
+      
       }}>
       {children}
     </ProfileContext.Provider>
@@ -152,12 +105,6 @@ export const useProfileContext = () => {
     handlePresentModalPress,
     handleCloseModalPress,
     handleSheetChanges,
-    filterMaxTracksNum,
-    filterOwnPlaylists,
-    filterSpotifyPlaylists,
-    groupPlaylistsByOwner,
-    orderAlphabetically,
-    orderRecent,
   } = useContext(ProfileContext);
   return {
     user,
@@ -169,11 +116,5 @@ export const useProfileContext = () => {
     handlePresentModalPress,
     handleCloseModalPress,
     handleSheetChanges,
-    filterMaxTracksNum,
-    filterOwnPlaylists,
-    filterSpotifyPlaylists,
-    groupPlaylistsByOwner,
-    orderAlphabetically,
-    orderRecent,
   };
 };

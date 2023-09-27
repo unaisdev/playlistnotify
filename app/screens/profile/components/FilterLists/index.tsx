@@ -31,25 +31,34 @@ const FilterLists = ({
 }: Props) => {
   const {isDarkMode} = useTheme();
   const {selectedFilter, setSelectedFilter} = useProfileFiltersStore();
-  const {setSorted} = useProfileContext();
 
-  useEffect(() => {
-    if (selectedFilter === SELECT_FILTERS.ALL) filterAll();
-    setSorted(SORTED_TYPE_KEYS.RECENT_ADDED);
-  }, [selectedFilter]);
+  const setFilterAll = () => {
+    setSelectedFilter(SELECT_FILTERS.ALL);
+    filterAll();
+  };
 
   const handleTapFilterOwn = () => {
-    setSelectedFilter('OwnFilter');
-    filterOwnPlaylists();
+    if (selectedFilter !== SELECT_FILTERS.OWN) {
+      setSelectedFilter(SELECT_FILTERS.OWN);
+      filterOwnPlaylists();
+      return;
+    }
+
+    setFilterAll();
   };
 
   const handleTapFilterSpotify = () => {
-    setSelectedFilter('SpotifyFilter');
-    filterSpotifyPlaylists();
+    if (selectedFilter !== SELECT_FILTERS.SPOTIFY) {
+      setSelectedFilter(SELECT_FILTERS.SPOTIFY);
+      filterSpotifyPlaylists();
+      return;
+    }
+
+    setFilterAll();
   };
 
   const handleTapFilterMax = () => {
-    setSelectedFilter('MaxTracksFilter');
+    setSelectedFilter(SELECT_FILTERS.MAX_TRACKS_200);
     filterByTracksNum(200);
   };
 

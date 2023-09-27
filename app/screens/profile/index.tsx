@@ -13,20 +13,25 @@ import {PlaylistModel} from '../../services/types';
 import PlaylistList from './components/PlaylistList';
 import BottomSheetProfileFooter from './components/BottomSheetFooter';
 import BottomSheetProfileContent from './components/BottomSheetContent';
+import {ActivityIndicator, View} from 'react-native';
 
 const ProfileScreen = () => {
+  const [selectedDisplay, setSelectedDisplay] = useState('row');
   const {
     ref,
+    isLoading,
     handlePresentModalPress,
+    user,
     userPlaylists,
     setUserPlaylists,
-    user,
+    filterAll,
     filterMaxTracksNum,
     filterOwnPlaylists,
     filterSpotifyPlaylists,
-    handleCloseModalPress,
-    handleSheetChanges,
-  } = useProfileContext();
+    groupPlaylistsByOwner,
+    orderAlphabetically,
+    orderRecent,
+  } = useProfile();
 
   const {t} = useTranslation();
 
@@ -36,53 +41,40 @@ const ProfileScreen = () => {
 
   if (!userPlaylists) return null;
 
-  userPlaylists.map(item => console.log(item.name));
-
   const list = useMemo(() => {
     return [...userPlaylists];
   }, []);
 
-  const orderRecent = () => {
-    setUserPlaylists([...userPlaylists]);
-  };
-
-  const orderAlphabetically = () => {
-    const sortedPlaylists = [...userPlaylists]; // Create a copy of the playlists array
-    sortedPlaylists.sort((a, b) => {
-      // Compare playlist names (alphabetically)
-      const nameA = a.name.toUpperCase(); // Convert names to uppercase for case-insensitive sorting
-      const nameB = b.name.toUpperCase();
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
+  const toggleSelectedDisplay = () => {
+    setSelectedDisplay(prev => {
+      if (prev === 'row') return 'square';
+      else return 'row';
     });
-    setUserPlaylists(sortedPlaylists); // Update playlists with the sorted array
-  };
-
-  const groupPlaylistsByOwner = () => {
-    const sorted = [...userPlaylists].sort((a, b) => {
-      // Compare owner names to group by owner
-      const ownerNameA = a.owner.display_name.toUpperCase();
-      const ownerNameB = b.owner.display_name.toUpperCase();
-      if (ownerNameA < ownerNameB) return -1;
-      if (ownerNameA > ownerNameB) return 1;
-      return 0;
-    });
-
-    // Update the state with the sorted array
-    setUserPlaylists(sorted);
   };
 
   return (
     <Layout style={{paddingHorizontal: 0, paddingVertical: 0}}>
       <FilterLists
-        filterAll={() => setUserPlaylists(list)}
+        filterAll={filterAll}
         filterOwnPlaylists={filterOwnPlaylists}
         filterSpotifyPlaylists={filterSpotifyPlaylists}
         filterByTracksNum={filterMaxTracksNum}
       />
-      <OrderBy handleBottomSheetOpen={handlePresentModalPress} />
-      <PlaylistList profilePlaylists={userPlaylists} />
+      <OrderBy
+        selectedDisplay={selectedDisplay}
+        toggleSelectedDisplay={toggleSelectedDisplay}
+        handleBottomSheetOpen={handlePresentModalPress}
+      />
+      {isLoading ? (
+        <View>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <PlaylistList
+          selectedDisplay={selectedDisplay}
+          profilePlaylists={userPlaylists}
+        />
+      )}
       <BottomSheetProfile
         ref={ref}
         snapPoints={snapPoints}
