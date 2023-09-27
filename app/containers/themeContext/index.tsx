@@ -16,16 +16,17 @@ type ThemeContextType = {
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
-  theme: APP_THEME.DEFAULT,
+  theme: APP_THEME.LIGHT,
   toggleTheme: () => {},
   isDarkMode: false,
   setTheme: () => {},
 });
 
 export const ThemeProvider = ({children}: PropsWithChildren) => {
-  const [theme, setTheme] = useState<APP_THEME_TYPE>(APP_THEME.DARK_THEME);
+  const [theme, setTheme] = useState<APP_THEME_TYPE>(APP_THEME.DARK);
 
   useEffect(() => {
+
     const init = async () => {
       await saveThemeOnStorage(theme);
     };
@@ -34,7 +35,7 @@ export const ThemeProvider = ({children}: PropsWithChildren) => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'default' : 'dark'));
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
   const putTheme = (theme: APP_THEME_TYPE) => {
