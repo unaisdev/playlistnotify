@@ -1,11 +1,13 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import {useTranslation} from 'react-i18next';
 import {
   ActivityIndicator,
+  Image,
   RefreshControl,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -16,112 +18,94 @@ import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 import BottomSheetUpdatedPlaylist from '@app/features/commons/components/BottomSheetFor';
 
 import {useHome} from './hooks';
-import PlaylistList from './components/PlaylistList';
-import BottomSheetFooter from './components/BottomSheetFooter';
-import BottomSheetContent from './components/BottomSheetContent';
+import PlaylistList from '../playlists-for-notify/components/PlaylistList';
+import BottomSheetFooter from '../playlists-for-notify/components/BottomSheetFooter';
+import BottomSheetContent from '../playlists-for-notify/components/BottomSheetContent';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootTabsParamList} from '@app/navigation';
+
+const UpdatedPlaylistImagesList = () => {
+  const [displayIndex, setDisplayIndex] = useState(0);
+
+  const list: {display: boolean; img: string}[] = [
+    {
+      display: true,
+      img: 'https://i.scdn.co/image/ab67706c0000bebbd9535582accae50c518b825a',
+    },
+    {
+      display: false,
+      img: 'https://mosaic.scdn.co/640/ab67616d0000b2730d8dfc539a831baeab2f6a15ab67616d0000b27319f892cc0f14a6176594adcfab67616d0000b273a4268639fb789e5b44b4ca53ab67616d0000b273f7cb8aee16f4e2ef3600a187',
+    },
+    {
+      display: false,
+      img: 'https://mosaic.scdn.co/640/ab67616d0000b2731c8a849fc29dcd2e7d06cb52ab67616d0000b2731f6efc4f43f2474945d82563ab67616d0000b273a1035396117d3635c361be58ab67616d0000b273f9f1721aac14a6fb8cdacfaa',
+    },
+    {
+      display: true,
+      img: 'https://mosaic.scdn.co/640/ab67616d0000b2730deacf472b21a3773d37b3f4ab67616d0000b27397dd973df77a343bd38bcff7ab67616d0000b273add81dfc2ee9f05f616a923fab67616d0000b273c6d155c7dc4f59e7d61f5859',
+    },
+  ];
+
+  const filteredList = list.filter(item => item.display).slice(-2);
+
+  console.log(displayIndex);
+
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        bottom: -20,
+        position: 'absolute',
+      }}>
+      {filteredList.map((item, index) => {
+        if (displayIndex < 2 && item.display) {
+          return (
+            <Image
+              key={item.img}
+              source={{uri: item.img}}
+              style={{
+                width: 50,
+                height: 50,
+                transform: [{rotate: '-25deg'}],
+              }}
+            />
+          );
+        }
+      })}
+    </View>
+  );
+};
 
 const HomeScreen = () => {
-  const {isLoading, isRefetching, refetch, userNotifiedPlaylists} = useHome();
-  const {t} = useTranslation();
-
-  const {ref} = useBottomSheetContext();
-  const snapPoints = useMemo(() => ['50%'], []);
-
-  if (isLoading)
-    return (
-      <View style={[styles.loadingContainer]}>
-        <Text style={styles.loadingText}>
-          {t('loading_notified_playlists')}
-        </Text>
-        <ActivityIndicator />
-      </View>
-    );
-
-  if (!userNotifiedPlaylists) return;
-
-  if (userNotifiedPlaylists?.length === 0)
-    return (
-      <Layout>
-        <ScrollView
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-          }
-          contentContainerStyle={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginVertical: 12,
-            marginHorizontal: 20,
-            rowGap: 48,
-          }}
-          style={styles.nodataContainer}>
-          <View style={{rowGap: 12}}>
-            <Text style={styles.noDataText}>
-              ¿Todavía no has seleccionado ninguna lista para que te
-              notifiquemos?
-            </Text>
-
-            <Text style={styles.noDataDesc}>
-              Para poder notificarte sobre la actualización de una lista de
-              reproducción, primero deberás de seleccionar alguna.
-            </Text>
-            <Text>
-              Accede desde tu foto de perfil a tus playlists, en la parte
-              superior derecha, o utiliza el buscador para encontrar una en
-              concreto.
-            </Text>
-            {/* <View style={styles.inline}>
-          <Text>Puedes probar con esta: </Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Playlist', {id: defaultPlaylist.id});
-            }}>
-            <PlaylistInfo
-              id={defaultPlaylist.id}
-              image_url={defaultPlaylist.image_url}
-              name={defaultPlaylist.name}
-            />
-          </TouchableOpacity>
-        </View> */}
-            <View style={styles.inline}>
-              <Text style={{flex: 1}}>
-                Marca el icono de notificación en la cabecera de las listas de
-                reproducción.
-              </Text>
-              <View
-                style={[styles.inline, {flex: 1, justifyContent: 'center'}]}>
-                <MaterialIcon
-                  name="notifications-off"
-                  size={24}
-                  color={'gray'}
-                />
-                <MaterialIcon name="arrow-right-alt" size={24} color={'gray'} />
-                <MaterialIcon
-                  name="notifications-active"
-                  size={24}
-                  color={'black'}
-                />
-              </View>
-            </View>
-          </View>
-        </ScrollView>
-      </Layout>
-    );
+  const tabNavigation =
+    useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
 
   return (
     <Layout style={{paddingHorizontal: 0, paddingVertical: 0}}>
-      <PlaylistList
-        isLoading={isLoading}
-        isRefetching={isRefetching}
-        refetch={refetch}
-        userNotifiedPlaylists={userNotifiedPlaylists}
-      />
-      <BottomSheetUpdatedPlaylist
-        ref={ref}
-        snapPoints={snapPoints}
-        content={<BottomSheetContent />}
-        footer={props => <BottomSheetFooter />}
-      />
+      <TouchableOpacity
+        style={{
+          height: 60,
+          backgroundColor: '#004D40',
+          borderRadius: 16,
+          margin: 12,
+          overflow: 'hidden',
+        }}
+        onPress={() => {
+          tabNavigation.navigate('PlaylistsForNotify');
+        }}>
+        <UpdatedPlaylistImagesList />
+
+        <View
+          style={{
+            padding: 16,
+            flex: 1,
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+          }}>
+          <Text colorReverted>Listas actualizadas</Text>
+        </View>
+      </TouchableOpacity>
     </Layout>
   );
 };

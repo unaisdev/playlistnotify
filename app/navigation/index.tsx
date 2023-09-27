@@ -25,6 +25,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import TabBar from './components/TabBar';
+import PlaylistsForNotifyScreen from '@app/screens/playlists-for-notify';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -36,6 +37,7 @@ export type RootStackParamList = {
 export type RootTabsParamList = {
   Home: undefined;
   Profile: undefined;
+  PlaylistsForNotify: undefined;
   SearchPlaylist: undefined;
   Settings: undefined;
 };
@@ -114,6 +116,16 @@ const Tabs = () => {
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
+        options={{
+          headerLeft: () => <></>,
+          headerRight: () => <></>,
+          headerTitle: () => <></>,
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="PlaylistsForNotify"
+        component={PlaylistsForNotifyScreen}
         options={{
           headerLeft: () => <></>,
           headerRight: () => <></>,

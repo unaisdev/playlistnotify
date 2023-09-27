@@ -38,7 +38,8 @@ const BottomSheetContent = () => {
           ref={scrollRef}
           horizontal
           index={0}
-          style={{flex: 1}}>
+          style={{flex: 1}}
+          contentContainerStyle={{flex: 1}}>
           <View style={[styles.child]}>
             <AddedTracks tracksNew={tracksNew} />
           </View>

@@ -1,10 +1,18 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {useTranslation} from 'react-i18next';
 import Animated, {Layout} from 'react-native-reanimated';
-import {Alert, RefreshControl, StyleSheet} from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Image,
+  RefreshControl,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-import {RootStackParamList} from '@app/navigation';
+import {RootStackParamList, RootTabsParamList} from '@app/navigation';
 import {useNavigation} from '@react-navigation/native';
 import {removePlaylistForNotify} from '@app/services/playlist';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -12,6 +20,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import PlaylistListItem from '../PlaylistListItem';
 import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
 import {UserAddedPlaylistsResponse} from '../../../../services/types';
+import Text from '@app/features/commons/layout/Text';
 
 const defaultPlaylist = {
   id: '4OYwdvuAT2msLdqmNVUQD4',
@@ -35,6 +44,8 @@ const PlaylistList = ({
   const {t} = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const tabNavigation =
+    useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
 
   const showAlert = (item: UserAddedPlaylistsResponse) =>
     Alert.alert(
