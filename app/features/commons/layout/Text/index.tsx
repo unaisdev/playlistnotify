@@ -38,7 +38,7 @@ const Text: React.FC<Props> = ({
     <RNText
       ellipsizeMode={ellipsizeMode}
       numberOfLines={numberOfLines}
-      style={[styles.textColor, style, comingStyles, colorRevertedStyle]}>
+      style={[styles.text, style, comingStyles, colorRevertedStyle]}>
       {children}
     </RNText>
   );
@@ -46,7 +46,8 @@ const Text: React.FC<Props> = ({
 
 const styling = (isDarkMode: boolean) => {
   return StyleSheet.create({
-    textColor: {
+    text: {
+      fontFamily: 'sans-serif',
       color: isDarkMode ? 'white' : 'black',
     },
     revertedTextColor: {
