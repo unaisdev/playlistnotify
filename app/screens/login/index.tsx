@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
-import { useTranslation } from 'react-i18next';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {useTranslation} from 'react-i18next';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import Text from '@app/features/commons/layout/Text';
 import Layout from '@app/features/commons/layout/TabLayout';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import useLogin from './hooks/useLogin';
-import { RootStackParamList } from '../../navigation';
+import {RootStackParamList} from '../../navigation';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -34,12 +34,12 @@ const LoginScreen = ({navigation}: Props) => {
             source={require('../../assets/spotify-icons-logos/icons/01_RGB/02_PNG/Spotify_Icon_RGB_Green.png')}
             style={styles.spotify_logo}
           />
-          <Text>{t('login.spotify_connect')}</Text>
+          <Text style={{color: 'white'}}>{t('login.spotify_connect')}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.footer}>
         <View style={styles.footerContainer}>
-          <Text textType="light" style={{fontSize: 12}}>
+          <Text textType="light" style={{fontSize: 12, color: 'white'}}>
             Powered by
           </Text>
           <Image
@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 0,
+    paddingVertical: 0,
     gap: 8,
   },
   header: {flex: 1, justifyContent: 'center'},
@@ -68,9 +70,15 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
+    width: '100%'
   },
   footerContainer: {
     flexDirection: 'row',
+    backgroundColor: '#424242',
+    paddingBottom: 20,
+    paddingTop: 10,
+    borderTopRightRadius: 12,
+    borderTopLeftRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
     columnGap: 12,
