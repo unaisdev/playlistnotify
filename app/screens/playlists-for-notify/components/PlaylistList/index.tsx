@@ -81,7 +81,7 @@ const PlaylistList = ({
     <Animated.FlatList
       style={styles.container}
       data={userNotifiedPlaylists}
-      contentContainerStyle={{flex: 1}}
+      contentContainerStyle={{flexGrow: 1}}
       scrollEnabled
       itemLayoutAnimation={Layout.duration(500).delay(500)}
       keyExtractor={(item, index) => item.id}

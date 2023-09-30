@@ -23,7 +23,7 @@ const PlaylistList = ({profilePlaylists, selectedDisplay}: Props) => {
   const {t} = useTranslation();
   const {isDarkMode} = useTheme();
 
-  const styles = styling(isDarkMode);
+  const styles = styling(isDarkMode, selectedDisplay);
 
   const numColumns = selectedDisplay === 'square' ? 2 : 1;
 
@@ -62,14 +62,14 @@ const PlaylistList = ({profilePlaylists, selectedDisplay}: Props) => {
   );
 };
 
-const styling = (isDarkMode: boolean) => {
+const styling = (isDarkMode: boolean, selectedDisplay: string) => {
   return StyleSheet.create({
     flatList: {
       flex: 1,
       backgroundColor: isDarkMode ? '#212121' : 'white',
     },
     containerFlatlist: {
-      flex: 1,
+      flexGrow: selectedDisplay === 'square' ? 1 : 0,
       paddingVertical: 10,
       columnGap: 30,
     },
