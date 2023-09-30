@@ -38,8 +38,7 @@ const BottomSheetContent = () => {
           ref={scrollRef}
           horizontal
           index={0}
-          style={{flex: 1}}
-          contentContainerStyle={{flex: 1}}>
+          style={{flex: 1}}>
           <View style={[styles.child]}>
             <AddedTracks tracksNew={tracksNew} />
           </View>
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
   },
   child: {
     width,
-
     justifyContent: 'flex-start',
   },
 });
