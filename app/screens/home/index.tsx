@@ -17,13 +17,13 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 import BottomSheetUpdatedPlaylist from '@app/features/commons/components/BottomSheetFor';
 
-import {useHome} from './hooks';
 import PlaylistList from '../playlists-for-notify/components/PlaylistList';
 import BottomSheetFooter from '../playlists-for-notify/components/BottomSheetFooter';
 import BottomSheetContent from '../playlists-for-notify/components/BottomSheetContent';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootTabsParamList} from '@app/navigation';
+import {RootStackParamList, RootTabsParamList} from '@app/navigation';
+import {useProfile} from '../profile/hooks/useProfile';
 
 const UpdatedPlaylistImagesList = () => {
   const [displayIndex, setDisplayIndex] = useState(0);
@@ -78,17 +78,60 @@ const UpdatedPlaylistImagesList = () => {
 };
 
 const HomeScreen = () => {
+  const {userPlaylists} = useProfile();
   const tabNavigation =
     useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
+  const screenNavigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <Layout style={{paddingHorizontal: 0, paddingVertical: 0}}>
+    <Layout style={{rowGap: 20}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          gap: 6,
+        }}>
+        {userPlaylists.slice(0, 6).map((item, index) => {
+          return (
+            <View key={item.id} style={{width: '49%'}}>
+              <TouchableOpacity
+                style={{
+                  height: 50,
+                  backgroundColor: '#004D40',
+                  borderRadius: 6,
+                  overflow: 'hidden',
+                }}
+                onPress={() => {
+                  screenNavigation.navigate('Playlist', {id: item.id});
+                }}>
+                <View
+                  style={{
+                    flex: 1,
+                    columnGap: 12,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                  }}>
+                  <Image
+                    source={{uri: item.images[0].url}}
+                    style={{width: 50, height: 50}}
+                  />
+                  <Text style={{fontSize: 12, width: '60%'}} numberOfLines={2}>
+                    {item.name}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          );
+        })}
+      </View>
       <TouchableOpacity
         style={{
           height: 60,
           backgroundColor: '#004D40',
-          borderRadius: 16,
-          margin: 12,
+          borderRadius: 12,
           overflow: 'hidden',
         }}
         onPress={() => {

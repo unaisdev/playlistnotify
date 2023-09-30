@@ -85,7 +85,7 @@ const Categories = () => {
     <Animated.FlatList
       ListHeaderComponent={props => {
         return (
-          <Text style={{marginBottom: 12,}} textType="bold">
+          <Text style={{marginBottom: 20}} textType="bold">
             Explora todo
           </Text>
         );
@@ -109,7 +109,7 @@ const Categories = () => {
 const styles = StyleSheet.create({
   categoriesContainer: {
     paddingHorizontal: 12,
-    paddingTop: 12,
+    paddingTop: 20,
     paddingBottom: 8,
     alignItems: 'center',
   },
