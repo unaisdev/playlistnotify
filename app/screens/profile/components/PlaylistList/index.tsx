@@ -69,6 +69,7 @@ const styling = (isDarkMode: boolean) => {
       backgroundColor: isDarkMode ? '#212121' : 'white',
     },
     containerFlatlist: {
+      flex: 1,
       paddingVertical: 10,
       columnGap: 30,
     },

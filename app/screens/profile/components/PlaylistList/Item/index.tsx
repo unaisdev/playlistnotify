@@ -33,7 +33,7 @@ const PlaylistItem = ({item, index, selectedDisplay}: Props) => {
       entering={FadeInDown.duration(300).delay(index * 25)}
       exiting={FadeOutRight.duration(300)}
       layout={Layout.duration(800).delay(400)}
-      style={{flex: 1}}>
+      style={{}}>
       <Pressable
         onPress={() => {
           navigation.navigate('Playlist', {id: item.id});
