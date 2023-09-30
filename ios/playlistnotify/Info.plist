@@ -27,7 +27,7 @@
 		<string>Fontisto.ttf</string>
 	</array>
 	<key>CFBundleDisplayName</key>
-	<string>playlistnotify</string>
+	<string>Playlist Notify</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
