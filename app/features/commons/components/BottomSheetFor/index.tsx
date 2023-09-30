@@ -1,6 +1,6 @@
 import React, {FC, forwardRef, useMemo} from 'react';
 
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {Easing} from 'react-native-reanimated';
 
 import BottomSheet, {
@@ -26,6 +26,7 @@ const BottomSheetUpdatedPlaylist = (
     duration: 550,
     easing: Easing.exp,
   });
+  const {height} = Dimensions.get('window');
 
   return (
     <BottomSheet
@@ -33,6 +34,7 @@ const BottomSheetUpdatedPlaylist = (
       index={-1}
       snapPoints={snapPoints}
       enableDynamicSizing
+      maxDynamicContentSize={height / 2}
       backdropComponent={props => <CustomBackdrop {...props} />}
       footerComponent={footer}
       containerStyle={styles.container}
