@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Linking,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -94,6 +95,16 @@ const PlaylistScreen = ({route}: Props) => {
               justifyContent: 'space-evenly',
             }}>
             <View style={styles.topContent}>
+              <TouchableOpacity onPress={() => ({})} style={styles.open}>
+                <Image
+                  style={{
+                    width: 24,
+                    height: 24,
+                  }}
+                  source={require('../../assets/spotify-icons-logos/icons/01_RGB/02_PNG/Spotify_Icon_RGB_Green.png')}
+                />
+                <Text style={styles.openText}>Abrir en Spotify</Text>
+              </TouchableOpacity>
               <Pressable
                 style={styles.inline}
                 onPress={() => {
@@ -120,11 +131,7 @@ const PlaylistScreen = ({route}: Props) => {
               </Pressable>
 
               <View style={styles.columnBetween}>
-                <Text style={{fontSize: 10}}>
-                  {playlistData.tracks.total}{' '}
-                  {t('playlist.number_tracks_playlist')}
-                </Text>
-                {/* <View style={styles.inline}>
+                <View style={styles.inline}>
                   <Text
                     style={{
                       fontSize: 10,
@@ -136,7 +143,11 @@ const PlaylistScreen = ({route}: Props) => {
                     size={8}
                     color={isDarkMode ? 'white' : 'black'}
                   />
-                </View> */}
+                </View>
+                <Text style={{fontSize: 10}}>
+                  {playlistData.tracks.total}{' '}
+                  {t('playlist.number_tracks_playlist')}
+                </Text>
               </View>
             </View>
           </View>
@@ -206,10 +217,11 @@ const styles = StyleSheet.create({
     height: 88,
   },
   topContent: {
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: 8,
-    paddingRight: 16,
+    paddingHorizontal: 12,
   },
   inline: {
     columnGap: 4,
@@ -231,9 +243,19 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   columnBetween: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 8,
+  },
+  open: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    columnGap: 8,
+  },
+  openText: {
+    fontSize: 12,
+    color: '#1db954',
   },
 });
 

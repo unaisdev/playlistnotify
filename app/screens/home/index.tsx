@@ -24,6 +24,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList, RootTabsParamList} from '@app/navigation';
 import {useProfile} from '../profile/hooks/useProfile';
+import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
 
 const UpdatedPlaylistImagesList = () => {
   const [displayIndex, setDisplayIndex] = useState(0);
@@ -146,9 +147,10 @@ const HomeScreen = () => {
             alignItems: 'flex-end',
             justifyContent: 'flex-end',
           }}>
-          <Text colorReverted>Listas actualizadas</Text>
+          <Text>Listas actualizadas</Text>
         </View>
       </TouchableOpacity>
+      <PoweredBySpotify />
     </Layout>
   );
 };

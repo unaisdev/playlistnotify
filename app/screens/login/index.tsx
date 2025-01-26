@@ -9,6 +9,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import useLogin from './hooks/useLogin';
 import {RootStackParamList} from '../../navigation';
+import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -37,17 +38,7 @@ const LoginScreen = ({navigation}: Props) => {
           <Text style={{color: 'white'}}>{t('login.spotify_connect')}</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.footer}>
-        <View style={styles.footerContainer}>
-          <Text textType="light" style={{fontSize: 12, color: 'white'}}>
-            Powered by
-          </Text>
-          <Image
-            source={require('../../assets/spotify-icons-logos/logos/spotify-for-developers-white.png')}
-            style={styles.spotify_devs_logo}
-          />
-        </View>
-      </View>
+      <PoweredBySpotify />
     </Layout>
   );
 };
@@ -70,7 +61,7 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
-    width: '100%'
+    width: '100%',
   },
   footerContainer: {
     flexDirection: 'row',

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import AppModal from '@app/features/commons/modal';
@@ -21,7 +21,6 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
   const {top} = useSafeAreaInsets();
   const {user} = useUserContext();
   const {t} = useTranslation();
-
 
   const TabHeaderText = () => {
     const currentTabName = route.name || TAB_NAME_DEFAULT;
@@ -51,7 +50,17 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
     // <View style={[styles.container, {marginTop: top}]}>
     <View style={[styles.container, {marginTop: top}]}>
       <View style={styles.contentContainer}>
-        <TabHeaderText />
+        <View style={styles.leftContainer}>
+          <Image
+            style={{
+              width: 24,
+              height: 24,
+            }}
+            resizeMode="contain"
+            source={require('../../../assets/spotify-icons-logos/icons/01_RGB/02_PNG/Spotify_Icon_RGB_Green.png')}
+          />
+          <TabHeaderText />
+        </View>
         <View style={styles.rightHeader}>
           <SettingsButton />
           <ProfileImageButton />
@@ -69,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
- 
+
   contentContainer: {
     width: '100%',
     backgroundColor: 'black',
@@ -80,10 +89,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
   },
+
   rightHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 20,
+  },
+
+  leftContainer: {
+    columnGap: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 });
 

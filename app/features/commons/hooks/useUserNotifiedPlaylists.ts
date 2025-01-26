@@ -20,6 +20,8 @@ export const useUserNotifiedPlaylists = () => {
     enabled: !!user, // Start the query only when user is available
     keepPreviousData: true,
     retry: 3,
+    staleTime: 6000,
+    refetchOnWindowFocus: 'always',
   });
 
   return {
