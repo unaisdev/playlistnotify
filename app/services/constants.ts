@@ -1,4 +1,4 @@
-export const API_URL = 'https://api-spotify-playlists-0yk7-dev.fl0.io';
+export const API_URL = 'http://10.0.2.2:3000';
 export const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 
 //https://github.com/luggit/react-native-config
