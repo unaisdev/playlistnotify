@@ -26,6 +26,7 @@ import {
 
 import TabBar from './components/TabBar';
 import PlaylistsForNotifyScreen from '@app/screens/playlists-for-notify';
+
 import BootSplash from 'react-native-bootsplash';
 
 export type RootStackParamList = {
