@@ -1,19 +1,6 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 
-import {
-  ActivityIndicator,
-  Keyboard,
-  KeyboardAvoidingView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-
-import {useNavigation} from '@react-navigation/native';
-import Layout from '@app/features/commons/layout/TabLayout';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Keyboard, TouchableWithoutFeedback, View} from 'react-native';
 
 import {useSearch} from './hooks/useSearch';
 import SearchBar from './components/searchBar';
@@ -34,7 +21,7 @@ const SearchPlaylistScreen = () => {
   } = useSearch();
 
   const handleViewPress = () => {
-    console.log('pressssss')
+    console.log('pressssss');
     Keyboard.dismiss();
   };
 
@@ -51,11 +38,11 @@ const SearchPlaylistScreen = () => {
           isFetching={isFetching}
           isLoading={isLoading}
         />
-          {!data || data?.length === 0 ? (
-            <Categories />
-          ) : (
-            <SearchList searchResults={data} />
-          )}
+        {!data || data?.length === 0 ? (
+          <Categories />
+        ) : (
+          <SearchList searchResults={data} />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );

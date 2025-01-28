@@ -41,12 +41,12 @@ export const useNotifyMeButton = (playlistId: string) => {
     if (isSaved)
       return {
         color: isDarkMode ? 'white' : 'black',
-        iconName: 'notifications-active',
+        iconName: 'material-symbols:notifications-active-rounded',
       };
 
     return {
       color: 'gray',
-      iconName: 'notifications-off',
+      iconName: 'material-symbols:notifications-off-outline-rounded',
     };
   }, [isSaved]);
 

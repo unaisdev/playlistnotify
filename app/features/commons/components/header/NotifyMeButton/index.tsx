@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Monicon} from '@monicon/native';
 
 import {useNotifyMeButton} from './hooks/useNotifyMeButton';
 
@@ -35,11 +35,7 @@ const NotifyMeButton = ({id}: Props) => {
       <TouchableOpacity
         onPress={togglePlaylistSave}
         disabled={canSavePlaylist || loadingToggle}>
-        <MaterialIcons
-          name={iconProps.iconName}
-          size={26}
-          color={iconProps.color}
-        />
+        <Monicon name={iconProps.iconName} size={26} color={iconProps.color} />
       </TouchableOpacity>
     </View>
   );

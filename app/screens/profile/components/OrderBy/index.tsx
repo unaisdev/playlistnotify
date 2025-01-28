@@ -1,14 +1,13 @@
 import {StyleSheet, Touchable, TouchableOpacity, View} from 'react-native';
 
 import Text from '@app/features/commons/layout/Text';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   SORTED_TYPE_KEYS,
   useProfileContext,
 } from '@app/containers/ProfileContext';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import Monicon from '@monicon/native';
 
 type Props = {
   selectedDisplay: string;
@@ -16,12 +15,19 @@ type Props = {
   toggleSelectedDisplay: () => void;
 };
 
-const OrderBy = ({selectedDisplay, handleBottomSheetOpen, toggleSelectedDisplay}: Props) => {
+const OrderBy = ({
+  selectedDisplay,
+  handleBottomSheetOpen,
+  toggleSelectedDisplay,
+}: Props) => {
   const {sortedType} = useProfileContext();
   const {isDarkMode} = useTheme();
   const {t} = useTranslation();
 
-  const iconSelectedDisplay = selectedDisplay === 'row' ? 'view-grid-outline': 'format-list-bulleted-square'
+  const iconSelectedDisplay =
+    selectedDisplay === 'row'
+      ? 'material-symbols:grid-view'
+      : 'material-symbols:format-list-bulleted';
 
   const handlePress = () => {
     handleBottomSheetOpen();
@@ -39,15 +45,15 @@ const OrderBy = ({selectedDisplay, handleBottomSheetOpen, toggleSelectedDisplay}
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePress} style={styles.inline}>
-        <FontAwesome
-          name="unsorted"
+        <Monicon
+          name="material-symbols:sort"
           size={18}
           color={isDarkMode ? 'white' : 'black'}
         />
         <Text style={{fontSize: 12}}>{customText}</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={toggleSelectedDisplay}>
-        <MaterialCommunityIcons
+        <Monicon
           name={iconSelectedDisplay}
           size={18}
           color={isDarkMode ? 'white' : 'black'}

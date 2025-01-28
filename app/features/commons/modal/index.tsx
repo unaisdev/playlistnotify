@@ -1,7 +1,7 @@
 import {Alert, Modal, Pressable, StyleSheet, View} from 'react-native';
 
 import Text from '@app/features/commons/layout/Text';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Monicon} from '@monicon/native';
 
 import Layout from '../layout/TabLayout';
 
@@ -27,7 +27,7 @@ const AppModal = ({modalVisible, toggleModal}: Props) => {
             testID="closeModalButton"
             style={[styles.button, styles.buttonClose]}
             onPress={() => toggleModal()}>
-            <MaterialCommunityIcons name="close" size={22} color={'black'} />
+            <Monicon name="close" size={22} color={'black'} />
           </Pressable>
         </View>
 
@@ -49,8 +49,8 @@ const AppModal = ({modalVisible, toggleModal}: Props) => {
                 backgroundColor: '#4CAF50',
                 justifyContent: 'space-between',
               }}>
-              <MaterialCommunityIcons
-                name="beta"
+              <Monicon
+                name="mdi:beta"
                 size={22}
                 color={'black'}
                 style={{padding: 8}}

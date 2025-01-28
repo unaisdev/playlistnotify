@@ -11,10 +11,10 @@ import Animated, {
 import {PlaylistModel} from '@app/services/types';
 import Text from '@app/features/commons/layout/Text';
 import {RootStackParamList} from '@app/navigation';
-import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import Monicon from '@monicon/native';
 
 type Props = {
   selectedDisplay: string;
@@ -92,8 +92,8 @@ const PlaylistItem = ({item, index, selectedDisplay}: Props) => {
                     alignItems: 'center',
                     gap: 4,
                   }}>
-                  <Feather
-                    name="user"
+                  <Monicon
+                    name="material-symbols:person"
                     size={8}
                     color={isDarkMode ? 'white' : 'black'}
                   />

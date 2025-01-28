@@ -3,24 +3,17 @@ import {RefObject, useMemo, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
   ActivityIndicator,
-  Keyboard,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import Animated, {
-  FadeInDown,
   FadeInLeft,
   FadeOutLeft,
-  FadeOutRight,
   Layout,
 } from 'react-native-reanimated';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import {useSearch} from '../../hooks/useSearch';
+import Monicon from '@monicon/native';
 
 type Props = {
   searchPhrase: string;
@@ -66,7 +59,7 @@ const SearchBar = ({
             entering={FadeInLeft.duration(300)}
             exiting={FadeOutLeft}
             style={{marginRight: 12}}>
-            <MaterialIcons name="search" size={20} color="white" />
+            <Monicon name="mdi:search" size={20} color="white" />
           </Animated.View>
         )}
 
@@ -82,7 +75,11 @@ const SearchBar = ({
         />
         {userHasTypedOnInput && (
           <TouchableOpacity onPress={handleClear}>
-            <MaterialCommunityIcons name="close" size={16} color={'white'} />
+            <Monicon
+              name="material-symbols:close-rounded"
+              size={16}
+              color={'white'}
+            />
           </TouchableOpacity>
         )}
       </Animated.View>
@@ -95,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     width: '100%',
-    backgroundColor: 'red'
+    backgroundColor: 'red',
   },
   searchBar: {
     height: 60,

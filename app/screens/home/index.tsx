@@ -1,25 +1,9 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useState} from 'react';
 
-import {useTranslation} from 'react-i18next';
-import {
-  ActivityIndicator,
-  Image,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import Text from '@app/features/commons/layout/Text';
 import Layout from '@app/features/commons/layout/TabLayout';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
-import BottomSheetUpdatedPlaylist from '@app/features/commons/components/BottomSheetFor';
-
-import PlaylistList from '../playlists-for-notify/components/PlaylistList';
-import BottomSheetFooter from '../playlists-for-notify/components/BottomSheetFooter';
-import BottomSheetContent from '../playlists-for-notify/components/BottomSheetContent';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList, RootTabsParamList} from '@app/navigation';

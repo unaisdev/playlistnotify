@@ -1,21 +1,12 @@
-import {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
 
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
-
-import Text from '@app/features/commons/layout/Text';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   SELECT_FILTERS,
   useProfileFiltersStore,
 } from '@app/features/stores/ProfileStore';
 
 import FilterItem from './FilterItem';
-import {
-  SORTED_TYPE_KEYS,
-  useProfileContext,
-} from '@app/containers/ProfileContext';
-
 type Props = {
   filterAll: () => void;
   filterOwnPlaylists: () => void;

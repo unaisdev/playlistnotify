@@ -3,7 +3,7 @@ import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Monicon} from '@monicon/native';
 
 import {RootStackParamList} from '../../../../../navigation';
 
@@ -24,7 +24,7 @@ const GoBackButton = ({}: Props) => {
 
   return (
     <TouchableOpacity style={{height: 28}} onPress={handlePress}>
-      <MaterialCommunityIcons name="arrow-left" size={22} color={color} />
+      <Monicon name="material-symbols:arrow-back-ios" size={22} color={color} />
     </TouchableOpacity>
   );
 };
