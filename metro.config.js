@@ -1,11 +1,18 @@
-const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+// metro.config.js
+const {getDefaultConfig} = require('@react-native/metro-config');
+const {withMonicon} = require('@monicon/metro');
+const config = getDefaultConfig(__dirname);
 
-/**
- * Metro configuration
- * https://reactnative.dev/docs/metro
- *
- * @type {import('@react-native/metro-config').MetroConfig}
- */
-const config = {};
+config.resolver.blockList = [/@monicon\/runtime/].concat(
+  config.resolver.blockList,
+);
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+module.exports = withMonicon(config, {
+  icons: [
+    'feather:activity',
+    'logos:active-campaign',
+    'lucide:badge-check',
+    'mdi:home',
+  ],
+  collections: ['radix-icons'], // entire collection if you do not want to list icons
+});

@@ -23,6 +23,7 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+import {Monicon} from '@monicon/native';
 
 import TabBar from './components/TabBar';
 import PlaylistsForNotifyScreen from '@app/screens/playlists-for-notify';
@@ -79,10 +80,11 @@ const Tabs = () => {
           headerRight: () => <></>,
           headerTitle: () => <></>,
           tabBarIcon: ({color, size, focused}) => (
-            <MaterialCommunityIcons
-              name={focused ? 'home' : 'home-outline'}
-              size={size}
+            <Monicon
+              name="mdi:home"
               color={color}
+              size={size}
+              strokeWidth={focused ? 2 : 1}
             />
           ),
           tabBarLabel: () => <></>,
