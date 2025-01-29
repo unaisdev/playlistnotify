@@ -32,6 +32,8 @@ module.exports = withMonicon(config, {
     'material-symbols:arrow-right-alt',
     'material-symbols:settings-rounded',
     'material-symbols:person',
+    'nrk:media-playlist-add',
+    'nrk:media-playlist-remove',
   ],
   collections: ['radix-icons'], // entire collection if you do not want to list icons
 });

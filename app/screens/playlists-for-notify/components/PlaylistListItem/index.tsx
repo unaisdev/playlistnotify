@@ -124,8 +124,8 @@ const PlaylistListItem = ({
               <View style={styles.inlineBetween}>
                 <View style={styles.inline}>
                   <Monicon
-                    name="octicon:diff-added-16"
-                    size={12}
+                    name="nrk:media-playlist-add"
+                    size={18}
                     color={isDarkMode ? 'white' : 'black'}
                   />
                   <Text style={{fontSize: 12}}>
@@ -135,8 +135,8 @@ const PlaylistListItem = ({
                 </View>
                 <View style={styles.inline}>
                   <Monicon
-                    name="octicon:diff-removed-16"
-                    size={12}
+                    name="nrk:media-playlist-remove"
+                    size={18}
                     color={isDarkMode ? 'white' : 'black'}
                   />
                   <Text style={{fontSize: 12}}>
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     gap: 8,
   },
-  infoContainer: {
+  infoContainer: {^
     padding: 8,
     flexGrow: 1,
     // backgroundColor: 'gray',
