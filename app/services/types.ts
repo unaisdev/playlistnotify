@@ -152,7 +152,7 @@ export interface Track {
       height: number;
       width: number;
     }[];
-    name: string;
+    name?: string;
     popularity: number;
     type: string;
     uri: string;
