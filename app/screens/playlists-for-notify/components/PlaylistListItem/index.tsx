@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     gap: 8,
   },
-  infoContainer: {^
+  infoContainer: {
     padding: 8,
     flexGrow: 1,
     // backgroundColor: 'gray',
