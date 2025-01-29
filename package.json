@@ -14,6 +14,7 @@
     "@monicon/metro": "^1.2.2",
     "@monicon/native": "^1.2.2",
     "@monicon/webpack": "^1.2.2",
+    "@notifee/react-native": "^9.1.8",
     "@react-native-async-storage/async-storage": "2.1.0",
     "@react-native-community/cli-doctor": "11.3.6",
     "@react-navigation/bottom-tabs": "6.5.8",
@@ -39,6 +40,7 @@
     "react-native-swiper-flatlist": "3.2.5",
     "react-native-vector-icons": "10.2.0",
     "react-native-webview": "13.13.1",
+    "reactotron-react-native": "5.1.12",
     "zustand": "4.4.1"
   },
   "devDependencies": {
