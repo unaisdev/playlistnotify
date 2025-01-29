@@ -68,7 +68,7 @@ const Tabs = () => {
       })}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={PlaylistsForNotifyScreen}
         options={{
           headerLeft: () => <></>,
           headerRight: () => <></>,

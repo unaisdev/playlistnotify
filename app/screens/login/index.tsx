@@ -38,7 +38,9 @@ const LoginScreen = ({navigation}: Props) => {
           <Text style={{color: 'white'}}>{t('login.spotify_connect')}</Text>
         </TouchableOpacity>
       </View>
-      <PoweredBySpotify />
+      <View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 40}}>
+        <PoweredBySpotify />
+      </View>
     </Layout>
   );
 };

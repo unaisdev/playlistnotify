@@ -41,7 +41,9 @@ const SearchPlaylistScreen = () => {
         {!data || data?.length === 0 ? (
           <Categories />
         ) : (
-          <SearchList searchResults={data} />
+          !isLoading && (
+            <SearchList searchResults={data.filter(data => data != null)} />
+          )
         )}
       </View>
     </TouchableWithoutFeedback>

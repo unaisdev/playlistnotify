@@ -23,6 +23,7 @@ import Text from '@app/features/commons/layout/Text';
 import BottomSheetFooter from './components/BottomSheetFooter';
 import Animated, {FadeIn} from 'react-native-reanimated';
 import Monicon from '@monicon/native';
+import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
 
 type Props = {
   isLoading: boolean;
@@ -147,11 +148,12 @@ const PlaylistsForNotifyScreen = () => {
                 <Monicon
                   name="material-symbols:notifications-active-rounded"
                   size={24}
-                  color={'black'}
+                  color={'gray'}
                 />
               </View>
             </View>
           </View>
+          <PoweredBySpotify />
         </ScrollView>
       </Layout>
     );
