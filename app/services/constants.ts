@@ -43,6 +43,7 @@ export const ENCRYPTED_STORAGE = {
 export const ASYNC_STORAGE = {
   THEME: 'theme',
   LANGUAGE: 'language',
+  FORBIDDEN_ERROR: '403Error',
 };
 
 export const DEFAULT_PROFILE_IMAGE_URL =
