@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {API_URL, ENCRYPTED_STORAGE, AUTH_CONFIG} from './constants';
-import useLogin from '../screens/login/hooks/useLogin';
 import {refresh} from 'react-native-app-auth';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {triggerForbiddenError} from '@app/features/events/forbiddenError';
 
 const HttpClient = axios.create();
 
@@ -74,6 +75,16 @@ HttpClient.interceptors.response.use(
       console.log(refreshed.accessToken, 'refreshToken conseguido!');
     }
 
+    if (error.response && error.response.status === 403) {
+      const errorUrl = error.response.config.url;
+
+      if (errorUrl.includes('api.spotify.com')) {
+        console.log('Error 403 de la API de Spotify detectado');
+        await triggerForbiddenError();
+      } else {
+        console.log('Error 403 de otra API detectado');
+      }
+    }
     return Promise.reject(error);
   },
 );
