@@ -74,6 +74,7 @@ const FilterLists = ({
           filterFn={handleTapFilterSpotify}
           filterText="De Spotify"
           isSelected={selectedFilter === 'SpotifyFilter'}
+          showSpotifyIcon
         />
       </ScrollView>
     </View>
