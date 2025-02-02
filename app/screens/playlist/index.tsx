@@ -72,7 +72,7 @@ const PlaylistScreen = ({route}: Props) => {
 
   const gradientColors = isDarkMode ? darkModeColors : lightModeColors;
 
-  if (!playlistData) return;
+  if (!playlistData) return null;
 
   return (
     <SafeAreaView style={{flex: 1}}>

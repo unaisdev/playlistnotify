@@ -82,7 +82,9 @@ const PlaylistsForNotifyScreen = () => {
       </View>
     );
 
-  if (!userNotifiedPlaylists) return;
+  if (!userNotifiedPlaylists) {
+    return null;
+  }
 
   if (userNotifiedPlaylists?.length === 0)
     return (

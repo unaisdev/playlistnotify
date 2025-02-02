@@ -45,7 +45,7 @@ const Tab = createBottomTabNavigator<RootTabsParamList>();
 const Tabs = () => {
   const {user} = fetchUserProfile();
 
-  if (!user) return;
+  if (!user) return null;
 
   return (
     <Tab.Navigator
