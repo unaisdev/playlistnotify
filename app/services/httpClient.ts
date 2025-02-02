@@ -76,7 +76,7 @@ HttpClient.interceptors.response.use(
     }
 
     if (error.response && error.response.status === 403) {
-      const errorUrl = error.response.config.url;
+      const errorUrl = error.response.config.baseURL;
 
       if (errorUrl.includes('api.spotify.com')) {
         console.log('Error 403 de la API de Spotify detectado');

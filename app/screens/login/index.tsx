@@ -17,6 +17,7 @@ type Props = {
 
 const LoginScreen = ({navigation}: Props) => {
   const {handleLogin, isTokenValid, refreshToken, init} = useLogin(navigation);
+
   const {t} = useTranslation();
 
   useEffect(() => {

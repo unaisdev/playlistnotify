@@ -23,6 +23,10 @@ import TabBar from './components/TabBar';
 import PlaylistsForNotifyScreen from '@app/screens/playlists-for-notify';
 
 import BootSplash from 'react-native-bootsplash';
+import {useForbiddenError} from '@app/hooks/useForbiddenError';
+import Layout from '@app/features/commons/layout/TabLayout';
+import {Text} from 'react-native-gesture-handler';
+import {BetaScreen} from '@app/screens/beta';
 
 export type RootStackParamList = {
   Tabs: undefined;
@@ -138,6 +142,7 @@ const Tabs = () => {
 
 const AppNavigator = () => {
   const {isDarkMode, setTheme} = useTheme();
+  const {error} = useForbiddenError();
 
   useEffect(() => {
     const init = async () => {
@@ -152,6 +157,10 @@ const AppNavigator = () => {
 
     init();
   }, []);
+
+  if (error) {
+    return <BetaScreen />;
+  }
 
   return (
     <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
