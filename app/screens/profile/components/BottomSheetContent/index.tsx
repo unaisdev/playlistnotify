@@ -3,7 +3,6 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import Text from '@app/features/commons/layout/Text';
 import Layout from '@app/features/commons/layout/TabLayout';
-import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {
   SORTED_TYPE_KEYS,
   useProfileContext,
@@ -11,6 +10,7 @@ import {
 import {useTranslation} from 'react-i18next';
 import {BottomSheetView} from '@gorhom/bottom-sheet';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import Monicon from '@monicon/native';
 
 type Props = {
   sortAlphabetical: () => void;
@@ -86,7 +86,11 @@ const BottomSheetProfileContent = ({
                   {customText}
                 </Text>
                 {sortedType === key && (
-                  <FontAwesome6 name="check" size={18} color={'green'} />
+                  <Monicon
+                    name="material-symbols:check"
+                    size={18}
+                    color={'green'}
+                  />
                 )}
               </TouchableOpacity>
             );

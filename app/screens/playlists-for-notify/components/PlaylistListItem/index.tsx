@@ -9,7 +9,6 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import Text from '@app/features/commons/layout/Text';
-import Octicons from 'react-native-vector-icons/Octicons';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 
@@ -17,6 +16,7 @@ import SkeletonItem from './components/SkeletonItem';
 import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
 import {useBottomSheetContext} from '../../../../containers/BottomSheetHomeContext';
 import {usePlaylistAllTracks} from '../../../../features/commons/hooks/usePlaylistAllTracks';
+import Monicon from '@monicon/native';
 
 interface Props {
   playlistId: string;
@@ -123,9 +123,9 @@ const PlaylistListItem = ({
             ) : (
               <View style={styles.inlineBetween}>
                 <View style={styles.inline}>
-                  <Octicons
-                    name="diff-added"
-                    size={12}
+                  <Monicon
+                    name="nrk:media-playlist-add"
+                    size={18}
                     color={isDarkMode ? 'white' : 'black'}
                   />
                   <Text style={{fontSize: 12}}>
@@ -134,9 +134,9 @@ const PlaylistListItem = ({
                   </Text>
                 </View>
                 <View style={styles.inline}>
-                  <Octicons
-                    name="diff-removed"
-                    size={12}
+                  <Monicon
+                    name="nrk:media-playlist-remove"
+                    size={18}
                     color={isDarkMode ? 'white' : 'black'}
                   />
                   <Text style={{fontSize: 12}}>

@@ -25,8 +25,10 @@ const formatDuration = (duration: number) => {
 const TrackItem = ({item}: Props) => {
   const artists = item.track.artists.map((artist, index) => {
     // Capitalize the first letter of each artist name
-    const formattedName =
-      artist.name.charAt(0).toUpperCase() + artist.name.slice(1);
+    const formattedName = artist.name
+      ?.charAt(0)
+      .toUpperCase()
+      .concat(artist.name?.slice(1));
 
     // Separate artists with commas, except for the last one
     const separator = index === item.track.artists.length - 1 ? '' : ', ';

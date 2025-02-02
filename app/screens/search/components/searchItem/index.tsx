@@ -9,13 +9,13 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import Text from '@app/features/commons/layout/Text';
-import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {PlaylistModel} from '../../../../services/types';
 import {RootStackParamList} from '../../../../navigation';
+import Monicon from '@monicon/native';
 
 type Props = {
   item: PlaylistModel;
@@ -82,8 +82,8 @@ const SearchItem = ({item, index}: Props) => {
                 alignItems: 'center',
                 gap: 4,
               }}>
-              <Feather
-                name="user"
+              <Monicon
+                name="material-symbols:person"
                 size={8}
                 color={isDarkMode ? 'white' : 'black'}
               />

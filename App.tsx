@@ -1,4 +1,8 @@
-import React from 'react';
+if (__DEV__) {
+  require('./ReactotronConfig');
+}
+
+import React, {useEffect} from 'react';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import StackNavigation from './app/navigation';
 import {UserProvider} from './app/containers/UserContext';
@@ -12,7 +16,7 @@ import MyStatusBar from '@app/features/commons/components/StatusBar';
 import {BottomSheetHomeProvider} from '@app/containers/BottomSheetHomeContext';
 import GlobalContext from '@app/containers';
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const App = () => {
   return (

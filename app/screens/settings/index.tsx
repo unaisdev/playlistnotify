@@ -8,14 +8,13 @@ import {RootStackParamList} from '@app/navigation';
 import {useNavigation} from '@react-navigation/native';
 import Layout from '@app/features/commons/layout/TabLayout';
 import {ENCRYPTED_STORAGE} from '@app/services/constants';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useLanguage} from '@app/features/commons/hooks/useLanguage';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {useState} from 'react';
 import AppModal from '@app/features/commons/modal';
+import Monicon from '@monicon/native';
 
 const logoutUser = async () => {
   await EncryptedStorage.removeItem(ENCRYPTED_STORAGE.AUTH_TOKEN);
@@ -59,8 +58,8 @@ const SettingsScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={[styles.inlineGap, {padding: 20}]}>
-          <MaterialIcons
-            name="app-settings-alt"
+          <Monicon
+            name="material-symbols:settings"
             color={isDarkMode ? 'white' : 'black'}
             size={20}
           />
@@ -76,8 +75,8 @@ const SettingsScreen = () => {
 
               <View style={styles.inlineGap}>
                 <Switch value={isDarkMode} onChange={() => toggleTheme()} />
-                <MaterialCommunityIcons
-                  name="theme-light-dark"
+                <Monicon
+                  name="mdi:theme-light-dark"
                   color={isDarkMode ? 'white' : 'black'}
                   size={20}
                 />
@@ -99,8 +98,8 @@ const SettingsScreen = () => {
                     );
                   })}
                 </View>
-                <FontAwesome
-                  name="language"
+                <Monicon
+                  name="material-symbols:translate-rounded"
                   color={isDarkMode ? 'white' : 'black'}
                   size={20}
                 />
@@ -111,7 +110,7 @@ const SettingsScreen = () => {
       </View>
 
       <TouchableOpacity onPress={handleLogout} style={styles.itemLogout}>
-        <MaterialCommunityIcons name="logout" color={'black'} size={16} />
+        <Monicon name="material-symbols:logout" color={'black'} size={16} />
         <Text>{t('settings.logout')}</Text>
       </TouchableOpacity>
       <AppModal modalVisible={betaModalVisible} toggleModal={toggleModal} />

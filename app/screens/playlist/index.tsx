@@ -12,8 +12,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import Feather from 'react-native-vector-icons/Feather';
-
 import {SafeAreaView} from 'react-native-safe-area-context';
 import TrackList from './components/TrackList';
 
@@ -27,6 +25,7 @@ import Layout from '@app/features/commons/layout/TabLayout';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import Text from '@app/features/commons/layout/Text';
 import {useTranslation} from 'react-i18next';
+import Monicon from '@monicon/native';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;
@@ -73,7 +72,7 @@ const PlaylistScreen = ({route}: Props) => {
 
   const gradientColors = isDarkMode ? darkModeColors : lightModeColors;
 
-  if (!playlistData) return;
+  if (!playlistData) return null;
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -110,8 +109,8 @@ const PlaylistScreen = ({route}: Props) => {
                 onPress={() => {
                   Linking.openURL(playlistData.owner.uri);
                 }}>
-                <Feather
-                  name="user"
+                <Monicon
+                  name="material-symbols:person"
                   size={8}
                   color={isDarkMode ? 'white' : 'black'}
                 />
@@ -138,8 +137,8 @@ const PlaylistScreen = ({route}: Props) => {
                     }}>
                     {playlistData?.followers.total}
                   </Text>
-                  <Feather
-                    name="users"
+                  <Monicon
+                    name="solar:users-group-two-rounded-bold"
                     size={8}
                     color={isDarkMode ? 'white' : 'black'}
                   />

@@ -20,9 +20,10 @@ import BottomSheetUpdatedPlaylist from '@app/features/commons/components/BottomS
 import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 import {useHome} from './hooks';
 import Text from '@app/features/commons/layout/Text';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import BottomSheetFooter from './components/BottomSheetFooter';
 import Animated, {FadeIn} from 'react-native-reanimated';
+import Monicon from '@monicon/native';
+import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
 
 type Props = {
   isLoading: boolean;
@@ -81,7 +82,9 @@ const PlaylistsForNotifyScreen = () => {
       </View>
     );
 
-  if (!userNotifiedPlaylists) return;
+  if (!userNotifiedPlaylists) {
+    return null;
+  }
 
   if (userNotifiedPlaylists?.length === 0)
     return (
@@ -134,20 +137,25 @@ const PlaylistsForNotifyScreen = () => {
               </Text>
               <View
                 style={[styles.inline, {flex: 1, justifyContent: 'center'}]}>
-                <MaterialIcon
-                  name="notifications-off"
+                <Monicon
+                  name="material-symbols:notifications-off-outline-rounded"
                   size={24}
                   color={'gray'}
                 />
-                <MaterialIcon name="arrow-right-alt" size={24} color={'gray'} />
-                <MaterialIcon
-                  name="notifications-active"
+                <Monicon
+                  name="material-symbols:arrow-right-alt"
                   size={24}
-                  color={'black'}
+                  color={'gray'}
+                />
+                <Monicon
+                  name="material-symbols:notifications-active-rounded"
+                  size={24}
+                  color={'gray'}
                 />
               </View>
             </View>
           </View>
+          <PoweredBySpotify />
         </ScrollView>
       </Layout>
     );

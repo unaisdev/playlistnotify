@@ -6,26 +6,22 @@ import ProfileScreen from '@app/screens/profile';
 import PlaylistScreen from '@app/screens/playlist';
 import SettingsScreen from '@app/screens/settings';
 import SearchPlaylistScreen from '@app/screens/search';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {getThemeFromStorage} from '@app/services/storage';
 import TabHeader from '@app/navigation/components/TabHeader';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
 import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
 } from '@react-navigation/native';
-import {
-  BottomTabBar,
-  BottomTabBarProps,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Monicon} from '@monicon/native';
 
 import TabBar from './components/TabBar';
 import PlaylistsForNotifyScreen from '@app/screens/playlists-for-notify';
+
 import BootSplash from 'react-native-bootsplash';
 
 export type RootStackParamList = {
@@ -49,7 +45,7 @@ const Tab = createBottomTabNavigator<RootTabsParamList>();
 const Tabs = () => {
   const {user} = fetchUserProfile();
 
-  if (!user) return;
+  if (!user) return null;
 
   return (
     <Tab.Navigator
@@ -72,16 +68,17 @@ const Tabs = () => {
       })}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={PlaylistsForNotifyScreen}
         options={{
           headerLeft: () => <></>,
           headerRight: () => <></>,
           headerTitle: () => <></>,
           tabBarIcon: ({color, size, focused}) => (
-            <MaterialCommunityIcons
-              name={focused ? 'home' : 'home-outline'}
-              size={size}
+            <Monicon
+              name="mdi:home"
               color={color}
+              size={size}
+              strokeWidth={focused ? 2 : 1}
             />
           ),
           tabBarLabel: () => <></>,
@@ -105,10 +102,11 @@ const Tabs = () => {
           headerRight: () => <></>,
           headerTitle: () => <></>,
           tabBarIcon: ({color, size, focused}) => (
-            <Ionicons
-              name={focused ? 'search' : 'search-outline'}
-              size={size}
+            <Monicon
+              name="mdi:search"
               color={color}
+              size={size}
+              strokeWidth={focused ? 2 : 1}
             />
           ),
           tabBarLabel: () => <></>,

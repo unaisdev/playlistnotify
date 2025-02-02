@@ -8,6 +8,7 @@ import {
   removePlaylistForNotify,
   savePlaylistForNotify,
 } from '@app/services/playlist';
+import {queryClient} from '../../../../../../../App';
 
 export const useNotifyMeButton = (playlistId: string) => {
   const {isDarkMode} = useTheme();
@@ -41,12 +42,12 @@ export const useNotifyMeButton = (playlistId: string) => {
     if (isSaved)
       return {
         color: isDarkMode ? 'white' : 'black',
-        iconName: 'notifications-active',
+        iconName: 'material-symbols:notifications-active-rounded',
       };
 
     return {
       color: 'gray',
-      iconName: 'notifications-off',
+      iconName: 'material-symbols:notifications-off-outline-rounded',
     };
   }, [isSaved]);
 
@@ -58,9 +59,11 @@ export const useNotifyMeButton = (playlistId: string) => {
         if (!isSaved) {
           // Always save the playlist, regardless of hasNextPage
           await savePlaylistForNotify(playlistId, tracks, user?.id);
+          queryClient.invalidateQueries({queryKey: ['userPlaylists']});
           setIsSaved(true);
         } else {
           await removePlaylistForNotify(playlistId, user?.id);
+          queryClient.invalidateQueries({queryKey: ['userPlaylists']});
           setIsSaved(false);
         }
       } catch (error) {
