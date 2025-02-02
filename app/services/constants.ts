@@ -1,4 +1,8 @@
-export const API_URL = 'https://apispotifyplaylists-production.up.railway.app';
+const API_URL_PROD = 'https://apispotifyplaylists-production.up.railway.app';
+const API_URL_DEV = 'http://10.0.2.2:3000';
+
+export const API_URL = API_URL_DEV;
+
 export const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 
 //https://github.com/luggit/react-native-config

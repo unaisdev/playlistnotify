@@ -58,7 +58,7 @@ export const savePlaylistForNotify = async (
   try {
     const data = await HttpClient<boolean>({
       baseURL: API_URL,
-      url: '/addPlaylistForNotify',
+      url: '/playlist/add',
       method: 'post',
       data: {
         playlistId: playlistId,
@@ -84,7 +84,7 @@ export const removePlaylistForNotify = async (
 ) => {
   const data = await HttpClient<boolean>({
     baseURL: API_URL,
-    url: '/deleteUserPlaylistsForNotify',
+    url: '/playlist/delete',
     method: 'post',
     data: {
       playlistId: playlistId,
@@ -104,7 +104,7 @@ export const isSavedPlaylistForNotify = async (
 ) => {
   return await HttpClient<boolean>({
     baseURL: API_URL,
-    url: '/isSavedPlaylistsForNotify',
+    url: '/playlist/saved',
     method: 'post',
     data: {
       playlistId: playlistId,

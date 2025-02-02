@@ -52,7 +52,7 @@ export const getUserPlaylists = async (
 export const getUserNotifiedPlaylists = async (userId: string) => {
   const {data} = await HttpClient<UserAddedPlaylistsResponse[]>({
     baseURL: API_URL,
-    url: '/getUserPlaylistsForNotify', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    url: '/playlist/getAll', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
     method: 'post',
     data: {
       userId: userId,
