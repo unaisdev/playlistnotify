@@ -67,7 +67,7 @@ export const registerUser = async (user: User) => {
 
   const data = await HttpClient<User>({
     baseURL: API_URL,
-    url: '/register', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
+    url: '/user/register', // Utiliza el valor de 'next' si está presente, de lo contrario, usa '/me/playlists'
     method: 'post',
     data: {
       user: user,
