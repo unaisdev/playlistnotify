@@ -3,15 +3,14 @@ import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
 
-@main
-class AppDelegate: RCTAppDelegate {
+@UIApplicationMain
+class AppDelegate: RCTAppDelegate, RNAppAuthAuthorizationFlowManager {
+  public weak var authorizationFlowManagerDelegate: RNAppAuthAuthorizationFlowManagerDelegate?
+
   override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     self.moduleName = "playlistnotify"
     self.dependencyProvider = RCTAppDependencyProvider()
-
-    // You can add your custom initial props in the dictionary below.
-    // They will be passed down to the ViewController used by React Native.
-    self.initialProps = [:]
+    self.initialProps = [:] // Puedes agregar props iniciales aquí
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
@@ -22,9 +21,18 @@ class AppDelegate: RCTAppDelegate {
 
   override func bundleURL() -> URL? {
 #if DEBUG
-    RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
+    return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
 #else
-    Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+    return Bundle.main.url(forResource: "main", withExtension: "jsbundle")
 #endif
+  }
+
+  // Manejo del redireccionamiento OAuth
+  override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    if let authorizationFlowManagerDelegate = authorizationFlowManagerDelegate,
+       authorizationFlowManagerDelegate.resumeExternalUserAgentFlow(with: url) {
+      return true
+    }
+    return RCTLinkingManager.application(app, open: url, options: options)
   }
 }
