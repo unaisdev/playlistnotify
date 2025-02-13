@@ -46,15 +46,6 @@ jobs:
       - name: Asegurar permisos del script
         run: chmod +x ./android/fastlane/bump-release-numbers.sh
 
-      - name: Generate Android JS bundle
-        run: |
-          npx react-native bundle \
-            --platform android \
-            --dev false \
-            --entry-file index.js \
-            --bundle-output android/app/src/main/assets/index.android.bundle \
-            --assets-dest android/app/src/main/res
-
       - name: Ejecutar Fastlane Deploy
         uses: maierj/fastlane-action@v3.1.0
         with:
