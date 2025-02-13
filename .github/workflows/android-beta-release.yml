@@ -31,11 +31,13 @@ jobs:
         run: |
           yarn install --frozen-lockfile
 
+      - name: Instalar Bundler (si es necesario)
+        run: gem install bundler
+
+
       - name: Eliminar configuración de deployment de Bundler
         run: bundle config --delete deployment
 
-      - name: Instalar Bundler (si es necesario)
-        run: gem install bundler
 
       - name: Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
