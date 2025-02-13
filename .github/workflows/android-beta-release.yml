@@ -25,11 +25,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.19.0'
-          cache: 'yarn'
+          # cache: 'yarn'  # Deshabilitar caché temporalmente
 
       - name: Install dependencies
         run: |
           yarn install --frozen-lockfile
+
+      - name: Verificar instalación de dependencias
+        run: |
+          yarn check
+          bundle check
 
       - name: Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
@@ -46,12 +51,22 @@ jobs:
       - name: Asegurar permisos del script
         run: chmod +x ./android/fastlane/bump-release-numbers.sh
 
+      - name: Listar estructura de archivos
+        run: |
+          echo "Estructura de archivos:"
+          ls -R
+
       - name: Ejecutar Fastlane Deploy
         uses: maierj/fastlane-action@v3.1.0
         with:
           lane: 'deploy'
           subdirectory: 'android'
           options: '{ "version_type": "${{ github.event.inputs.version_type }}" }'
+
+      - name: Crear bundle de release (depuración)
+        run: |
+          cd android
+          ./gradlew createBundleReleaseJsAndAssets
 
       - name: Borrar keys.json (seguridad)
         if: always()
