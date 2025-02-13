@@ -15,12 +15,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-          bundler-cache: true  # Activar caché para el resto de pasos
+          bundler-cache: false  # Desactivamos el cache para evitar problemas con deployment mode
 
       - name: Instalar dependencias del proyecto
         run: |
           gem install bundler
-          bundle install --no-cache  # Deshabilitar caché solo en este paso
+          bundle config set --local deployment 'false'
+          bundle install
 
       - name: Crear keys.json en fastlane/secrets
         run: |
