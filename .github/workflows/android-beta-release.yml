@@ -20,6 +20,7 @@ jobs:
       - name: Instalar dependencias del proyecto
         run: |
           gem install bundler -v 2.4.22
+          rm -f Gemfile.lock
           bundle install
 
       - name: Crear keys.json en fastlane/secrets
