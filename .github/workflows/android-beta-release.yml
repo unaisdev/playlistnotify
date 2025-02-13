@@ -38,6 +38,12 @@ jobs:
           bundler-cache: true
           working-directory: './'
 
+      - name: Eliminar configuración de deployment de Bundler
+        run: bundle config --delete deployment
+
+      - name: Instalar Bundler (si es necesario)
+        run: gem install bundler
+
       - name: Crear keys.json en fastlane/secrets
         run: |
           mkdir -p ./fastlane/secrets
