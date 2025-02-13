@@ -54,6 +54,9 @@ jobs:
           working-directory: './android'
 
       - name: Install bundle
+        run: gem install bundler
+
+      - name: Install bundle for app
         run: bundle install
 
       - name: Crear keys.json en fastlane/secrets
