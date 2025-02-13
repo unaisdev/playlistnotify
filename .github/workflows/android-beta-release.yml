@@ -30,7 +30,7 @@ jobs:
           echo "${{ secrets.KEYS_JSON }}" > ./fastlane/secrets/keys.json
 
       - name: Asegurar permisos del script
-        run: chmod +x ./bump-release-numbers.sh
+        run: chmod +x ./android/fastlane/bump-release-numbers.sh
 
       - name: Ejecutar Fastlane Deploy
         uses: maierj/fastlane-action@v3.1.0
