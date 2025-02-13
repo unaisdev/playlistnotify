@@ -1,4 +1,4 @@
-name: Deploy Android con Fastlane  # Nombre del workflow
+name: Deploy Android con Fastlane
 
 on:
   workflow_dispatch:
@@ -8,28 +8,36 @@ on:
         required: true
         type: choice
         options:
-          - 'major'  # X.0.0
-          - 'minor'  # N.X.0
-          - 'patch'  # N.N.X
+          - 'major'
+          - 'minor'
+          - 'patch'
         default: 'patch'
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Azul Zulu JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'  # Usa Azul Zulu como distribución de Java
+
+      - name: Verificar versión de Java
+        run: java -version
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18.19.0'
-          # cache: 'yarn'  # Deshabilitar caché temporalmente
+          cache: 'yarn'
 
       - name: Install dependencies
         run: |
-          rm -rf node_modules yarn.lock
           yarn install
 
       - name: Configurar Ruby y Bundler
@@ -47,22 +55,12 @@ jobs:
       - name: Asegurar permisos del script
         run: chmod +x ./android/fastlane/bump-release-numbers.sh
 
-      - name: Listar estructura de archivos
-        run: |
-          echo "Estructura de archivos:"
-          ls -R
-
       - name: Ejecutar Fastlane Deploy
         uses: maierj/fastlane-action@v3.1.0
         with:
           lane: 'deploy'
           subdirectory: 'android'
           options: '{ "version_type": "${{ github.event.inputs.version_type }}" }'
-
-      - name: Crear bundle de release (depuración)
-        run: |
-          cd android
-          ./gradlew createBundleReleaseJsAndAssets
 
       - name: Borrar keys.json (seguridad)
         if: always()
