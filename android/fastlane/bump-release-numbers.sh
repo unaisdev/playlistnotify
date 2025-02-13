@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Ruta del archivo build.gradle (ajusta la ruta si es necesario)
+# Ruta del archivo build.gradle
 GRADLE_FILE="../app/build.gradle"
 
 # Clean .cxx folder
@@ -29,29 +29,28 @@ fi
 # Desglosa la versión en major, minor y patch
 IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION_NAME"
 
-# Pregunta qué parte se quiere incrementar
-echo "Versión actual: $CURRENT_VERSION_NAME"
-echo "Selecciona el tipo de versión a incrementar:"
-echo "1) Major (X.0.0)"
-echo "2) Minor ($MAJOR.X.0)"
-echo "3) Patch ($MAJOR.$MINOR.X)"
-read -r -p "Ingresa tu elección (1/2/3): " CHOICE </dev/tty
+# Lee la opción desde stdin
+read -r CHOICE
 
+# Valida y procesa la opción
 case $CHOICE in
   1)
+    echo "Incrementando versión Major"
     MAJOR=$((MAJOR + 1))
     MINOR=0
     PATCH=0
     ;;
   2)
+    echo "Incrementando versión Minor"
     MINOR=$((MINOR + 1))
     PATCH=0
     ;;
   3)
+    echo "Incrementando versión Patch"
     PATCH=$((PATCH + 1))
     ;;
   *)
-    echo "Opción no válida."
+    echo "Opción no válida: $CHOICE"
     exit 1
     ;;
 esac
@@ -60,9 +59,17 @@ esac
 NEW_VERSION_NAME="$MAJOR.$MINOR.$PATCH"
 NEW_VERSION_CODE=$((CURRENT_VERSION_CODE + 1))
 
-# Actualiza el archivo build.gradle
-sed -i.bak "s/versionCode $CURRENT_VERSION_CODE/versionCode $NEW_VERSION_CODE/" "$GRADLE_FILE"
-sed -i.bak "s/versionName \"$CURRENT_VERSION_NAME\"/versionName \"$NEW_VERSION_NAME\"/" "$GRADLE_FILE"
+# Crea un archivo temporal
+TMP_FILE=$(mktemp)
 
-echo "versionCode actualizado de $CURRENT_VERSION_CODE a $NEW_VERSION_CODE."
-echo "versionName actualizado de $CURRENT_VERSION_NAME a $NEW_VERSION_NAME."
+# Actualiza el archivo build.gradle usando sed con un archivo temporal
+sed "s/versionCode $CURRENT_VERSION_CODE/versionCode $NEW_VERSION_CODE/" "$GRADLE_FILE" > "$TMP_FILE"
+sed -i "s/versionName \"$CURRENT_VERSION_NAME\"/versionName \"$NEW_VERSION_NAME\"/" "$TMP_FILE"
+
+# Mueve el archivo temporal al original
+mv "$TMP_FILE" "$GRADLE_FILE"
+
+echo "versionCode actualizado de $CURRENT_VERSION_CODE a $NEW_VERSION_CODE"
+echo "versionName actualizado de $CURRENT_VERSION_NAME a $NEW_VERSION_NAME"
+
+exit 0

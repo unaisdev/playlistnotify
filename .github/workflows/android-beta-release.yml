@@ -1,7 +1,17 @@
 name: Deploy Android con Fastlane  # Nombre del workflow
 
 on:
-  workflow_dispatch:  # Solo se ejecutará manualmente
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Tipo de versión a incrementar'
+        required: true
+        type: choice
+        options:
+          - '1'  # Major (X.0.0)
+          - '2'  # Minor (N.X.0)
+          - '3'  # Patch (N.N.X)
+        default: '3'
 
 jobs:
   build:
@@ -31,6 +41,7 @@ jobs:
         with:
           lane: 'deploy'
           subdirectory: 'android'
+          options: '{ "version_type": "${{ github.event.inputs.version_type }}" }'
 
       - name: Borrar keys.json (seguridad)
         if: always()

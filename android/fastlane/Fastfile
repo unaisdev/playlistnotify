@@ -22,9 +22,12 @@ platform :android do
   end
 
   desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    # sh bump release numbers
-    sh "./bump-release-numbers.sh"
+  lane :deploy do |options|
+    # Establecer el tipo de versión por defecto a patch si no se especifica
+    version_type = options[:version_type] || "3"
+    
+    # Ejecutar el script con el tipo de versión como argumento
+    sh "echo #{version_type} | ./bump-release-numbers.sh"
 
     # Construye y sube a Google Play
     gradle(
@@ -35,7 +38,7 @@ platform :android do
       build_type: "Release"
     )
     upload_to_play_store(
-      track: 'beta',  # Optional: specify the track (e.g., alpha, beta, production)
+      track: 'beta',
       skip_upload_metadata: true,
       skip_upload_images: true,
       skip_upload_screenshots: true
