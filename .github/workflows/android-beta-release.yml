@@ -29,7 +29,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install
+          yarn install --frozen-lockfile
 
       - name: Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
