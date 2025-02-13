@@ -48,7 +48,6 @@ jobs:
 
       - name: Generate Android JS bundle
         run: |
-          cd $(git rev-parse --show-toplevel) # Ir a la raíz del proyecto
           npx react-native bundle \
             --platform android \
             --dev false \
