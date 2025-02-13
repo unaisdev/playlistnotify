@@ -8,10 +8,10 @@ on:
         required: true
         type: choice
         options:
-          - '1'  # Major (X.0.0)
-          - '2'  # Minor (N.X.0)
-          - '3'  # Patch (N.N.X)
-        default: '3'
+          - 'major'  # X.0.0
+          - 'minor'  # N.X.0
+          - 'patch'  # N.N.X
+        default: 'patch'
 
 jobs:
   build:
@@ -20,6 +20,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn install
 
       - name: Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
