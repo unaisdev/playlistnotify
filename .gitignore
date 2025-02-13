@@ -78,3 +78,6 @@ yarn-error.log
 
 # Monicon
 .monicon/
+
+# fastlane
+android/fastlane/keys.json
