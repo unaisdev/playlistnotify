@@ -46,9 +46,6 @@ jobs:
       - name: Asegurar permisos del script
         run: chmod +x ./android/fastlane/bump-release-numbers.sh
 
-      - name: Ejecutar reset cache metro
-        run: npx react-native start --reset-cache
-
       - name: Generate Android JS bundle
         run: |
           cd $(git rev-parse --show-toplevel) # Ir a la raíz del proyecto
