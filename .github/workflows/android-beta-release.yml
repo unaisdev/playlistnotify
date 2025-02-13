@@ -15,15 +15,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-          bundler-cache: false
-
-      - name: Instalar dependencias del proyecto
-        run: |
-          gem install bundler -v 2.4.22
-          rm -f Gemfile.lock
-          bundle config path vendor/bundle
-          bundle config set --local without 'development test'
-          bundle install --jobs 4 --retry 3
+          bundler-cache: true
+          working-directory: './android'
 
       - name: Crear keys.json en fastlane/secrets
         run: |
@@ -37,6 +30,7 @@ jobs:
         uses: maierj/fastlane-action@v3.1.0
         with:
           lane: 'deploy'
+          subdirectory: 'android'
 
       - name: Borrar keys.json (seguridad)
         if: always()
