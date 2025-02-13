@@ -53,6 +53,9 @@ jobs:
           bundler-cache: true
           working-directory: './android'
 
+      - name: Install bundle
+        run: bundle install
+
       - name: Crear keys.json en fastlane/secrets
         run: |
           mkdir -p ./fastlane/secrets
