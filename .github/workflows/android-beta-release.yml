@@ -36,9 +36,15 @@ jobs:
           node-version: '18.19.0'
           cache: 'yarn'
 
-      - name: Install dependencies
+      - name: Instalar dependencias
         run: |
           yarn install
+
+      - name: Limpiar caché de Metro
+        run: rm -rf /tmp/metro-*
+
+      - name: Listar estructura de archivos
+        run: ls -R
 
       - name: Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
