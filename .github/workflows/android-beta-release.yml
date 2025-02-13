@@ -31,20 +31,12 @@ jobs:
         run: |
           yarn install --frozen-lockfile
 
-      - name: Instalar Bundler (si es necesario)
-        run: gem install bundler
-
-
-      - name: Eliminar configuración de deployment de Bundler
-        run: bundle config --delete deployment
-
-
       - name: Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
           bundler-cache: true
-          working-directory: './'
+          working-directory: './android'
 
       - name: Crear keys.json en fastlane/secrets
         run: |
