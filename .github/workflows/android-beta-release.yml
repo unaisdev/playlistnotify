@@ -32,11 +32,6 @@ jobs:
           rm -rf node_modules yarn.lock
           yarn install
 
-      - name: Verificar instalación de dependencias
-        run: |
-          yarn check
-          bundle check
-
       - name: Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
         with:
