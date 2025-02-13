@@ -35,4 +35,3 @@ jobs:
       - name: Borrar keys.json (seguridad)
         if: always()
         run: rm -f ./fastlane/secrets/keys.json
-# Forzar detección de workflow
