@@ -29,6 +29,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          rm -rf node_modules yarn.lock
           yarn install
 
       - name: Verificar instalación de dependencias
