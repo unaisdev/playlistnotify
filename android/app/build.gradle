@@ -96,11 +96,14 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-        release {
-            storeFile file(System.getenv('MYAPP_UPLOAD_STORE_FILE'))
-            storePassword System.getenv('MYAPP_UPLOAD_STORE_PASSWORD')
-            keyAlias System.getenv('MYAPP_UPLOAD_KEY_ALIAS')
-            keyPassword System.getenv('MYAPP_UPLOAD_KEY_PASSWORD')
+         release {
+            def storeFileEnv = System.getenv('MYAPP_UPLOAD_STORE_FILE')
+            if (storeFileEnv != null) {
+                storeFile file(storeFileEnv)
+                storePassword System.getenv('MYAPP_UPLOAD_STORE_PASSWORD')
+                keyAlias System.getenv('MYAPP_UPLOAD_KEY_ALIAS')
+                keyPassword System.getenv('MYAPP_UPLOAD_KEY_PASSWORD')
+            }
         }
     }
     buildTypes {
