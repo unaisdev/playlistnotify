@@ -58,25 +58,31 @@ jobs:
           mkdir -p ./android/fastlane/secrets
           echo "${{ secrets.KEYS_JSON }}" > ./android/fastlane/secrets/keys.json
 
-      - name: Asegurar permisos del script
-        run: chmod +x ./android/fastlane/bump-release-numbers.sh
+      - name: Listar estructura de archivos
+        run: ls -R
 
-      - name: Crear keystore desde Base64
-        run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > ./android/app/android-play-store-key.keystore
+      - name: Echo contents of keys.json
+        run: cat ./android/fastlane/secrets/keys.json
+
+      # - name: Asegurar permisos del script
+      #   run: chmod +x ./android/fastlane/bump-release-numbers.sh
+
+      # - name: Crear keystore desde Base64
+      #   run: |
+      #     echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > ./android/app/android-play-store-key.keystore
           
-      - name: Ejecutar Fastlane Deploy
-        uses: maierj/fastlane-action@v3.1.0
-        with:
-          lane: 'deploy'
-          subdirectory: 'android'
-          options: '{ "version_type": "${{ github.event.inputs.version_type }}" }'
-        env:
-          MYAPP_UPLOAD_STORE_FILE: ${{ secrets.MYAPP_UPLOAD_STORE_FILE }}
-          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
-          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
-          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+      # - name: Ejecutar Fastlane Deploy
+      #   uses: maierj/fastlane-action@v3.1.0
+      #   with:
+      #     lane: 'deploy'
+      #     subdirectory: 'android'
+      #     options: '{ "version_type": "${{ github.event.inputs.version_type }}" }'
+      #   env:
+      #     MYAPP_UPLOAD_STORE_FILE: ${{ secrets.MYAPP_UPLOAD_STORE_FILE }}
+      #     MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
+      #     MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+      #     MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
 
-      - name: Borrar keys.json (seguridad)
-        if: always()
-        run: rm -f ./fastlane/secrets/keys.json
+      # - name: Borrar keys.json (seguridad)
+      #   if: always()
+      #   run: rm -f ./fastlane/secrets/keys.json
