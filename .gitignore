@@ -81,3 +81,5 @@ yarn-error.log
 
 # fastlane
 android/fastlane/keys.json
+
+.env
