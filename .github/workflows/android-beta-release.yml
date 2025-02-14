@@ -21,37 +21,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Azul Zulu JDK 17
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'zulu'  # Usa Azul Zulu como distribución de Java
+          distribution: 'zulu'
 
-      - name: Verificar versión de Java
-        run: java -version
-
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18.19.0'
-          cache: 'yarn'
 
-      - name: Instalar dependencias
-        run: |
-          yarn install
+      - name: Install dependencies
+        run: yarn install
 
       - name: Limpiar caché de Metro
         run: rm -rf /tmp/metro-*
-
-      - name: Listar estructura de archivos
-        run: ls -R
-
-      - name: Configurar Ruby y Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: true
-          working-directory: './android'
 
       - name: Crear keys.json en fastlane/secrets
         run: |
@@ -67,6 +52,11 @@ jobs:
           lane: 'deploy'
           subdirectory: 'android'
           options: '{ "version_type": "${{ github.event.inputs.version_type }}" }'
+        env:
+          MYAPP_UPLOAD_STORE_FILE: ${{ secrets.MYAPP_UPLOAD_STORE_FILE }}
+          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.MYAPP_UPLOAD_KEY_ALIAS }}
+          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
 
       - name: Borrar keys.json (seguridad)
         if: always()

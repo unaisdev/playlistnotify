@@ -2,6 +2,23 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
+// Cargar el archivo .env
+def envFile = new File("../.env")
+def envVars = [:]
+
+if (envFile.exists()) {
+    println "Archivo .env encontrado. Cargando variables..."
+    envFile.eachLine { line ->
+        def parts = line.split("=", 2)
+        if (parts.size() == 2) {
+            envVars[parts[0].trim()] = parts[1].trim()
+        }
+    }
+    println "Propiedades cargadas: ${envVars}"
+} else {
+    println "Archivo .env no encontrado."
+}
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -97,12 +114,10 @@ android {
             keyPassword 'android'
         }
         release {
-            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-                storeFile file(MYAPP_UPLOAD_STORE_FILE)
-                storePassword MYAPP_UPLOAD_STORE_PASSWORD
-                keyAlias MYAPP_UPLOAD_KEY_ALIAS
-                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
-            }
+            storeFile file(envVars["MYAPP_UPLOAD_STORE_FILE"])
+            storePassword envVars["MYAPP_UPLOAD_STORE_PASSWORD"]
+            keyAlias envVars["MYAPP_UPLOAD_KEY_ALIAS"]
+            keyPassword envVars["MYAPP_UPLOAD_KEY_PASSWORD"]
         }
     }
     buildTypes {
