@@ -55,8 +55,8 @@ jobs:
 
       - name: Crear keys.json en fastlane/secrets
         run: |
-          mkdir -p ./fastlane/secrets
-          echo "${{ secrets.KEYS_JSON }}" > ./fastlane/secrets/keys.json
+          mkdir -p ./android/fastlane/secrets
+          echo "${{ secrets.KEYS_JSON }}" > ./android/fastlane/secrets/keys.json
 
       - name: Asegurar permisos del script
         run: chmod +x ./android/fastlane/bump-release-numbers.sh
