@@ -1,0 +1,46 @@
+{
+  "login": {
+    "connect": "Login via",
+    "spotify_connect": "Log in with Spotify"
+  },
+  "home": {
+    "title": "Welcome,",
+    "empty_notification_playlists_title": "You don't have playlist for ",
+    "empty_notification_playlists_first_text": "",
+    "empty_notification_playlists_second_text": "",
+    "empty_notification_playlists_third_text": ""
+  },
+  "profile": {
+    "title": "Your profile",
+    "desc_text": "Here you see your playlists from Spotify, even the liked ones.",
+    "your_lists": "Lists created by you",
+    "liked_lists": "Lists you like",
+    "order_alphabetical": "Alphabetical order",
+    "order_recent": "Most recent",
+    "order_createdby": "Created by"
+  },
+  "search": {
+    "title": "Are you looking for a playlist?",
+    "input_placeholder": "Search for a playlist",
+    "search_for": "Type for searching a playlist...",
+    "results_empty": "There is no playlist with that name"
+  },
+  "playlist": {
+    "number_tracks_playlist": "tracks in this playlist"
+  },
+  "settings": {
+    "title": "Settings",
+    "appsettings_title": "Application settings",
+    "darkMode": "Dark mode",
+    "language": "Language",
+    "logout": "Logout"
+  },
+  "es_language": "Spanish",
+  "en_language": "English",
+  "simple_loading": "Loading...",
+  "tracks_added": "Added",
+  "tracks_deleted": "Deleted",
+  "tracks": "tracks",
+  "no_tracks_new_or_deleted": "There are no added or deleted tracks",
+  "loading_notified_playlists": "We are fetching data from playlists you selected for notification. Hold on a second..."
+}

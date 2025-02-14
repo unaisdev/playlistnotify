@@ -1,0 +1,42 @@
+{
+  "login": {
+    "connect": "Conéctate con",
+    "spotify_connect": "Conéctate con Spotify"
+  },
+  "home": {
+    "title": "Bienvenido,"
+  },
+  "profile": {
+    "title": "Tu perfil",
+    "desc_text": "Tanto aquí, como en el buscador, podrás elegir las listas de las que quieres recibir notificaciones en Spotify.",
+    "your_lists": "Listas creadas por ti",
+    "liked_lists": "Listas que te gustan",
+    "order_alphabetical": "Orden alfabético",
+    "order_recent": "Recientes",
+    "order_createdby": "Creador"
+  },
+  "search": {
+    "title": "¿Buscas alguna lista?",
+    "input_placeholder": "Escribe para buscar una lista de reproducción",
+    "search_for": "Haz una búsqueda para ver aquí los resultados...",
+    "results_empty": "No existe ninguna lista con ese nombre"
+  },
+  "playlist": {
+    "number_tracks_playlist": "canciones en esta lista"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "appsettings_title": "Configuración de la aplicación",
+    "darkMode": "Modo oscuro",
+    "language": "Idioma",
+    "logout": "Cerrar sesión"
+  },
+  "es_language": "Castellano",
+  "en_language": "Inglés",
+  "simple_loading": "Cargando...",
+  "tracks_added": "Añadidas",
+  "tracks_deleted": "Eliminadas",
+  "tracks": "canciones",
+  "no_tracks_new_or_deleted": "No hay canciones nuevas o eliminadas",
+  "loading_notified_playlists": "Estamos obteniendo datos de las listas que seleccionaste para notificación. Espera un momento..."
+}
