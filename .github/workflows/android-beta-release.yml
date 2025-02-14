@@ -53,10 +53,10 @@ jobs:
           bundler-cache: true
           working-directory: './android'
 
-      - name: Crear keys.json en fastlane/secrets
+      - name: Crear y decodificar keys.json en fastlane/secrets
         run: |
           mkdir -p ./android/fastlane/secrets
-          echo "${{ secrets.KEYS_JSON }}" > ./android/fastlane/secrets/keys.json
+          echo "${{ secrets.KEYS_JSON_BASE64 }}" | base64 --decode > ./android/fastlane/secrets/keys.json
 
       - name: Listar estructura de archivos
         run: ls -R
