@@ -77,7 +77,6 @@ jobs:
           MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
           MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
 
-
       - name: Borrar keys.json (seguridad)
         if: always()
         run: rm -f ./fastlane/secrets/keys.json

@@ -43,6 +43,12 @@ platform :android do
     # Configurar la firma en Gradle usando estas variables
     gradle(
       task: "clean",
+      properties: {
+        "MYAPP_UPLOAD_STORE_FILE" => store_file,
+        "MYAPP_UPLOAD_KEY_ALIAS" => key_alias,
+        "MYAPP_UPLOAD_STORE_PASSWORD" => store_password,
+        "MYAPP_UPLOAD_KEY_PASSWORD" => key_password
+      }
     )
     gradle(
       task: "bundle",
