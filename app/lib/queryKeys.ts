@@ -14,4 +14,17 @@ export const QUERY_KEYS = {
   PLAYLIST_DETAIL: 'playlistDetail',
   PLAYLIST_TRACKS: 'playlistTracks',
   PLAYLIST_IS_SAVED: 'playlistIsSaved',
-} as const; 
+
+  // Notify related keys
+  NOTIFY: {
+    all: ['notify'],
+    playlist: (playlistId: string, userId?: string) => [
+      'notify',
+      playlistId,
+      userId,
+    ],
+  },
+
+  playlistTracks: (playlistId: string) =>
+    ['playlist', playlistId, 'tracks'] as const,
+} as const;

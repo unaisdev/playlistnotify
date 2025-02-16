@@ -1,12 +1,10 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 import {getPlaylistTracks} from '../../../services/playlist';
 
-export const usePlaylistAllTracks = (playlistId: string) => {
-  const fetchTracks = async ({pageParam = ''}) => {
-    const res = await getPlaylistTracks(playlistId, pageParam);
-    return res;
-  };
+import React, {useEffect} from 'react';
+import {QUERY_KEYS} from '@app/lib/queryKeys';
 
+export const usePlaylistAllTracks = (playlistId: string) => {
   const {
     data,
     fetchNextPage,
@@ -16,18 +14,26 @@ export const usePlaylistAllTracks = (playlistId: string) => {
     error,
     refetch,
   } = useInfiniteQuery({
-    queryKey: ['playlistAllTracks', playlistId],
-    queryFn: fetchTracks,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage?.next;
-    },
+    queryKey: QUERY_KEYS.playlistTracks(playlistId),
+    queryFn: ({pageParam = ''}) => getPlaylistTracks(playlistId, pageParam),
+    getNextPageParam: lastPage => lastPage?.next || undefined,
     keepPreviousData: true,
+    staleTime: 5 * 60 * 1000, // 5 minutos
+    cacheTime: 30 * 60 * 1000, // 30 minutos
   });
 
-  if (hasNextPage) fetchNextPage();
+  // Memoizar el flatMap para evitar recálculos innecesarios
+  const tracks = React.useMemo(
+    () => data?.pages.flatMap(page => page?.items ?? []) ?? [],
+    [data?.pages],
+  );
 
-  //flatMapping data for getting only tracks items
-  const tracks = data?.pages.flatMap(page => page?.items ?? []) ?? [];
+  // Cargar siguiente página solo si hay más y no estamos ya cargando
+  useEffect(() => {
+    if (hasNextPage && !isFetching) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetching, fetchNextPage]);
 
   return {
     tracks,

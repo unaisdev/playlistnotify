@@ -24,17 +24,20 @@ const NotifyMeButton = ({id}: Props) => {
     checkingSaved,
   } = useNotifyMeButton(id);
 
-  if (checkingSaved)
+  const showLoading = checkingSaved || canSavePlaylist;
+  const showSavingLoading = loadingToggle || checkingSaved || canSavePlaylist;
+
+  if (showLoading)
     return (
       <ActivityIndicator style={styles.inline} size="small" color="gray" />
     );
 
   return (
     <View style={styles.inline}>
-      {loadingToggle && <ActivityIndicator size="small" color="gray" />}
+      {showSavingLoading && <ActivityIndicator size="small" color="gray" />}
       <TouchableOpacity
-        onPress={togglePlaylistSave}
-        disabled={canSavePlaylist || loadingToggle}>
+        disabled={showSavingLoading}
+        onPress={togglePlaylistSave}>
         <Monicon name={iconProps.iconName} size={26} color={iconProps.color} />
       </TouchableOpacity>
     </View>
