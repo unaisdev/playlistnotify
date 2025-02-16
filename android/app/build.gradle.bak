@@ -87,7 +87,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 221
-        versionName "2.1.11"
+        versionName "2.1.10"
     }
     signingConfigs {
         debug {
@@ -96,13 +96,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-         release {
-            def storeFileEnv = System.getenv('MYAPP_UPLOAD_STORE_FILE')
-            if (storeFileEnv != null) {
-                storeFile file(storeFileEnv)
-                storePassword System.getenv('MYAPP_UPLOAD_STORE_PASSWORD')
-                keyAlias System.getenv('MYAPP_UPLOAD_KEY_ALIAS')
-                keyPassword System.getenv('MYAPP_UPLOAD_KEY_PASSWORD')
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
             }
         }
     }
