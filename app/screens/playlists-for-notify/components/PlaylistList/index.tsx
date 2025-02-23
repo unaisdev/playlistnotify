@@ -1,26 +1,27 @@
 import React, {useEffect, useState} from 'react';
 
 import {useTranslation} from 'react-i18next';
-import Animated, {Layout} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import {
+  ActivityIndicator,
   Alert,
   FlatList,
   Image,
   RefreshControl,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import {RootStackParamList, RootTabsParamList} from '@app/navigation';
-import {useNavigation} from '@react-navigation/native';
-import {removePlaylistForNotify} from '@app/services/playlist';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-
 import PlaylistListItem from '../PlaylistListItem';
 import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
 import {UserAddedPlaylistsResponse} from '../../../../services/types';
 import Text from '@app/features/commons/layout/Text';
+import {useUserNotifiedPlaylists} from '@app/features/commons/hooks/useUserNotifiedPlaylists';
+import Layout from '@app/features/commons/layout/TabLayout';
+import Monicon from '@monicon/native';
+import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
 
 const defaultPlaylist = {
   id: '4OYwdvuAT2msLdqmNVUQD4',
@@ -28,54 +29,17 @@ const defaultPlaylist = {
   name: 'holAloh',
 };
 
-type Props = {
-  isLoading: boolean;
-  isRefetching: boolean;
-  refetch: () => void;
-  userNotifiedPlaylists: UserAddedPlaylistsResponse[];
-};
+const PlaylistList = () => {
+  const {
+    userNotifiedPlaylists,
+    isLoading,
+    isRefetching,
+    refetchUserNotifiesPlaylists,
+  } = useUserNotifiedPlaylists();
 
-const PlaylistList = ({
-  isLoading,
-  isRefetching,
-  refetch,
-  userNotifiedPlaylists,
-}: Props) => {
-  const {t} = useTranslation();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const tabNavigation =
-    useNavigation<NativeStackNavigationProp<RootTabsParamList>>();
-
-  const showAlert = (item: UserAddedPlaylistsResponse) =>
-    Alert.alert(
-      'Confirmar Acción',
-      '¿Estás seguro de que deseas realizar esta acción?',
-      [
-        {
-          text: 'Cancelar',
-          onPress: () => console.log('Acción cancelada'),
-          style: 'cancel',
-        },
-        {
-          text: 'Eliminar',
-          onPress: async () => {
-            await removePlaylistForNotify(item.playlistId, item.userId);
-            refetch();
-            // swipableRef?.current?.close();
-          },
-          style: 'destructive',
-        },
-      ],
-      {
-        cancelable: true,
-      },
-    );
-
-  useEffect(() => {
-    if (userNotifiedPlaylists)
-      userNotifiedPlaylists.map(item => console.log(item.playlistId));
-  }, [userNotifiedPlaylists]);
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <Animated.FlatList
@@ -83,10 +47,13 @@ const PlaylistList = ({
       data={userNotifiedPlaylists}
       contentContainerStyle={{flexGrow: 1}}
       scrollEnabled
-      itemLayoutAnimation={Layout.duration(500).delay(500)}
+      // itemLayoutAnimation={Layout.duration(500).delay(500)}
       keyExtractor={(item, index) => item.id}
       refreshControl={
-        <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+        <RefreshControl
+          refreshing={isRefetching}
+          onRefresh={refetchUserNotifiesPlaylists}
+        />
       }
       renderItem={({
         item,
@@ -96,14 +63,92 @@ const PlaylistList = ({
         index: number;
       }) => {
         return (
-          <SwipeableItem onSwipped={() => showAlert(item)}>
-            <PlaylistListItem
-              index={index}
-              playlistId={item.playlistId}
-              savedPlaylistTracksIds={item.trackIds}
-              isRefetching={isRefetching}
-            />
-          </SwipeableItem>
+          <PlaylistListItem
+            index={index}
+            playlistId={item.playlistId}
+            savedPlaylistTracksIds={item.trackIds}
+            isRefetching={isRefetching}
+          />
+        );
+      }}
+      ListEmptyComponent={() => {
+        return (
+          <Layout>
+            <ScrollView
+              refreshControl={
+                <RefreshControl
+                  refreshing={isRefetching}
+                  onRefresh={refetchUserNotifiesPlaylists}
+                />
+              }
+              contentContainerStyle={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginVertical: 12,
+                marginHorizontal: 20,
+                rowGap: 48,
+              }}
+              style={styles.nodataContainer}>
+              <View style={{rowGap: 12}}>
+                <Text style={styles.noDataText}>
+                  ¿Todavía no has seleccionado ninguna lista para que te
+                  notifiquemos?
+                </Text>
+
+                <Text style={styles.noDataDesc}>
+                  Para poder notificarte sobre la actualización de una lista de
+                  reproducción, primero deberás de seleccionar alguna.
+                </Text>
+                <Text>
+                  Accede desde tu foto de perfil a tus playlists, en la parte
+                  superior derecha, o utiliza el buscador para encontrar una en
+                  concreto.
+                </Text>
+                {/* <View style={styles.inline}>
+              <Text>Puedes probar con esta: </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Playlist', {id: defaultPlaylist.id});
+                }}>
+                <PlaylistInfo
+                  id={defaultPlaylist.id}
+                  image_url={defaultPlaylist.image_url}
+                  name={defaultPlaylist.name}
+                />
+              </TouchableOpacity>
+            </View> */}
+                <View style={styles.inline}>
+                  <Text style={{flex: 1}}>
+                    Marca el icono de notificación en la cabecera de las listas
+                    de reproducción.
+                  </Text>
+                  <View
+                    style={[
+                      styles.inline,
+                      {flex: 1, justifyContent: 'center'},
+                    ]}>
+                    <Monicon
+                      name="material-symbols:notifications-off-outline-rounded"
+                      size={24}
+                      color={'gray'}
+                    />
+                    <Monicon
+                      name="material-symbols:arrow-right-alt"
+                      size={24}
+                      color={'gray'}
+                    />
+                    <Monicon
+                      name="material-symbols:notifications-active-rounded"
+                      size={24}
+                      color={'gray'}
+                    />
+                  </View>
+                </View>
+              </View>
+              <PoweredBySpotify />
+            </ScrollView>
+          </Layout>
         );
       }}
     />

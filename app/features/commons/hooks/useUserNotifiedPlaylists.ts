@@ -2,6 +2,7 @@ import {useQuery} from '@tanstack/react-query';
 import {useUserContext} from '../../../containers/UserContext';
 import {getUserNotifiedPlaylists} from '../../../services/user';
 import {useEffect} from 'react';
+import {QUERY_KEYS} from '@app/lib/queryKeys';
 
 export const useUserNotifiedPlaylists = () => {
   const {user} = useUserContext();
@@ -12,16 +13,18 @@ export const useUserNotifiedPlaylists = () => {
 
       if (fetchedPlaylists) return fetchedPlaylists;
     }
+
+    return [];
   };
 
   const {data, refetch, isRefetching, isLoading} = useQuery({
-    queryKey: ['userPlaylists'],
+    queryKey: [QUERY_KEYS.USER_NOTIFIED_PLAYLISTS],
     queryFn: getNotifiedPlaylists,
     enabled: !!user, // Start the query only when user is available
-    keepPreviousData: true,
     retry: 3,
-    cacheTime: 600000,
-    refetchOnWindowFocus: 'always',
+    staleTime: 5 * 60 * 1000, // 5 minutos
+    cacheTime: 30 * 60 * 1000, // 30 minutos
+    // refetchOnWindowFocus: true,
   });
 
   return {
