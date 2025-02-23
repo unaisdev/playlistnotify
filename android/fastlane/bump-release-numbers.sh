@@ -30,6 +30,10 @@ fi
 IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION_NAME"
 
 # Lee la opción desde stdin
+echo "Seleccione el tipo de incremento:"
+echo "1) Major"
+echo "2) Minor"
+echo "3) Patch"
 read -r CHOICE
 
 # Valida y procesa la opción
@@ -57,14 +61,18 @@ esac
 
 # Forma la nueva versión
 NEW_VERSION_NAME="$MAJOR.$MINOR.$PATCH"
-NEW_VERSION_CODE=$((CURRENT_VERSION_CODE + 1))
+NEW_VERSION_CODE="$MAJOR$MINOR$PATCH"
 
 # Crea un archivo temporal
 TMP_FILE=$(mktemp)
 
-# Actualiza el archivo build.gradle usando sed con un archivo temporal
+# Actualiza el archivo build.gradle usando sed con compatibilidad universal
 sed "s/versionCode $CURRENT_VERSION_CODE/versionCode $NEW_VERSION_CODE/" "$GRADLE_FILE" > "$TMP_FILE"
-sed -i "s/versionName \"$CURRENT_VERSION_NAME\"/versionName \"$NEW_VERSION_NAME\"/" "$TMP_FILE"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' "s/versionName \"$CURRENT_VERSION_NAME\"/versionName \"$NEW_VERSION_NAME\"/" "$TMP_FILE"
+else
+  sed -i "s/versionName \"$CURRENT_VERSION_NAME\"/versionName \"$NEW_VERSION_NAME\"/" "$TMP_FILE"
+fi
 
 # Mueve el archivo temporal al original
 mv "$TMP_FILE" "$GRADLE_FILE"

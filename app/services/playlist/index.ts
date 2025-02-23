@@ -55,27 +55,20 @@ export const savePlaylistForNotify = async (
   tracks: PlaylistItem[],
   userId: string,
 ): Promise<boolean> => {
-  try {
-    const data = await HttpClient<boolean>({
-      baseURL: API_URL,
-      url: '/playlist/add',
-      method: 'post',
-      data: {
-        playlistId: playlistId,
-        tracks: tracks,
-        userId: userId,
-      },
-    });
-    // .then(({data}) => {
-    //   console.log(data);
-    //   return data;
-    // })
-    // .catch((error: AxiosError) => console.log(error.response?.data));
+  console.log('## Adding playlist for notify: ' + playlistId + ' ##');
 
-    return data.data;
-  } catch {
-    return false;
-  }
+  const data = await HttpClient<boolean>({
+    baseURL: API_URL,
+    url: '/playlist/add',
+    method: 'post',
+    data: {
+      playlistId: playlistId,
+      tracks: tracks,
+      userId: userId,
+    },
+  });
+
+  return data.data;
 };
 
 export const removePlaylistForNotify = async (

@@ -23,17 +23,6 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do |options|
-    # Convertir el tipo de versión a número
-    version_map = {
-      'major' => '1',
-      'minor' => '2',
-      'patch' => '3'
-    }
-    version_type = version_map[options[:version_type]] || '3'
-    
-    # Ejecutar el script con el tipo de versión como argumento
-    sh "echo #{version_type} | ./bump-release-numbers.sh"
-
     # Leer las variables de GitHub Secrets directamente
     store_file = ENV["MYAPP_UPLOAD_STORE_FILE"]
     store_password = ENV["MYAPP_UPLOAD_STORE_PASSWORD"]
@@ -68,5 +57,26 @@ platform :android do
       skip_upload_images: true,
       skip_upload_screenshots: true
     )
+
+    # --- AHORA ACTUALIZAMOS LA VERSIÓN PARA LA SIGUIENTE BUILD ---
+    version_map = {
+      'major' => '1',
+      'minor' => '2',
+      'patch' => '3'
+    }
+    version_type = version_map[options[:version_type]] || '3'
+
+    # Ejecutar el script con el tipo de versión como argumento
+    sh "echo #{version_type} | ./bump-release-numbers.sh"
+
+    # --- SUBIR LOS CAMBIOS A GIT ---
+    commit_message = "🔖 Bump versión de desarrollo automática después de release"
+    branch_name = sh("git rev-parse --abbrev-ref HEAD").strip
+
+    sh "git add ."
+    sh "git commit -m '#{commit_message}'"
+    sh "git push origin #{branch_name}"
+
+    puts "✅ Versión subida a Google Play y número de versión actualizado en Git."
   end
 end

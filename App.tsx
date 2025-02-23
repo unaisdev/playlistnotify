@@ -15,8 +15,7 @@ import MyStatusBar from '@app/features/commons/components/StatusBar';
 
 import {BottomSheetHomeProvider} from '@app/containers/BottomSheetHomeContext';
 import GlobalContext from '@app/containers';
-
-export const queryClient = new QueryClient();
+import {queryClient} from '@app/lib/react-query';
 
 const App = () => {
   return (
