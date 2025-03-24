@@ -1,0 +1,172 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Estándares y convenciones de código para el proyecto
+globs: 
+alwaysApply: false
+---
+# Estándares de Código y Estructura de Carpetas
+
+## Estructura de Carpetas
+- `/app`: Código fuente principal
+  - `/commons`: Elementos compartidos y reutilizables
+    - `/components`: Componentes base reutilizables
+      - Cada componente en su propia carpeta
+      - index.tsx para el componente
+      - styles.ts para estilos
+      - types.ts para tipos
+      - tests
+    - `/hooks`: Hooks compartidos reutilizables
+      - Hooks genéricos
+      - Utilidades de estado
+    - `/layout`: Componentes de estructura
+      - Headers
+      - Footers
+      - Layouts base
+      - Containers
+    - `/modal`: Componentes y lógica de modales
+      - Modal base
+      - Providers de modal
+      - Tipos de modales
+    - `/theme`: Configuración de tema y estilos
+      - Tokens
+      - Paleta de colores
+      - Tipografía
+      - Espaciado
+  - `/screens`: Pantallas/vistas principales de la aplicación
+    - Cada pantalla en su propia carpeta
+    - Componentes específicos de pantalla
+  - `/navigation`: Configuración de navegación y stacks
+    - Stacks de navegación
+    - Types de navegación
+    - Guards y middlewares
+  - `/hooks`: Custom hooks reutilizables
+    - Hooks específicos de feature
+    - Hooks de lógica de negocio
+  - `/services`: Servicios, APIs y lógica de negocio
+    - Servicios por feature
+    - Adaptadores de API
+  - `/utils`: Utilidades y funciones helper
+    - Funciones puras
+    - Helpers reutilizables
+  - `/types`: Definiciones de tipos TypeScript
+    - Tipos por feature
+    - Interfaces compartidas
+  - `/assets`: Recursos estáticos
+    - `/images`
+    - `/fonts`
+    - `/icons`
+  - `/stores`: Estado global
+    - Stores por dominio
+    - Hooks relacionados
+    - Types del store
+  - `/locales`: Internacionalización
+    - `/en`: Traducciones en inglés
+    - `/es`: Traducciones en español
+    - `/pt`: Traducciones en portugués
+    - `i18n.ts`: Configuración de i18n
+  - `/lib`: Librerías y utilidades core
+    - `queryKeys.ts`: Keys para React Query
+    - `react-query.ts`: Configuración de React Query
+- `/@types`: Declaraciones de tipos globales
+  - Archivos `.d.ts`
+  - `global.d.ts`: Tipos globales
+  - `env.d.ts`: Tipos de variables de entorno
+  - `api.d.ts`: Tipos de API
+
+## Convenciones de Código
+
+### Estructura de Archivos
+- Cada componente/módulo en su propia carpeta
+- Usar index.ts/tsx como punto de entrada
+- Separar lógica de presentación
+- Mantener archivos pequeños y enfocados
+- Seguir principio de responsabilidad única
+
+### TypeScript
+- Usar TypeScript estricto (`strict: true`)
+- Definir interfaces/types para todo
+- No usar `any` o `unknown`
+- Preferir `type` sobre `interface` para tipos simples
+- Usar `interface` para objetos que pueden ser extendidos
+- Exportar tipos en archivos separados cuando sean compartidos
+- Usar tipos globales en `/@types` para declaraciones compartidas
+
+### Commons
+- `/components`: 
+  - Componentes altamente reutilizables
+  - Documentación con Storybook
+  - Tests unitarios completos
+- `/hooks`: 
+  - Hooks genéricos y reutilizables
+  - Documentación clara de parámetros y retornos
+- `/layout`: 
+  - Componentes estructurales
+  - Responsive design
+  - Consistencia visual
+- `/modal`: 
+  - Sistema de modales unificado
+  - Gestión de estado de modales
+  - Accesibilidad
+- `/theme`: 
+  - Design tokens
+  - Sistema de diseño consistente
+  - Tipado fuerte para tema
+
+### Lib
+- Configuración centralizada de React Query
+- Keys tipadas para queries
+- Manejo de caché consistente
+- Configuración de staleTime y cacheTime
+- Manejo de errores global
+
+### Stores
+- Organización por dominio
+- Acciones tipadas
+- Selectors memoizados
+- Estado inmutable
+- Persistencia cuando sea necesario
+
+### Navegación
+- Tipos para parámetros de ruta
+- Guards de autenticación
+- Middleware de navegación
+- Deep linking configurado
+
+### Internacionalización
+- Keys tipadas
+- Namespaces por feature
+- Fallbacks configurados
+- Pluralización
+- Interpolación tipada
+
+### Testing
+- Jest + React Native Testing Library
+- Tests unitarios para utils y hooks
+- Tests de integración para flujos críticos
+- E2E con Detox
+- Mocks consistentes
+
+### Performance
+- Lazy loading de rutas
+- Memoización apropiada
+- Optimización de re-renders
+- Monitoreo de bundle size
+- Optimización de imágenes
+
+### Seguridad
+- Sanitización de inputs
+- Validación de datos
+- Manejo seguro de tokens
+- Encriptación cuando sea necesaria
+- Prevención de inyección de código
+
+### Accesibilidad
+- Labels y hints
+- Soporte para VoiceOver/TalkBack
+- Contraste adecuado
+- Gestos alternativos
+- Testing de accesibilidad
