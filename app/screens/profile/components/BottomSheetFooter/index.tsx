@@ -1,4 +1,4 @@
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {View} from 'react-native';
 
 const BottomSheetFooter = () => {

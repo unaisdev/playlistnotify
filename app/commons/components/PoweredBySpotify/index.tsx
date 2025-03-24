@@ -15,7 +15,7 @@ export const PoweredBySpotify = () => {
             Powered by
           </Text>
           <Image
-            source={require('../../../../assets/spotify-icons-logos/logos/spotify-for-developers-white.png')}
+            source={require('../../../assets/spotify-icons-logos/logos/spotify-for-developers-white.png')}
             style={styles.spotify_devs_logo}
           />
         </TouchableOpacity>

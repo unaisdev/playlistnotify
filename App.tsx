@@ -11,7 +11,7 @@ import {I18nextProvider} from 'react-i18next';
 import i18n from '@app/locales/i18next';
 import {StatusBar} from 'react-native';
 import {ThemeProvider} from '@app/containers/ThemeContext';
-import MyStatusBar from '@app/features/commons/components/StatusBar';
+import MyStatusBar from '@app/commons/components/StatusBar';
 
 import {BottomSheetHomeProvider} from '@app/containers/BottomSheetHomeContext';
 import GlobalContext from '@app/containers';

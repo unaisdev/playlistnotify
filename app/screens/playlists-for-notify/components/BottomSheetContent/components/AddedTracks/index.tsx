@@ -1,7 +1,7 @@
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
 
 import {PlaylistItem} from '@app/services/types';
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 
 type TracksListProps = {

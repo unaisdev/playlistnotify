@@ -1,4 +1,4 @@
-import {APP_THEME, APP_THEME_TYPE} from '@app/features/commons/theme/types';
+import {APP_THEME, APP_THEME_TYPE} from '@app/commons/theme/types';
 import {saveThemeOnStorage} from '@app/services/storage';
 import {
   PropsWithChildren,
@@ -26,7 +26,6 @@ export const ThemeProvider = ({children}: PropsWithChildren) => {
   const [theme, setTheme] = useState<APP_THEME_TYPE>(APP_THEME.DARK);
 
   useEffect(() => {
-
     const init = async () => {
       await saveThemeOnStorage(theme);
     };

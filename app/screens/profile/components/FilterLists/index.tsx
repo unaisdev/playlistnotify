@@ -1,6 +1,6 @@
 import {ScrollView, StyleSheet, View} from 'react-native';
 
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import {SELECT_FILTERS, useProfileFiltersStore} from '@app/stores/ProfileStore';
 
 import FilterItem from './FilterItem';

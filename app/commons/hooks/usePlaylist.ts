@@ -1,6 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
-import {getPlaylist} from '../../../services/playlist';
+
 import {QUERY_KEYS} from '@app/lib/queryKeys';
+import {getPlaylist} from '@app/services/playlist';
 
 interface Props {
   playlistId: string;

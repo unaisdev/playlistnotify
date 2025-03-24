@@ -1,8 +1,8 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
-import {getPlaylistTracks} from '../../../services/playlist';
 
 import React, {useEffect} from 'react';
 import {QUERY_KEYS} from '@app/lib/queryKeys';
+import {getPlaylistTracks} from '@app/services/playlist';
 
 export const usePlaylistAllTracks = (playlistId: string) => {
   const {

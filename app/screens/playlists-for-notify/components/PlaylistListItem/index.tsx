@@ -8,19 +8,19 @@ import Animated, {
   Layout,
 } from 'react-native-reanimated';
 
-import Text from '@app/features/commons/layout/Text';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import Text from '@app/commons/layout/Text';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 
 import SkeletonItem from './components/SkeletonItem';
-import {usePlaylist} from '../../../../features/commons/hooks/usePlaylist';
-import {useBottomSheetContext} from '../../../../containers/BottomSheetHomeContext';
-import {usePlaylistAllTracks} from '../../../../features/commons/hooks/usePlaylistAllTracks';
 import Monicon from '@monicon/native';
 import {QUERY_KEYS} from '@app/lib/queryKeys';
 import {queryClient} from '@app/lib/react-query';
 import SwipeableItem from './components/SwipableItem';
-import {useRemoveNotify} from '@app/features/commons/hooks/useNotifyPlaylist';
+import {useRemoveNotify} from '@app/commons/hooks/useNotifyPlaylist';
+import {usePlaylistAllTracks} from '@app/commons/hooks/usePlaylistAllTracks';
+import {usePlaylist} from '@app/commons/hooks/usePlaylist';
+import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 
 interface Props {
   playlistId: string;

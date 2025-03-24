@@ -5,9 +5,9 @@ import Animated from 'react-native-reanimated';
 import {StyleSheet} from 'react-native';
 import {Layout as LayoutR} from 'react-native-reanimated';
 
-import Text from '@app/features/commons/layout/Text';
-import Layout from '@app/features/commons/layout/TabLayout';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import Text from '@app/commons/layout/Text';
+import Layout from '@app/commons/layout/TabLayout';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 
 import SearchItem from '../searchItem';
 import {PlaylistModel} from '../../../../services/types';

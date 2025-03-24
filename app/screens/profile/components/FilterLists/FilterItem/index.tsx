@@ -1,6 +1,6 @@
 import {Image, TouchableOpacity} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 
 type Props = {
   filterFn: () => void;

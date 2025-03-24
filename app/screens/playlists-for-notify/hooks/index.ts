@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 
-import {useUserNotifiedPlaylists} from '@app/features/commons/hooks/useUserNotifiedPlaylists';
+import {useUserNotifiedPlaylists} from '@app/commons/hooks/useUserNotifiedPlaylists';
 
 export function useHome() {
   const {

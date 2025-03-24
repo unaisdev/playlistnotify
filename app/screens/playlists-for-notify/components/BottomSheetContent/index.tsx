@@ -3,9 +3,9 @@ import React, {useCallback, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {PlaylistItem, Track} from '@app/services/types';
-import Layout from '@app/features/commons/layout/TabLayout';
+import Layout from '@app/commons/layout/TabLayout';
 import {BottomSheetScrollView, TouchableOpacity} from '@gorhom/bottom-sheet';
 import {SwiperFlatListWithGestureHandler} from 'react-native-swiper-flatlist/WithGestureHandler';
 
