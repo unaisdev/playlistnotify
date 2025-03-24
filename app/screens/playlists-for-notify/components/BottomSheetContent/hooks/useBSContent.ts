@@ -3,7 +3,7 @@ import React from 'react';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 
 import {Track} from '@app/services/types';
-import {useTracksInfo} from '@app/features/commons/hooks/useTracksInfo';
+import {useTracksInfo} from '@app/commons/hooks/useTracksInfo';
 import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 
 export function useBSContent() {

@@ -1,8 +1,8 @@
 import {useMemo} from 'react';
 import {useUserContext} from '@app/containers/UserContext';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {usePlaylistAllTracks} from '@app/features/commons/hooks/usePlaylistAllTracks';
-import {useToggleNotify} from '@app/features/commons/hooks/useToggleNotify';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
+import {usePlaylistAllTracks} from '@app/commons/hooks/usePlaylistAllTracks';
+import {useToggleNotify} from '@app/commons/hooks/useToggleNotify';
 
 export const useNotifyMeButton = (playlistId: string) => {
   const {isDarkMode} = useTheme();

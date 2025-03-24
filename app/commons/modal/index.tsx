@@ -1,6 +1,6 @@
 import {Alert, Modal, Pressable, StyleSheet, View} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {Monicon} from '@monicon/native';
 
 import Layout from '../layout/TabLayout';

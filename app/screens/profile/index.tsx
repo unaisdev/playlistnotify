@@ -2,8 +2,8 @@ import React, {useEffect, useMemo, useRef, useState} from 'react';
 
 import {useTranslation} from 'react-i18next';
 
-import Layout from '@app/features/commons/layout/TabLayout';
-import BottomSheetProfile from '@app/features/commons/components/BottomSheetFor';
+import Layout from '@app/commons/layout/TabLayout';
+import BottomSheetProfile from '@app/commons/components/BottomSheetFor';
 import {useProfileContext} from '@app/containers/ProfileContext';
 
 import OrderBy from './components/OrderBy';

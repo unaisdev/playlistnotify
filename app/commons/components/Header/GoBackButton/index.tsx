@@ -1,7 +1,7 @@
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Monicon} from '@monicon/native';
 

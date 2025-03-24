@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
-import Layout from '@app/features/commons/layout/TabLayout';
+import Text from '@app/commons/layout/Text';
+import Layout from '@app/commons/layout/TabLayout';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList, RootTabsParamList} from '@app/navigation';
 import {useProfile} from '../profile/hooks/useProfile';
-import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
+import {PoweredBySpotify} from '@app/commons/components/PoweredBySpotify';
 
 const UpdatedPlaylistImagesList = () => {
   const [displayIndex, setDisplayIndex] = useState(0);

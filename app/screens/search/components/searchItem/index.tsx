@@ -8,9 +8,9 @@ import Animated, {
   Layout,
 } from 'react-native-reanimated';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {useNavigation} from '@react-navigation/native';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {PlaylistModel} from '../../../../services/types';

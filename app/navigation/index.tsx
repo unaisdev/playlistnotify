@@ -8,8 +8,8 @@ import SettingsScreen from '@app/screens/settings';
 import SearchPlaylistScreen from '@app/screens/search';
 import {getThemeFromStorage} from '@app/services/storage';
 import TabHeader from '@app/navigation/components/TabHeader';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import {fetchUserProfile} from '@app/features/commons/hooks/useUser';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
+import {fetchUserProfile} from '@app/commons/hooks/useUser';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   DarkTheme,
@@ -24,7 +24,7 @@ import PlaylistsForNotifyScreen from '@app/screens/playlists-for-notify';
 
 import BootSplash from 'react-native-bootsplash';
 import {useForbiddenError} from '@app/hooks/useForbiddenError';
-import Layout from '@app/features/commons/layout/TabLayout';
+import Layout from '@app/commons/layout/TabLayout';
 import {Text} from 'react-native-gesture-handler';
 import {BetaScreen} from '@app/screens/beta';
 

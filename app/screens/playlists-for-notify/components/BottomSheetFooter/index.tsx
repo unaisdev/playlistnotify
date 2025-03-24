@@ -1,13 +1,15 @@
 import {Image, StyleSheet, View} from 'react-native';
-import {BottomSheetFooterProps} from '@gorhom/bottom-sheet'
+import {BottomSheetFooterProps} from '@gorhom/bottom-sheet';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 import {useBottomSheetContext} from '@app/containers/BottomSheetHomeContext';
 
-const BottomSheetFooter = ({animatedFooterPosition}: BottomSheetFooterProps) => {
+const BottomSheetFooter = ({
+  animatedFooterPosition,
+}: BottomSheetFooterProps) => {
   const {playlist} = useBottomSheetContext();
-  
+
   return (
     <View style={styles.footerContent}>
       <Image

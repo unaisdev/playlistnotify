@@ -11,7 +11,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 
 const SkeletonItem = () => {
   const [isLoading, setIsLoading] = useState(true);

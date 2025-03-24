@@ -1,5 +1,5 @@
+import {getTrackInfo} from '@app/services/track';
 import {useQueries} from '@tanstack/react-query';
-import {getTrackInfo} from '../../../services/track';
 
 export function useTracksInfo(trackIds: string[]) {
   // Crear un array de objetos de consulta para cada trackId

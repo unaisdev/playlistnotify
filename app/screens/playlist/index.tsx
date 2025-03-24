@@ -18,14 +18,14 @@ import TrackList from './components/TrackList';
 import {RootStackParamList} from '../../navigation';
 import {PlaylistItem} from '../../services/types';
 
-import {usePlaylistAllTracks} from '../../features/commons/hooks/usePlaylistAllTracks';
-import {usePlaylist} from '../../features/commons/hooks/usePlaylist';
 import PlaylistHeader from '@app/screens/playlist/components/PlaylistScreenHeader';
-import Layout from '@app/features/commons/layout/TabLayout';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
-import Text from '@app/features/commons/layout/Text';
+import Layout from '@app/commons/layout/TabLayout';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
+import Text from '@app/commons/layout/Text';
 import {useTranslation} from 'react-i18next';
 import Monicon from '@monicon/native';
+import {usePlaylistAllTracks} from '@app/commons/hooks/usePlaylistAllTracks';
+import {usePlaylist} from '@app/commons/hooks/usePlaylist';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Playlist'>;

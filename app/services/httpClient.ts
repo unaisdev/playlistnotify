@@ -3,7 +3,7 @@ import {API_URL, ENCRYPTED_STORAGE, AUTH_CONFIG} from './constants';
 import {refresh} from 'react-native-app-auth';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {triggerForbiddenError} from '@app/features/events/forbiddenError';
+import {triggerForbiddenError} from '@app/events/forbiddenError';
 
 const HttpClient = axios.create();
 

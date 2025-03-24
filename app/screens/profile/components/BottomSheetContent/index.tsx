@@ -1,15 +1,15 @@
 import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-import Text from '@app/features/commons/layout/Text';
-import Layout from '@app/features/commons/layout/TabLayout';
+import Text from '@app/commons/layout/Text';
+import Layout from '@app/commons/layout/TabLayout';
 import {
   SORTED_TYPE_KEYS,
   useProfileContext,
 } from '@app/containers/ProfileContext';
 import {useTranslation} from 'react-i18next';
 import {BottomSheetView} from '@gorhom/bottom-sheet';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import Monicon from '@monicon/native';
 
 type Props = {

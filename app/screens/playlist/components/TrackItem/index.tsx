@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Image, StyleSheet, View} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {DEFAULT_NO_IMAGE_PLAYLIST_OR_TRACK} from '@app/services/constants';
 
 import {PlaylistItem} from '../../../../services/types';

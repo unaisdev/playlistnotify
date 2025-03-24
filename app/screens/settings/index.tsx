@@ -3,17 +3,17 @@ import {Switch} from 'react-native-gesture-handler';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {RootStackParamList} from '@app/navigation';
 import {useNavigation} from '@react-navigation/native';
-import Layout from '@app/features/commons/layout/TabLayout';
+import Layout from '@app/commons/layout/TabLayout';
 import {ENCRYPTED_STORAGE} from '@app/services/constants';
-import {useLanguage} from '@app/features/commons/hooks/useLanguage';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useLanguage} from '@app/commons/hooks/useLanguage';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {useState} from 'react';
-import AppModal from '@app/features/commons/modal';
+import AppModal from '@app/commons/modal';
 import Monicon from '@monicon/native';
 
 const logoutUser = async () => {

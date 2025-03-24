@@ -1,12 +1,12 @@
 import {StyleSheet, Touchable, TouchableOpacity, View} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {
   SORTED_TYPE_KEYS,
   useProfileContext,
 } from '@app/containers/ProfileContext';
 import {useTranslation} from 'react-i18next';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import Monicon from '@monicon/native';
 
 type Props = {

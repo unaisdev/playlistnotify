@@ -17,11 +17,11 @@ import {
 import PlaylistListItem from '../PlaylistListItem';
 import SwipeableItem from '../PlaylistListItem/components/SwipableItem';
 import {UserAddedPlaylistsResponse} from '../../../../services/types';
-import Text from '@app/features/commons/layout/Text';
-import {useUserNotifiedPlaylists} from '@app/features/commons/hooks/useUserNotifiedPlaylists';
-import Layout from '@app/features/commons/layout/TabLayout';
+import Text from '@app/commons/layout/Text';
+import {useUserNotifiedPlaylists} from '@app/commons/hooks/useUserNotifiedPlaylists';
+import Layout from '@app/commons/layout/TabLayout';
 import Monicon from '@monicon/native';
-import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
+import {PoweredBySpotify} from '@app/commons/components/PoweredBySpotify';
 
 const defaultPlaylist = {
   id: '4OYwdvuAT2msLdqmNVUQD4',

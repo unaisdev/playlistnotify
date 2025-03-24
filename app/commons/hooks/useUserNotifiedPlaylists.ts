@@ -1,8 +1,8 @@
 import {useQuery} from '@tanstack/react-query';
-import {useUserContext} from '../../../containers/UserContext';
-import {getUserNotifiedPlaylists} from '../../../services/user';
 import {useEffect} from 'react';
 import {QUERY_KEYS} from '@app/lib/queryKeys';
+import {getUserNotifiedPlaylists} from '@app/services/user';
+import {useUserContext} from '@app/containers/UserContext';
 
 export const useUserNotifiedPlaylists = () => {
   const {user} = useUserContext();

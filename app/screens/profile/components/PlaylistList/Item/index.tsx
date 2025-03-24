@@ -9,10 +9,10 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import {PlaylistModel} from '@app/services/types';
-import Text from '@app/features/commons/layout/Text';
+import Text from '@app/commons/layout/Text';
 import {RootStackParamList} from '@app/navigation';
 import {useNavigation} from '@react-navigation/native';
-import {useTheme} from '@app/features/commons/theme/hooks/useTheme';
+import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Monicon from '@monicon/native';
 

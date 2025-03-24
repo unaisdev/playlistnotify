@@ -9,16 +9,16 @@ import {
 } from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import AppModal from '@app/features/commons/modal';
-import Text from '@app/features/commons/layout/Text';
-import SettingsButton from '@app/features/commons/components/Header/SettingsButton';
-import ProfileImageButton from '@app/features/commons/components/Header/ProfileImageButton';
+import AppModal from '@app/commons/modal';
+import Text from '@app/commons/layout/Text';
+import SettingsButton from '@app/commons/components/Header/SettingsButton';
+import ProfileImageButton from '@app/commons/components/Header/ProfileImageButton';
 import {BottomTabHeaderProps} from '@react-navigation/bottom-tabs';
 
-import {useUserContext} from '../../../containers/UserContext';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '@app/navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useUserContext} from '@app/containers/UserContext';
 
 interface TabNames {
   [key: string]: string;
@@ -42,7 +42,7 @@ const TabHeader = ({route}: BottomTabHeaderProps) => {
       Settings: t('settings.title'),
     };
 
-    if (!user) return;
+    if (!user) return null;
 
     return (
       <Text

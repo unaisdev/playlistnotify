@@ -3,13 +3,13 @@ import React, {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import Text from '@app/features/commons/layout/Text';
-import Layout from '@app/features/commons/layout/TabLayout';
+import Text from '@app/commons/layout/Text';
+import Layout from '@app/commons/layout/TabLayout';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import useLogin from './hooks/useLogin';
 import {RootStackParamList} from '../../navigation';
-import {PoweredBySpotify} from '@app/features/commons/components/PoweredBySpotify';
+import {PoweredBySpotify} from '@app/commons/components/PoweredBySpotify';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList>;

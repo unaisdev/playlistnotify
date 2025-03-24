@@ -5,9 +5,9 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-import {RootStackParamList} from '../../../navigation';
-import {useUserContext} from '../../../containers/UserContext';
-import {AUTH_CONFIG, ENCRYPTED_STORAGE} from '../../../services/constants';
+import {useUserContext} from '@app/containers/UserContext';
+import {RootStackParamList} from '@app/navigation';
+import {ENCRYPTED_STORAGE} from '@app/services/constants';
 
 const useLogin = (
   navigation?: NativeStackNavigationProp<RootStackParamList>,

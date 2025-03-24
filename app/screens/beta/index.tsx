@@ -1,5 +1,5 @@
-import Layout from '@app/features/commons/layout/TabLayout';
-import Text from '@app/features/commons/layout/Text';
+import Layout from '@app/commons/layout/TabLayout';
+import Text from '@app/commons/layout/Text';
 
 export const BetaScreen = () => {
   return (
