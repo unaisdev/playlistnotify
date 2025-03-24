@@ -35,6 +35,15 @@
     "language": "Language",
     "logout": "Logout"
   },
+  "beta": {
+    "title": "Beta Program",
+    "description": "Join our beta program to get early access to new features",
+    "email_placeholder": "Enter your email",
+    "submit": "Join Beta",
+    "invalid_email": "Please enter a valid email",
+    "success": "Thanks for joining! We'll be in touch soon",
+    "error": "Could not register for beta program"
+  },
   "es_language": "Spanish",
   "en_language": "English",
   "simple_loading": "Loading...",

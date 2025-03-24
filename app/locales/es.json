@@ -31,6 +31,15 @@
     "language": "Idioma",
     "logout": "Cerrar sesión"
   },
+  "beta": {
+    "title": "Programa Beta",
+    "description": "Únete a nuestro programa beta para acceder a nuevas funciones",
+    "email_placeholder": "Ingresa tu email",
+    "submit": "Unirse a Beta",
+    "invalid_email": "Por favor ingresa un email válido",
+    "success": "¡Gracias por unirte! Nos pondremos en contacto pronto",
+    "error": "No se pudo registrar en el programa beta"
+  },
   "es_language": "Castellano",
   "en_language": "Inglés",
   "simple_loading": "Cargando...",
