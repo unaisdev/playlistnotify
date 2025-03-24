@@ -1,4 +1,5 @@
-import {API_URL, SPOTIFY_API_URL} from '../constants';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {API_URL, ENCRYPTED_STORAGE, SPOTIFY_API_URL} from '../constants';
 import HttpClient from '../httpClient';
 import {PlaylistModel, User, UserAddedPlaylistsResponse} from '../types';
 import {AxiosError} from 'axios';
@@ -80,4 +81,10 @@ export const registerUser = async (user: User) => {
     .catch((error: AxiosError) =>
       console.log(error.response?.data, error.response?.status),
     );
+};
+
+export const logoutUser = async () => {
+  await EncryptedStorage.removeItem(ENCRYPTED_STORAGE.AUTH_TOKEN);
+  await EncryptedStorage.removeItem(ENCRYPTED_STORAGE.AUTH_TOKEN_EXPIRATION);
+  await EncryptedStorage.removeItem(ENCRYPTED_STORAGE.REFRESH_TOKEN);
 };
