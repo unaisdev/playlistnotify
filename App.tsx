@@ -8,7 +8,7 @@ import StackNavigation from './app/navigation';
 import {UserProvider} from './app/containers/UserContext';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {I18nextProvider} from 'react-i18next';
-import i18n from '@app/features/locales/i18next';
+import i18n from '@app/locales/i18next';
 import {StatusBar} from 'react-native';
 import {ThemeProvider} from '@app/containers/ThemeContext';
 import MyStatusBar from '@app/features/commons/components/StatusBar';

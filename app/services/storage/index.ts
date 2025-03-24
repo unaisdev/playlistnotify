@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ASYNC_STORAGE} from '../constants';
 import {APP_THEME_TYPE} from '@app/features/commons/theme/types';
-import {APP_LANGUAGE_TYPE} from '@app/features/locales/types';
+import {APP_LANGUAGE_TYPE} from '@app/locales/types';
 
 export const saveThemeOnStorage = async (theme: APP_THEME_TYPE) => {
   await AsyncStorage.setItem(ASYNC_STORAGE.THEME, theme);

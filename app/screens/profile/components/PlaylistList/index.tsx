@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {Layout as LayoutR} from 'react-native-reanimated';
 
-import i18n from '@app/features/locales/i18next';
+import i18n from '@app/locales/i18next';
 import Text from '@app/features/commons/layout/Text';
 import Layout from '@app/features/commons/layout/TabLayout';
 import {useTheme} from '@app/features/commons/theme/hooks/useTheme';

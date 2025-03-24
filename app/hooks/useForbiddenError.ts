@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ASYNC_STORAGE} from '@app/services/constants';
 import {Alert} from 'react-native';
-import {AppEvents, eventEmitter} from '@app/features/events';
-import {clearForbiddenError} from '@app/features/events/forbiddenError';
+import {AppEvents, eventEmitter} from '@app/events';
+import {clearForbiddenError} from '@app/events/forbiddenError';
 
 export const useForbiddenError = () => {
   const [error, setHas403Error] = useState(false);
