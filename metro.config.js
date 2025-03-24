@@ -1,15 +1,27 @@
-// metro.config.js
-const {getDefaultConfig} = require('@react-native/metro-config');
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const path = require('path');
 const {withMonicon} = require('@monicon/metro');
-const config = getDefaultConfig(__dirname);
 
-config.resolver.blockList = [/@monicon\/runtime/].concat(
-  config.resolver.blockList,
-);
+const defaultConfig = getDefaultConfig(__dirname);
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
-module.exports = withMonicon(config, {
+// Asegurar que defaultConfig.resolver existe
+defaultConfig.resolver = defaultConfig.resolver || {};
+
+// Si blockList no es un array, conviértelo en uno
+if (!Array.isArray(defaultConfig.resolver.blockList)) {
+  defaultConfig.resolver.blockList = [];
+}
+
+defaultConfig.resolver.blockList.push(/@monicon\/runtime/);
+
+const customConfig = {
+  resolver: defaultConfig.resolver, // Asegura que blockList se mantiene
+};
+
+const mergedConfig = mergeConfig(defaultConfig, customConfig);
+const moniconConfig = withMonicon(mergedConfig, {
   icons: [
-    // http://icones.js.org
     'feather:activity',
     'logos:active-campaign',
     'lucide:badge-check',
@@ -35,5 +47,21 @@ module.exports = withMonicon(config, {
     'nrk:media-playlist-add',
     'nrk:media-playlist-remove',
   ],
-  collections: ['radix-icons'], // entire collection if you do not want to list icons
+  collections: ['radix-icons'],
 });
+
+// Solo importa Storybook en desarrollo
+let finalConfig = moniconConfig;
+if (isDevelopment) {
+  try {
+    const withStorybook = require('@storybook/react-native/metro/withStorybook');
+    finalConfig = withStorybook(moniconConfig, {
+      enabled: true,
+      configPath: path.resolve(__dirname, './.storybook'),
+    });
+  } catch (error) {
+    console.warn('⚠️ Storybook no está instalado, continuando sin él.');
+  }
+}
+
+module.exports = finalConfig;
