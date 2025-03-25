@@ -54,4 +54,28 @@ export const createStyles = (isDarkMode: boolean) =>
       fontSize: 16,
       fontWeight: 'bold',
     },
+    successButton: {
+      backgroundColor: '#1DB954',
+    },
+    successContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
+      backgroundColor: isDarkMode ? '#212121' : '#FFFFFF',
+    },
+    successTitle: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: isDarkMode ? '#FFFFFF' : '#000000',
+      marginTop: 20,
+      marginBottom: 12,
+      textAlign: 'center',
+    },
+    successDescription: {
+      fontSize: 16,
+      color: isDarkMode ? '#B3B3B3' : '#666666',
+      textAlign: 'center',
+      marginBottom: 20,
+    },
   });

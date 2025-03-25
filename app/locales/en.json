@@ -43,13 +43,16 @@
     "submit": "Join Beta",
     "invalid_email": "Please enter a valid email",
     "success": "Thanks for joining! We'll be in touch soon",
-    "error": "Could not register for beta program"
+    "error": "Could not register for beta program",
+    "already_registered_title": "You are already in the list!",
+    "already_registered_description": "You are already part of our beta users. We will notify you when there are news."
   },
-  "es_language": "Spanish",
-  "en_language": "English",
-  "simple_loading": "Loading...",
-  "tracks_added": "Added",
-  "tracks_deleted": "Deleted",
+  "es_language": "Castellano",
+  "en_language": "Inglés",
+  "simple_loading": "Cargando...",
+  "tracks_added": "Añadidas",
+  "tracks_deleted": "Eliminadas",
+  "tracks": "canciones",
   "tracks": "tracks",
   "no_tracks_new_or_deleted": "There are no added or deleted tracks",
   "loading_notified_playlists": "We are fetching data from playlists you selected for notification. Hold on a second..."

@@ -39,7 +39,9 @@
     "submit": "Unirse a Beta",
     "invalid_email": "Por favor ingresa un email válido",
     "success": "¡Gracias por unirte! Nos pondremos en contacto pronto",
-    "error": "No se pudo registrar en el programa beta"
+    "error": "No se pudo registrar en el programa beta",
+    "already_registered_title": "¡Ya estás en la lista!",
+    "already_registered_description": "Ya formas parte de nuestros usuarios beta. Te notificaremos cuando haya novedades."
   },
   "es_language": "Castellano",
   "en_language": "Inglés",

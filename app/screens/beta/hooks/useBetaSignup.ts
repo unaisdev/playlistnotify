@@ -1,9 +1,8 @@
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 
-import {BetaSignupResponse} from './types';
 import {queryClient} from '@app/lib/react-query';
 import {QUERY_KEYS} from '@app/lib/queryKeys';
-import {betaService} from './beta.service';
+import {betaService} from '@app/services/beta/beta.service';
 
 export const useBetaSignupMutation = () => {
   return useMutation({

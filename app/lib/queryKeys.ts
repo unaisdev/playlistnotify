@@ -34,6 +34,8 @@ export const QUERY_KEYS = {
     signup: ['signup'],
   },
 
+  BETA_CHECK_EMAIL: 'betaCheckEmail',
+
   // Functions for dynamic keys
   betaSignup: (email: string) => ['beta', 'signup', email] as const,
 } as const;

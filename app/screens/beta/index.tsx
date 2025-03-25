@@ -1,18 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, TextInput, ActivityIndicator} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import Text from '@app/commons/layout/Text';
 import {Button} from '@app/commons/components/Button';
-import {useBetaSignupMutation} from '@app/services/beta';
 import {validateEmail} from '@app/utils/validation';
 import {useTheme} from '@app/commons/theme/hooks/useTheme';
 import {createStyles} from './styles';
+import {useBetaSignupMutation} from './hooks/useBetaSignup';
+import {useBetaCheckEmailMutation} from './hooks/useBetaCheckEmail';
+import {saveBetaEmail, getBetaEmail} from './utils';
 
-interface BetaScreenProps {
-  onClose: () => void;
-}
-
-export const BetaScreen: React.FC<BetaScreenProps> = ({onClose}) => {
+export const BetaScreen = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState<string | null>(null);
   const {t} = useTranslation();
@@ -20,6 +18,19 @@ export const BetaScreen: React.FC<BetaScreenProps> = ({onClose}) => {
   const styles = createStyles(isDarkMode);
 
   const betaSignupMutation = useBetaSignupMutation();
+  const {data: betaCheckEmailData, mutate} = useBetaCheckEmailMutation(email);
+  console.log('betaCheckEmailData', betaCheckEmailData);
+  // Cargar email guardado al iniciar
+  useEffect(() => {
+    const loadSavedEmail = async () => {
+      const savedEmail = await getBetaEmail();
+      if (savedEmail) {
+        setEmail(savedEmail);
+        mutate(savedEmail);
+      }
+    };
+    loadSavedEmail();
+  }, []);
 
   const handleSubmit = async () => {
     if (!validateEmail(email)) {
@@ -27,8 +38,23 @@ export const BetaScreen: React.FC<BetaScreenProps> = ({onClose}) => {
       return;
     }
     setEmailError(null);
+    await saveBetaEmail(email); // Guardar email en AsyncStorage
     betaSignupMutation.mutate(email);
   };
+
+  if (betaCheckEmailData || betaSignupMutation.isSuccess) {
+    return (
+      <View style={styles.successContainer}>
+        {/* <Icon name="check-circle" size={80} color="#1DB954" /> */}
+        <Text style={styles.successTitle}>
+          {t('beta.already_registered_title')}
+        </Text>
+        <Text style={styles.successDescription}>
+          {t('beta.already_registered_description')}
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -61,20 +87,13 @@ export const BetaScreen: React.FC<BetaScreenProps> = ({onClose}) => {
         <Text style={styles.error}>{t('beta.error')}</Text>
       )}
 
-      {betaSignupMutation.isSuccess && (
-        <Text style={styles.success}>{t('beta.success')}</Text>
-      )}
-
       <View style={styles.buttonContainer}>
         <Button
           onPress={handleSubmit}
-          disabled={
-            betaSignupMutation.isLoading || betaSignupMutation.isSuccess
-          }
+          disabled={betaSignupMutation.isLoading}
           style={[
             styles.button,
-            (betaSignupMutation.isLoading || betaSignupMutation.isSuccess) &&
-              styles.buttonDisabled,
+            betaSignupMutation.isLoading && styles.buttonDisabled,
           ]}>
           {betaSignupMutation.isLoading ? (
             <ActivityIndicator color="white" />

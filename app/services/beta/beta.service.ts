@@ -54,9 +54,7 @@ export const betaService = {
   },
 
   async checkEmail(email: string): Promise<boolean> {
-    const response = await axios.get<boolean>(
-      `${API_URL}/beta/check-email?email=${email}`,
-    );
+    const response = await axios.get<boolean>(`${API_URL}/beta/check/${email}`);
 
     return response.data;
   },
