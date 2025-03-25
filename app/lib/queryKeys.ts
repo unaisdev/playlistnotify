@@ -29,12 +29,11 @@ export const QUERY_KEYS = {
     ['playlist', playlistId, 'tracks'] as const,
 
   // Beta related keys
-  BETA_SIGNUP: 'betaSignup',
+  BETA: {
+    all: ['beta'],
+    signup: ['signup'],
+  },
 
   // Functions for dynamic keys
   betaSignup: (email: string) => ['beta', 'signup', email] as const,
 } as const;
-export const betaKeys = {
-  all: ['beta'] as const,
-  signup: () => [...betaKeys.all, 'signup'] as const,
-};

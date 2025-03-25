@@ -1,6 +1,6 @@
+import Text from '@app/commons/layout/Text';
 import React from 'react';
 import {View, StyleSheet, Image, TouchableOpacity, Linking} from 'react-native';
-import Text from '../../layout/Text';
 
 export const PoweredBySpotify = () => {
   const onPress = () => {
