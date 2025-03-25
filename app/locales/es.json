@@ -34,6 +34,7 @@
   "beta": {
     "title": "Programa Beta",
     "description": "Únete a nuestro programa beta para acceder a nuevas funciones",
+    "subdescription": "Spotify no me deja publicar la aplicación para todos los usuarios aún. Estoy trabajando en ello. No te preocupes, estará disponible para todos pronto.",
     "email_placeholder": "Ingresa tu email",
     "submit": "Unirse a Beta",
     "invalid_email": "Por favor ingresa un email válido",

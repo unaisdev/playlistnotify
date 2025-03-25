@@ -37,7 +37,8 @@
   },
   "beta": {
     "title": "Beta Program",
-    "description": "Join our beta program to get early access to new features",
+    "description": "Join our beta program to grant access to this application later.",
+    "subdescription": "Spotify is not letting me publish it to all users yet. I'm working on it. Don't worry, will be available for all users as soon as possible!",
     "email_placeholder": "Enter your email",
     "submit": "Join Beta",
     "invalid_email": "Please enter a valid email",
