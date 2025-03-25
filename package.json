@@ -7,7 +7,9 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "storybook-generate": "sb-rn-get-stories",
+    "storybook": "sb-rn-get-stories && react-native start --reset-cache --config ./.ondevice/metro.storybook.js "
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "5.0.6",
@@ -17,6 +19,7 @@
     "@notifee/react-native": "9.1.8",
     "@react-native-async-storage/async-storage": "2.1.0",
     "@react-native-community/cli-doctor": "11.3.6",
+    "@react-native-community/slider": "4.5.6",
     "@react-navigation/bottom-tabs": "6.5.8",
     "@react-navigation/native": "6.1.7",
     "@react-navigation/native-stack": "6.9.13",
@@ -42,6 +45,7 @@
     "react-native-vector-icons": "10.2.0",
     "react-native-webview": "13.13.1",
     "reactotron-react-native": "5.1.12",
+    "storybook": "8.5.8",
     "zustand": "4.4.1"
   },
   "devDependencies": {
@@ -52,10 +56,15 @@
     "@react-native-community/cli": "15.0.1",
     "@react-native-community/cli-platform-android": "15.0.1",
     "@react-native-community/cli-platform-ios": "15.0.1",
+    "@react-native-community/datetimepicker": "8.3.0",
     "@react-native/babel-preset": "0.77.0",
     "@react-native/eslint-config": "0.77.0",
     "@react-native/metro-config": "0.77.0",
     "@react-native/typescript-config": "0.77.0",
+    "@storybook/addon-ondevice-actions": "8.5.5",
+    "@storybook/addon-ondevice-backgrounds": "8.5.5",
+    "@storybook/addon-ondevice-controls": "8.5.5",
+    "@storybook/react-native": "8.5.5",
     "@types/jest": "29.5.13",
     "@types/react": "18.2.6",
     "@types/react-native-vector-icons": "6.4.13",
