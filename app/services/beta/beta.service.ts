@@ -52,4 +52,12 @@ export const betaService = {
       throw error;
     }
   },
+
+  async checkEmail(email: string): Promise<boolean> {
+    const response = await axios.get<boolean>(
+      `${API_URL}/beta/check-email?email=${email}`,
+    );
+
+    return response.data;
+  },
 };
